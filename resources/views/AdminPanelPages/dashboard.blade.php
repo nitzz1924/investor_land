@@ -1,5 +1,5 @@
 {{----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------}}
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 <x-app-layout>
     <div class="container-fluid">
         <!--  Owl carousel -->

@@ -7,13 +7,32 @@
         <x-validation-errors class="mb-4" />
 
         @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ $value }}
-            </div>
+        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+            {{ $value }}
+        </div>
         @endsession
+        <style>
+            .custom-heading {
+                font-size: 2rem;
+                /* Adjust size as needed */
+                font-weight: bold;
+                text-transform: uppercase;
+            }
 
+            .custom-subheading {
+                font-size: 1.5rem;
+                /* Adjust size as needed */
+                color: #6c757d;
+                /* Muted gray color */
+            }
+
+        </style>
         <form method="POST" action="{{ route('login') }}">
             @csrf
+            <div class="text-center">
+                <h1 class="custom-heading">Admin Login</h1>
+                <p class="custom-subheading">Explore Homes with Style.</p>
+            </div>
 
             <div>
                 <x-label for="email" value="{{ __('Email') }}" />
@@ -34,9 +53,9 @@
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
+                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
+                    {{ __('Forgot your password?') }}
+                </a>
                 @endif
 
                 <x-button class="ms-4">

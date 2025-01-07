@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title','| Investor Land')</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -26,23 +26,37 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
     <!-- Owl Carousel  -->
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" />
+
+
 </head>
 <body>
-    <div class="toast toast-onload align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    {{-- <div class="toast toast-onload align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-body hstack align-items-start gap-6">
             <i class="ti ti-alert-circle fs-6"></i>
             <div>
-                <h5 class="text-white fs-3 mb-1">Welcome to Modernize</h5>
-                <h6 class="text-white fs-2 mb-0">
-                    Easy to costomize the Template!!!
-                </h6>
-            </div>
-            <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
+                <h5 class="text-white fs-3 mb-1">Welcome
+                @if (Auth::user()) {{ Auth::user()->name }}
+    </h5>
+    @else
+    <h5 class="text-white fs-3 mb-1">
+        Guest User
+    </h5>
+    @endif
+    <h6 class="text-white fs-2 mb-0">
+        Hope you are doing well!
+    </h6>
     </div>
+    <button type="button" class="btn-close btn-close-white fs-2 m-0 ms-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    </div> --}}
     <div id="main-wrapper">
         <div class="page-wrapper">
             @include('navigation-menu')
+            @yield('title')
             <div class="body-wrapper">
                 {{ $slot }}
             </div>
@@ -51,9 +65,11 @@
     </div>
     </div>
     <div class="dark-transparent sidebartoggler"></div>
-    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.all.min.js"></script>
+
 
     <!-- Import Js Files -->
+    <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.init.js') }}"></script>
@@ -61,12 +77,62 @@
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
 
-    <!-- solar icons -->
+
     <script src="{{ asset('assets/js/iconify-icon.min.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/js/apexcharts.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/select2.init.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/icons@1.74.0/icons-react/dist/index.umd.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="{{ asset('assets/js/datatable-advanced.init.js') }}"></script>
+
+    <script>
+        $('.floating-labels .form-control').on('focus blur', function(e) {
+            $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+        }).trigger('blur');
+
+    </script>
+    @if (session('success'))
+    <script>
+        // Display SweetAlert for success message
+        Swal.fire({
+            title: "Success!"
+            , text: "{{ session('success') }}"
+            , icon: "success"
+            , confirmButtonClass: "btn btn-primary w-xs me-2 mt-2"
+            , buttonsStyling: true
+            , showCancelButton: true
+            , showCloseButton: true
+        , });
+
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        // Display SweetAlert for error message
+        Swal.fire({
+            title: "Error!"
+            , text: "{{ session('error') }}"
+            , icon: "error"
+            , confirmButtonClass: "btn btn-primary w-xs me-2 mt-2"
+            , buttonsStyling: true
+            , showCloseButton: true
+        , });
+
+    </script>
+    @endif
     @stack('modals')
 
     @livewireScripts
