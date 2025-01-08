@@ -7,7 +7,7 @@
           <div class="brand-logo d-flex align-items-center justify-content-between">
               <a href="index.html" class="text-nowrap text-center fw-bolder fs-6 logo-img">
                   {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/dark-logo.svg" class="dark-logo" alt="Logo-Dark" /> --}}
-                <span style="color: #4F73D9; font-weight:bolder; font-size: xx-large;">Admin Panel</span>  {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/light-logo.svg" class="light-logo" alt="Logo-light" /> --}}
+                  <span style="color: #4F73D9; font-weight:bolder; font-size: xx-large;">Admin Panel</span> {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/light-logo.svg" class="light-logo" alt="Logo-light" /> --}}
               </a>
               <a href="javascript:void(0)" class="sidebartoggler ms-auto text-decoration-none fw-bolder fs-5 d-block d-xl-none">
                   IL
@@ -21,7 +21,7 @@
                       <span class="hide-menu">Menu</span>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{ route('admin.admindashboard')}}" id="get-url" aria-expanded="false">
+                      <a class="sidebar-link" href="{{route ('admin.admindashboard')}}"  aria-expanded="false">
                           <span>
                               <i class="ti ti-layout-grid"></i>
                           </span>
@@ -29,7 +29,7 @@
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url"  aria-expanded="false">
                           <span class="d-flex">
                               <i class="ti ti-settings"></i>
                           </span>
@@ -42,6 +42,12 @@
                                       <i class="ti ti-circle"></i>
                                   </div>
                                   <span class="hide-menu">Add Category</span>
+                              </a>
+                              <a href="{{ route('admin.companyprofile')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">Company Profile</span>
                               </a>
                           </li>
                       </ul>
@@ -62,9 +68,12 @@
                       <span class="fs-2">{{ Auth::user()->email }}</span>
                       @endif
                   </div>
-                  <button class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
-                      <i class="ti ti-power fs-6"></i>
-                  </button>
+                  <form method="POST" action="{{ route('logout') }}">
+                  @csrf
+                      <button type="submit" class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
+                          <i class="ti ti-power fs-6"></i>
+                      </button>
+                  </form>
               </div>
           </div>
 
@@ -411,7 +420,7 @@
                                       <div class="d-grid py-4 px-7 pt-8">
                                           <form method="POST" action="{{ route('logout') }}">
                                               @csrf
-                                            <button type="submit" class=" w-100 btn btn-outline-primary">Log Out</button>
+                                              <button type="submit" class=" w-100 btn btn-outline-primary">Log Out</button>
                                           </form>
                                       </div>
                                   </div>
