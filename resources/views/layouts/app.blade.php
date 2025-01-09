@@ -20,7 +20,7 @@
     <!-- Required meta tags -->
 
     <!-- Favicon icon-->
-    <link rel="shortcut icon" type="image/png" href="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/moving.png') }}" />
 
     <!-- Core Css -->
     <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />

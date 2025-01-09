@@ -6,6 +6,10 @@ use App\Models\RegisterCompany;
 use Illuminate\Http\Request;
 use App\Models\Master;
 use Exception;
+use Log;
+Use Auth;
+use Illuminate\Support\Facades\Hash;
+
 class AdminStores extends Controller
 {
 
@@ -144,6 +148,41 @@ class AdminStores extends Controller
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
             //return back()->with('error', 'Not Updated..Try Again.....');
+        }
+    }
+
+    public function updatemyprofile(Request $request)
+    {
+        // dd($request->all());
+        try {
+            $user = auth()->user();
+            $filenameprofileimage="";
+            if ($request->hasFile('myprofileimage')) {
+                $request->validate([
+                    'myprofileimage' => 'image|mimes:jpeg,png,jpg,svg,webp|max:2048',
+                ]);
+                $profileimage = $request->file('myprofileimage');
+                $filenameprofileimage = time() . '_' . $profileimage->getClientOriginalName();
+                $profileimage->move(public_path('assets/images/'), $filenameprofileimage);
+            }
+
+            if (Hash::check($request->oldpassword, $user->password)) {
+                // Update user's password
+                $udpatedpassword = $user->password = Hash::make($request->newpassword);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'profile_photo_path' => $filenameprofileimage == null ?  $user->profile_photo_path : $filenameprofileimage ,
+                'website_link' => $request->websitelink,
+                'fulladdress' => $request->fulladdress,
+                'password' => $udpatedpassword ?? $user->password,
+            ]);
+
+            return back()->with('success', "Profile Updated..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
         }
     }
 }

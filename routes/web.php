@@ -34,6 +34,8 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/companyprofile', [AdminViews::class, 'companyprofile'])->name('admin.companyprofile');
     Route::post('/addcompanydetails', [AdminStores::class, 'addcompanydetails'])->name('admin.addcompanydetails');
     Route::post('/updateregistercompany', [AdminStores::class, 'updateregistercompany'])->name('admin.updateregistercompany');
+    Route::get('/myprofile', [AdminViews::class, 'myprofile'])->name('admin.myprofile');
+    Route::post('/updatemyprofile', [AdminStores::class, 'updatemyprofile'])->name('admin.updatemyprofile');
 
 });
 

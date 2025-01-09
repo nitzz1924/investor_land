@@ -21,7 +21,7 @@
                       <span class="hide-menu">Menu</span>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="{{route ('admin.admindashboard')}}"  aria-expanded="false">
+                      <a class="sidebar-link" href="{{route ('admin.admindashboard')}}" aria-expanded="false">
                           <span>
                               <i class="ti ti-layout-grid"></i>
                           </span>
@@ -29,7 +29,7 @@
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url"  aria-expanded="false">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
                           <span class="d-flex">
                               <i class="ti ti-settings"></i>
                           </span>
@@ -58,7 +58,10 @@
           <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded mt-3">
               <div class="hstack gap-3">
                   <div class="john-img">
-                      <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
+                      @php
+                      $userdata = auth()->user();
+                      @endphp
+                      <img src="{{asset('assets/images/'. $userdata->profile_photo_path)}}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
                   </div>
                   <div class="john-title">
                       @if (Auth::user())
@@ -69,7 +72,7 @@
                       @endif
                   </div>
                   <form method="POST" action="{{ route('logout') }}">
-                  @csrf
+                      @csrf
                       <button type="submit" class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button" aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
                           <i class="ti ti-power fs-6"></i>
                       </button>
@@ -381,17 +384,18 @@
                               <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                                   <div class="d-flex align-items-center">
                                       <div class="user-profile-img">
-                                          <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                          {{-- @php
+                                          $userdata = auth()->user();
+                                          @endphp --}}
+                                          <img src="{{asset('assets/images/'.$userdata->profile_photo_path)}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
                                       </div>
                                   </div>
                               </a>
                               <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop1">
                                   <div class="profile-dropdown position-relative" data-simplebar>
-                                      <div class="py-3 px-7 pb-0">
-                                          <h5 class="mb-0 fs-5 fw-semibold">Admin Profile</h5>
-                                      </div>
                                       <div class="d-flex align-items-center py-9 mx-7 border-bottom">
-                                          <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
+
+                                          <img src="{{asset('assets/images/'.$userdata->profile_photo_path)}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
                                           <div class="ms-3">
                                               @if (Auth::user())
                                               <h5 class="mb-1 fs-3">{{ Auth::user()->name }}</h5>
@@ -405,7 +409,7 @@
                                           </div>
                                       </div>
                                       <div class="message-body">
-                                          <a href="page-user-profile.html" class="py-8 px-7 mt-8 d-flex align-items-center">
+                                          <a href="{{ route('admin.myprofile') }}" class="py-8 px-7 mt-8 d-flex align-items-center">
                                               <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                                   <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-account.svg" alt="modernize-img" width="24" height="24" />
                                               </span>
