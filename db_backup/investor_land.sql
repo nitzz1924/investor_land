@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2025 at 10:40 AM
+-- Generation Time: Jan 09, 2025 at 09:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736324688),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1736324688;', 1736324688);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736411201),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1736411201;', 1736411201);
 
 -- --------------------------------------------------------
 
@@ -149,7 +149,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '0001_01_01_000001_create_cache_table', 1),
 (3, '0001_01_01_000002_create_jobs_table', 1),
 (4, '2025_01_02_080358_add_two_factor_columns_to_users_table', 1),
-(5, '2025_01_02_080436_create_personal_access_tokens_table', 1);
+(5, '2025_01_02_080436_create_personal_access_tokens_table', 1),
+(6, '2025_01_09_070838_add_website_link_to_users_table', 2);
 
 -- --------------------------------------------------------
 
@@ -232,7 +233,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('0rN3hM2xOGBZUzbcD8AupuKOpw0xtU3NTx5nRRrd', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibjM5SlBGeTdQYlpjdm4xMzVNckt0UkxjN2xTV0VFc3lwUmpsS3lIRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjM6InVybCI7YTowOnt9czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkMEZmWVRiNnRvVDNaMk5Kb2l5dXg4dWF3b3JvOVJLUU15YkZIZUVObzlvVFlUaVhkNXlGWHkiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1736325301);
+('OdGmWHH6ONtojEtRvXgbQG6HnKxgwEaJymRG2021', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjM6InVybCI7YTowOnt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjY6Il90b2tlbiI7czo0MDoiU1JackZHV24yQ0NSMFpNYTZZbWljOWVFMkZ6dXFzS1doQmZqQURDaSI7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1736411169);
 
 -- --------------------------------------------------------
 
@@ -251,7 +252,12 @@ CREATE TABLE `users` (
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `current_team_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `profile_photo_path` varchar(2048) DEFAULT NULL,
+  `profile_photo_path` varchar(255) DEFAULT NULL,
+  `website_link` varchar(255) DEFAULT NULL,
+  `fulladdress` varchar(255) DEFAULT NULL,
+  `old_password` varchar(255) DEFAULT NULL,
+  `new_password` varchar(255) DEFAULT NULL,
+  `confirm_password` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -260,8 +266,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Ram Kumar', 'ramkumar@gmail.com', NULL, '$2y$12$0FfYTb6toT3Z2NJoiyux8uaworo9RKQMybFHeENo9oTYTiXd5yFXy', NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-02 02:38:23', '2025-01-02 02:39:02');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `website_link`, `fulladdress`, `old_password`, `new_password`, `confirm_password`, `created_at`, `updated_at`) VALUES
+(1, 'Ram Kumar', 'ramkumar@gmail.com', NULL, '$2y$12$uVAfvTIVFxvUGl7sQBT5XeXNnyUtEVkFs78M8zvqHFaJFl8GzOuta', NULL, NULL, NULL, NULL, NULL, '1736409350_avatar-3.jpg', 'www.investorlands.com', 'Ajmer, Rajasthan, India.', NULL, NULL, NULL, '2025-01-02 02:38:23', '2025-01-09 02:27:45');
 
 --
 -- Indexes for dumped tables
@@ -372,7 +378,7 @@ ALTER TABLE `masters`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
