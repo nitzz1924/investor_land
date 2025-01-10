@@ -30,6 +30,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/dropzone.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
 
 
 </head>
@@ -76,6 +78,9 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     <script src="{{ asset('assets/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('assets/js/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/js/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/js/quill-init.js') }}"></script>
 
 
     <script src="{{ asset('assets/js/iconify-icon.min.js') }}"></script>
@@ -96,7 +101,6 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="{{ asset('assets/js/datatable-advanced.init.js') }}"></script>
-
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));

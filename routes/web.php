@@ -36,7 +36,10 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('/updateregistercompany', [AdminStores::class, 'updateregistercompany'])->name('admin.updateregistercompany');
     Route::get('/myprofile', [AdminViews::class, 'myprofile'])->name('admin.myprofile');
     Route::post('/updatemyprofile', [AdminStores::class, 'updatemyprofile'])->name('admin.updatemyprofile');
-
+    Route::get('/addproperty', [AdminViews::class, 'addproperty'])->name('admin.addproperty');
+    Route::post('/insertlisting', [AdminStores::class, 'insertlisting'])->name('admin.insertlisting');
+    Route::get('/editproperty/{id}', [AdminViews::class, 'editproperty'])->name('admin.editproperty');
+    Route::post('/updatelisting', [AdminStores::class, 'updatelisting'])->name('admin.updatelisting');
 });
 
 
