@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/dropzone.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" />
 
 
 </head>
@@ -101,6 +102,8 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="{{ asset('assets/js/datatable-advanced.init.js') }}"></script>
+    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script> 
+    <script src="{{ asset('assets/js/productDetail.js') }}"></script> 
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));

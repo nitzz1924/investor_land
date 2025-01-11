@@ -63,6 +63,7 @@
                                 </td>
                                 <td>
                                     <div class="hstack gap-3 flex-wrap">
+                                        <a href="{{ route('admin.viewproperty',['id' => $data->id]) }}" class="link-primary  fs-6"><i class="ti ti-eye-share"></i></a>
                                         <a href="{{ route('admin.editproperty',['id' => $data->id]) }}" class="link-dark  fs-6"><i class="ti ti-edit"></i></a>
                                         <button onclick="confirmDelete('{{ $data->id }}')" class="link-danger  fs-6"><i class="ti ti-trash"></i></button>
                                     </div>

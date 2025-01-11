@@ -48,4 +48,10 @@ class AdminViews extends Controller
         $allproperties = PropertyListing::orderBy('created_at','DESC')->get();
         return view('AdminPanelPages.allproperties',compact('allproperties'));
     }
+
+    public function viewproperty($id){
+        $listingdata = PropertyListing::find($id);
+        $propertyName = $listingdata->property_name;
+        return view('AdminPanelPages.viewproperty', compact('listingdata', 'propertyName'));
+    }
 }

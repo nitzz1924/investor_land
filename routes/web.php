@@ -42,6 +42,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('/updatelisting', [AdminStores::class, 'updatelisting'])->name('admin.updatelisting');
     Route::get('/allproperties', [AdminViews::class, 'allproperties'])->name('admin.allproperties');
     Route::get('/deletelisting/{id}', [AdminStores::class, 'deletelisting'])->name('admin.deletelisting');
+    Route::get('/viewproperty/{id}', [AdminViews::class, 'viewproperty'])->name('admin.viewproperty');
 
 
 });
