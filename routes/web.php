@@ -40,6 +40,10 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('/insertlisting', [AdminStores::class, 'insertlisting'])->name('admin.insertlisting');
     Route::get('/editproperty/{id}', [AdminViews::class, 'editproperty'])->name('admin.editproperty');
     Route::post('/updatelisting', [AdminStores::class, 'updatelisting'])->name('admin.updatelisting');
+    Route::get('/allproperties', [AdminViews::class, 'allproperties'])->name('admin.allproperties');
+    Route::get('/deletelisting/{id}', [AdminStores::class, 'deletelisting'])->name('admin.deletelisting');
+
+
 });
 
 

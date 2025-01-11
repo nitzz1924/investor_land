@@ -43,4 +43,9 @@ class AdminViews extends Controller
         $categories = Master::where('type','Master')->get();
        return view('AdminPanelPages.editproperty',compact('listingdata','categories'));
     }
+
+    public function allproperties(){
+        $allproperties = PropertyListing::orderBy('created_at','DESC')->get();
+        return view('AdminPanelPages.allproperties',compact('allproperties'));
+    }
 }

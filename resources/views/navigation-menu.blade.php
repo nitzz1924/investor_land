@@ -61,11 +61,11 @@
                       </a>
                       <ul aria-expanded="false" class="collapse first-level">
                           <li class="sidebar-item">
-                              <a href="{{ route('admin.addproperty')}}" class="sidebar-link">
+                              <a href="{{ route('admin.allproperties')}}" class="sidebar-link">
                                   <div class="round-16 d-flex align-items-center justify-content-center">
                                       <i class="ti ti-circle"></i>
                                   </div>
-                                  <span class="hide-menu">Add Property</span>
+                                  <span class="hide-menu">All Properties List</span>
                               </a>
                           </li>
                       </ul>

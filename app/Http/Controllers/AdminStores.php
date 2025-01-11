@@ -340,7 +340,8 @@ class AdminStores extends Controller
             }
 
 
-            $olddata = RegisterCompany::find($request->listingid);
+            $olddata = PropertyListing::find($request->listingid);
+            // dd($olddata);
             // Create the property listing
             $data = PropertyListing::where('id',$request->listingid)->update([
                 'usertype' => 'Admin',
@@ -360,10 +361,21 @@ class AdminStores extends Controller
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
                 'status' => $datareq['status'],
             ]);
-
+         
             return response()->json(['data' => $data, 'message' => 'Listing Updated..!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deletelisting($id)
+    {
+        try {
+            $data = PropertyListing::find($id);
+            $data->delete();
+            return back()->with('success', "Listing Deleted..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
         }
     }
 }

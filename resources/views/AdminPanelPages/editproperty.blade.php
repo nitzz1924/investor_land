@@ -5,7 +5,7 @@
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
             <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
-                    <div class="col-12">
+                    <div class="col-md-10">
                         <h4 class="fw-semibold mb-8">@yield('title')</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -15,6 +15,13 @@
                                 <li class="breadcrumb-item" aria-current="page">@yield('title')</li>
                             </ol>
                         </nav>
+                    </div>
+                     <div class="col-md-2 d-flex justify-content-end align-items-center">
+                        <div class="">
+                            <a href="{{ url()->previous() }}" class="btn btn-outline-primary">
+                               <i class="ti ti-arrow-narrow-left"></i> Go Back
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -35,7 +42,7 @@
                                 <label class="form-label">Property Name<span class="text-danger">*</span>
                                 </label>
                                 <input type="text" value="{{$listingdata->property_name}}" placeholder="Property Name" name="property_name" class="form-control" required>
-                                <input type="hidden" name="listingid" value="{{$listingdata->id}}" >
+                                <input type="hidden" name="listingid" value="{{$listingdata->id}}">
                             </div>
                             <div>
                                 <label class="form-label">Property Description</label>
@@ -136,15 +143,15 @@
                                     to upload</button>
                             </div>
                         </form>
-                         @if ($listingdata->documents)
-                            <div class=" d-flex">
-                                @foreach (json_decode($listingdata->documents) as $documentimg)
-                                <div class="mx-2">
-                                    <iframe src="{{ asset($documentimg) }}" class="rounded-3 img-fluid" style="max-height: 100px; width: 100px;" frameborder="0"></iframe>
-                                </div>
-                                @endforeach
+                        @if ($listingdata->documents)
+                        <div class=" d-flex">
+                            @foreach (json_decode($listingdata->documents) as $documentimg)
+                            <div class="mx-2">
+                                <iframe src="{{ asset($documentimg) }}" class="rounded-3 img-fluid" style="max-height: 100px; width: 100px;" frameborder="0"></iframe>
                             </div>
-                            @endif
+                            @endforeach
+                        </div>
+                        @endif
                         <p class="fs-2 text-center text-danger mb-0">
                             Set the product documents. Only *.pdf files are accepted.
                         </p>
@@ -153,6 +160,23 @@
             </div>
             <div class="col-lg-4">
                 <div class="offcanvas-md offcanvas-end overflow-auto" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between mb-7">
+                                <h4 class="card-title">Status</h4>
+                                <div class="p-2 h-100 {{$listingdata->status == 'unpublished' ? 'bg-danger' : 'bg-success'}} rounded-circle"></div>
+                            </div>
+                            <form action="#" class="form-horizontal">
+                                <div>
+                                    <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
+                                        <option selected="">--select status--</option>
+                                        <option value="unpublished" {{$listingdata->status == 'unpublished' ? 'selected' : ''}}>Unpublished</option>
+                                        <option value="published" {{$listingdata->status == 'published' ? 'selected' : ''}}>Published</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-7">Property Thumbnail</h4>
@@ -199,23 +223,6 @@
                             </div>
                         </form>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between mb-7">
-                                <h4 class="card-title">Status</h4>
-                                <div class="p-2 h-100 {{$listingdata->status == 'unpublished' ? 'bg-danger' : 'bg-success'}} rounded-circle"></div>
-                            </div>
-                            <form action="#" class="form-horizontal">
-                                <div>
-                                    <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
-                                        <option selected="">--select status--</option>
-                                        <option value="unpublished" {{$listingdata->status == 'unpublished' ? 'selected' : ''}}>Unpublished</option>
-                                        <option value="published" {{$listingdata->status == 'published' ? 'selected' : ''}}>Published</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-start mb-5">
@@ -247,7 +254,8 @@
             const dropzoneInstance = Dropzone.forElement("#propertyGalleryForm"); // Multiple images
             const propertydocumentsform = Dropzone.forElement("#propertydocumentsform"); // Multiple images
             const propertyThumbnail = Dropzone.forElement("#propertythumbnail"); // Single image
-            const descriptionContent = quill.root.innerHTML;
+            const descriptionContent = document.querySelector('#editorr').innerHTML;
+            console.log(descriptionContent);
             combinedFormData.append("description", descriptionContent);
 
             // Append multiple image files to FormData
@@ -302,7 +310,7 @@
                                 , showCloseButton: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.reload();
+                                    window.location.href="/admin/allproperties/";
                                 }
                             });
                         } else {
@@ -332,15 +340,20 @@
         });
 
     </script>
-        <script src="{{ asset('assets/js/dropzone.min.js') }}"></script>
-        <script src="{{ asset('assets/js/quill.min.js') }}"></script>
-        <script src="{{ asset('assets/js/quill-init.js') }}"></script>
+    <script src="{{ asset('assets/js/dropzone.min.js') }}"></script>
+    <script src="{{ asset('assets/js/quill.min.js') }}"></script>
+    <script src="{{ asset('assets/js/quill-init.js') }}"></script>
     <script>
+        // Initialize the Quill editor
         var quill = new Quill('#editorr', {
             theme: 'snow'
         });
-        const content = {{ Js::from($listingdata['discription'])}};
+
+        // Inject content from Laravel
+        const content = @json($listingdata['discription']);
         console.log(content);
+
+        // Check if content exists and populate the editor
         if (content) {
             quill.clipboard.dangerouslyPasteHTML(content);
         }

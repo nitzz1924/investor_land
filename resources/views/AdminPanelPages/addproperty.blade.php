@@ -5,7 +5,7 @@
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
             <div class="card-body px-4 py-3">
                 <div class="row align-items-center">
-                    <div class="col-12">
+                    <div class="col-md-10">
                         <h4 class="fw-semibold mb-8">@yield('title')</h4>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
@@ -15,6 +15,13 @@
                                 <li class="breadcrumb-item" aria-current="page">@yield('title')</li>
                             </ol>
                         </nav>
+                    </div>
+                     <div class="col-md-2 d-flex justify-content-end align-items-center">
+                        <div class="">
+                            <a href="{{ route('admin.allproperties') }}" class="btn btn-outline-primary">
+                               <i class="ti ti-arrow-narrow-left"></i> Go Back
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,6 +141,23 @@
                 <div class="offcanvas-md offcanvas-end overflow-auto" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                     <div class="card">
                         <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between mb-7">
+                                <h4 class="card-title">Set Property Status</h4>
+                                <div class="p-2 h-100 bg-danger rounded-circle"></div>
+                            </div>
+                            <form action="#" class="form-horizontal">
+                                <div>
+                                    <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
+                                        <option selected="">--select status--</option>
+                                        <option value="unpublished">Unpublished</option>
+                                        <option value="published">Published</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="card-title mb-7">Property Thumbnail</h4>
                             <form action="#" class="dropzone dz-clickable mb-2" id="propertythumbnail">
                                 <div class="dz-default dz-message">
@@ -146,7 +170,6 @@
                             </p>
                         </div>
                     </div>
-
                     <div class="card">
                         <form action="" method="post">
                             <div class="card-body">
@@ -162,23 +185,6 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between mb-7">
-                                <h4 class="card-title">Status</h4>
-                                <div class="p-2 h-100 bg-danger rounded-circle"></div>
-                            </div>
-                            <form action="#" class="form-horizontal">
-                                <div>
-                                    <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
-                                        <option selected="">--select status--</option>
-                                        <option value="unpublished">Unpublished</option>
-                                        <option value="published">Published</option>
-                                    </select>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

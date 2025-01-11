@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2025 at 02:13 PM
+-- Generation Time: Jan 11, 2025 at 10:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736485571),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1736485571;', 1736485571);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736572556),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1736572556;', 1736572556);
 
 -- --------------------------------------------------------
 
@@ -214,8 +214,8 @@ CREATE TABLE `property_listings` (
 --
 
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
-(30, 'Admin', '1', 'tretrtrtrtr', 'trtrtrtrtrt', '1500000', '343', '4', '3', '4', 'Ajmer', 'Ajmer', '1736509787_moving.png', 'Buy', 'unpublished', '[\"assets\\/images\\/Listings\\/7cfd5df443b4eb0d69886a583b33de4c.jpg\",\"assets\\/images\\/Listings\\/6d7d394c9d0c886e9247542e06ebb705.jpg\"]', '[\"assets\\/images\\/Listings\\/ca6ab34959489659f8c3776aaf1f8efd.pdf\",\"assets\\/images\\/Listings\\/cd3109c63bf4323e6b987a5923becb96.pdf\"]', '2025-01-10 06:19:47', '2025-01-10 06:19:47'),
-(31, 'Admin', '1', 'Valley', '&nbsp;Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore magni, vitae illum earum fugit animi voluptas reprehenderit laudantium doloremque perferendis hic. Modi a vitae nisi doloribus facilis voluptatum? Facere, incidunt accusantium? Neque eius veniam aliquam velit rerum? Repellat enim nam laborum, explicabo, praesentium dicta libero ducimus nihil magni unde molestias!', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736510321_moving.png', 'Buy', 'unpublished', '[\"assets\\/images\\/Listings\\/0a49e3c3a03ebde64f85c0bacd8a08e2.jpg\",\"assets\\/images\\/Listings\\/60519c3dd22587d6de04d5f1e28bd41d.jpg\"]', '[\"assets\\/images\\/Listings\\/256bf8e6923a52fda8ddf7dc050a1148.pdf\",\"assets\\/images\\/Listings\\/767c23430487b6c64d45b83d5d32e9a1.pdf\"]', '2025-01-10 06:28:41', '2025-01-10 12:04:50');
+(31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/0a49e3c3a03ebde64f85c0bacd8a08e2.jpg\",\"assets\\/images\\/Listings\\/60519c3dd22587d6de04d5f1e28bd41d.jpg\"]', '[\"assets\\/images\\/Listings\\/256bf8e6923a52fda8ddf7dc050a1148.pdf\",\"assets\\/images\\/Listings\\/767c23430487b6c64d45b83d5d32e9a1.pdf\"]', '2025-01-10 06:28:41', '2025-01-11 04:07:11'),
+(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Buy', 'unpublished', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/a0b45d1bb84fe1bedbb8449764c4d5d5.pdf\",\"assets\\/images\\/Listings\\/58f1e2bfc0c0c182f1afdab7cae02402.pdf\"]', '2025-01-11 04:05:33', '2025-01-11 04:05:33');
 
 -- --------------------------------------------------------
 
@@ -267,7 +267,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('AIhkMl2hSS2RlBK2ZalQG9WaKtfU8tDKnRx4aiqz', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoidUlvQ1NTRW8yUldCQWw0d2taaGx5ZGVOZnZkYW1MMXZFa1FoMW5ucCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQzOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vZWRpdHByb3BlcnR5LzMxIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMiR1VkFmdlRJVkZ4dlVHbDdzUUJUNVhlWE5ueVV0RVZrRnM3OE04enZxSEZhSkZsOEd6T3V0YSI7fQ==', 1736514747);
+('OwEeQm23MZfTGQri1jnuHPCpBP7jLHvM6KJrudP3', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRk9qaHpXbm5PS1RnZ1ZzdHpHMkJSdkYyT2pMc3h6eldmM2l2cWtRRyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWxscHJvcGVydGllcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1736588266);
 
 -- --------------------------------------------------------
 
@@ -430,7 +430,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `register_companies`

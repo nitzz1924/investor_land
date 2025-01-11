@@ -53,48 +53,50 @@
             </div>
             <div class="col-md-12">
                 <div class="card shadow">
-                     <div class="card-header">
+                    <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="card-title">All Categories</h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <ol class="list-group list-group">
-                            <table id="file_export" class="table w-100 table-striped table-bordered display text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>SNo.</th>
-                                        <th>Name</th>
-                                        <th>Category</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="table-body">
-                                    @foreach ($allcategories as $index => $rows)
-                                    <tr>
-                                        <td>{{ $index + 1}}</td>
-                                        <td>{{ $rows->label}}</td>
-                                        <td>
-                                            @if($rows->type == 'Master')
-                                            <span class="badge bg-secondary">Parent Category</span>
-                                            @else
-                                            <span class="badge bg-success">{{ $rows->type}}</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <ul class="list-inline mb-0">
-                                                <li class="list-inline-item">
-                                                    <button class="btn btn-outline-primary btn-border editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal" data-car-list="{{ json_encode($rows) }}"><i class="ti ti-edit"></i></button>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <button onclick="confirmDelete('{{ $rows->id }}')" class="btn btn-outline-danger btn-border"><i class="ti ti-trash"></i></button>
-                                                </li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <div class="">
+                                <table id="file_export" class="table w-100 table-striped table-bordered display text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>SNo.</th>
+                                            <th>Name</th>
+                                            <th>Category</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table-body">
+                                        @foreach ($allcategories as $index => $rows)
+                                        <tr>
+                                            <td>{{ $index + 1}}</td>
+                                            <td>{{ $rows->label}}</td>
+                                            <td>
+                                                @if($rows->type == 'Master')
+                                                <span class="badge bg-secondary">Parent Category</span>
+                                                @else
+                                                <span class="badge bg-success">{{ $rows->type}}</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item">
+                                                        <button class="btn btn-outline-primary btn-border editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal" data-car-list="{{ json_encode($rows) }}"><i class="ti ti-edit"></i></button>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <button onclick="confirmDelete('{{ $rows->id }}')" class="btn btn-outline-danger btn-border"><i class="ti ti-trash"></i></button>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </ol>
                     </div>
                 </div>
@@ -110,8 +112,8 @@
                     </h4>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                 <form action="{{ route('admin.updatemaster')}}" class="" method="POST" enctype="multipart/form-data">
+
+                <form action="{{ route('admin.updatemaster')}}" class="" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body" id="modalbodyedit">
 
