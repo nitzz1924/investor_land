@@ -70,6 +70,24 @@
                           </li>
                       </ul>
                   </li>
+                   <li class="sidebar-item">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
+                          <span class="d-flex">
+                              <i class="ti ti-users"></i>
+                          </span>
+                          <span class="hide-menu">Lead Management</span>
+                      </a>
+                      <ul aria-expanded="false" class="collapse first-level">
+                          <li class="sidebar-item">
+                              <a href="{{ route('admin.leadslist')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">All Leads</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
               </ul>
           </nav>
 

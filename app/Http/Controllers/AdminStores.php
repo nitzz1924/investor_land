@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lead;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
 use Illuminate\Http\Request;
@@ -200,7 +201,7 @@ class AdminStores extends Controller
                 $request->validate([
                     'thumbnailImages' => 'required|mimes:jpeg,png,jpg',
                 ]);
-               
+
                 $file = $request->file('thumbnailImages');
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
@@ -228,7 +229,7 @@ class AdminStores extends Controller
                     // Store the path for the image
                     $galleryImages[] = 'assets/images/Listings/' . $imageFullName;
                 }
-            //    dd( $galleryImages);
+                //    dd( $galleryImages);
             }
 
             // Handle multiple documents
@@ -289,7 +290,7 @@ class AdminStores extends Controller
                 $request->validate([
                     'thumbnailImages' => 'required|mimes:jpeg,png,jpg',
                 ]);
-               
+
                 $file = $request->file('thumbnailImages');
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
@@ -317,7 +318,7 @@ class AdminStores extends Controller
                     // Store the path for the image
                     $galleryImages[] = 'assets/images/Listings/' . $imageFullName;
                 }
-            //    dd( $galleryImages);
+                //    dd( $galleryImages);
             }
 
             // Handle multiple documents
@@ -343,7 +344,7 @@ class AdminStores extends Controller
             $olddata = PropertyListing::find($request->listingid);
             // dd($olddata);
             // Create the property listing
-            $data = PropertyListing::where('id',$request->listingid)->update([
+            $data = PropertyListing::where('id', $request->listingid)->update([
                 'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
@@ -357,11 +358,11 @@ class AdminStores extends Controller
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename ?? $olddata->thumbnail,
                 'category' => $datareq['category'],
-                'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery, 
+                'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
                 'status' => $datareq['status'],
             ]);
-         
+
             return response()->json(['data' => $data, 'message' => 'Listing Updated..!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
@@ -378,4 +379,57 @@ class AdminStores extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+    public function insertfollowup(Request $request)
+    {
+        try {
+            $followupdetails = [
+                'date' => $request->followupdate,
+                'description' => $request->followupdesciption,
+            ];
+            $leads = Lead::find($request->recordid);
+            $existingFollowups = $leads->followupdetails ? json_decode($leads->followupdetails, true) : [];
+            $existingFollowups[] = $followupdetails;
+            $leads->followupdetails = json_encode($existingFollowups);
+            // dd( $existingFollowups);
+
+            if ($request->followupstatus) {
+                $leads->status = $request->followupstatus;
+            }
+           $leads->save();
+
+            return back()->with('success', "Follow-up Added and Status Updated..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function deletelead($id)
+    {
+        try {
+            $data = Lead::find($id);
+            $data->delete();
+            return back()->with('success', "Deleted..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function updatelead(Request $request){
+        try {
+
+            $data = Lead::find($request->leadid);
+            $data->update([
+                'name' => $request->customername,
+                'mobilenumber' => $request->mobilenumber,
+                'email' => $request->email,
+                'city' => $request->city,
+                'inwhichcity' => $request->cityofproperty,
+            ]);
+
+            return back()->with('success', "Lead Updated..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }   
 }

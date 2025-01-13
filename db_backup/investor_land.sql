@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2025 at 10:40 AM
+-- Generation Time: Jan 13, 2025 at 02:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736572556),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1736572556;', 1736572556);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736744533),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1736744533;', 1736744533);
 
 -- --------------------------------------------------------
 
@@ -107,6 +107,37 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `leads`
+--
+
+CREATE TABLE `leads` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `mobilenumber` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `state` varchar(255) DEFAULT NULL,
+  `housecategory` varchar(255) DEFAULT NULL,
+  `inwhichcity` varchar(255) DEFAULT NULL,
+  `propertyid` varchar(255) DEFAULT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'new',
+  `followupdetails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`followupdetails`)),
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leads`
+--
+
+INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2025-01-13 06:59:41', '2025-01-13 07:01:15'),
+(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'new', NULL, '2025-01-13 06:59:41', '2025-01-13 10:28:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `masters`
 --
 
@@ -123,8 +154,17 @@ CREATE TABLE `masters` (
 --
 
 INSERT INTO `masters` (`id`, `label`, `type`, `created_at`, `updated_at`) VALUES
-(18, 'Buy', 'Master', '2025-01-09 07:30:59', '2025-01-09 07:30:59'),
-(19, 'Rent', 'Master', '2025-01-09 07:31:07', '2025-01-09 07:31:07');
+(20, 'Follow Up Status', 'Master', '2025-01-13 02:04:34', '2025-01-13 02:04:34'),
+(21, 'New', 'Follow Up Status', '2025-01-13 02:05:09', '2025-01-13 02:05:09'),
+(22, 'Qualified', 'Follow Up Status', '2025-01-13 02:05:26', '2025-01-13 02:05:26'),
+(23, 'Not Responded', 'Follow Up Status', '2025-01-13 02:05:35', '2025-01-13 02:05:35'),
+(24, 'Final', 'Follow Up Status', '2025-01-13 02:06:34', '2025-01-13 02:08:09'),
+(25, 'Won', 'Follow Up Status', '2025-01-13 02:06:44', '2025-01-13 02:06:44'),
+(26, 'Property Categories', 'Master', '2025-01-13 02:09:06', '2025-01-13 02:09:06'),
+(27, 'Apartment', 'Property Categories', '2025-01-13 02:09:23', '2025-01-13 02:09:23'),
+(28, 'Villa', 'Property Categories', '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
+(29, 'Penthouse', 'Property Categories', '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
+(30, 'Residences', 'Property Categories', '2025-01-13 02:10:07', '2025-01-13 02:10:07');
 
 -- --------------------------------------------------------
 
@@ -214,8 +254,8 @@ CREATE TABLE `property_listings` (
 --
 
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
-(31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/0a49e3c3a03ebde64f85c0bacd8a08e2.jpg\",\"assets\\/images\\/Listings\\/60519c3dd22587d6de04d5f1e28bd41d.jpg\"]', '[\"assets\\/images\\/Listings\\/256bf8e6923a52fda8ddf7dc050a1148.pdf\",\"assets\\/images\\/Listings\\/767c23430487b6c64d45b83d5d32e9a1.pdf\"]', '2025-01-10 06:28:41', '2025-01-11 04:07:11'),
-(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Buy', 'unpublished', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/a0b45d1bb84fe1bedbb8449764c4d5d5.pdf\",\"assets\\/images\\/Listings\\/58f1e2bfc0c0c182f1afdab7cae02402.pdf\"]', '2025-01-11 04:05:33', '2025-01-11 04:05:33');
+(31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/256bf8e6923a52fda8ddf7dc050a1148.pdf\",\"assets\\/images\\/Listings\\/767c23430487b6c64d45b83d5d32e9a1.pdf\"]', '2025-01-10 06:28:41', '2025-01-11 05:14:17'),
+(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/a0b45d1bb84fe1bedbb8449764c4d5d5.pdf\",\"assets\\/images\\/Listings\\/58f1e2bfc0c0c182f1afdab7cae02402.pdf\"]', '2025-01-11 04:05:33', '2025-01-12 23:36:46');
 
 -- --------------------------------------------------------
 
@@ -267,7 +307,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('OwEeQm23MZfTGQri1jnuHPCpBP7jLHvM6KJrudP3', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiRk9qaHpXbm5PS1RnZ1ZzdHpHMkJSdkYyT2pMc3h6eldmM2l2cWtRRyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQxOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYWxscHJvcGVydGllcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1736588266);
+('k2ECzy16IdBjtzD9eKHM69Brku39x9zyRnJnlT92', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSktvMm50VnNpM2lGaEVlcWpSc1NMempLdEhGWEpXTEJMU3FCQmp0MiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1736773908);
 
 -- --------------------------------------------------------
 
@@ -340,6 +380,12 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `leads`
+--
+ALTER TABLE `leads`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `masters`
 --
 ALTER TABLE `masters`
@@ -409,10 +455,16 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `leads`
+--
+ALTER TABLE `leads`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `migrations`

@@ -29,10 +29,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/css/bootstrap-material-datetimepicker.min.css">
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/dropzone.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.css') }}" />
 
 
 </head>
@@ -101,9 +104,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="{{ asset('assets/js/moment.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-datetimepicker/2.7.1/js/bootstrap-material-datetimepicker.min.js"></script>
+    <script src="{{ asset('assets/js/material-datepicker-init.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
     <script src="{{ asset('assets/js/datatable-advanced.init.js') }}"></script>
     <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script> 
     <script src="{{ asset('assets/js/productDetail.js') }}"></script> 
+    <script src="{{ asset('assets/js/daterangepicker.js') }}"></script> 
+    <script src="{{ asset('assets/js/daterangepicker-init.js') }}"></script> 
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));

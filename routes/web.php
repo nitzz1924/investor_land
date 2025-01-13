@@ -43,6 +43,11 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/allproperties', [AdminViews::class, 'allproperties'])->name('admin.allproperties');
     Route::get('/deletelisting/{id}', [AdminStores::class, 'deletelisting'])->name('admin.deletelisting');
     Route::get('/viewproperty/{id}', [AdminViews::class, 'viewproperty'])->name('admin.viewproperty');
+    Route::get('/leadslist', [AdminViews::class, 'leadslist'])->name('admin.leadslist');
+    Route::post('/insertfollowup', [AdminStores::class, 'insertfollowup'])->name('admin.insertfollowup');
+    Route::get('/deletelead/{id}', [AdminStores::class, 'deletelead'])->name('admin.deletelead');
+    Route::post('/updatelead', [AdminStores::class, 'updatelead'])->name('admin.updatelead');
+    Route::get('/leadstatusfilter/{status}', [AdminViews::class, 'leadstatusfilter'])->name('admin.leadstatusfilter');
 
 
 });
