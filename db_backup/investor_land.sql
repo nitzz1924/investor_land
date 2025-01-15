@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2025 at 02:12 PM
+-- Generation Time: Jan 15, 2025 at 08:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,8 +38,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736744533),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1736744533;', 1736744533);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736915949),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1736915949;', 1736915949);
 
 -- --------------------------------------------------------
 
@@ -132,8 +132,9 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2025-01-13 06:59:41', '2025-01-13 07:01:15'),
-(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'new', NULL, '2025-01-13 06:59:41', '2025-01-13 10:28:15');
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'New', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-15 07:45:37'),
+(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'Qualified', NULL, '2025-01-13 06:59:41', '2025-01-15 07:45:30'),
+(4, 'Stephnie Machman', '8765432109', 'stephnie.mac@example.com', 'Ajmer', 'Rajasthan', 'Villa', 'Jaipur', '33', '5', 'Won', '[{\"date\":\"2025-01-16\",\"description\":\"He will talk tomorrow\"},{\"date\":\"2025-01-16\",\"description\":\"He will do the final tomorrow also\"}]', '2025-01-15 06:59:41', '2025-01-15 02:19:50');
 
 -- --------------------------------------------------------
 
@@ -159,12 +160,12 @@ INSERT INTO `masters` (`id`, `label`, `type`, `created_at`, `updated_at`) VALUES
 (22, 'Qualified', 'Follow Up Status', '2025-01-13 02:05:26', '2025-01-13 02:05:26'),
 (23, 'Not Responded', 'Follow Up Status', '2025-01-13 02:05:35', '2025-01-13 02:05:35'),
 (24, 'Final', 'Follow Up Status', '2025-01-13 02:06:34', '2025-01-13 02:08:09'),
-(25, 'Won', 'Follow Up Status', '2025-01-13 02:06:44', '2025-01-13 02:06:44'),
 (26, 'Property Categories', 'Master', '2025-01-13 02:09:06', '2025-01-13 02:09:06'),
 (27, 'Apartment', 'Property Categories', '2025-01-13 02:09:23', '2025-01-13 02:09:23'),
 (28, 'Villa', 'Property Categories', '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
 (29, 'Penthouse', 'Property Categories', '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
-(30, 'Residences', 'Property Categories', '2025-01-13 02:10:07', '2025-01-13 02:10:07');
+(30, 'Residences', 'Property Categories', '2025-01-13 02:10:07', '2025-01-13 02:10:07'),
+(31, 'Won', 'Follow Up Status', '2025-01-14 06:46:38', '2025-01-14 06:46:38');
 
 -- --------------------------------------------------------
 
@@ -307,7 +308,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('k2ECzy16IdBjtzD9eKHM69Brku39x9zyRnJnlT92', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiSktvMm50VnNpM2lGaEVlcWpSc1NMempLdEhGWEpXTEJMU3FCQmp0MiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1736773908);
+('KewlqCqasWlyaiMzwBzPi1v77XuoDDmSBammwYTg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMlI2OGNUN2EzcHlpY2tCa2gxWHBHYVpnSkI4aE5FWGlYYXY3bzlPTCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vbGVhZHNsaXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1736927769);
 
 -- --------------------------------------------------------
 
@@ -458,13 +459,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `migrations`

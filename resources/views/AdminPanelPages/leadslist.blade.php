@@ -18,12 +18,12 @@
                     </div>
                     <div class="col-md-2 d-flex justify-content-end align-items-center gap-1">
                         <div class="" data-bs-toggle="tooltip" title="Switch to Kanban">
-                            <a href="{{ route('admin.addproperty') }}" class="btn btn-outline-dark">
+                            <a href="{{ route('admin.leadslistkaban') }}" class="btn btn-outline-dark">
                                 <i class="ti ti-layout-kanban"></i>
                             </a>
                         </div>
                         <div class="" data-bs-toggle="tooltip" title="Switch to List">
-                            <a href="{{ route('admin.addproperty') }}" class="btn btn-outline-dark">
+                            <a href="{{ route('admin.leadslist') }}" class="btn btn-outline-dark">
                                 <i class="ti ti-list"></i>
                             </a>
                         </div>
@@ -37,7 +37,7 @@
                     <div class="col-md-3">
                         <label class="mb-2">Filter by Date</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control daterange" />
+                            <input type="text" class="form-control daterange" id="dateinput" name="date" />
                             <span class="input-group-text">
                                 <i class="ti ti-calendar fs-5"></i>
                             </span>
@@ -62,8 +62,8 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-body">
-                <div class="">
+            <div class="">
+                <div class="p-4">
                     <table id="file_export" class="table tabhover table-striped table-bordered display text-nowrap py-3">
                         <thead>
                             <tr>
@@ -90,11 +90,11 @@
                                 <td>{{ $data->inwhichcity}}</td>
                                 <td>
                                     <span class="mb-1 badge 
-                                    @if($data->status == 'new') text-bg-primary 
-                                    @elseif($data->status == 'qualified') text-bg-success 
-                                    @elseif($data->status == 'not responded') text-bg-warning 
-                                    @elseif($data->status == 'payment mode') text-bg-info 
-                                    @elseif($data->status == 'won') text-bg-success 
+                                    @if($data->status == 'New') text-bg-primary 
+                                    @elseif($data->status == 'Qualified') text-bg-secondary 
+                                    @elseif($data->status == 'Not Responded') text-bg-danger 
+                                    @elseif($data->status == 'Final') text-bg-info 
+                                    @elseif($data->status == 'Won') text-bg-dark 
                                     @else text-bg-danger 
                                     @endif">
                                         {{ ucfirst($data->status) }}
@@ -229,7 +229,7 @@
                                             <select name="followupstatus" class="form-select" data-placeholder="Choose a Category" tabindex="1">
                                                 <option value="Master">--select status--</option>
                                                 @foreach ($followupstatus as $row)
-                                                    <option value="{{$row->label}}">{{$row->label}}</option>
+                                                    <option value="{{ ucfirst(strtolower($row->label)) }}">{{ ucfirst(strtolower($row->label)) }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -315,6 +315,108 @@
                         </div>
                     </div>
                 `);
+        });
+
+    </script>
+
+    {{-- Date filter Functionality Code--}}
+    <script>
+        $(document).ready(function() {
+            /* Initialize DataTable
+            var dataTableCustomer = $('#file_export').DataTable({
+                layout: {
+                    topStart: {
+                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                    }
+                }
+            });*/
+
+            $('.daterange').on('change', function() {
+                var date = $('#dateinput').val();
+                var dates = date.split(" - ");
+                var startDate = dates[0].trim();
+                var endDate = dates[1].trim();
+
+                console.log("Start Date:", startDate);
+                console.log("End Date:", endDate);
+
+                $.ajax({
+                    url: '/admin/datefilterleads'
+                    , method: 'POST'
+                    , data: {
+                        datefrom: startDate
+                        , dateto: endDate
+                    , }
+                    , headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                    , success: function(response) {
+                        console.log("Filtered data:", response);
+
+                        // Clear DataTable before appending new data
+                        var dataTableCustomer = $('#file_export').DataTable().clear().destroy();
+                        $('#table-body').empty();
+
+                        if (Array.isArray(response) && response.length > 0) {
+                            response.forEach(function(row) {
+                                var dateObj = new Date(row.created_at);
+                                var formattedDate = dateObj.toLocaleDateString('en-GB', {
+                                    day: 'numeric'
+                                    , month: 'short'
+                                    , year: 'numeric'
+                                });
+                                var formattedTime = dateObj.toLocaleTimeString('en-US', {
+                                    hour: 'numeric'
+                                    , minute: '2-digit'
+                                    , hour12: true
+                                });
+
+                                var html = `
+                        <tr>
+                            <td>${row.name}</td>
+                            <td>${formattedTime}</td>
+                            <td>${row.mobilenumber}</td>
+                            <td>${row.email}</td>
+                            <td>${row.city}</td>
+                            <td>${row.housecategory}</td>
+                            <td>${row.inwhichcity}</td>
+                            <td>
+                                <span class="mb-1 badge 
+                                ${row.status === 'new' ? 'text-bg-primary' : 
+                                  row.status === 'qualified' ? 'text-bg-success' : 
+                                  row.status === 'not responded' ? 'text-bg-warning' : 
+                                  row.status === 'payment mode' ? 'text-bg-info' : 
+                                  row.status === 'won' ? 'text-bg-success' : 
+                                  'text-bg-danger'}">
+                                    ${row.status.charAt(0).toUpperCase() + row.status.slice(1)}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="hstack gap-3 flex-wrap">
+                                    <a href="#" data-car-list='${JSON.stringify(row)}' class="link-primary fs-6 editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal"><i class="ti ti-table-plus" data-bs-toggle="tooltip" title="Add Follow Up Status"></i></a>
+                                    <a href="#" data-record='${JSON.stringify(row)}' data-bs-toggle="modal" data-bs-target="#primary-header-modaledit" class="link-dark editbtnmodalnew fs-6" data-bs-toggle="tooltip" title="Edit"><i class="ti ti-edit"></i></a>
+                                    <button data-bs-toggle="tooltip" title="Delete" onclick="confirmDelete('${row.id}')" class="link-danger fs-6"><i class="ti ti-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        `;
+                                $('#table-body').append(html);
+                            });
+
+                            // Reinitialize DataTable
+                            dataTableCustomer = $('#file_export').DataTable({
+                                layout: {
+                                    topStart: {
+                                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                                    }
+                                }
+                            });
+                        } else {
+                            $('#table-body').html('<tr><td colspan="9">No orders found for the selected date range.</td></tr>');
+                        }
+                    }
+                });
+            });
         });
 
     </script>

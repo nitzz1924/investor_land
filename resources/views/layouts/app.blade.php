@@ -114,6 +114,8 @@
     <script src="{{ asset('assets/js/productDetail.js') }}"></script> 
     <script src="{{ asset('assets/js/daterangepicker.js') }}"></script> 
     <script src="{{ asset('assets/js/daterangepicker-init.js') }}"></script> 
+    <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script> 
+    <script src="{{ asset('assets/js/kanban.js') }}"></script> 
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
