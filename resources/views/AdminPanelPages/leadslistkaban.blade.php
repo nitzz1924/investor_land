@@ -31,110 +31,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="add-task-title modal-title" id="addTaskModalTitleLabel1">Add Task</h5>
-                        <h5 class="edit-task-title modal-title" id="addTaskModalTitleLabel2">Edit Task</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="compose-box">
-                            <div class="compose-content" id="addTaskModalTitle">
-                                <div class="addTaskAccordion" id="add_task_accordion">
-                                    <div class="task-content task-text-progress">
-                                        <div id="collapseTwo" class="collapse show" data-parent="#add_task_accordion">
-                                            <div class="task-content-body">
-                                                <form action="javascript:void(0);">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="task-title mb-4 d-flex">
-                                                                <input id="kanban-title" type="text" placeholder="Task" class="form-control" name="task">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="task-badge d-flex">
-                                                                <textarea id="kanban-text" placeholder="Task Text" class="form-control" name="taskText"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-start">
-                        <div class="d-flex gap-6">
-                            <button data-btn-action="addTask" class="btn add-tsk btn-primary">Add Task</button>
-                            <button data-btn-action="editTask" class="btn edit-tsk btn-success">Save</button>
-                            <button class="btn bg-danger-subtle text-danger d-flex align-items-center gap-1" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="addListModal" tabindex="-1" role="dialog" aria-labelledby="addListModalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title add-list-title" id="addListModalTitleLabel1">Add List</h5>
-                        <h5 class="modal-title edit-list-title" id="addListModalTitleLabel2">Edit List</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="compose-box">
-                            <div class="compose-content" id="addListModalTitle">
-                                <form action="javascript:void(0);">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="list-title d-flex align-items-center">
-                                                <input id="item-name" type="text" placeholder="List Name" class="form-control" name="task">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer justify-content-start">
-                        <div class="d-flex gap-6">
-                            <button class="btn bg-danger-subtle text-danger d-flex align-items-center gap-1" data-bs-dismiss="modal">Cancel</button>
-                            <button class="btn add-list btn-primary">Add List</button>
-                            <button class="btn edit-list btn-success">Save</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="deleteConformation" tabindex="-1" role="dialog" aria-labelledby="deleteConformationLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" id="deleteConformationLabel">
-                    <div class="modal-header">
-                        <div class="icon round-40 d-flex align-items-center justify-content-center bg-light-danger text-danger me-2 rounded-circle">
-                            <i class="ti ti-trash fs-6"></i>
-                        </div>
-                        <h5 class="modal-title fw-semibold" id="exampleModalLabel">Delete the task?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="mb-0">If you delete the task it will be gone forever. Are you sure you want to
-                            proceed?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn bg-danger-subtle text-danger" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" data-remove="task">Delete</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="scrumboard" id="cancel-row">
             <div class="layout-spacing pb-3">
                 <div data-simplebar>
@@ -148,7 +44,7 @@
                                     @foreach($newleads as $new)
                                     <div data-draggable="true" draggable="true" ondragstart="drag(event)" class="card img-task" data-id="{{ $new->id }}">
                                         <div class="card-body">
-                                            <div class="task-header">
+                                            <div class="task-header" id="table-body">
                                                 <div>
                                                     <h4 data-item-title="{{$new->name}}">{{$new->name}}</h4>
                                                 </div>
@@ -157,10 +53,10 @@
                                                         <i class="ti ti-dots-vertical text-dark"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink-1">
-                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1 editbtnmodalnew" href="#" data-record="{{ json_encode($new) }}" data-bs-toggle="modal" data-bs-target="#primary-header-modaledit">
                                                             <i class="ti ti-pencil fs-5"></i>Edit
                                                         </a>
-                                                        <a class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a onclick="confirmDelete('{{ $new->id }}')" class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="#">
                                                             <i class="ti ti-trash fs-5"></i>Delete
                                                         </a>
                                                     </div>
@@ -168,13 +64,13 @@
                                             </div>
                                             <div class="task-content">
                                                 <p class="mb-0" data-item-text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.">
-                                                    {{$new->city}} / {{$new->state}}
+                                                    <span class="fw-bold">In : </span>{{$new->city}} / {{$new->state}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->mobilenumber}}">
-                                                    {{$new->mobilenumber}}
+                                                      <span class="fw-bold">Mobile : </span>+91-{{$new->mobilenumber}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->inwhichcity}}">
-                                                    {{$new->inwhichcity}}
+                                                     <span class="fw-bold">For City : </span>{{$new->inwhichcity}}
                                                 </p>
                                             </div>
                                             <div class="task-body">
@@ -213,10 +109,10 @@
                                                         <i class="ti ti-dots-vertical text-dark"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink-1">
-                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1 editbtnmodalnew" href="#" data-record="{{ json_encode($new) }}" data-bs-toggle="modal" data-bs-target="#primary-header-modaledit">
                                                             <i class="ti ti-pencil fs-5"></i>Edit
                                                         </a>
-                                                        <a class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a onclick="confirmDelete('{{ $new->id }}')"  class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="#">
                                                             <i class="ti ti-trash fs-5"></i>Delete
                                                         </a>
                                                     </div>
@@ -224,13 +120,13 @@
                                             </div>
                                             <div class="task-content">
                                                 <p class="mb-0" data-item-text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.">
-                                                    {{$new->city}} / {{$new->state}}
+                                                    <span class="fw-bold">For City : </span>{{$new->city}} / {{$new->state}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->mobilenumber}}">
-                                                    {{$new->mobilenumber}}
+                                                    <span class="fw-bold">Mobile : </span>+91-{{$new->mobilenumber}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->inwhichcity}}">
-                                                    {{$new->inwhichcity}}
+                                                    <span class="fw-bold">For City : </span>{{$new->inwhichcity}}
                                                 </p>
                                             </div>
                                             <div class="task-body">
@@ -269,10 +165,10 @@
                                                         <i class="ti ti-dots-vertical text-dark"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink-1">
-                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1 editbtnmodalnew" href="#" data-record="{{ json_encode($new) }}" data-bs-toggle="modal" data-bs-target="#primary-header-modaledit">
                                                             <i class="ti ti-pencil fs-5"></i>Edit
                                                         </a>
-                                                        <a class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a onclick="confirmDelete('{{ $new->id }}')"  class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="#">
                                                             <i class="ti ti-trash fs-5"></i>Delete
                                                         </a>
                                                     </div>
@@ -280,13 +176,13 @@
                                             </div>
                                             <div class="task-content">
                                                 <p class="mb-0" data-item-text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.">
-                                                    {{$new->city}} / {{$new->state}}
+                                                      <span class="fw-bold">In : </span>{{$new->city}} / {{$new->state}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->mobilenumber}}">
-                                                    {{$new->mobilenumber}}
+                                                    <span class="fw-bold">Mobile : </span>+91-{{$new->mobilenumber}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->inwhichcity}}">
-                                                    {{$new->inwhichcity}}
+                                                    <span class="fw-bold">For City : </span>{{$new->inwhichcity}}
                                                 </p>
                                             </div>
                                             <div class="task-body">
@@ -325,10 +221,10 @@
                                                         <i class="ti ti-dots-vertical text-dark"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink-1">
-                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1 editbtnmodalnew" href="#" data-record="{{ json_encode($new) }}" data-bs-toggle="modal" data-bs-target="#primary-header-modaledit">
                                                             <i class="ti ti-pencil fs-5"></i>Edit
                                                         </a>
-                                                        <a class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a onclick="confirmDelete('{{ $new->id }}')"  class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="#">
                                                             <i class="ti ti-trash fs-5"></i>Delete
                                                         </a>
                                                     </div>
@@ -336,13 +232,13 @@
                                             </div>
                                             <div class="task-content">
                                                 <p class="mb-0" data-item-text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.">
-                                                    {{$new->city}} / {{$new->state}}
+                                                      <span class="fw-bold">In : </span>{{$new->city}} / {{$new->state}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->mobilenumber}}">
-                                                    {{$new->mobilenumber}}
+                                                    <span class="fw-bold">Mobile : </span>+91-{{$new->mobilenumber}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->inwhichcity}}">
-                                                    {{$new->inwhichcity}}
+                                                    <span class="fw-bold">For City : </span>{{$new->inwhichcity}}
                                                 </p>
                                             </div>
                                             <div class="task-body">
@@ -381,10 +277,10 @@
                                                         <i class="ti ti-dots-vertical text-dark"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink-1">
-                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a class="dropdown-item kanban-item-edit cursor-pointer d-flex align-items-center gap-1 editbtnmodalnew" href="#" data-record="{{ json_encode($new) }}" data-bs-toggle="modal" data-bs-target="#primary-header-modaledit">
                                                             <i class="ti ti-pencil fs-5"></i>Edit
                                                         </a>
-                                                        <a class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="javascript:void(0);">
+                                                        <a onclick="confirmDelete('{{ $new->id }}')"  class="dropdown-item kanban-item-delete cursor-pointer d-flex align-items-center gap-1" href="#">
                                                             <i class="ti ti-trash fs-5"></i>Delete
                                                         </a>
                                                     </div>
@@ -392,13 +288,13 @@
                                             </div>
                                             <div class="task-content">
                                                 <p class="mb-0" data-item-text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, o eiusmod tempor incid.">
-                                                    {{$new->city}} / {{$new->state}}
+                                                      <span class="fw-bold">In : </span>{{$new->city}} / {{$new->state}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->mobilenumber}}">
-                                                    {{$new->mobilenumber}}
+                                                    <span class="fw-bold">Mobile : </span>+91-{{$new->mobilenumber}}
                                                 </p>
                                                 <p class="mb-0" data-item-text="{{$new->inwhichcity}}">
-                                                    {{$new->inwhichcity}}
+                                                    <span class="fw-bold">For City : </span>{{$new->inwhichcity}}
                                                 </p>
                                             </div>
                                             <div class="task-body">
@@ -424,6 +320,34 @@
             </div>
         </div>
     </div>
+    <div id="primary-header-modaledit" class="modal fade" tabindex="-1" aria-labelledby="primary-header-modalLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header modal-colored-header bg-primary text-white">
+                    <h4 class="modal-title text-white" id="primary-header-modalLabel">
+                        Edit Details
+                    </h4>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin.updatelead') }}" class="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body" id="modalbodynew">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn bg-primary-subtle text-primary ">
+                            Save changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
     {{--BASSSS HAWA NICKAL GAI THI TUM DONO KII MUJE KARTE KARTE AB YAAD RAKHNA MUJE😂--}}
     <script>
@@ -483,4 +407,78 @@
         }
 
     </script>
+
+
+    {{-- Edit & Delete Functionality Code--}}
+    <script>
+        $('.editbtnmodalnew').on('click', function() {
+            const rowdata = $(this).data('record');
+            console.log(rowdata);
+            $('#modalbodynew').empty();
+            $('#modalbodynew').html(`
+                     <div class="">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <div class="">
+                                        <label class="mb-2">Customer Name
+                                        </label>
+                                        <input type="text" name="customername" placeholder="Customer Name" class="form-control" value="${rowdata.name}" >
+                                    </div>
+                                    <input type="hidden" name="leadid" class="" value="${rowdata.id}">
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="">
+                                        <label class="mb-2">Mobile Number
+                                        </label>
+                                        <input type="text" name="mobilenumber" placeholder="Mobile Number" class="form-control" value="${rowdata.mobilenumber}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="">
+                                        <label class="mb-2">Email
+                                        </label>
+                                        <input type="text" name="email" placeholder="Email" class="form-control" value="${rowdata.email}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="mt-3">
+                                        <label class="mb-2">City
+                                        </label>
+                                        <input type="text" name="city" placeholder="City" class="form-control" value="${rowdata.city}" >
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                     <div class="mt-3">
+                                        <label class="mb-2">City of Property
+                                        </label>
+                                        <input type="text" name="cityofproperty" placeholder="City of Property" class="form-control" value="${rowdata.inwhichcity}" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+        });
+
+
+         function confirmDelete(id) {
+            Swal.fire({
+                    title: "Are you sure?"
+                    , html: "You want to delete ?"
+                    , icon: "warning"
+                    , showCancelButton: true
+                    , confirmButtonColor: "#222222"
+                    , cancelButtonColor: "#d33"
+                    , confirmButtonText: "Yes, delete it!"
+                    , cancelButtonText: "Cancel"
+                })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "/admin/deletelead/" + id;
+                    }
+                });
+        }
+    </script>
+
 </x-app-layout>

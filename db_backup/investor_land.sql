@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 08:56 AM
+-- Generation Time: Jan 15, 2025 at 02:12 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `blogs`
+--
+
+CREATE TABLE `blogs` (
+  `id` int(11) NOT NULL,
+  `blogname` varchar(255) DEFAULT NULL,
+  `blogcategories` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`blogcategories`)),
+  `blogthumbnail` varchar(255) DEFAULT NULL,
+  `blogdescription` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `blogname`, `blogcategories`, `blogthumbnail`, `blogdescription`, `created_at`, `updated_at`) VALUES
+(7, 'Awasthi Institute Of Paramedical Science', '[\"Business\",\"Fashion\"]', '1736946332_moving.png', 'This is testing udpate', '2025-01-15 07:33:12', '2025-01-15 07:35:32');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `cache`
 --
 
@@ -32,14 +55,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1736915949),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1736915949;', 1736915949);
 
 -- --------------------------------------------------------
 
@@ -132,9 +147,8 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'New', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-15 07:45:37'),
-(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'Qualified', NULL, '2025-01-13 06:59:41', '2025-01-15 07:45:30'),
-(4, 'Stephnie Machman', '8765432109', 'stephnie.mac@example.com', 'Ajmer', 'Rajasthan', 'Villa', 'Jaipur', '33', '5', 'Won', '[{\"date\":\"2025-01-16\",\"description\":\"He will talk tomorrow\"},{\"date\":\"2025-01-16\",\"description\":\"He will do the final tomorrow also\"}]', '2025-01-15 06:59:41', '2025-01-15 02:19:50');
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-15 03:55:16'),
+(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34');
 
 -- --------------------------------------------------------
 
@@ -165,7 +179,12 @@ INSERT INTO `masters` (`id`, `label`, `type`, `created_at`, `updated_at`) VALUES
 (28, 'Villa', 'Property Categories', '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
 (29, 'Penthouse', 'Property Categories', '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
 (30, 'Residences', 'Property Categories', '2025-01-13 02:10:07', '2025-01-13 02:10:07'),
-(31, 'Won', 'Follow Up Status', '2025-01-14 06:46:38', '2025-01-14 06:46:38');
+(31, 'Won', 'Follow Up Status', '2025-01-14 06:46:38', '2025-01-14 06:46:38'),
+(32, 'Blog Categories', 'Master', '2025-01-15 05:52:59', '2025-01-15 05:53:09'),
+(33, 'Business', 'Blog Categories', '2025-01-15 05:53:26', '2025-01-15 05:53:26'),
+(34, 'Computer Software', 'Blog Categories', '2025-01-15 05:53:42', '2025-01-15 05:53:42'),
+(35, 'Fashion', 'Blog Categories', '2025-01-15 05:53:59', '2025-01-15 05:53:59'),
+(36, 'Health', 'Blog Categories', '2025-01-15 05:54:06', '2025-01-15 05:54:06');
 
 -- --------------------------------------------------------
 
@@ -308,7 +327,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('KewlqCqasWlyaiMzwBzPi1v77XuoDDmSBammwYTg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiMlI2OGNUN2EzcHlpY2tCa2gxWHBHYVpnSkI4aE5FWGlYYXY3bzlPTCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vbGVhZHNsaXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1736927769);
+('3sX0EguMqPJW34Qn1BjrV15wEujwtBoty0UlGTEt', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTlN0dzdlenpJZjEwM2g2cW9xNHRDRUNxTHpZS0hoa2FUMjNsUkhjWiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYmxvZ3NsaXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1736946727);
 
 -- --------------------------------------------------------
 
@@ -347,6 +366,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tw
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `blogs`
+--
+ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cache`
@@ -444,6 +469,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `blogs`
+--
+ALTER TABLE `blogs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -465,7 +496,7 @@ ALTER TABLE `leads`
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `migrations`

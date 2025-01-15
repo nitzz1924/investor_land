@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Lead;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
@@ -431,5 +432,82 @@ class AdminStores extends Controller
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
         }
-    }   
+    }
+    
+    public function submitblog(Request $request){
+        $categories = json_decode($request->input('categories'), true);
+        // dd($categories);
+        $description = $request->input('blogdescription');
+        $files = $request->file('blogthumbnail');
+        $blogname = $request->input('blogname');
+
+        try{
+            $thumbnailFilename = null;
+            if ($request->hasFile('blogthumbnail')) {
+                $request->validate([
+                    'blogthumbnail' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('blogthumbnail');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Blogs'), $thumbnailFilename);
+            }
+             // Create the property listing
+             $data = Blog::create([
+                'blogname' => $blogname,
+                'blogcategories' => json_encode($categories),
+                'blogthumbnail' =>$thumbnailFilename,
+                'blogdescription' =>  strip_tags($description),
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateblog(Request $request){
+        $categories = json_decode($request->input('categories'), true);
+        // dd($categories);
+        $description = $request->input('blogdescription');
+        $files = $request->file('blogthumbnail');
+        $blogname = $request->input('blogname');
+
+        try{
+            $thumbnailFilename = null;
+            if ($request->hasFile('blogthumbnail')) {
+                $request->validate([
+                    'blogthumbnail' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('blogthumbnail');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Blogs'), $thumbnailFilename);
+            }
+            $olddata = Blog::find($request->blogid);
+             // Create the property listing
+             $data = Blog::where('id', $request->blogid)->update([
+                'blogname' => $blogname,
+                'blogcategories' => json_encode($categories),
+                'blogthumbnail' => $thumbnailFilename ?? $olddata->blogthumbnail,
+                'blogdescription' =>  strip_tags($description),
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Blog Updated.....!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deleteblog($id)
+    {
+        try {
+            $data = Blog::find($id);
+            $data->delete();
+            return back()->with('success', "Deleted..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
 }

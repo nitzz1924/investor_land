@@ -51,6 +51,12 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('/datefilterleads', [AdminViews::class, 'datefilterleads'])->name('admin.datefilterleads');
     Route::get('/leadslistkaban', [AdminViews::class, 'leadslistkaban'])->name('admin.leadslistkaban');
     Route::post('/updateLeadStatusKanban', [AdminViews::class, 'updateLeadStatusKanban'])->name('admin.updateLeadStatusKanban');
+    Route::get('/addblog', [AdminViews::class, 'addblog'])->name('admin.addblog');
+    Route::get('/blogslist', [AdminViews::class, 'blogslist'])->name('admin.blogslist');
+    Route::post('/submitblog', [AdminStores::class, 'submitblog'])->name('admin.submitblog');
+    Route::get('/editblog/{id}', [AdminViews::class, 'editblog'])->name('admin.editblog');
+    Route::post('/updateblog', [AdminStores::class, 'updateblog'])->name('admin.updateblog');
+    Route::get('/deleteblog/{id}', [AdminStores::class, 'deleteblog'])->name('admin.deleteblog');
 
 });
 

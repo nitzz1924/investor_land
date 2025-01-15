@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Lead;
 use App\Models\Master;
 use App\Models\PropertyListing;
@@ -124,4 +125,23 @@ class AdminViews extends Controller
         }
     }
 
+    public function blogslist()
+    {
+        $blogs = Blog::orderBy('created_at', 'DESC')->get();
+        $blogcount = Blog::count();
+        return view('AdminPanelPages.bloglists', compact('blogs', 'blogcount'));
+    }
+
+    public function addblog(){
+        $categories = Master::where('type', 'Blog Categories')->get();
+        return view('AdminPanelPages.addblog',compact('categories'));
+    }
+
+    public function editblog($id)
+    {
+        // dd($id);
+        $blogs = Blog::find($id);
+        $categories = Master::where('type', 'Blog Categories')->get();
+        return view('AdminPanelPages.editblog', compact('blogs', 'categories'));
+    }
 }
