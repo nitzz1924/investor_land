@@ -44,7 +44,7 @@ class AdminViews extends Controller
     {
         // dd($id);
         $listingdata = PropertyListing::find($id);
-        $categories = Master::where('type', 'Master')->get();
+        $categories = Master::where('type', 'Property Categories')->get();
         return view('AdminPanelPages.editproperty', compact('listingdata', 'categories'));
     }
 

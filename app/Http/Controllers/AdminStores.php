@@ -20,11 +20,19 @@ class AdminStores extends Controller
     {
         // dd($rq->all());
         try {
+            if ($rq->hasFile('categoryimage')) {
+                $rq->validate([
+                    'categoryimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                $file = $rq->file('categoryimage');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Categories'), $filename);
+            }
             $attributes = Master::create([
                 'type' => $rq->type == 'Master' ? 'Master' : $rq->type,
                 'label' => $rq->label,
+                'categoryimage' => $filename,
             ]);
-
             return back()->with('success', "Category Added..!!!");
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -46,9 +54,18 @@ class AdminStores extends Controller
     public function updatemaster(Request $rq)
     {
         try {
+            if ($rq->hasFile('categoryimage')) {
+                $rq->validate([
+                    'categoryimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                ]);
+                $file = $rq->file('categoryimage');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Categories'), $filename);
+            }
             $data = Master::find($rq->masterid);
             $data->type = $rq->type;
             $data->label = $rq->label;
+            $data->categoryimage = $filename ?? $data->categoryimage;
             $data->save();
             return back()->with('success', "Category Updated..!!!");
         } catch (Exception $e) {

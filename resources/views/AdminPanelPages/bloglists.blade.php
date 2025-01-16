@@ -29,7 +29,7 @@
         <div class="card">
             <div class="">
                 <div class="p-4">
-                    <table id="file_export" class="table tabhover table-striped table-bordered display text-nowrap py-3">
+                    <table id="file_export" class="table table-hover table-bordered display text-nowrap py-3">
                         <thead>
                             <tr>
                                 <th>SNo.</th>

@@ -29,10 +29,10 @@
         <div class="card">
             <div class="card-body">
                 <div class="">
-                    <table id="file_export" class="table tabhover table-striped table-bordered display text-nowrap py-3">
+                    <table id="file_export" class="table  table-hover table-bordered display text-nowrap py-3">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Properties Photo & Name</th>
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>City</th>

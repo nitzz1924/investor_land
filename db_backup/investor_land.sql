@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 02:12 PM
+-- Generation Time: Jan 16, 2025 at 10:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `blogname`, `blogcategories`, `blogthumbnail`, `blogdescription`, `created_at`, `updated_at`) VALUES
-(7, 'Awasthi Institute Of Paramedical Science', '[\"Business\",\"Fashion\"]', '1736946332_moving.png', 'This is testing udpate', '2025-01-15 07:33:12', '2025-01-15 07:35:32');
+(7, 'Awasthi Institute Of Paramedical Science', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'This is testing udpate', '2025-01-15 07:33:12', '2025-01-16 02:13:11');
 
 -- --------------------------------------------------------
 
@@ -55,6 +55,14 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737009037),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1737009037;', 1737009037);
 
 -- --------------------------------------------------------
 
@@ -147,7 +155,7 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-15 03:55:16'),
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-16 01:00:44'),
 (3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34');
 
 -- --------------------------------------------------------
@@ -160,6 +168,7 @@ CREATE TABLE `masters` (
   `id` int(11) NOT NULL,
   `label` varchar(255) DEFAULT NULL,
   `type` varchar(255) NOT NULL DEFAULT 'Master',
+  `categoryimage` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -168,23 +177,24 @@ CREATE TABLE `masters` (
 -- Dumping data for table `masters`
 --
 
-INSERT INTO `masters` (`id`, `label`, `type`, `created_at`, `updated_at`) VALUES
-(20, 'Follow Up Status', 'Master', '2025-01-13 02:04:34', '2025-01-13 02:04:34'),
-(21, 'New', 'Follow Up Status', '2025-01-13 02:05:09', '2025-01-13 02:05:09'),
-(22, 'Qualified', 'Follow Up Status', '2025-01-13 02:05:26', '2025-01-13 02:05:26'),
-(23, 'Not Responded', 'Follow Up Status', '2025-01-13 02:05:35', '2025-01-13 02:05:35'),
-(24, 'Final', 'Follow Up Status', '2025-01-13 02:06:34', '2025-01-13 02:08:09'),
-(26, 'Property Categories', 'Master', '2025-01-13 02:09:06', '2025-01-13 02:09:06'),
-(27, 'Apartment', 'Property Categories', '2025-01-13 02:09:23', '2025-01-13 02:09:23'),
-(28, 'Villa', 'Property Categories', '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
-(29, 'Penthouse', 'Property Categories', '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
-(30, 'Residences', 'Property Categories', '2025-01-13 02:10:07', '2025-01-13 02:10:07'),
-(31, 'Won', 'Follow Up Status', '2025-01-14 06:46:38', '2025-01-14 06:46:38'),
-(32, 'Blog Categories', 'Master', '2025-01-15 05:52:59', '2025-01-15 05:53:09'),
-(33, 'Business', 'Blog Categories', '2025-01-15 05:53:26', '2025-01-15 05:53:26'),
-(34, 'Computer Software', 'Blog Categories', '2025-01-15 05:53:42', '2025-01-15 05:53:42'),
-(35, 'Fashion', 'Blog Categories', '2025-01-15 05:53:59', '2025-01-15 05:53:59'),
-(36, 'Health', 'Blog Categories', '2025-01-15 05:54:06', '2025-01-15 05:54:06');
+INSERT INTO `masters` (`id`, `label`, `type`, `categoryimage`, `created_at`, `updated_at`) VALUES
+(20, 'Follow Up Status', 'Master', NULL, '2025-01-13 02:04:34', '2025-01-13 02:04:34'),
+(21, 'New', 'Follow Up Status', NULL, '2025-01-13 02:05:09', '2025-01-13 02:05:09'),
+(22, 'Qualified', 'Follow Up Status', NULL, '2025-01-13 02:05:26', '2025-01-13 02:05:26'),
+(23, 'Not Responded', 'Follow Up Status', NULL, '2025-01-13 02:05:35', '2025-01-13 02:05:35'),
+(24, 'Final', 'Follow Up Status', NULL, '2025-01-13 02:06:34', '2025-01-13 02:08:09'),
+(26, 'Property Categories', 'Master', NULL, '2025-01-13 02:09:06', '2025-01-13 02:09:06'),
+(27, 'Apartment', 'Property Categories', NULL, '2025-01-13 02:09:23', '2025-01-13 02:09:23'),
+(28, 'Villa', 'Property Categories', NULL, '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
+(29, 'Penthouse', 'Property Categories', NULL, '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
+(30, 'Residences', 'Property Categories', NULL, '2025-01-13 02:10:07', '2025-01-13 02:10:07'),
+(31, 'Won', 'Follow Up Status', NULL, '2025-01-14 06:46:38', '2025-01-14 06:46:38'),
+(32, 'Blog Categories', 'Master', NULL, '2025-01-15 05:52:59', '2025-01-15 05:53:09'),
+(33, 'Business', 'Blog Categories', NULL, '2025-01-15 05:53:26', '2025-01-15 05:53:26'),
+(34, 'Computer Software', 'Blog Categories', NULL, '2025-01-15 05:53:42', '2025-01-15 05:53:42'),
+(35, 'Fashion', 'Blog Categories', NULL, '2025-01-15 05:53:59', '2025-01-15 05:53:59'),
+(36, 'Health', 'Blog Categories', NULL, '2025-01-15 05:54:06', '2025-01-15 05:54:06'),
+(37, 'Luxury House', 'Property Categories', '1737012944_2.png', '2025-01-16 01:38:56', '2025-01-16 02:05:44');
 
 -- --------------------------------------------------------
 
@@ -274,8 +284,8 @@ CREATE TABLE `property_listings` (
 --
 
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
-(31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/256bf8e6923a52fda8ddf7dc050a1148.pdf\",\"assets\\/images\\/Listings\\/767c23430487b6c64d45b83d5d32e9a1.pdf\"]', '2025-01-10 06:28:41', '2025-01-11 05:14:17'),
-(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Buy', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/a0b45d1bb84fe1bedbb8449764c4d5d5.pdf\",\"assets\\/images\\/Listings\\/58f1e2bfc0c0c182f1afdab7cae02402.pdf\"]', '2025-01-11 04:05:33', '2025-01-12 23:36:46');
+(31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/faa98789cfb692431ffb52e13497443a.pdf\",\"assets\\/images\\/Listings\\/466accbac9a66b805ba50e42ad715740.pdf\"]', '2025-01-10 06:28:41', '2025-01-16 02:17:34'),
+(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Luxury House', 'unpublished', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-16 02:18:04');
 
 -- --------------------------------------------------------
 
@@ -327,7 +337,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('3sX0EguMqPJW34Qn1BjrV15wEujwtBoty0UlGTEt', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiTlN0dzdlenpJZjEwM2g2cW9xNHRDRUNxTHpZS0hoa2FUMjNsUkhjWiI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjM3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYWRtaW4vYmxvZ3NsaXN0Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1736946727);
+('BxtTWi86sGwo51FKax3UQm9f4TLk05wO7f4rOpTL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOWN3bklRVjlUek9JbXBLSmY0YnVyTTM0dnk0NTZBSDV6WGhuUzJZVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3RrYWJhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737019295);
 
 -- --------------------------------------------------------
 
@@ -496,7 +506,7 @@ ALTER TABLE `leads`
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `migrations`

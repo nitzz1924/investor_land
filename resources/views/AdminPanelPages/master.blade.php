@@ -25,22 +25,35 @@
                     @csrf
                     <div class="card shadow">
                         <div class="card-body">
-                            <div class="form-group mt-3 mb-4">
-                                <select name="type" class="select2 form-control border border-none">
-                                    <option value="Master">--select a parent category--</option>
-                                    <optgroup>
-                                        @foreach ($data as $row)
-                                        <option value="{{ $row->label}}">{{ $row->label}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                                <span class="bar"></span>
-                                <label for="input1 mb-4">Select Category</label>
-                            </div>
-                            <div class="form-group mb-4">
-                                <input type="text" class="form-control" name="label" id="input1" required>
-                                <span class="bar"></span>
-                                <label for="input1">Category Label</label>
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <select name="type" class="select2 form-control border border-none">
+                                            <option value="Master">--select a parent category--</option>
+                                            <optgroup>
+                                                @foreach ($data as $row)
+                                                <option value="{{ $row->label}}">{{ $row->label}}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        </select>
+                                        <span class="bar"></span>
+                                        <label for="input1">Select Category</label>
+                                    </div>
+                                    <div class="form-group mt-5">
+                                        <input type="text" class="form-control" name="label" id="input1" required>
+                                        <span class="bar"></span>
+                                        <label for="input1">Category Label</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="thumbnailPreview" class="mt-3">
+                                        <img id="imagePreview" src="{{asset('assets/images/Categories/placeholder.png')}}" alt="Thumbnail Preview" class="rounded-3" style="width: 150px; height: 150px;">
+                                    </div>
+                                    <div class="mt-3">
+                                        <label for="example-search-input" class="mt-3">Category Image</label>
+                                        <input class="form-control mt-3" placeholder="enter value" name="categoryimage" type="file" value="" onchange="previewImage(event)">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-center">
@@ -67,6 +80,7 @@
                                             <th>SNo.</th>
                                             <th>Name</th>
                                             <th>Category</th>
+                                            <th>Category Image</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -83,9 +97,12 @@
                                                 @endif
                                             </td>
                                             <td>
+                                                <img src="{{ $rows->categoryimage ? asset('assets/images/Categories/'.$rows->categoryimage) : asset('assets/images/Categories/placeholder.png') }}" class="rounded" alt="Category Image" width="50" height="50">
+                                            </td>
+                                            <td>
                                                 <ul class="list-inline mb-0">
                                                     <li class="list-inline-item">
-                                                        <button class="btn btn-outline-primary btn-border editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal" data-car-list="{{ json_encode($rows) }}"><i class="ti ti-edit"></i></button>
+                                                        <button  class="btn btn-outline-primary btn-border editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal" data-car-list="{{ json_encode($rows) }}"><i class="ti ti-edit"></i></button>
                                                     </li>
                                                     <li class="list-inline-item">
                                                         <button onclick="confirmDelete('{{ $rows->id }}')" class="btn btn-outline-danger btn-border"><i class="ti ti-trash"></i></button>
@@ -149,15 +166,27 @@
                     }
                 });
         }
+
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+                output.style.display = 'block';
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
         // Populate Edit Modal with Data
         $('#table-body').on('click', '.editbtnmodal', function() {
             const masterdata = $(this).data('car-list');
             console.log(masterdata);
             $('#modal-body').empty();
+             const imageSrc = masterdata.categoryimage ? '{{ asset('assets/images/Categories/') }}/' + masterdata.categoryimage : '';
             $('#modalbodyedit').html(`
                     <div class="">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="col-md-6">
                                     <div class="form-group mt-0">
                                          <div class="">
@@ -170,21 +199,25 @@
                                             </select>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                      <div class="form-group mt-3">
                                         <label class="mb-2">Category Label</label>
                                         <input type="text" class="form-control" name="label" value="${masterdata.label}" id="input1" required>
                                     </div>
+                                     <div class="mt-3">
+                                        <label for="example-search-input" class="0">Category Image</label>
+                                        <input class="form-control mt-3" placeholder="enter value" name="categoryimage" type="file" value="" onchange="previewImage(event)">
+                                    </div>
                                     <input type="hidden" name="masterid" value="${masterdata.id}" id="">
+                                </div>
+                                <div class="col-md-6">
+                                   <div id="thumbnailPreview" class="mt-3">
+                                        <img id="imagePreview" src="${imageSrc}" alt="Thumbnail Preview" class="rounded-3 img-fluid">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `);
-            $('.select2').select2({
-                width: '100%' // Ensures the dropdown fits the input field
-            });
         });
 
     </script>
