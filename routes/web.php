@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminViews;
+use App\Http\Controllers\WebsiteViews;
 use App\Http\Controllers\AdminStores;
 
 
@@ -26,6 +27,8 @@ Route::middleware([
     Route::get('admin/dashboard', [AdminViews::class, 'admindashboard'])->name('admin.admindashboard');
 });
 
+
+//Admin Panel Routes
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/master', [AdminViews::class, 'master'])->name('admin.master');
     Route::post('/createmaster', [AdminStores::class, 'createmaster'])->name('admin.createmaster');
@@ -57,9 +60,13 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/editblog/{id}', [AdminViews::class, 'editblog'])->name('admin.editblog');
     Route::post('/updateblog', [AdminStores::class, 'updateblog'])->name('admin.updateblog');
     Route::get('/deleteblog/{id}', [AdminStores::class, 'deleteblog'])->name('admin.deleteblog');
-
 });
 
+
+//Website Routes
+Route::controller(WebsiteViews::class)->group(function() {
+    Route::get('/', 'homepage')->name('website.homepage');
+});
 
 
 
