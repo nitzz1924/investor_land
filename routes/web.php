@@ -66,6 +66,11 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 //Website Routes
 Route::controller(WebsiteViews::class)->group(function() {
     Route::get('/', 'homepage')->name('website.homepage');
+    Route::get('/about-us', 'aboutpage')->name('website.aboutpage');
+    Route::get('/contact-us', 'contactpage')->name('website.contactpage');
+    Route::get('/blogs', 'blogs')->name('website.blogs');
+    Route::get('/blog-details', 'blogdetails')->name('website.blogdetails');
+    Route::get('/property-listings', 'propertylistings')->name('website.propertylistings');
 });
 
 

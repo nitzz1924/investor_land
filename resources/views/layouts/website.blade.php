@@ -31,7 +31,7 @@
         <div class="loading-container">
             <div class="loading"></div>
             <div id="loading-icon"><img src="{{asset('websiteAssets/images/loader.svg')}}" alt=""></div>
-        </div>
+    </div>
     </div> --}}
     <!-- Preloader End -->
 
@@ -48,7 +48,7 @@
                 <div class="container">
                     <!-- Logo Start -->
                     <a class="navbar-brand" href="/">
-                    <h1>Investor Lands</h1>
+                        <h1>Investor Lands</h1>
                         {{-- <img src="images/logo.svg" alt="Logo"> --}}
                     </a>
                     <!-- Logo End -->
@@ -56,13 +56,12 @@
                     <!-- Main Menu start -->
                     <div class="collapse navbar-collapse main-menu">
                         <ul class="navbar-nav mr-auto" id="menu">
-                            <li class="nav-item"><a class="nav-link" href="index-2.html">Home</a>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.homepage')}}">Home</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="about.html">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="property-single.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="property-single.html">Properties</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Projects</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage')}}">About us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
                             <li class="nav-item highlighted-menu"><a class="nav-link" href="#">Login</a></li>
                         </ul>
                     </div>
@@ -81,49 +80,19 @@
     </div>
     <!-- Footer Section Start -->
     <footer class="footer">
-        <!-- Mega Footer Start -->
         <div class="mega-footer">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <!-- Footer About Start -->
-                        <div class="footer-about">
-                            <!-- Footer Logo Start -->
-                            <div class="footer-logo">
-                                <img src="images/footer-logo.svg" alt="">
-                            </div>
-                            <!-- Footer Logo End -->
-
-                            <!-- Footer About Content Start -->
-                            <div class="footer-about-content">
-                                <p>Duis pulvinar metus elit, ut aliquam est sollicitudin finibus. Integer lobortis est interdum.</p>
-                            </div>
-                            <!-- Footer About Content End -->
-
-                            <!-- Footer Social Link Start -->
-                            <div class="footer-social-links">
-                                <ul>
-                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                </ul>
-                            </div>
-                            <!-- Footer Social Link End -->
-                        </div>
-                        <!-- Footer About End -->
-                    </div>
-
-                    <div class="col-lg-3 col-md-6">
-                        <!-- Footer Contact Info Start -->
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-4">
                         <div class="footer-contact-info">
-                            <h3>Contact Info</h3>
-
-                            <!-- Footer Contact Info Box Start -->
+                            <h1>Get in Touch</h1>
+                            <div class="footer-about-content">
+								<p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
+							</div>
                             <div class="footer-contact-box">
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="images/icon-location.svg" alt="">
+                                        <img src="{{asset('websiteAssets/images/icon-location.svg')}}" alt="">
                                     </div>
 
                                     <p>123, Lorem Ipsum, Street no, Cityname, Country 123456</p>
@@ -131,58 +100,75 @@
 
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="images/icon-phone.svg" alt="">
+                                        <img src="{{asset('websiteAssets/images/icon-phone.svg')}}" alt="">
                                     </div>
 
-                                    <p>+0 12345 67890</p>
+                                    <p>+91-94612-57675</p>
                                 </div>
 
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="images/icon-email.svg" alt="">
+                                        <img src="{{asset('websiteAssets/images/icon-email.svg')}}" alt="">
                                     </div>
 
-                                    <p>info@domainname.com</p>
+                                    <p>investorlands.com</p>
                                 </div>
                             </div>
-                            <!-- Footer Contact Info Box End -->
                         </div>
-                        <!-- Footer Contact Info End -->
                     </div>
-
-                    <div class="col-lg-2 col-md-6">
-                        <!-- Footer Quick Link Starts -->
-                        <div class="footer-quick-links">
-                            <h3>Quick Links</h3>
-                            <ul>
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Listing</a></li>
-                                <li><a href="#">Property</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                            </ul>
-                        </div>
-                        <!-- Footer Quick Link End -->
-                    </div>
-
-                    <div class="col-lg-3">
-                        <!-- Footer Quick Link Starts -->
+                    <div class="col-md-4">
                         <div class="footer-appointment">
-                            <h3>Appointment</h3>
-
+                            <h1>Appointment</h1>
                             <div class="footer-appointment-content">
-                                <p>Duis pulvinar metus elit, ut aliquam est sollicitudin finibus. Integer lobortis est interdum.</p>
-                                <a href="#" class="btn-default">Book Appointment</a>
+                                <div class="contact-form wow fadeInUp" data-wow-delay="0.75s">
+                                    <form id="contactForm" action="#" method="POST" data-toggle="validator">
+                                        <div class="row">
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="name" class="form-control footerforminput" id="name" placeholder="First Name" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="lastname" class="form-control footerforminput" id="lastname" placeholder="Last Name" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="email" name="email" class="form-control footerforminput" id="phone" placeholder="Email" required>
+                                            </div>
+
+                                            <div class="form-group col-md-6 mb-4">
+                                                <input type="text" name="phone" class="form-control footerforminput" id="subject" placeholder="Phone" required>
+                                            </div>
+
+                                            <div class="form-group col-md-12 mb-4">
+                                                <textarea name="addresss" class="form-control footerforminput" id="msg" rows="4" placeholder="Address" required></textarea>
+                                            </div>
+
+                                            <div class="col-md-12 text-center">
+                                                <button type="submit" class="btn-default">Submit</button>
+                                                <div id="msgSubmit" class="h3 text-left hidden"></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <!-- Footer Quick Link End -->
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-quick-links">
+                            <h1>Quick Links</h1>
+                            <ul>
+                                <li><a href="{{ route('website.homepage')}}">Home</a></li>
+                                <li><a href="{{ route('website.aboutpage')}}">About Us</a></li>
+                                <li><a href="{{ route('website.propertylistings')}}">Properties</a></li>
+                                <li><a href="{{ route('website.blogs')}}">Blogs</a></li>
+                                <li><a href="{{ route('website.contactpage')}}">Contact Us</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Mega Footer End -->
     </footer>
-    <!-- Footer Section End -->
 
     <!-- Footer Copyright Section Start -->
     <div class="footer-copyright-links">

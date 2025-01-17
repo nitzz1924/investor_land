@@ -2,7 +2,7 @@
 @extends('layouts.website')
 @section('title','Home')
 @section('content')
-<!-- Hero Section Start -->
+
 <div class="hero">
     <div class="hero-section parallaxie">
         <div class="container">
@@ -33,7 +33,6 @@
         </div>
     </div>
 
-    <!-- Hero Search Form Start -->
     <div class="hero-search-form-section">
         <div class="container">
             <!-- Property Search Form Start -->
@@ -72,11 +71,9 @@
             <!-- Property Search Form End -->
         </div>
     </div>
-    <!-- Hero Search Form End -->
 </div>
-<!-- Hero Section End -->
 
-<!-- Property Type Section Start -->
+
 <div class="property-types">
     <div class="container">
         <div class="row">
@@ -148,9 +145,8 @@
         </div>
     </div>
 </div>
-<!-- Property Type Section End -->
 
-<!-- Featured Property Section Start -->
+
 <div class="featured-property">
     <div class="container">
         <div class="row">
@@ -435,8 +431,8 @@
         </div>
     </div>
 </div>
-<!-- Featured Property Section End -->
-<!-- Property By City Section Start -->
+
+
 <div class="property-by-city">
     <div class="container">
         <div class="row">
@@ -465,7 +461,7 @@
                     <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
-                            <h3>Surabaya</h3>
+                            <h3>Ajmer</h3>
                             <p>22 Properties</p>
                         </div>
 
@@ -492,7 +488,7 @@
                     <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
-                            <h3>Jakarta</h3>
+                            <h3>Delhi</h3>
                             <p>22 Properties</p>
                         </div>
 
@@ -519,7 +515,7 @@
                     <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
-                            <h3>Medan</h3>
+                            <h3>Mumbai</h3>
                             <p>22 Properties</p>
                         </div>
 
@@ -546,7 +542,7 @@
                     <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
-                            <h3>Bandung</h3>
+                            <h3>Bengluru</h3>
                             <p>22 Properties</p>
                         </div>
 
@@ -561,42 +557,37 @@
         </div>
     </div>
 </div>
-<!-- Property By City Section End -->
-<!-- About Section Start -->
+
 <div class="about-us">
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 d-flex flex-row">
-                <div class="row flex-column">
-                    <div class="col-md-6">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" height="800px" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" height="300px" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-                <div class="row flex-column">
-
-                    <div class="col-md-12">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-md-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
                                 <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" alt="">
                             </figure>
                         </div>
-
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" alt="">
+                                <img src="{{asset('websiteAssets/images/video-img-2.jpg')}}" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-2">
+                        <div class="about-image">
+                            <figure class="reveal image-anime">
+                                <img src="{{asset('websiteAssets/images/property-6.jpg')}}" alt="">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="col-md-6 p-2">
+                        <div class="about-image">
+                            <figure class="reveal image-anime">
+                                <img src="{{asset('websiteAssets/images/need-help-bg.jpg')}}" alt="">
                             </figure>
                         </div>
                     </div>
@@ -607,14 +598,14 @@
                 <div class="about-content">
                     <!-- Section Title Start -->
                     <div class="section-title">
-                        <h3 class="wow fadeInUp text-white">About Investor Lands</h3>
+                        <h3 class="wow fadeInUp text-white">Investor Lands</h3>
                         <h2 class="text-anime text-white">Explore Our Projects</h2>
                     </div>
                     <!-- Section Title End -->
 
                     <!-- About Content Body Start -->
                     <div class="about-content-body">
-                        <p class="wow fadeInUp text-white" data-wow-delay="0.5s">Duis pulvinar metus elit, ut aliquam est sollicitudin finibus. Integer lobortis est interdum. Suspendisse nunc est, varius quis fringilla ac, commodo a ante. Praesent non elit cursus, aliquam sapien quis, dictum tortor.</p>
+                        <p class="wow fadeInUp text-white" data-wow-delay="0.5s">Investor Lands offers a portfolio of projects designed to maximize returns and build lasting value. Explore now to find the perfect project that aligns with your goals and future vision.</p>
 
                         <ul>
                             <li class="wow fadeInUp" data-wow-delay="0.75s">
@@ -648,221 +639,218 @@
         </div>
     </div>
 </div>
-<!-- About Section End -->
 
-<!-- How It Work Section Start -->
-<div class="how-it-works">
+<div class="why-choose-us">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Section Title Start -->
-                <div class="section-title">
-                    <h3 class="wow fadeInUp">How it works</h3>
-                    <h2 class="text-anime">Find a Perfect Home</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <figure class="reveal image-anime">
+                    <img src="{{asset('websiteAssets/images/newservice.jpg')}}" class="img-fluid rounded-4" alt="">
+                </figure>
+                <!-- Why Choose us Images End -->
+            </div>
+
+            <div class="col-lg-6 order-lg-1">
+                <div class="why-choose-us-content">
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">Investor Lands</h3>
+                        <h2 class="text-anime">Our Services</h2>
+                    </div>
+                    <div class="why-choose-us-body wow fadeInUp" data-wow-delay="0.25s">
+                        <p>At Investor Lands, we provide comprehensive services to cater to all your investment and real estate needs. From personalized investment consulting to property acquisition, development, and management, we are your trusted partner in navigating the real estate landscape. </p>
+                        <ul>
+                            <li>Land Acquisition</li>
+                            <li>Investment Consultation</li>
+                            <li>Property Management</li>
+                            <li>Market Analysis</li>
+                        </ul>
+                        {{-- <a href="#" class="btn-default">View More</a> --}}
+                    </div>
                 </div>
-                <!-- Section Title End -->
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-lg-3 col-md-6">
-                <!-- How it Work Item Start -->
                 <div class="how-it-work-item wow fadeInUp" data-wow-delay="0.25s">
                     <div class="icon-box">
-                        <img src="images/icon-how-1.svg" alt="">
+                        <img src="{{asset('websiteAssets/images/icon-how-1.svg')}}" alt="">
                     </div>
 
-                    <h3>Find Property</h3>
-                    <p>Duis pulvinar metus elit, ut aliquam est sollicitudin. est interdum.</p>
+                    <h3>Extensive Expertise</h3>
+                    <p>Leverage our extensive expertise to make informed and profitable real estate investment decisions.</p>
                 </div>
-                <!-- How it Work Item End -->
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <!-- How it Work Item Start -->
                 <div class="how-it-work-item wow fadeInUp" data-wow-delay="0.5s">
                     <div class="icon-box">
-                        <img src="images/icon-how-2.svg" alt="">
+                        <img src="{{asset('websiteAssets/images/connected.png')}}" alt="">
                     </div>
 
-                    <h3>Meet Retailer</h3>
-                    <p>Duis pulvinar metus elit, ut aliquam est sollicitudin. est interdum.</p>
+                    <h3>Dedicated Team</h3>
+                    <p>Partner with our dedicated team committed to delivering exceptional service and personalized solutions.</p>
                 </div>
-                <!-- How it Work Item End -->
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <!-- How it Work Item Start -->
                 <div class="how-it-work-item wow fadeInUp" data-wow-delay="0.75s">
                     <div class="icon-box">
-                        <img src="images/icon-how-3.svg" alt="">
+                        <img src="{{asset('websiteAssets/images/premium.png')}}" alt="">
                     </div>
 
-                    <h3>Documents</h3>
-                    <p>Duis pulvinar metus elit, ut aliquam est sollicitudin. est interdum.</p>
+                    <h3>Premium Quality</h3>
+                    <p>Experience premium quality in every project, ensuring excellence and long-term value.</p>
                 </div>
-                <!-- How it Work Item End -->
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <!-- How it Work Item Start -->
                 <div class="how-it-work-item wow fadeInUp" data-wow-delay="1s">
                     <div class="icon-box">
-                        <img src="images/icon-how-4.svg" alt="">
+                        <img src="{{asset('websiteAssets/images/mobile-payment.png')}}" alt="">
                     </div>
 
-                    <h3>Take the keys</h3>
-                    <p>Duis pulvinar metus elit, ut aliquam est sollicitudin. est interdum.</p>
+                    <h3>Transparent Trasactions</h3>
+                    <p>Ensure peace of mind with our commitment to transparent transactions and integrity.</p>
                 </div>
-                <!-- How it Work Item End -->
             </div>
         </div>
     </div>
 </div>
-<!-- How It Work Section End -->
 
 
-
-<!-- Infobar Section Start -->
-<div class="infobar-cta">
+<div class="infobar-cta ">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- Infobar Box Start -->
                 <div class="infobar-box">
                     <div class="row align-items-center">
                         <div class="col-lg-7">
-                            <!-- Infobar Content Start -->
                             <div class="cta-content">
-                                <h2 class="text-anime">Need Help? Talk to Our Expert.</h2>
-                                <p class="wow fadeInUp">Duis pulvinar metus elit, ut aliquam est sollicitudin finibus. Integer lobortis est interdum. Suspendisse nunc est, varius quis fringilla ac, commodo a ante.</p>
+                                <h2 class="text-anime">Need Guidance? Talk to Our Experts.</h2>
+                                <p class="wow fadeInUp">At Investor Lands, our experienced professionals are here to guide you through every step of your investment journey. Reach out today for personalized advice and insights tailored to your goals.</p>
                             </div>
-                            <!-- Infobar Content End -->
                         </div>
 
                         <div class="col-lg-5">
-                            <!-- CTA Button Start -->
                             <div class="cta-button">
-                                <a href="#" class="btn-default btn-border"><i class="fa-solid fa-phone-volume"></i> +123 456 789</a>
+                                <a href="tel:+919461257675" class="btn-default btn-border"><i class="fa-solid fa-phone-volume"></i> +91-94612-57675</a>
                                 <a href="#" class="btn-default">Contact Now</a>
                             </div>
-                            <!-- CTA Button End -->
                         </div>
                     </div>
                 </div>
-                <!-- Infobar Box End -->
             </div>
         </div>
     </div>
 </div>
-<!-- Infobar Section End -->
 
-<!-- Latest Posts Section Start -->
-<div class="latest-posts">
+<div class="why-choose-us">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <figure class="reveal image-anime">
+                    <img src="{{asset('websiteAssets/images/aboutus.jpg')}}" class="img-fluid rounded-4" alt="">
+                </figure>
+                <!-- Why Choose us Images End -->
+            </div>
+
+            <div class="col-lg-6 order-lg-1">
+                <div class="why-choose-us-content">
+                    <div class="section-title">
+                        <h3 class="wow fadeInUp">About Us</h3>
+                        <h2 class="text-anime">Your Trusted Real Estate Partner</h2>
+                    </div>
+                    <div class="why-choose-us-body wow fadeInUp" data-wow-delay="0.25s">
+                        <p>At Investor Lands, we are passionate about transforming investment opportunities into lasting value. With a strong foundation in real estate expertise, we specialize in offering premium projects that align with our clients' financial goals. Our mission is to simplify the complexities of real estate investment through transparency, integrity, and innovation.</p>
+                        <a href="#" class="btn-default">More about Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="testimonials">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <!-- Section Title Start -->
                 <div class="section-title">
-                    <h3 class="wow fadeInUp">News & Blog</h3>
-                    <h2 class="text-anime">Read Our Latest News</h2>
+                    <h3 class="wow fadeInUp text-white">Testimonials</h3>
+                    <h2 class="text-anime text-white">What our Client Says</h2>
                 </div>
                 <!-- Section Title End -->
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4">
-                <!-- Post Item Start -->
-                <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt=""></a>
-                        </figure>
+            <div class="col-md-12">
+                <!-- Testimonial Carousel Start -->
+                <div class="testimonial-slider">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="testimonial-slide">
+                                    <div class="testimonial-rating">
+                                        <img src="{{asset('websiteAssets/images/icon-rating.svg')}}" alt="">
+                                    </div>
 
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
+                                    <div class="testimonial-content">
+                                        <p>Investor Lands made the process of finding the perfect investment seamless. Their team was incredibly professional and guided me every step of the way. I highly recommend their services to anyone looking for reliable real estate solutions!</p>
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h3>- Amit Sharma</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="testimonial-slide">
+                                    <div class="testimonial-rating">
+                                        <img src="{{asset('websiteAssets/images/icon-rating.svg')}}" alt="">
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p>I was impressed with the transparency and dedication of the team at Investor Lands. They ensured I was informed about every detail, making me feel confident in my decision. A truly stress-free experience!</p>
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h3>- Neha Verma</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-slide">
+                                    <div class="testimonial-rating">
+                                        <img src="{{asset('websiteAssets/images/icon-rating.svg')}}" alt="">
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p>The expertise and range of projects at Investor Lands are unmatched. They helped me find a property that fit my budget and long-term goals perfectly. I couldn’t be happier with their service!</p>
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h3>- Rohan Mehta</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="testimonial-slide">
+                                    <div class="testimonial-rating">
+                                        <img src="{{asset('websiteAssets/images/icon-rating.svg')}}" alt="">
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p>What stood out to me about Investor Lands was their commitment to quality and transparency. Their team went above and beyond to address all my concerns and helped me secure the best deal. Highly recommended!</p>
+                                    </div>
+                                    <div class="testimonial-author-info">
+                                        <h3>- Priya Iyer</h3>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <!-- Post Featured Image End -->
 
-                    <!-- Post Body Start -->
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-
-                        <h3><a href="#">Our Latest Development Projects by More Efficie.</a></h3>
+                        <div class="swiper-pagination"></div>
                     </div>
-                    <!-- Post Body End -->
                 </div>
-                <!-- Post Item End -->
-            </div>
-
-            <div class="col-lg-4">
-                <!-- Post Item Start -->
-                <div class="post-item wow fadeInUp" data-wow-delay="0.5s">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{asset('websiteAssets/images/post-2.jpg')}}" alt=""></a>
-                        </figure>
-
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Post Featured Image End -->
-
-                    <!-- Post Body Start -->
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Office</a></li>
-                            </ul>
-                        </div>
-
-                        <h3><a href="#">Cultivating Market Leadership from the Inside.</a></h3>
-                    </div>
-                    <!-- Post Body End -->
-                </div>
-                <!-- Post Item End -->
-            </div>
-
-            <div class="col-lg-4">
-                <!-- Post Item Start -->
-                <div class="post-item wow fadeInUp" data-wow-delay="0.75s">
-                    <!-- Post Featured Image Start -->
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{asset('websiteAssets/images/post-3.jpg')}}" alt=""></a>
-                        </figure>
-
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <!-- Post Featured Image End -->
-
-                    <!-- Post Body Start -->
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-
-                        <h3><a href="#">We Are the Next Generation of the Advertising.</a></h3>
-                    </div>
-                    <!-- Post Body End -->
-                </div>
-                <!-- Post Item End -->
             </div>
         </div>
     </div>
 </div>
-<!-- Latest Posts Section End -->
 @endsection
