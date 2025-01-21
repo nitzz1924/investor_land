@@ -62,7 +62,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
-                            <li class="nav-item highlighted-menu"><a class="nav-link" href="#">Login</a></li>
+                            <li class="nav-item highlighted-menu"><a class="nav-link" href="{{ route('website.userlogin')}}">Login</a></li>
                         </ul>
                     </div>
                     <!-- Main Menu End -->
@@ -87,8 +87,8 @@
                         <div class="footer-contact-info">
                             <h1>Get in Touch</h1>
                             <div class="footer-about-content">
-								<p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
-							</div>
+                                <p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
+                            </div>
                             <div class="footer-contact-box">
                                 <div class="footer-info-box">
                                     <div class="icon-box">
@@ -215,5 +215,38 @@
     <script src="{{asset('websiteAssets/js/ScrollTrigger.min.js')}}"></script>
     <script src="{{asset('websiteAssets/js/wow.js')}}"></script>
     <script src="{{asset('websiteAssets/js/function.js')}}"></script>
+    <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.13.2/dist/sweetalert2.all.min.js"></script>
+    @if (session('success'))
+    <script>
+        // Display SweetAlert for success message
+        Swal.fire({
+            title: "Success!"
+            , text: "{{ session('success') }}"
+            , icon: "success"
+            , confirmButtonClass: "btn btn-primary w-xs me-2 mt-2"
+            , buttonsStyling: true
+            , showCancelButton: true
+            , showCloseButton: true
+        , });
+
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        // Display SweetAlert for error message
+        Swal.fire({
+            title: "Error!"
+            , text: "{{ session('error') }}"
+            , icon: "error"
+            , confirmButtonClass: "btn btn-primary w-xs me-2 mt-2"
+            , buttonsStyling: true
+            , showCloseButton: true
+        , });
+
+    </script>
+    @endif
+    @stack('modals')
 </body>
 </html>

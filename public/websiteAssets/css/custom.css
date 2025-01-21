@@ -3791,3 +3791,6 @@ footer.footer {
 .footerforminput::placeholder {
 	color: gray !important;
 }
+.loginhead{
+	color: var(--primary-color);
+}

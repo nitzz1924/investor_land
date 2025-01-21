@@ -2,6 +2,7 @@
 // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------
 namespace App\Http\Controllers;
 
+use App\Models\Master;
 use Illuminate\Http\Request;
 
 class WebsiteViews extends Controller
@@ -23,5 +24,15 @@ class WebsiteViews extends Controller
     }
     public function propertylistings(){
         return view('WebsitePages.propertylistings');
+    }
+    public function propertydetails(){
+        $categories = Master::where('type', 'Property Categories')->get();
+        return view('WebsitePages.propertydetails', compact('categories'));
+    }
+    public function userlogin(){
+        return view('auth.UserAgentPanel.login');
+    }
+    public function registration(){
+        return view('auth.UserAgentPanel.registration');
     }
 }

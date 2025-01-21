@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2025 at 10:22 AM
+-- Generation Time: Jan 21, 2025 at 10:50 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -55,14 +55,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737009037),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1737009037;', 1737009037);
 
 -- --------------------------------------------------------
 
@@ -144,7 +136,7 @@ CREATE TABLE `leads` (
   `inwhichcity` varchar(255) DEFAULT NULL,
   `propertyid` varchar(255) DEFAULT NULL,
   `userid` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT 'new',
+  `status` varchar(255) DEFAULT 'New',
   `followupdetails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`followupdetails`)),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -155,7 +147,7 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-16 01:00:44'),
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-21 04:08:25'),
 (3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34');
 
 -- --------------------------------------------------------
@@ -337,7 +329,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BxtTWi86sGwo51FKax3UQm9f4TLk05wO7f4rOpTL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOWN3bklRVjlUek9JbXBLSmY0YnVyTTM0dnk0NTZBSDV6WGhuUzJZVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3RrYWJhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737019295);
+('fAFelByiDeuMcghnBlxo2ei7tkAsY5AiU7Q8IrYL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiM09IZXd4dnZRdjZNOUdZSm1lYzJoUEpWRWdaTkp0VHRqQzZBc2lGWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737452803);
 
 -- --------------------------------------------------------
 
@@ -500,7 +492,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `masters`

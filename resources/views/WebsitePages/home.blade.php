@@ -223,7 +223,7 @@
                                     <!-- Property Item Footer Start -->
                                     <div class="property-footer">
                                         <p class="property-price">$150,000</p>
-                                        <a href="#" class="btn-default">View Property</a>
+                                        <a href="{{route('website.propertydetails')}}" class="btn-default">View Property</a>
                                     </div>
                                     <!-- Property Item Footer Start -->
                                 </div>

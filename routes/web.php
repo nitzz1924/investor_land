@@ -1,5 +1,6 @@
 <?php
 // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------
+use App\Http\Controllers\WebsiteStores;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminViews;
@@ -71,6 +72,15 @@ Route::controller(WebsiteViews::class)->group(function() {
     Route::get('/blogs', 'blogs')->name('website.blogs');
     Route::get('/blog-details', 'blogdetails')->name('website.blogdetails');
     Route::get('/property-listings', 'propertylistings')->name('website.propertylistings');
+    Route::get('/property-details', 'propertydetails')->name('website.propertydetails');
+    Route::get('/property-details', 'propertydetails')->name('website.propertydetails');
+    Route::get('/userlogin', 'userlogin')->name('website.userlogin');
+    Route::get('/user-registration', 'registration')->name('website.registration');
+  
+});
+
+Route::controller(WebsiteStores::class)->group(function() {
+    Route::post('/sendenquiry', 'sendenquiry')->name('website.sendenquiry');
 });
 
 
