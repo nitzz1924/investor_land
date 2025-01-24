@@ -977,7 +977,7 @@ header.main-header .header-sticky.active {
 }
 
 .property-item .property-body h3 {
-	font-size: 22px;
+	font-size: 16px;
 	font-weight: 600;
 	color: var(--dark-color);
 }
@@ -1027,8 +1027,8 @@ header.main-header .header-sticky.active {
 }
 
 .property-item .property-footer .btn-default {
-	font-size: 14px;
-	padding: 10px 20px;
+	font-size: 11px;
+    padding: 5px 20px;
 }
 
 .property-slider .swiper-pagination {
@@ -3860,9 +3860,7 @@ footer.footer {
 	border-radius: 50%;
 	height: 80px;
 }
-/* .section-divider {
-    border: none;
-    height:10px;
-	border-radius: 50%;
-    background: linear-gradient(to right, #1b1b1b, #726555);
-} */
+
+.property-meta .property-amenity-item span{
+	font-size: 12px;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2025 at 02:04 PM
+-- Generation Time: Jan 24, 2025 at 02:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,9 +42,8 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `blogname`, `blogcategories`, `blogthumbnail`, `blogdescription`, `created_at`, `updated_at`) VALUES
-(7, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22'),
-(8, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22'),
-(9, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22');
+(7, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Computer Software\",\"Fashion\"]', '1737013391_2.png', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\"><p>When selling your property, the first impression can make all the difference. Buyers often form opinions within seconds of viewing a home, whether in person or online. To maximize your property’s appeal, it’s essential to present it in the best possible light. Here are some actionable tips to help you showcase your property and attract the right buyers.</p><p><br></p><h4>1. <strong>Enhance Curb Appeal</strong></h4><p>The exterior of your property sets the tone for what’s inside. Make sure it leaves a lasting impression.</p><ul><li><strong>Landscaping:</strong> Keep the lawn trimmed, bushes manicured, and pathways clear. Add fresh mulch, seasonal flowers, or potted plants for a welcoming touch.</li><li><strong>Exterior Maintenance:</strong> Repaint faded walls, fix broken fences, and ensure the gutters are clean.</li><li><strong>Lighting:</strong> Install outdoor lighting to highlight your home’s features and provide a safe, inviting feel during evening viewings.</li></ul><p><br></p><h4>2. <strong>Declutter and Depersonalize</strong></h4><p>Buyers want to envision themselves in the space. Decluttering and depersonalizing your home can make it easier for them to do so.</p><ul><li><strong>Declutter:</strong> Remove excess furniture and items that make the space look cramped.</li><li><strong>Depersonalize:</strong> Take down personal photos, mementos, and unique decor. Neutral spaces appeal to a broader audience.</li><li><strong>Storage:</strong> Organize closets and cabinets. Buyers will likely peek inside, and neat storage suggests the home is well-maintained.</li></ul><p><br></p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\" style=\"margin-top: -33px;\"><a class=\"ql-preview\" rel=\"noopener noreferrer\" target=\"_blank\" href=\"about:blank\"></a><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', '2025-01-15 07:33:12', '2025-01-23 10:17:27'),
+(10, 'Simple Tips to Increase the Value of Your Property', '[\"Business\",\"Health\"]', '1737614935_blog.jpg', '<p>Selling your property can be both exciting and challenging. Whether you’re planning to put it on the market or simply looking to increase its long-term value, making smart improvements can significantly enhance its appeal. Here are seven practical tips to boost your property’s value and attract potential buyers.</p><p><br></p><h3><strong>1. Refresh the Paintwork</strong></h3><p>A fresh coat of paint can transform your property, giving it a clean and modern look.</p><ul><li><strong>Neutral Colors</strong>: Opt for neutral tones like beige, gray, or white to appeal to a broader audience.</li><li><strong>Accent Walls</strong>: Add character to your living space with a single, subtle accent wall.</li></ul><p><br></p><h3><strong>2. Improve Energy Efficiency</strong></h3><p>Energy-efficient homes are in high demand. Implementing these changes can save future buyers money while increasing your property’s value:</p><ul><li><strong>LED Lighting</strong>: Replace outdated bulbs with energy-efficient LED options.</li><li><strong>Insulation</strong>: Ensure your walls and attic are properly insulated to reduce energy consumption.</li><li><strong>Smart Thermostats</strong>: Install a smart thermostat for more efficient heating and cooling.</li></ul><p><br></p><h3><strong>3. Upgrade the Kitchen</strong></h3><p>The kitchen is often the heart of the home. Upgrades here can provide the best return on investment.</p><ul><li>Replace old cabinet handles with sleek, modern designs.</li><li>Add a stylish backsplash to enhance the space’s appeal.</li><li>Consider upgrading appliances to energy-efficient models.</li></ul><p><br></p><h3><strong>4. Beautify the Bathrooms</strong></h3><p>Modernizing your bathrooms can make a huge difference.</p><ul><li>Install new fixtures such as faucets, showerheads, and towel racks.</li><li>Replace outdated mirrors with elegant, framed alternatives.</li><li>Upgrade lighting to add a touch of luxury.</li></ul>', '2025-01-23 01:18:55', '2025-01-23 01:18:55');
 
 -- --------------------------------------------------------
 
@@ -63,12 +62,10 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('49e514196e5f567a43983f2f3395a96f', 'i:1;', 1737525689),
-('49e514196e5f567a43983f2f3395a96f:timer', 'i:1737525689;', 1737525689),
-('auto@gmail.com|127.0.0.1', 'i:1;', 1737525690),
-('auto@gmail.com|127.0.0.1:timer', 'i:1737525690;', 1737525690),
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737525695),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1737525695;', 1737525695);
+('b88be67d57e9aca0343f67fc52eda0ec', 'i:1;', 1737720041),
+('b88be67d57e9aca0343f67fc52eda0ec:timer', 'i:1737720041;', 1737720041),
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737720128),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1737720128;', 1737720128);
 
 -- --------------------------------------------------------
 
@@ -161,8 +158,9 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-22 01:28:59'),
-(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34');
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-23 07:59:25'),
+(3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34'),
+(12, 'Ravi Shankar', '2222222222', 'auto@gmail.com', 'Ajmer', 'Rajasthan', 'Apartment', 'Pune', '39', '2', 'New', NULL, '2025-01-24 01:13:18', '2025-01-24 01:13:18');
 
 -- --------------------------------------------------------
 
@@ -292,8 +290,10 @@ CREATE TABLE `property_listings` (
 
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
 (31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/faa98789cfb692431ffb52e13497443a.pdf\",\"assets\\/images\\/Listings\\/466accbac9a66b805ba50e42ad715740.pdf\"]', '2025-01-10 06:28:41', '2025-01-16 02:17:34'),
-(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-22 00:55:41'),
-(39, 'Admin', '1', 'Tungis Luxury', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5200000', '600', '4', '4', '6', 'Banswara', 'Jaipur', '1737548653_p-3.jpg', 'Bunglow', 'published', '[\"assets\\/images\\/Listings\\/8f125da0b3432ed853c0b6f7ee5aaa6b.jpg\",\"assets\\/images\\/Listings\\/29fdff891569187da8e5ed4f7a6ea4c8.jpg\",\"assets\\/images\\/Listings\\/7bec7e63a493e2d61891b1e4051ef75a.jpg\",\"assets\\/images\\/Listings\\/95e6834d0a3d99e9ea8811855ae9229d.jpg\"]', '[\"assets\\/images\\/Listings\\/5d0cb12f8c9ad6845110317afc6e2183.pdf\",\"assets\\/images\\/Listings\\/3ce83f544dbe69bb4fb19211fc442c2f.pdf\"]', '2025-01-22 06:54:13', '2025-01-22 07:00:06');
+(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Ajmer', 'Beawar', '1736588133_p-2.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-23 11:07:49'),
+(39, 'Admin', '1', 'Tungis Luxury', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5200000', '600', '4', '4', '6', 'Banswara', 'Jaipur', '1737548653_p-3.jpg', 'Bunglow', 'published', '[\"assets\\/images\\/Listings\\/8f125da0b3432ed853c0b6f7ee5aaa6b.jpg\",\"assets\\/images\\/Listings\\/29fdff891569187da8e5ed4f7a6ea4c8.jpg\",\"assets\\/images\\/Listings\\/7bec7e63a493e2d61891b1e4051ef75a.jpg\",\"assets\\/images\\/Listings\\/95e6834d0a3d99e9ea8811855ae9229d.jpg\"]', '[\"assets\\/images\\/Listings\\/5d0cb12f8c9ad6845110317afc6e2183.pdf\",\"assets\\/images\\/Listings\\/3ce83f544dbe69bb4fb19211fc442c2f.pdf\"]', '2025-01-22 06:54:13', '2025-01-22 07:00:06'),
+(40, 'Admin', '1', 'Ojiag Duplex Apartment', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '8600000', '541', '5', '5', '8', 'Jodhpur', 'Bhilwara', '1737616797_p-7.jpg', 'Apartment', 'published', '[\"assets\\/images\\/Listings\\/6f3a770e5af1fd4cadc5f004b81e1040.jpg\",\"assets\\/images\\/Listings\\/7eb7eabbe9bd03c2fc99881d04da9cbd.jpg\",\"assets\\/images\\/Listings\\/79a3308b13cd31f096d8a4a34f96b66b.jpg\",\"assets\\/images\\/Listings\\/d1dc3a8270a6f9394f88847d7f0050cf.jpg\"]', '[\"assets\\/images\\/Listings\\/75e33da9b103b7b91dcd8da0abe1354b.pdf\"]', '2025-01-23 01:49:57', '2025-01-23 03:00:35'),
+(41, 'Agent', '4', 'Duplex Bungalow', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '5', '5', '5', 'Beawar', 'Beawar', '1737717576_p-9.jpg', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/696186d1596721cb6e79013d4655c5d9.jpg\",\"assets\\/images\\/Listings\\/79cae1be0fbae74dafbf8399ee2209cb.jpg\",\"assets\\/images\\/Listings\\/6be5336db2c119736cf48f475e051bfe.jpg\"]', '[\"assets\\/images\\/Listings\\/0a2a51dac6138826127f093500461d91.pdf\"]', '2025-01-24 05:49:36', '2025-01-24 06:14:21');
 
 -- --------------------------------------------------------
 
@@ -338,6 +338,9 @@ CREATE TABLE `register_users` (
   `mobile` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `password` text DEFAULT NULL,
+  `company_name` varchar(255) DEFAULT NULL,
+  `company_document` varchar(255) DEFAULT NULL,
+  `profile_photo_path` varchar(255) DEFAULT NULL,
   `verification_status` varchar(255) DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -347,8 +350,9 @@ CREATE TABLE `register_users` (
 -- Dumping data for table `register_users`
 --
 
-INSERT INTO `register_users` (`id`, `user_type`, `name`, `mobile`, `email`, `password`, `verification_status`, `created_at`, `updated_at`) VALUES
-(2, 'user', 'Ravi Shankar', '2222222222', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', '1', '2025-01-21 05:44:02', '2025-01-22 05:20:20');
+INSERT INTO `register_users` (`id`, `user_type`, `name`, `mobile`, `email`, `password`, `company_name`, `company_document`, `profile_photo_path`, `verification_status`, `created_at`, `updated_at`) VALUES
+(2, 'user', 'Ravi Shankar', '5754854858', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', NULL, NULL, '1737716083_agent-6.jpg', '1', '2025-01-21 05:44:02', '2025-01-24 05:24:43'),
+(4, 'agent', 'Anshul', '6565656565', 'ans@gmail.com', '$2y$12$xFw53U/L9mKUkv0.S.AvoOL0pVIWEtzhJxw/mKK2fN74979ZRdp7K', 'DOSSO', '1737625140_dummy.pdf', '1737715936_agent-1.jpg', '1', '2025-01-23 04:09:01', '2025-01-24 05:22:37');
 
 -- --------------------------------------------------------
 
@@ -370,7 +374,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('qLoR7MiZHzwtWfXMdb59WckmtRadGs0qcQcv8ObT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJfdG9rZW4iO3M6NDA6ImFlZjBwN2E3cm9xR2FHTVFsNThPWnRlTEIzQk1pMHNsNDZDMzVMMHkiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737550715);
+('nw3K45C1IoxKDEsD74T15Mfv18oxQEpej9wwKwM5', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoia1dkTm9DOE02UVZLQjYzVG9ieGdBNHhnOFZRdWo2bVNsTjVrYnJycyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3QiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1737720104),
+('yl4cpju8WJfWzSrZ5Wnkz7kdjQ2gEhEimGzsMKDV', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJfdG9rZW4iO3M6NDA6IkZQV3NqQTZoakJiRjJvd3lOUzE2eFF2V1p4UktCMFMyVWNUOTBPMTEiO3M6MzoidXJsIjthOjA6e31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1737723465);
 
 -- --------------------------------------------------------
 
@@ -521,7 +526,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -539,7 +544,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `masters`
@@ -563,7 +568,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `register_companies`
@@ -575,7 +580,7 @@ ALTER TABLE `register_companies`
 -- AUTO_INCREMENT for table `register_users`
 --
 ALTER TABLE `register_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -63,7 +63,31 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
-                            <li class="nav-item highlighted-menu"><a class="nav-link" href="{{ route('website.userlogin')}}">Login</a></li>
+                            <li class="nav-item dropdown">
+                                @if(Auth::guard('customer')->check())
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                    {{ Auth::guard('customer')->user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="userMenu">
+                                    <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.myprofile') }}">My Profile</a></li>
+                                    <li>
+                                        <form method="GET" action="{{ route('user.logoutuserpanel') }}">
+                                            @csrf
+                                            <button type="submit" class="dropdown-item">Log Out</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                                @else
+                            <li class="nav-item highlighted-menu">
+                                <a class="nav-link" href="{{ route('website.userlogin') }}">Login</a>
+                            </li>
+                            @endif
+                            </li>
+
+
+
                         </ul>
                     </div>
                     <!-- Main Menu End -->
@@ -218,6 +242,6 @@
     <script src="{{asset('websiteAssets/js/function.js')}}"></script>
     <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-  </body>
+</body>
 </body>
 </html>

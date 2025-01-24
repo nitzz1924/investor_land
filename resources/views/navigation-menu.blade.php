@@ -52,10 +52,10 @@
                           </li>
                       </ul>
                   </li>
-                   <li class="sidebar-item">
+                  <li class="sidebar-item">
                       <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
                           <span class="d-flex">
-                             <i class="ti ti-home-plus"></i>
+                              <i class="ti ti-home-plus"></i>
                           </span>
                           <span class="hide-menu">Property</span>
                       </a>
@@ -70,10 +70,10 @@
                           </li>
                       </ul>
                   </li>
-                   <li class="sidebar-item">
+                  <li class="sidebar-item">
                       <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
                           <span class="d-flex">
-                              <i class="ti ti-users"></i>
+                            <i class="ti ti-file-spreadsheet"></i>
                           </span>
                           <span class="hide-menu">Lead Management</span>
                       </a>
@@ -88,7 +88,7 @@
                           </li>
                       </ul>
                   </li>
-                   <li class="sidebar-item">
+                  <li class="sidebar-item">
                       <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
                           <span class="d-flex">
                               <i class="ti ti-article"></i>
@@ -102,6 +102,42 @@
                                       <i class="ti ti-circle"></i>
                                   </div>
                                   <span class="hide-menu">All Blogs</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
+                          <span class="d-flex">
+                              <i class="ti ti-address-book"></i>
+                          </span>
+                          <span class="hide-menu">Customers</span>
+                      </a>
+                      <ul aria-expanded="false" class="collapse first-level">
+                          <li class="sidebar-item">
+                              <a href="{{ route('admin.allcustomers')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">All Customers</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
+                          <span class="d-flex">
+                            <i class="ti ti-users"></i>
+                          </span>
+                          <span class="hide-menu">Agents</span>
+                      </a>
+                      <ul aria-expanded="false" class="collapse first-level">
+                          <li class="sidebar-item">
+                              <a href="{{ route('admin.allagents')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">All Agents</span>
                               </a>
                           </li>
                       </ul>

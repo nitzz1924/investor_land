@@ -19,5 +19,6 @@ class RegisterUser extends Authenticatable
         'verification_status',
         'company_name',
         'company_document',
+        'profile_photo_path',
     ];
 }

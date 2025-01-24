@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-                                                        
+
 
     <div class="hero-search-form-section">
         <div class="container">
@@ -92,7 +92,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="featured-property">
     <div class="container">
@@ -275,6 +274,7 @@
         </div>
     </div>
 </div>
+
 <div class="about-us">
     <div class="container">
         <div class="row align-items-center">
@@ -356,6 +356,7 @@
         </div>
     </div>
 </div>
+
 <div class="why-choose-us">
     <div class="container">
         <div class="row align-items-center">
@@ -433,7 +434,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="infobar-cta ">
     <div class="container">
@@ -618,19 +618,19 @@
             console.log(pair[0] + ': ' + pair[1]);
         }
         $.ajax({
-            url: "{{ route('website.filterlistings') }}",
-            type: "POST",
-            data: formdata,
-            headers: {
+            url: "{{ route('website.filterlistings') }}"
+            , type: "POST"
+            , data: formdata
+            , headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            processData: false,
-            contentType: false,
-            success: function(response) {
+            }
+            , processData: false
+            , contentType: false
+            , success: function(response) {
                 window.location.href = response.redirect_url;
                 console.log(response);
-            },
-            error: function(xhr, status, error) {
+            }
+            , error: function(xhr, status, error) {
                 // Handle error response
                 console.error(xhr.responseText);
             }

@@ -62,6 +62,8 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/editblog/{id}', [AdminViews::class, 'editblog'])->name('admin.editblog');
     Route::post('/updateblog', [AdminStores::class, 'updateblog'])->name('admin.updateblog');
     Route::get('/deleteblog/{id}', [AdminStores::class, 'deleteblog'])->name('admin.deleteblog');
+    Route::get('/all-customers', [AdminViews::class, 'allcustomers'])->name('admin.allcustomers');
+    Route::get('/all-agents', [AdminViews::class, 'allagents'])->name('admin.allagents');
 });
 
 
@@ -69,7 +71,16 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 Route::prefix('user')->middleware('customer.auth')->group(function () {
     Route::controller(UserViews::class)->group(function () {
         Route::get('/dashboard', 'dashboard')->name('user.dashboard');
+        Route::get('/myprofile', 'myprofile')->name('user.myprofile');
         Route::get('/logoutuserpanel', 'logoutuserpanel')->name('user.logoutuserpanel');
+        Route::post('/updateuserprofile', 'updateuserprofile')->name('user.updateuserprofile');
+        Route::get('/mylistings', 'mylistings')->name('user.mylistings');
+        Route::get('/addlisting', 'addlisting')->name('user.addlisting');
+        Route::post('/insertuserlisting', 'insertuserlisting')->name('user.insertuserlisting');
+        Route::get('/viewlisting/{id}', 'viewlisting')->name('user.viewlisting');
+        Route::get('/editlisting/{id}', 'editlisting')->name('user.editlisting');
+        Route::post('/updateuserlisting', 'updateuserlisting')->name('user.updateuserlisting');
+        Route::get('/deletelisting/{id}', 'deletelisting')->name('user.deletelisting');
     });
 });
 

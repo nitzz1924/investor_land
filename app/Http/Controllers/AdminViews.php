@@ -7,6 +7,7 @@ use App\Models\Lead;
 use App\Models\Master;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
+use App\Models\RegisterUser;
 use Illuminate\Http\Request;
 use Auth;
 class AdminViews extends Controller
@@ -143,5 +144,16 @@ class AdminViews extends Controller
         $blogs = Blog::find($id);
         $categories = Master::where('type', 'Blog Categories')->get();
         return view('AdminPanelPages.editblog', compact('blogs', 'categories'));
+    }
+
+    public function allcustomers(){
+        $allcustomers = RegisterUser::where('user_type','user')->orderBy('created_at', 'DESC')->get();
+        $allcustomerscnt = RegisterUser::where('user_type','user')->count();
+        return view('AdminPanelPages.allcustomers', compact('allcustomers', 'allcustomerscnt'));
+    }
+    public function allagents(){
+        $allagents = RegisterUser::where('user_type','agent')->orderBy('created_at', 'DESC')->get();
+        $allagentscnt = RegisterUser::where('user_type','agent')->count();
+        return view('AdminPanelPages.allagents', compact('allagents', 'allagentscnt'));
     }
 }

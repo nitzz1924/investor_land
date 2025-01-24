@@ -322,7 +322,7 @@
     {{-- Date filter Functionality Code--}}
     <script>
         $(document).ready(function() {
-            /* Initialize DataTable
+            /*
             var dataTableCustomer = $('#file_export').DataTable({
                 layout: {
                     topStart: {
@@ -361,20 +361,21 @@
                             response.forEach(function(row) {
                                 var dateObj = new Date(row.created_at);
                                 var formattedDate = dateObj.toLocaleDateString('en-GB', {
-                                    day: 'numeric'
-                                    , month: 'short'
-                                    , year: 'numeric'
+                                    day: 'numeric',
+                                    month: 'short',
+                                    year: 'numeric'
                                 });
                                 var formattedTime = dateObj.toLocaleTimeString('en-US', {
-                                    hour: 'numeric'
-                                    , minute: '2-digit'
-                                    , hour12: true
+                                    hour: 'numeric',
+                                    minute: '2-digit',
+                                    hour12: true
                                 });
+                                var formattedDateTime = formattedDate + ' | ' + formattedTime;
 
                                 var html = `
                         <tr>
                             <td>${row.name}</td>
-                            <td>${formattedTime}</td>
+                            <td>${formattedDateTime}</td>
                             <td>${row.mobilenumber}</td>
                             <td>${row.email}</td>
                             <td>${row.city}</td>
@@ -382,11 +383,11 @@
                             <td>${row.inwhichcity}</td>
                             <td>
                                 <span class="mb-1 badge 
-                                ${row.status === 'new' ? 'text-bg-primary' : 
-                                  row.status === 'qualified' ? 'text-bg-success' : 
-                                  row.status === 'not responded' ? 'text-bg-warning' : 
-                                  row.status === 'payment mode' ? 'text-bg-info' : 
-                                  row.status === 'won' ? 'text-bg-success' : 
+                                ${row.status === 'New' ? 'text-bg-primary' : 
+                                  row.status === 'Qualified' ? 'text-bg-success' : 
+                                  row.status === 'Not Responded' ? 'text-bg-warning' : 
+                                  row.status === 'Payment Mode' ? 'text-bg-info' : 
+                                  row.status === 'Won' ? 'text-bg-success' : 
                                   'text-bg-danger'}">
                                     ${row.status.charAt(0).toUpperCase() + row.status.slice(1)}
                                 </span>
@@ -394,7 +395,9 @@
                             <td>
                                 <div class="hstack gap-3 flex-wrap">
                                     <a href="#" data-car-list='${JSON.stringify(row)}' class="link-primary fs-6 editbtnmodal" data-bs-toggle="modal" data-bs-target="#primary-header-modal"><i class="ti ti-table-plus" data-bs-toggle="tooltip" title="Add Follow Up Status"></i></a>
+
                                     <a href="#" data-record='${JSON.stringify(row)}' data-bs-toggle="modal" data-bs-target="#primary-header-modaledit" class="link-dark editbtnmodalnew fs-6" data-bs-toggle="tooltip" title="Edit"><i class="ti ti-edit"></i></a>
+
                                     <button data-bs-toggle="tooltip" title="Delete" onclick="confirmDelete('${row.id}')" class="link-danger fs-6"><i class="ti ti-trash"></i></button>
                                 </div>
                             </td>
@@ -404,13 +407,10 @@
                             });
 
                             // Reinitialize DataTable
-                            dataTableCustomer = $('#file_export').DataTable({
-                                layout: {
-                                    topStart: {
-                                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                                    }
-                                }
-                            });
+                            $('#file_export').DataTable({
+                                dom: "Bfrtip"
+                                , buttons: ["copy", "csv", "excel", "pdf", "print"]
+                            , });
                         } else {
                             $('#table-body').html('<tr><td colspan="9">No orders found for the selected date range.</td></tr>');
                         }

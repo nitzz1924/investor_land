@@ -22,8 +22,8 @@ class WebsiteStores extends Controller
                 'state' => $rq->state,
                 'housecategory' => $rq->propertytype,
                 'inwhichcity' => $rq->cityofproperty,
-                'propertyid' => 55,
-                'userid' => 99,
+                'propertyid' => $rq->propertyid,
+                'userid' =>  $rq->userid,
             ]);
             return back()->with('success', "Enquiry Sent..!!!");
         } catch (Exception $e) {
@@ -71,7 +71,7 @@ class WebsiteStores extends Controller
                     if (Auth::guard('customer')->check()) {
                         $user->verification_status = 1;
                         $user->save();
-                        return redirect('user/dashboard');
+                        return redirect('/');
                     } else {
                         return back()->with('error', "Invalid Credentials..!!!");
                     }

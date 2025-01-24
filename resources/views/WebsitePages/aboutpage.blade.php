@@ -90,7 +90,7 @@
                         <img src="{{asset('websiteAssets/images/icon-how-4.svg')}}" alt="">
                     </div>
 
-                    <h3>Transparent Transactions</h3>
+                    <h3>Transparent Deals</h3>
                     <p>Ensure peace of mind with our commitment to transparent transactions and integrity.</p>
                 </div>
             </div>

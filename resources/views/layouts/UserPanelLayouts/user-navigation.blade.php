@@ -29,12 +29,22 @@
                       </a>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="#" aria-expanded="false">
-                          <span>
-                              <i class="ti ti-layout-grid"></i>
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
+                          <span class="d-flex">
+                              <i class="ti ti-home-plus"></i>
                           </span>
-                          <span class="hide-menu">My Listings</span>
+                          <span class="hide-menu">Property</span>
                       </a>
+                      <ul aria-expanded="false" class="collapse first-level">
+                          <li class="sidebar-item">
+                              <a href="{{ route('user.mylistings')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">All Properties List</span>
+                              </a>
+                          </li>
+                      </ul>
                   </li>
               </ul>
           </nav>
@@ -42,10 +52,10 @@
           <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded mt-3">
               <div class="hstack gap-3">
                   <div class="john-img">
-                      {{-- @php
-                      $userdata = auth()->user();
-                      @endphp--}}
-                      <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
+                      @php
+                      $userdata = Auth::guard('customer')->user();  
+                      @endphp
+                      <img src="{{asset('assets/images/Users/'.$userdata->profile_photo_path)}}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
                   </div>
                   <div class="john-title">
                       @if (Auth::guard('customer')->user()->name)
@@ -365,10 +375,10 @@
                               <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                                   <div class="d-flex align-items-center">
                                       <div class="user-profile-img">
-                                          {{-- @php
-                                          $userdata = auth()->user();
-                                          @endphp--}}
-                                          <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                          @php
+                                        $userdata = Auth::guard('customer')->user();
+                                          @endphp
+                                          <img src="{{asset('assets/images/Users/'.  $userdata->profile_photo_path)}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
                                       </div>
                                   </div>
                               </a>
@@ -376,7 +386,7 @@
                                   <div class="profile-dropdown position-relative" data-simplebar>
                                       <div class="d-flex align-items-center py-9 mx-7 border-bottom">
 
-                                          <img src="{{asset('assets/images/defaultuser.png')}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                          <img src="{{asset('assets/images/Users/'.  $userdata->profile_photo_path)}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
                                           <div class="ms-3">
                                               @if (Auth::guard('customer')->user())
                                               <h5 class="mb-1 fs-3">{{ Auth::guard('customer')->user()->name }}</h5>
@@ -390,7 +400,7 @@
                                           </div>
                                       </div>
                                       <div class="message-body">
-                                          <a href="{{ route('admin.myprofile') }}" class="py-8 px-7 mt-8 d-flex align-items-center">
+                                          <a href="{{ route('user.myprofile') }}" class="py-8 px-7 mt-8 d-flex align-items-center">
                                               <span class="d-flex align-items-center justify-content-center text-bg-light rounded-1 p-6">
                                                   <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/icon-account.svg" alt="modernize-img" width="24" height="24" />
                                               </span>

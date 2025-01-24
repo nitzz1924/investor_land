@@ -134,7 +134,7 @@
                         </div>
 
                         <div class="property-map-iframe">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d135589.94055825932!2d74.55331276083179!3d26.453373262694694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396be6d8fcb7cd01%3A0xcbaf8f12eb8100ee!2sAjmer%2C%20Rajasthan!5e1!3m2!1sen!2sin!4v1737543080216!5m2!1sen!2sin"  width="600" height="450"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d135589.94055825932!2d74.55331276083179!3d26.453373262694694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396be6d8fcb7cd01%3A0xcbaf8f12eb8100ee!2sAjmer%2C%20Rajasthan!5e1!3m2!1sen!2sin!4v1737543080216!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,16 @@
             <div class="col-lg-4">
                 <!-- Property Single Sidebar Start -->
                 <div class="porperty-single-sidebar">
-                    <!-- Property Information Box Start -->
+                    @if ($message = Session::get('success'))
+                    <div class="alert border-0 alert-success text-center" role="alert" id="successAlert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
+                    @if ($message = Session::get('error'))
+                    <div class="alert border-0 alert-danger text-center" role="alert" id="dangerAlert">
+                        <strong>{{ $message }}</strong>
+                    </div>
+                    @endif
                     <div class="property-info-box wow fadeInUp" data-wow-delay="0.25s">
                         <h3>Other Details</h3>
 
@@ -192,15 +201,18 @@
                                 @csrf
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-3">
-                                        <input type="text" name="customername" class="form-control" id="customername" placeholder="Your Name" required>
+                                        <input type="text" value="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user()->name : '' }}" name="customername" class="form-control" id="customername" placeholder="Your Name" required>
+                                    </div>
+
+                                    <input type="hidden" name="propertyid" value="{{$propertydetails->id}}">
+                                    <input type="hidden" name="userid" value="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user()->id : '' }}">
+
+                                    <div class="form-group col-md-12 mb-3">
+                                        <input type="text" value="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user()->mobile : '' }}" name="phone" class="form-control" id="phone" placeholder="Phone" required>
                                     </div>
 
                                     <div class="form-group col-md-12 mb-3">
-                                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required>
-                                    </div>
-
-                                    <div class="form-group col-md-12 mb-3">
-                                        <input type="email" name="email" class="form-control" id="email" placeholder="Email">
+                                        <input type="email" value="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user()->email : '' }}" name="email" class="form-control" id="email" placeholder="Email">
                                     </div>
 
                                     <div class="form-group col-md-12 mb-3">
@@ -236,4 +248,14 @@
         </div>
     </div>
 </div>
+<script>
+    setTimeout(function() {
+        $('#successAlert').fadeOut('slow');
+    }, 3000);
+
+    setTimeout(function() {
+        $('#dangerAlert').fadeOut('slow');
+    }, 3000);
+
+</script>
 @endsection

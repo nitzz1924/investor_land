@@ -1,6 +1,6 @@
 {{------------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 @extends('layouts.website')
-@section('title','Blog Details')
+@section('title',$blogdetails->blogname)
 @section('content')
 <div class="page-header parallaxie">
     <div class="container">
