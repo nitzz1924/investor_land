@@ -22,6 +22,7 @@
     <link href="{{asset('websiteAssets/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('websiteAssets/css/magnific-popup.css')}}" rel="stylesheet">
     <link href="{{asset('websiteAssets/css/custom.css')}}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body class="tt-magic-cursor">
@@ -62,7 +63,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
-                            <li class="nav-item highlighted-menu"><a class="nav-link" href="#">Login</a></li>
+                            <li class="nav-item highlighted-menu"><a class="nav-link" href="{{ route('website.userlogin')}}">Login</a></li>
                         </ul>
                     </div>
                     <!-- Main Menu End -->
@@ -87,8 +88,8 @@
                         <div class="footer-contact-info">
                             <h1>Get in Touch</h1>
                             <div class="footer-about-content">
-								<p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
-							</div>
+                                <p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
+                            </div>
                             <div class="footer-contact-box">
                                 <div class="footer-info-box">
                                     <div class="icon-box">
@@ -215,5 +216,8 @@
     <script src="{{asset('websiteAssets/js/ScrollTrigger.min.js')}}"></script>
     <script src="{{asset('websiteAssets/js/wow.js')}}"></script>
     <script src="{{asset('websiteAssets/js/function.js')}}"></script>
+    <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
 </body>
 </html>

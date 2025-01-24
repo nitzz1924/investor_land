@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2025 at 10:22 AM
+-- Generation Time: Jan 22, 2025 at 02:04 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,9 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `blogname`, `blogcategories`, `blogthumbnail`, `blogdescription`, `created_at`, `updated_at`) VALUES
-(7, 'Awasthi Institute Of Paramedical Science', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'This is testing udpate', '2025-01-15 07:33:12', '2025-01-16 02:13:11');
+(7, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22'),
+(8, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22'),
+(9, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Fashion\"]', '1737013391_2.png', 'Home staging is a crucial step in the selling process that involves preparing your home to appeal to a wide range of potential buyers. The goal is to highlight the property\'s best features and create a welcoming atmosphere that resonates with buyers\' emotions. Here are essential home staging tips to help you showcase your property effectively:', '2025-01-15 07:33:12', '2025-01-22 06:52:22');
 
 -- --------------------------------------------------------
 
@@ -61,8 +63,12 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737009037),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1737009037;', 1737009037);
+('49e514196e5f567a43983f2f3395a96f', 'i:1;', 1737525689),
+('49e514196e5f567a43983f2f3395a96f:timer', 'i:1737525689;', 1737525689),
+('auto@gmail.com|127.0.0.1', 'i:1;', 1737525690),
+('auto@gmail.com|127.0.0.1:timer', 'i:1737525690;', 1737525690),
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1737525695),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1737525695;', 1737525695);
 
 -- --------------------------------------------------------
 
@@ -144,7 +150,7 @@ CREATE TABLE `leads` (
   `inwhichcity` varchar(255) DEFAULT NULL,
   `propertyid` varchar(255) DEFAULT NULL,
   `userid` varchar(255) DEFAULT NULL,
-  `status` varchar(255) DEFAULT 'new',
+  `status` varchar(255) DEFAULT 'New',
   `followupdetails` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`followupdetails`)),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -155,7 +161,7 @@ CREATE TABLE `leads` (
 --
 
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
-(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-16 01:00:44'),
+(1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '3', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-22 01:28:59'),
 (3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '5', 'New', NULL, '2025-01-13 06:59:41', '2025-01-15 02:31:34');
 
 -- --------------------------------------------------------
@@ -184,17 +190,18 @@ INSERT INTO `masters` (`id`, `label`, `type`, `categoryimage`, `created_at`, `up
 (23, 'Not Responded', 'Follow Up Status', NULL, '2025-01-13 02:05:35', '2025-01-13 02:05:35'),
 (24, 'Final', 'Follow Up Status', NULL, '2025-01-13 02:06:34', '2025-01-13 02:08:09'),
 (26, 'Property Categories', 'Master', NULL, '2025-01-13 02:09:06', '2025-01-13 02:09:06'),
-(27, 'Apartment', 'Property Categories', NULL, '2025-01-13 02:09:23', '2025-01-13 02:09:23'),
-(28, 'Villa', 'Property Categories', NULL, '2025-01-13 02:09:29', '2025-01-13 02:09:29'),
-(29, 'Penthouse', 'Property Categories', NULL, '2025-01-13 02:09:40', '2025-01-13 02:09:40'),
-(30, 'Residences', 'Property Categories', NULL, '2025-01-13 02:10:07', '2025-01-13 02:10:07'),
+(27, 'Apartment', 'Property Categories', '1737012944_2.png', '2025-01-13 02:09:23', '2025-01-22 06:22:09'),
+(28, 'Villa', 'Property Categories', '1737012944_2.png', '2025-01-13 02:09:29', '2025-01-22 06:22:10'),
+(29, 'Penthouse', 'Property Categories', '1737012944_2.png', '2025-01-13 02:09:40', '2025-01-22 06:22:12'),
+(30, 'Residences', 'Property Categories', '1737012944_2.png', '2025-01-13 02:10:07', '2025-01-22 06:22:14'),
 (31, 'Won', 'Follow Up Status', NULL, '2025-01-14 06:46:38', '2025-01-14 06:46:38'),
 (32, 'Blog Categories', 'Master', NULL, '2025-01-15 05:52:59', '2025-01-15 05:53:09'),
 (33, 'Business', 'Blog Categories', NULL, '2025-01-15 05:53:26', '2025-01-15 05:53:26'),
 (34, 'Computer Software', 'Blog Categories', NULL, '2025-01-15 05:53:42', '2025-01-15 05:53:42'),
 (35, 'Fashion', 'Blog Categories', NULL, '2025-01-15 05:53:59', '2025-01-15 05:53:59'),
 (36, 'Health', 'Blog Categories', NULL, '2025-01-15 05:54:06', '2025-01-15 05:54:06'),
-(37, 'Luxury House', 'Property Categories', '1737012944_2.png', '2025-01-16 01:38:56', '2025-01-16 02:05:44');
+(37, 'Luxury House', 'Property Categories', '1737012944_2.png', '2025-01-16 01:38:56', '2025-01-16 02:05:44'),
+(38, 'Bunglow', 'Property Categories', '1737549230_p-3.jpg', '2025-01-22 06:52:26', '2025-01-22 07:03:50');
 
 -- --------------------------------------------------------
 
@@ -285,7 +292,8 @@ CREATE TABLE `property_listings` (
 
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
 (31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/faa98789cfb692431ffb52e13497443a.pdf\",\"assets\\/images\\/Listings\\/466accbac9a66b805ba50e42ad715740.pdf\"]', '2025-01-10 06:28:41', '2025-01-16 02:17:34'),
-(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Luxury House', 'unpublished', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-16 02:18:04');
+(36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Beawar', 'Beawar', '1736588133_p-2.jpg', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-22 00:55:41'),
+(39, 'Admin', '1', 'Tungis Luxury', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5200000', '600', '4', '4', '6', 'Banswara', 'Jaipur', '1737548653_p-3.jpg', 'Bunglow', 'published', '[\"assets\\/images\\/Listings\\/8f125da0b3432ed853c0b6f7ee5aaa6b.jpg\",\"assets\\/images\\/Listings\\/29fdff891569187da8e5ed4f7a6ea4c8.jpg\",\"assets\\/images\\/Listings\\/7bec7e63a493e2d61891b1e4051ef75a.jpg\",\"assets\\/images\\/Listings\\/95e6834d0a3d99e9ea8811855ae9229d.jpg\"]', '[\"assets\\/images\\/Listings\\/5d0cb12f8c9ad6845110317afc6e2183.pdf\",\"assets\\/images\\/Listings\\/3ce83f544dbe69bb4fb19211fc442c2f.pdf\"]', '2025-01-22 06:54:13', '2025-01-22 07:00:06');
 
 -- --------------------------------------------------------
 
@@ -320,6 +328,31 @@ INSERT INTO `register_companies` (`id`, `companyname`, `companylogo`, `city`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `register_users`
+--
+
+CREATE TABLE `register_users` (
+  `id` int(11) NOT NULL,
+  `user_type` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `verification_status` varchar(255) DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `register_users`
+--
+
+INSERT INTO `register_users` (`id`, `user_type`, `name`, `mobile`, `email`, `password`, `verification_status`, `created_at`, `updated_at`) VALUES
+(2, 'user', 'Ravi Shankar', '2222222222', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', '1', '2025-01-21 05:44:02', '2025-01-22 05:20:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -337,7 +370,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('BxtTWi86sGwo51FKax3UQm9f4TLk05wO7f4rOpTL', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOWN3bklRVjlUek9JbXBLSmY0YnVyTTM0dnk0NTZBSDV6WGhuUzJZVCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9sZWFkc2xpc3RrYWJhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737019295);
+('qLoR7MiZHzwtWfXMdb59WckmtRadGs0qcQcv8ObT', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czoyMToiaHR0cDovLzEyNy4wLjAuMTo4MDAwIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo2OiJfdG9rZW4iO3M6NDA6ImFlZjBwN2E3cm9xR2FHTVFsNThPWnRlTEIzQk1pMHNsNDZDMzVMMHkiO3M6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1737550715);
 
 -- --------------------------------------------------------
 
@@ -460,6 +493,12 @@ ALTER TABLE `register_companies`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `register_users`
+--
+ALTER TABLE `register_users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -482,7 +521,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -500,13 +539,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -524,13 +563,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `register_companies`
 --
 ALTER TABLE `register_companies`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `register_users`
+--
+ALTER TABLE `register_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

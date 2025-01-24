@@ -1,5 +1,7 @@
 <?php
 // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------
+use App\Http\Controllers\UserViews;
+use App\Http\Controllers\WebsiteStores;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminViews;
@@ -63,14 +65,35 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 });
 
 
+//User Panel Routes
+Route::prefix('user')->middleware('customer.auth')->group(function () {
+    Route::controller(UserViews::class)->group(function () {
+        Route::get('/dashboard', 'dashboard')->name('user.dashboard');
+        Route::get('/logoutuserpanel', 'logoutuserpanel')->name('user.logoutuserpanel');
+    });
+});
+
+
+
 //Website Routes
 Route::controller(WebsiteViews::class)->group(function() {
     Route::get('/', 'homepage')->name('website.homepage');
     Route::get('/about-us', 'aboutpage')->name('website.aboutpage');
     Route::get('/contact-us', 'contactpage')->name('website.contactpage');
     Route::get('/blogs', 'blogs')->name('website.blogs');
-    Route::get('/blog-details', 'blogdetails')->name('website.blogdetails');
+    Route::get('/blog-details/{id}', 'blogdetails')->name('website.blogdetails');
     Route::get('/property-listings', 'propertylistings')->name('website.propertylistings');
+    Route::get('/property-details/{id}', 'propertydetails')->name('website.propertydetails');
+    Route::get('/userlogin', 'userlogin')->name('website.userlogin');
+    Route::get('/user-registration', 'registration')->name('website.registration');
+    Route::post('/filterlistings', 'filterlistings')->name('website.filterlistings');
+  
+});
+
+Route::controller(WebsiteStores::class)->group(function() {
+    Route::post('/sendenquiry', 'sendenquiry')->name('website.sendenquiry');
+    Route::post('/register-user', 'registeruser')->name('website.registeruser');
+    Route::post('/login-user', 'loginuser')->name('website.loginuser');
 });
 
 

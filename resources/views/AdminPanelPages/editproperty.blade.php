@@ -144,10 +144,15 @@
                             </div>
                         </form>
                         @if ($listingdata->documents)
-                        <div class=" d-flex">
-                            @foreach (json_decode($listingdata->documents) as $documentimg)
+                        <div class="d-flex">
+                            @foreach (json_decode($listingdata->documents) as $document)
                             <div class="mx-2">
-                                <iframe src="{{ asset($documentimg) }}" class="rounded-3 img-fluid" style="max-height: 100px; width: 100px;" frameborder="0"></iframe>
+                                @if (pathinfo($document, PATHINFO_EXTENSION) == 'pdf')
+                                <iframe src="{{ asset($document) }}" class="rounded-3 img-fluid" style="max-height: 100px; width: 100px;" frameborder="0"></iframe>
+                                @else
+                                <img src="{{ asset($document) }}" class="rounded-3 img-fluid" alt="Document" style="max-height: 100px;">
+                                @endif
+                                <a href="{{ asset($document) }}" class="btn btn-outline-primary mt-2" download>Download</a>
                             </div>
                             @endforeach
                         </div>

@@ -16,186 +16,29 @@
 <div class="blog-archive-page">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-6">
+            @foreach ($blogs as $blog)
+            <div class="col-lg-4">
                 <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
                     <div class="post-featured-image">
                         <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-1.jpg') }}" alt=""></a>
+                            <a href="#"><img src="{{asset('assets/images/Blogs/'.$blog->blogthumbnail)}}" alt="Blog Image"></a>
                         </figure>
+
                         <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
+                            <a href="{{ route('website.blogdetails',['id' => $blog->id]) }}" class="btn-default">Read More</a>
                         </div>
                     </div>
                     <div class="post-body">
                         <div class="post-category">
                             <ul>
-                                <li><a href="#">Apartments</a></li>
+                                <li><a href="#">{{$blog->blogname}}</a></li>
                             </ul>
                         </div>
-                        <h3><a href="#">Top Neighborhoods for Young Families</a></h3>
+                        <h3><a href="#">{{ Str::limit(strip_tags($blog->blogdescription),40)}}</a></h3>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-2.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">How to Stage Your Home for a Quick Sale.</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="0.75s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-3.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">The Ultimate Guide to Mortgage Pre-Approval.</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="1s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-4.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">Touring the Most Exclusive Properties in Area.</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="1.25s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-5.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">We Are the Next Generation of the Advertising.</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="1.5s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-6.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">Tips for First-Time Homebuyers: From Budgeting</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="1.75s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-7.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">Exploring the Hottest Real Estate Markets of 2024.</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="2s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-8.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">10 Tips for First-Time Homebuyers</a></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="post-item wow fadeInUp" data-wow-delay="2.25s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{ asset('websiteAssets/images/post-9.jpg') }}" alt=""></a>
-                        </figure>
-                        <div class="post-read-more">
-                            <a href="#" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">Apartments</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">Exploring the Benefits of Condo Living.</a></h3>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="row">
             <div class="col-md-12">

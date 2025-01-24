@@ -19,6 +19,7 @@ class AdminStores extends Controller
     public function createmaster(Request $rq)
     {
         // dd($rq->all());
+        $filename="";
         try {
             if ($rq->hasFile('categoryimage')) {
                 $rq->validate([
@@ -254,7 +255,7 @@ class AdminStores extends Controller
             $documents = [];
             if ($request->hasFile('documents')) {
                 $request->validate([
-                    'documents.*' => 'required|mimes:pdf',
+                    'documents.*' => 'required|mimes:pdf,jpeg,jpg',
                 ]);
 
                 $files = $request->file('documents');
@@ -343,7 +344,7 @@ class AdminStores extends Controller
             $documents = [];
             if ($request->hasFile('documents')) {
                 $request->validate([
-                    'documents.*' => 'required|mimes:pdf',
+                    'documents.*' => 'required|mimes:pdf,jpeg,jpg',
                 ]);
 
                 $files = $request->file('documents');
@@ -474,7 +475,7 @@ class AdminStores extends Controller
                 'blogname' => $blogname,
                 'blogcategories' => json_encode($categories),
                 'blogthumbnail' =>$thumbnailFilename,
-                'blogdescription' =>  strip_tags($description),
+                'blogdescription' =>  $description,
             ]);
             return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
 
@@ -507,7 +508,7 @@ class AdminStores extends Controller
                 'blogname' => $blogname,
                 'blogcategories' => json_encode($categories),
                 'blogthumbnail' => $thumbnailFilename ?? $olddata->blogthumbnail,
-                'blogdescription' =>  strip_tags($description),
+                'blogdescription' =>  $description,
             ]);
             return response()->json(['data' => $data, 'message' => 'Blog Updated.....!']);
 

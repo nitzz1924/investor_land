@@ -32,116 +32,63 @@
             </div>
         </div>
     </div>
+                                                        
 
     <div class="hero-search-form-section">
         <div class="container">
-            <!-- Property Search Form Start -->
             <div class="hero-search-form wow fadeInUp" data-wow-delay="1s">
                 <div class="search-heading">
                     <h4>Search Property</h4>
                 </div>
-
-                <!-- Filter Form Start -->
-                <form action="#" method="get">
+                <form id="searchform">
+                    @csrf
                     <div class="row justify-content-center">
-
                         <div class="col-lg-2 col-md-6">
-                            <select class="form-control">
-                                <option value="">Property Type</option>
-                                <option>Apartment</option>
-                                <option>Office</option>
+                            <select name="filtercategory" class="form-control">
+                                @foreach ($uniqueCategories as $uq)
+                                <option value="{{$uq}}">{{$uq}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="col-lg-2 col-md-6">
-                            <select class="form-control">
-                                <option value="">Location</option>
-                                <option>Surat</option>
-                                <option>Banglore</option>
+                            <select name="filtercity" class="form-control">
+                                @foreach ($uniqueCities as $uc)
+                                <option value="{{$uc}}">{{$uc}}</option>
+                                @endforeach
                             </select>
                         </div>
-
                         <div class="col-lg-2 col-md-6">
                             <button type="submit" class="btn-default">Search</button>
                         </div>
                     </div>
                 </form>
-                <!-- Filter Form End -->
             </div>
-            <!-- Property Search Form End -->
         </div>
     </div>
 </div>
 
-
-<div class="property-types">
+<div class="how-it-works bg-white">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- Section Title Start -->
                 <div class="section-title">
                     <h3 class="wow fadeInUp">Property Categories</h3>
                     <h2 class="text-anime">Explore Investment Opportunities Diverse Categories</h2>
                 </div>
-                <!-- Section Title End -->
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <!-- Property Slider Start -->
-                <div class="property-slider">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="property-type-item">
-                                    <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-property-type-1.svg')}}" alt="">
-                                    </div>
-
-                                    <h3>Houses</h3>
-                                    <p>22 Properties</p>
-                                </div>
-                                <!-- Property Item End -->
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="property-type-item">
-                                    <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-property-type-1.svg')}}" alt="">
-                                    </div>
-
-                                    <h3>Houses</h3>
-                                    <p>22 Properties</p>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="property-type-item">
-                                    <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-property-type-1.svg')}}" alt="">
-                                    </div>
-
-                                    <h3>Houses</h3>
-                                    <p>22 Properties</p>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="property-type-item">
-                                    <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-property-type-1.svg')}}" alt="">
-                                    </div>
-
-                                    <h3>Houses</h3>
-                                    <p>22 Properties</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="swiper-pagination"></div>
+            @foreach ($categories as $cat)
+            <div class="col-lg-3 col-md-6">
+                <div class="how-it-work-itemaboutnew wow fadeInUp mt-4" data-wow-delay="0.25s">
+                    <div class="icon-box">
+                        <img src="{{asset('assets/images/Categories/'.$cat->categoryimage)}}" alt="">
                     </div>
+                    <h3>{{$cat->label}}</h3>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>
@@ -151,287 +98,77 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- Section Title Start -->
                 <div class="section-title">
                     <h3 class="wow fadeInUp text-white">Properties</h3>
                     <h2 class="text-anime text-white">Featured Properties</h2>
                 </div>
-                <!-- Section Title End -->
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12">
-                <!-- Property Slider Start -->
                 <div class="property-slider">
                     <div class="swiper">
                         <div class="swiper-wrapper">
+                            @foreach ($listings as $list)
                             <div class="swiper-slide">
-                                <!-- Property Item Start -->
                                 <div class="property-item">
-                                    <!-- Property Item Header Start -->
                                     <div class="property-header">
                                         <figure class="image-anime">
-                                            <img src="{{asset('websiteAssets/images/property-1.jpg')}}" alt="">
+                                            <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
                                         </figure>
 
-                                        <span class="property-label">Rent</span>
+                                        <span class="property-label">{{$list->category}}</span>
                                     </div>
-                                    <!-- Property Item Header End -->
-
-                                    <!-- Property Item Body Start -->
                                     <div class="property-body">
-                                        <h3>Equestrian Family Home</h3>
-                                        <p>New York City, CA, USA</p>
+                                        <h3>{{$list->property_name}}</h3>
+                                        <p>{{$list->address}}</p>
 
                                         <div class="property-meta">
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
-                                                    <img src="images/icon-badroom.svg" alt="">
+                                                    <img src="{{asset('websiteAssets/images/icon-badroom.svg')}}" alt="">
                                                 </div>
-
-                                                <span>6 Bedsroom</span>
+                                                <span>{{$list->bedroom}} Bedsroom</span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
-                                                    <img src="images/icon-bathroom.svg" alt="">
+                                                    <img src="{{asset('websiteAssets/images/icon-bathroom.svg')}}" alt="">
                                                 </div>
-
-                                                <span>3 Bathrooms</span>
+                                                <span>{{$list->bathroom}} Bathrooms</span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
-                                                    <img src="images/icon-area.svg" alt="">
+                                                    <img src="{{asset('websiteAssets/images/icon-area.svg')}}" alt="">
                                                 </div>
-
-                                                <span>720 sq ft</span>
+                                                <span>{{$list->squarefoot}} sq ft</span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
-                                                    <img src="images/icon-garage.svg" alt="">
+                                                    <img src="{{asset('websiteAssets/images/icon-garage.svg')}}" alt="">
                                                 </div>
-
-                                                <span>1 Garages</span>
+                                                <span>{{$list->floor}} Floors</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Property Item Body End -->
-
-                                    <!-- Property Item Footer Start -->
                                     <div class="property-footer">
-                                        <p class="property-price">$150,000</p>
-                                        <a href="#" class="btn-default">View Property</a>
+                                        <span class="badge {{$list->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst($list->status) }}</span>
+                                        <a href="{{route('website.propertydetails',['id'=> $list->id])}}" class="btn-default">View Property</a>
                                     </div>
-                                    <!-- Property Item Footer Start -->
                                 </div>
-                                <!-- Property Item End -->
                             </div>
-
-                            <div class="swiper-slide">
-                                <!-- Property Item Start -->
-                                <div class="property-item">
-                                    <!-- Property Item Header Start -->
-                                    <div class="property-header">
-                                        <figure class="image-anime">
-                                            <img src="{{asset('websiteAssets/images/property-2.jpg')}}" alt="">
-                                        </figure>
-
-                                        <span class="property-label">Sell</span>
-                                    </div>
-                                    <!-- Property Item Header End -->
-
-                                    <!-- Property Item Body Start -->
-                                    <div class="property-body">
-                                        <h3>Luxury Family Home</h3>
-                                        <p>New York City, CA, USA</p>
-
-                                        <div class="property-meta">
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-badroom.svg" alt="">
-                                                </div>
-
-                                                <span>6 Bedsroom</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-bathroom.svg" alt="">
-                                                </div>
-
-                                                <span>3 Bathrooms</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-area.svg" alt="">
-                                                </div>
-
-                                                <span>720 sq ft</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-garage.svg" alt="">
-                                                </div>
-
-                                                <span>1 Garages</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Property Item Body End -->
-
-                                    <!-- Property Item Footer Start -->
-                                    <div class="property-footer">
-                                        <p class="property-price">$150,000</p>
-                                        <a href="#" class="btn-default">View Property</a>
-                                    </div>
-                                    <!-- Property Item Footer End -->
-                                </div>
-                                <!-- Property Item End -->
-                            </div>
-
-                            <div class="swiper-slide">
-                                <!-- Property Item Start -->
-                                <div class="property-item">
-                                    <!-- Property Item Header Start -->
-                                    <div class="property-header">
-                                        <figure class="image-anime">
-                                            <img src="{{asset('websiteAssets/images/property-3.jpg')}}" alt="">
-                                        </figure>
-
-                                        <span class="property-label">Rent</span>
-                                    </div>
-                                    <!-- Property Item Header End -->
-
-                                    <!-- Property Item Body Start -->
-                                    <div class="property-body">
-                                        <h3>Equestrian Family Home</h3>
-                                        <p>New York City, CA, USA</p>
-
-                                        <div class="property-meta">
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-badroom.svg" alt="">
-                                                </div>
-
-                                                <span>6 Bedsroom</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-bathroom.svg" alt="">
-                                                </div>
-
-                                                <span>3 Bathrooms</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-area.svg" alt="">
-                                                </div>
-
-                                                <span>720 sq ft</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-garage.svg" alt="">
-                                                </div>
-
-                                                <span>1 Garages</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Property Item Body End -->
-
-                                    <!-- Property Item Footer Start -->
-                                    <div class="property-footer">
-                                        <p class="property-price">$150,000</p>
-                                        <a href="#" class="btn-default">View Property</a>
-                                    </div>
-                                    <!-- Property Item Footer End -->
-                                </div>
-                                <!-- Property Item End -->
-                            </div>
-
-                            <div class="swiper-slide">
-                                <!-- Property Item Start -->
-                                <div class="property-item">
-                                    <!-- Property Item Header Start -->
-                                    <div class="property-header">
-                                        <figure class="image-anime">
-                                            <img src="{{asset('websiteAssets/images/property-4.jpg')}}" alt="">
-                                        </figure>
-
-                                        <span class="property-label">Rent</span>
-                                    </div>
-                                    <!-- Property Item Header End -->
-
-                                    <!-- Property Item Body Start -->
-                                    <div class="property-body">
-                                        <h3>Mountain View Condos</h3>
-                                        <p>New York City, CA, USA</p>
-
-                                        <div class="property-meta">
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-badroom.svg" alt="">
-                                                </div>
-
-                                                <span>6 Bedsroom</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-bathroom.svg" alt="">
-                                                </div>
-
-                                                <span>3 Bathrooms</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-area.svg" alt="">
-                                                </div>
-
-                                                <span>720 sq ft</span>
-                                            </div>
-
-                                            <div class="property-amenity-item">
-                                                <div class="icon-box">
-                                                    <img src="images/icon-garage.svg" alt="">
-                                                </div>
-
-                                                <span>1 Garages</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Property Item Body End -->
-
-                                    <!-- Property Item Footer Start -->
-                                    <div class="property-footer">
-                                        <p class="property-price">$150,000</p>
-                                        <a href="#" class="btn-default">View Property</a>
-                                    </div>
-                                    <!-- Property Item Footer End -->
-                                </div>
-                                <!-- Property Item End -->
-                            </div>
+                            @endforeach
                         </div>
-
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
-                <!-- Property Slider End -->
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="property-by-city">
     <div class="container">
@@ -440,7 +177,7 @@
                 <!-- Section Title Start -->
                 <div class="section-title">
                     <h3 class="wow fadeInUp">Location</h3>
-                    <h2 class="text-anime">Properties by Cities</h2>
+                    <h2 class="text-anime">Properties by Location</h2>
                 </div>
                 <!-- Section Title End -->
             </div>
@@ -483,9 +220,6 @@
                             <img src="{{asset('websiteAssets/images/city-2.jpg')}}" alt="">
                         </figure>
                     </div>
-                    <!-- Location Image End -->
-
-                    <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
                             <h3>Delhi</h3>
@@ -496,23 +230,16 @@
                             <a href="#" class="btn-default">See More</a>
                         </div>
                     </div>
-                    <!-- Location Content End -->
                 </div>
-                <!-- Location Item End -->
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <!-- Location Item Start -->
                 <div class="location-item wow fadeInUp" data-wow-delay="0.75s">
-                    <!-- Location Image Start -->
                     <div class="location-image">
                         <figure>
                             <img src="{{asset('websiteAssets/images/city-3.jpg')}}" alt="">
                         </figure>
                     </div>
-                    <!-- Location Image End -->
-
-                    <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
                             <h3>Mumbai</h3>
@@ -523,23 +250,16 @@
                             <a href="#" class="btn-default">See More</a>
                         </div>
                     </div>
-                    <!-- Location Content End -->
                 </div>
-                <!-- Location Item End -->
             </div>
 
             <div class="col-lg-3 col-md-6">
-                <!-- Location Item Start -->
                 <div class="location-item wow fadeInUp" data-wow-delay="1s">
-                    <!-- Location Image Start -->
                     <div class="location-image">
                         <figure>
                             <img src="{{asset('websiteAssets/images/city-4.jpg')}}" alt="">
                         </figure>
                     </div>
-                    <!-- Location Image End -->
-
-                    <!-- Location Content Start -->
                     <div class="location-content">
                         <div class="location-header">
                             <h3>Bengluru</h3>
@@ -550,41 +270,38 @@
                             <a href="#" class="btn-default">See More</a>
                         </div>
                     </div>
-                    <!-- Location Content End -->
                 </div>
-                <!-- Location Item End -->
             </div>
         </div>
     </div>
 </div>
-
 <div class="about-us">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="row">
-                    <div class="col-md-6 p-2">
+                    <div class="col-md-6 col-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
                                 <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" alt="">
                             </figure>
                         </div>
                     </div>
-                    <div class="col-md-6 p-2">
+                    <div class="col-md-6 col-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
                                 <img src="{{asset('websiteAssets/images/video-img-2.jpg')}}" alt="">
                             </figure>
                         </div>
                     </div>
-                    <div class="col-md-6 p-2">
+                    <div class="col-md-6 col-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
                                 <img src="{{asset('websiteAssets/images/property-6.jpg')}}" alt="">
                             </figure>
                         </div>
                     </div>
-                    <div class="col-md-6 p-2">
+                    <div class="col-md-6 col-6 p-2">
                         <div class="about-image">
                             <figure class="reveal image-anime">
                                 <img src="{{asset('websiteAssets/images/need-help-bg.jpg')}}" alt="">
@@ -639,7 +356,6 @@
         </div>
     </div>
 </div>
-
 <div class="why-choose-us">
     <div class="container">
         <div class="row align-items-center">
@@ -710,7 +426,7 @@
                         <img src="{{asset('websiteAssets/images/mobile-payment.png')}}" alt="">
                     </div>
 
-                    <h3>Transparent Trasactions</h3>
+                    <h3>Transparent Deals</h3>
                     <p>Ensure peace of mind with our commitment to transparent transactions and integrity.</p>
                 </div>
             </div>
@@ -853,4 +569,73 @@
         </div>
     </div>
 </div>
+
+<div class="latest-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="wow fadeInUp">Our Blogs</h3>
+                    <h2 class="text-anime">Read Our Latest Blogs</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach ($blogs as $blog)
+            <div class="col-lg-4">
+                <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
+                    <div class="post-featured-image">
+                        <figure>
+                            <a href="#"><img src="{{asset('assets/images/Blogs/'.$blog->blogthumbnail)}}" alt="Blog Image"></a>
+                        </figure>
+
+                        <div class="post-read-more">
+                            <a href="{{ route('website.blogdetails',['id' => $blog->id]) }}" class="btn-default">Read More</a>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-category">
+                            <ul>
+                                <li><a href="#">{{$blog->blogname}}</a></li>
+                            </ul>
+                        </div>
+                        <h3><a href="#">{{ Str::limit(strip_tags($blog->blogdescription),40)}}</a></h3>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    //This is Home Page filter by Car Details
+    jQuery('#searchform').submit(function(e) {
+        e.preventDefault();
+        var formdata = new FormData(document.getElementById('searchform'));
+        for (var pair of formdata.entries()) {
+            console.log(pair[0] + ': ' + pair[1]);
+        }
+        $.ajax({
+            url: "{{ route('website.filterlistings') }}",
+            type: "POST",
+            data: formdata,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                window.location.href = response.redirect_url;
+                console.log(response);
+            },
+            error: function(xhr, status, error) {
+                // Handle error response
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+</script>
 @endsection

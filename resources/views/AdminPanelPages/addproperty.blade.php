@@ -132,7 +132,7 @@
                             </div>
                         </form>
                         <p class="fs-2 text-center text-danger mb-0">
-                            Set the product documents. Only *.pdf files are accepted.
+                            Set the product documents. Only *.pdf, *.jpg files are accepted.
                         </p>
                     </div>
                 </div>
