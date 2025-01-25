@@ -35,7 +35,7 @@
 
 
     <div class="hero-search-form-section">
-        <div class="container">
+        <div class="container d-flex justify-content-center">
             <div class="hero-search-form wow fadeInUp" data-wow-delay="1s">
                 <div class="search-heading">
                     <h4>Search Property</h4>
@@ -43,23 +43,31 @@
                 <form id="searchform">
                     @csrf
                     <div class="row justify-content-center">
-                        <div class="col-lg-2 col-md-6">
-                            <select name="filtercategory" class="form-control">
-                                @foreach ($uniqueCategories as $uq)
-                                <option value="{{$uq}}">{{$uq}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-lg-2 col-md-6">
+                        <div class="col-lg-8 col-8">
                             <select name="filtercity" class="form-control">
                                 @foreach ($uniqueCities as $uc)
                                 <option value="{{$uc}}">{{$uc}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-2 col-md-6">
+                        <div class="col-lg-4 col-4">
                             <button type="submit" class="btn-default">Search</button>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-4 col-6">
+                            <select name="filtercategory" class="form-control">
+                                @foreach ($uniqueCategories as $uq)
+                                <option value="{{$uq}}">{{$uq}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-lg-4 col-6">
+                            <select name="filtercategory" class="form-control">
+                                @foreach ($uniqueCategories as $uq)
+                                <option value="{{$uq}}">{{$uq}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </form>
@@ -73,14 +81,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="section-title">
-                    <h3 class="wow fadeInUp">Property Categories</h3>
-                    <h2 class="text-anime">Explore Investment Opportunities Diverse Categories</h2>
+                    <h1 class="wow fadeInUp">Property Categories</h1>
                 </div>
             </div>
         </div>
         <div class="row">
             @foreach ($categories as $cat)
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6">
                 <div class="how-it-work-itemaboutnew wow fadeInUp mt-4" data-wow-delay="0.25s">
                     <div class="icon-box">
                         <img src="{{asset('assets/images/Categories/'.$cat->categoryimage)}}" alt="">
@@ -169,6 +176,180 @@
     </div>
 </div>
 
+<div class="about-us">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <div class="about-content">
+                    <div class="section-title">
+                        <h2 class="text-anime text-black text-center">Explore Our Projects</h2>
+                    </div>
+                    <div class="about-content-body">
+                        <p class="wow fadeInUp text-black text-center" data-wow-delay="0.5s">Investor Lands offers a portfolio of projects designed to maximize returns and build lasting value. Explore now to find the perfect project that aligns with your goals and future vision.</p>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.75s">
+                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-1.svg')}}" alt=""></div>
+                                <span class="text-black">Smart Home Design</span>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1s">
+                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-2.svg')}}" alt=""></div>
+                                <span class="text-black">Beautiful Scene Around</span>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1.25s">
+                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-3.svg')}}" alt=""></div>
+                                <span class="text-black">Exceptional Lifestyle</span>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1.5s">
+                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-4.svg')}}" alt=""></div>
+                                <span class="text-black">Complete 24/7 Security</span>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <div class="property-type-slider">
+                                    <div class="swiper">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/property-6.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <div class="gallery-item wow fadeInUp" data-wow-delay="0.25s">
+                                                    <a href="{{asset('websiteAssets/images/post-1.jpg')}}">
+                                                        <figure class="image-anime">
+                                                            <img src="{{asset('websiteAssets/images/post-1.jpg')}}" alt="">
+                                                        </figure>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="swiper-pagination"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="latest-posts">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h3 class="wow fadeInUp">Our Blogs</h3>
+                    <h2 class="text-anime">Read Our Latest Blogs</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach ($blogs as $blog)
+            <div class="col-lg-4">
+                <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
+                    <div class="post-featured-image">
+                        <figure>
+                            <a href="#"><img src="{{asset('assets/images/Blogs/'.$blog->blogthumbnail)}}" alt="Blog Image"></a>
+                        </figure>
+
+                        <div class="post-read-more">
+                            <a href="{{ route('website.blogdetails',['id' => $blog->id]) }}" class="btn-default">Read More</a>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <div class="post-category">
+                            <ul>
+                                <li><a href="#">{{$blog->blogname}}</a></li>
+                            </ul>
+                        </div>
+                        <h3><a href="#">{{ Str::limit(strip_tags($blog->blogdescription),40)}}</a></h3>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</div>
 <div class="property-by-city">
     <div class="container">
         <div class="row">
@@ -274,89 +455,6 @@
         </div>
     </div>
 </div>
-
-<div class="about-us">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="row">
-                    <div class="col-md-6 col-6 p-2">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/video-img-1.jpg')}}" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-6 p-2">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/video-img-2.jpg')}}" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-6 p-2">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/property-6.jpg')}}" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-6 p-2">
-                        <div class="about-image">
-                            <figure class="reveal image-anime">
-                                <img src="{{asset('websiteAssets/images/need-help-bg.jpg')}}" alt="">
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <!-- About Content Start -->
-                <div class="about-content">
-                    <!-- Section Title Start -->
-                    <div class="section-title">
-                        <h3 class="wow fadeInUp text-white">Investor Lands</h3>
-                        <h2 class="text-anime text-white">Explore Our Projects</h2>
-                    </div>
-                    <!-- Section Title End -->
-
-                    <!-- About Content Body Start -->
-                    <div class="about-content-body">
-                        <p class="wow fadeInUp text-white" data-wow-delay="0.5s">Investor Lands offers a portfolio of projects designed to maximize returns and build lasting value. Explore now to find the perfect project that aligns with your goals and future vision.</p>
-
-                        <ul>
-                            <li class="wow fadeInUp" data-wow-delay="0.75s">
-                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-1.svg')}}" alt=""></div>
-                                <span class="text-white">Smart Home Design</span>
-                            </li>
-
-                            <li class="wow fadeInUp" data-wow-delay="1s">
-                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-2.svg')}}" alt=""></div>
-                                <span class="text-white">Beautiful Scene Around</span>
-                            </li>
-
-                            <li class="wow fadeInUp" data-wow-delay="1.25s">
-                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-3.svg')}}" alt=""></div>
-                                <span class="text-white">Exceptional Lifestyle</span>
-                            </li>
-
-                            <li class="wow fadeInUp" data-wow-delay="1.5s">
-                                <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-4.svg')}}" alt=""></div>
-                                <span class="text-white">Complete 24/7 Security</span>
-                            </li>
-                        </ul>
-
-                        <a href="#" class="btn-default wow fadeInUp" data-wow-delay="1.75s">View More</a>
-                    </div>
-                    <!-- About Content Body End -->
-
-                </div>
-                <!-- About Content End -->
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="why-choose-us">
     <div class="container">
         <div class="row align-items-center">
@@ -387,7 +485,7 @@
             </div>
         </div>
 
-        <div class="row mt-5">
+        <div class="row mt-5 expertisesection">
             <div class="col-lg-3 col-md-6">
                 <div class="how-it-work-item wow fadeInUp" data-wow-delay="0.25s">
                     <div class="icon-box">
@@ -570,44 +668,6 @@
     </div>
 </div>
 
-<div class="latest-posts">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h3 class="wow fadeInUp">Our Blogs</h3>
-                    <h2 class="text-anime">Read Our Latest Blogs</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            @foreach ($blogs as $blog)
-            <div class="col-lg-4">
-                <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
-                    <div class="post-featured-image">
-                        <figure>
-                            <a href="#"><img src="{{asset('assets/images/Blogs/'.$blog->blogthumbnail)}}" alt="Blog Image"></a>
-                        </figure>
-
-                        <div class="post-read-more">
-                            <a href="{{ route('website.blogdetails',['id' => $blog->id]) }}" class="btn-default">Read More</a>
-                        </div>
-                    </div>
-                    <div class="post-body">
-                        <div class="post-category">
-                            <ul>
-                                <li><a href="#">{{$blog->blogname}}</a></li>
-                            </ul>
-                        </div>
-                        <h3><a href="#">{{ Str::limit(strip_tags($blog->blogdescription),40)}}</a></h3>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     //This is Home Page filter by Car Details

@@ -1,5 +1,5 @@
-  <!-- Sidebar Start -->
-  <aside class="left-sidebar with-vertical">
+
+<aside class="left-sidebar with-vertical">
       <div>
           <!-- ---------------------------------- -->
           <!-- Start Vertical Layout Sidebar -->
@@ -7,7 +7,7 @@
           <div class="brand-logo d-flex align-items-center justify-content-between">
               <a href="index.html" class="text-nowrap text-center fw-bolder fs-6 logo-img">
                   {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/dark-logo.svg" class="dark-logo" alt="Logo-Dark" /> --}}
-                  <span style="color: #4F73D9; font-weight:bolder; font-size: xx-large;">User Panel</span> {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/light-logo.svg" class="light-logo" alt="Logo-light" /> --}}
+                  <span style="color: #4F73D9; font-weight:bolder; font-size: xx-large;">Investor Lands</span> {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/light-logo.svg" class="light-logo" alt="Logo-light" /> --}}
               </a>
               <a href="javascript:void(0)" class="sidebartoggler ms-auto text-decoration-none fw-bolder fs-5 d-block d-xl-none">
                   IL
@@ -21,7 +21,7 @@
                       <span class="hide-menu">Menu</span>
                   </li>
                   <li class="sidebar-item">
-                      <a class="sidebar-link" href="#" aria-expanded="false">
+                      <a class="sidebar-link" href="{{ route('user.dashboard')}}" aria-expanded="false">
                           <span>
                               <i class="ti ti-layout-grid"></i>
                           </span>
@@ -53,7 +53,7 @@
               <div class="hstack gap-3">
                   <div class="john-img">
                       @php
-                      $userdata = Auth::guard('customer')->user();  
+                      $userdata = Auth::guard('customer')->user();
                       @endphp
                       <img src="{{asset('assets/images/Users/'.$userdata->profile_photo_path)}}" class="rounded-circle" width="40" height="40" alt="modernize-img" />
                   </div>
@@ -376,7 +376,7 @@
                                   <div class="d-flex align-items-center">
                                       <div class="user-profile-img">
                                           @php
-                                        $userdata = Auth::guard('customer')->user();
+                                          $userdata = Auth::guard('customer')->user();
                                           @endphp
                                           <img src="{{asset('assets/images/Users/'.  $userdata->profile_photo_path)}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
                                       </div>

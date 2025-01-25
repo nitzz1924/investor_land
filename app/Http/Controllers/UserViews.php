@@ -60,7 +60,7 @@ class UserViews extends Controller
         $authuser = Auth::guard('customer')->user();
         $allproperties = PropertyListing::where('roleid',$authuser->id)->orderBy('created_at', 'DESC')->get();
         $allpropertiescnt = PropertyListing::where('roleid',$authuser->id)->count();
-        return view('UserPanelPages.mylistings', compact('allproperties', 'allpropertiescnt'));
+        return view('UserPanelPages.mylistings', compact('allproperties', 'allpropertiescnt', 'authuser'));
     }
 
     public function addlisting()
@@ -275,4 +275,16 @@ class UserViews extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+    public function updateaduserlistingstatus(Request $request)
+    {
+        $lisdata = PropertyListing::find($request->id);
+        if ($lisdata) {
+            $lisdata->status = $request->status;
+            $lisdata->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
+    }
+
 }

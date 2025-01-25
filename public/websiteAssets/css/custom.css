@@ -638,7 +638,7 @@ header.main-header .header-sticky.active {
 	border-radius: 20px;
 	background: url(../images/hero.jpg) no-repeat center center;
 	background-size: cover;
-	padding: 100px 0 312px;
+	padding: 30px 0 230px;
 	position: relative;
 }
 
@@ -661,7 +661,7 @@ header.main-header .header-sticky.active {
 }
 
 .hero-content .section-title {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .hero-content .section-title h3 {
@@ -810,6 +810,7 @@ header.main-header .header-sticky.active {
 	bottom: 100px;
 	width: 100%;
 	padding: 0 15px;
+	top: 320px;
 }
 
 .hero-video .hero-search-form {
@@ -821,6 +822,7 @@ header.main-header .header-sticky.active {
 	padding: 30px;
 	border-radius: 20px;
 	backdrop-filter: blur(10px);
+	width: 620px;
 }
 
 .search-heading {
@@ -1028,7 +1030,7 @@ header.main-header .header-sticky.active {
 
 .property-item .property-footer .btn-default {
 	font-size: 11px;
-    padding: 5px 20px;
+	padding: 5px 20px;
 }
 
 .property-slider .swiper-pagination {
@@ -1050,7 +1052,7 @@ header.main-header .header-sticky.active {
 
 .about-us {
 	padding: 100px 0;
-	background-color: #1b1b1b;
+	background-color: #F6F8FF;
 }
 
 .about-images {
@@ -3032,9 +3034,6 @@ footer.footer {
 		padding: 0;
 	}
 
-	.how-it-works {
-		padding: 60px 0 30px;
-	}
 
 	.how-it-work-item {
 		margin-bottom: 30px;
@@ -3268,7 +3267,16 @@ footer.footer {
 }
 
 @media only screen and (max-width: 767px) {
-
+	.hero .hero-search-form-section{
+		top: -60px;
+	}
+	.how-it-works{
+		padding: 0px !important;
+		padding-bottom: 30px !important;
+	}
+	.property-item .property-meta .property-amenity-item {
+		width: 100%;
+	}
 	.btn-default {
 		padding: 10px 20px;
 	}
@@ -3429,10 +3437,6 @@ footer.footer {
 
 	.about-content-body .btn-default {
 		margin-top: 10px;
-	}
-
-	.how-it-works {
-		padding: 50px 0 20px;
 	}
 
 	.how-it-work-item .icon-box {
@@ -3861,6 +3865,13 @@ footer.footer {
 	height: 80px;
 }
 
-.property-meta .property-amenity-item span{
+.property-meta .property-amenity-item span {
 	font-size: 12px;
+}
+
+.mydashboardscroll .table-responsive::-webkit-scrollbar {
+	background-color: #000;
+}
+.expertisesection{
+	display: none;
 }

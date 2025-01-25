@@ -14,7 +14,29 @@ class AdminViews extends Controller
 {
     public function admindashboard()
     {
-        return view('AdminPanelPages.dashboard');
+        $propertyCount = PropertyListing::count();
+        $leadCount = Lead::count();
+        $userCount = RegisterUser::where('user_type', 'user')->count();
+        $agentCount = RegisterUser::where('user_type', 'agent')->count();
+        $blogCount = Blog::count();
+        $mylistingCount = PropertyListing::where('usertype', 'Admin')->count();
+        $allproperties = PropertyListing::orderBy('created_at', 'DESC')->get();
+        $leaddata = Lead::join('property_listings','leads.userid','=','property_listings.roleid')
+        ->select('leads.*','property_listings.property_name as propertyname')
+        ->orderBy('leads.created_at', 'DESC')->get();
+        $allcustomers = RegisterUser::where('user_type','user')->orderBy('created_at', 'DESC')->get();
+        $allagents = RegisterUser::where('user_type','agent')->orderBy('created_at', 'DESC')->get();
+        // dd( $leaddata);
+        $data = [
+            'propertyCount' => $propertyCount,
+            'leadCount' => $leadCount,
+            'userCount' => $userCount,
+            'agentCount' => $agentCount,
+            'blogCount' => $blogCount,
+            'mylistingCount' => $mylistingCount,
+        ];
+
+        return view('AdminPanelPages.dashboard', compact('data', 'allproperties','leaddata','allcustomers','allagents'));
     }
     public function master()
     {

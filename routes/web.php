@@ -31,7 +31,7 @@ Route::middleware([
 
 
 //Admin Panel Routes
-Route::prefix('admin')->middleware('auth')->group(function(){
+Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/master', [AdminViews::class, 'master'])->name('admin.master');
     Route::post('/createmaster', [AdminStores::class, 'createmaster'])->name('admin.createmaster');
     Route::get('/deletemaster/{id}', [AdminStores::class, 'deletemaster'])->name('admin.deletemaster');
@@ -64,6 +64,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('/deleteblog/{id}', [AdminStores::class, 'deleteblog'])->name('admin.deleteblog');
     Route::get('/all-customers', [AdminViews::class, 'allcustomers'])->name('admin.allcustomers');
     Route::get('/all-agents', [AdminViews::class, 'allagents'])->name('admin.allagents');
+    Route::post('/updateadminlistingstatus', [AdminStores::class, 'updateadminlistingstatus'])->name('admin.updateadminlistingstatus');
 });
 
 
@@ -81,13 +82,15 @@ Route::prefix('user')->middleware('customer.auth')->group(function () {
         Route::get('/editlisting/{id}', 'editlisting')->name('user.editlisting');
         Route::post('/updateuserlisting', 'updateuserlisting')->name('user.updateuserlisting');
         Route::get('/deletelisting/{id}', 'deletelisting')->name('user.deletelisting');
+        Route::post('/updateaduserlistingstatus', 'updateaduserlistingstatus')->name('user.updateaduserlistingstatus');
+       
     });
 });
 
 
 
 //Website Routes
-Route::controller(WebsiteViews::class)->group(function() {
+Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/', 'homepage')->name('website.homepage');
     Route::get('/about-us', 'aboutpage')->name('website.aboutpage');
     Route::get('/contact-us', 'contactpage')->name('website.contactpage');
@@ -98,10 +101,11 @@ Route::controller(WebsiteViews::class)->group(function() {
     Route::get('/userlogin', 'userlogin')->name('website.userlogin');
     Route::get('/user-registration', 'registration')->name('website.registration');
     Route::post('/filterlistings', 'filterlistings')->name('website.filterlistings');
-  
+    Route::get('/myownlistings/{username}/{userid}', 'myownlistings')->name('user.myownlistings');
+
 });
 
-Route::controller(WebsiteStores::class)->group(function() {
+Route::controller(WebsiteStores::class)->group(function () {
     Route::post('/sendenquiry', 'sendenquiry')->name('website.sendenquiry');
     Route::post('/register-user', 'registeruser')->name('website.registeruser');
     Route::post('/login-user', 'loginuser')->name('website.loginuser');

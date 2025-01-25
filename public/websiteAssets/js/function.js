@@ -106,7 +106,7 @@
 	/* Property Listing Carousel JS */
 	if ($('.property-slider').length) {
 		const property_listing_carousel = new Swiper('.property-slider .swiper', {
-			slidesPerView : 1,
+			slidesPerView : 2,
 			speed: 1500,
 			spaceBetween: 30,
 			loop: true,

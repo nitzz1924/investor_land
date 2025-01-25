@@ -528,4 +528,15 @@ class AdminStores extends Controller
         }
     }
 
+    public function updateadminlistingstatus(Request $request)
+    {
+        $lisdata = PropertyListing::find($request->id);
+        if ($lisdata) {
+            $lisdata->status = $request->status;
+            $lisdata->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
+    }
+
 }

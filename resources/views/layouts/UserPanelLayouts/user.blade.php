@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="horizontal">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="vertical">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -117,7 +117,8 @@
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script> 
     <script src="{{ asset('assets/js/kanban.js') }}"></script> 
     <script src="{{ asset('assets/js/apexcharts.min.js') }}"></script> 
-    <script src="{{ asset('assets/js/dashboard2.js') }}"></script> 
+    <script src="{{ asset('assets/js/dashboard2.js') }}"></script>
+    <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));

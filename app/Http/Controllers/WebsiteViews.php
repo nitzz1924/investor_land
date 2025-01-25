@@ -84,5 +84,11 @@ class WebsiteViews extends Controller
             'redirect_url' => route('website.propertylistings', ['filtercategory' => $category,'filtercity' => $city]),
         ], 200);
     }
+    public function myownlistings($usernameroute, $useridroute){
+        $username = $usernameroute;
+        $userid = $useridroute;
+        $listings = PropertyListing::where('roleid',$userid)->orderBy('created_at', 'DESC')->paginate(4);
+        return view('WebsitePages.myownlistings', compact('listings', 'username', 'userid'));
+    }
 
 }

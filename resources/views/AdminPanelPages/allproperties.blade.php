@@ -38,7 +38,7 @@
                                 <th>City</th>
                                 <th>Property Address</th>
                                 <th>Description</th>
-                                <th>Status</th>
+                                <th>Property Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -57,9 +57,12 @@
                                 <td>{{ $data->address}}</td>
                                 <td>{{ Str::limit($data->discription, 20) }}</td>
                                 <td>
-                                    <span class="mb-1 badge {{$data->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}">
-                                        {{ ucfirst($data->status) }}
-                                    </span>
+                                    <div class="form-check form-switch">
+                                        <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->status == 'published' ? 'checked' : '' }}  />
+                                        <label class="form-check-label  {{ $data->status == 'published' ? 'text-success' : 'text-danger' }}" for="color-success{{ $data->id }}">
+                                             {{ $data->status == 'published' ? 'Published' : 'Upublished' }}
+                                        </label>
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="hstack gap-3 flex-wrap">
@@ -76,6 +79,7 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function confirmDelete(id) {
             Swal.fire({
@@ -94,5 +98,62 @@
                     }
                 });
         }
+
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('input[type="checkbox"][switch="bool"]').change(function() {
+                var blogId = $(this).data('id');
+                var status = $(this).is(':checked') ? 'published' : 'unpublished';
+                console.log(blogId, status);
+
+                 $.ajax({
+                    url: '{{ route('admin.updateadminlistingstatus') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: blogId,
+                        status: status
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Status Updated!"
+                                , text: data.message
+                                , icon: "success"
+                                , confirmButtonText: "OK"
+                                , customClass: {
+                                    confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                                }
+                                , buttonsStyling: true
+                                , showCancelButton: true
+                                , showCloseButton: true
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Status Not Updated!!"
+                                , text: data.message
+                                , icon: "error"
+                                , confirmButtonText: "OK"
+                                , customClass: {
+                                    confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                                }
+                                , buttonsStyling: true
+                                , showCancelButton: true
+                                , showCloseButton: true
+                            });
+                        }
+                    },
+                    error: function() {
+                        swal("Error", "An error occurred.", "error");
+                    }
+                });
+            });
+        });
+
     </script>
 </x-app-layout>
