@@ -37,7 +37,7 @@
                                 <th>Price</th>
                                 <th>City</th>
                                 <th>Property Address</th>
-                                <th>Description</th>
+                                <th>Listed By</th>
                                 <th>Property Status</th>
                                 <th>Action</th>
                             </tr>
@@ -55,7 +55,16 @@
                                 <td>{{ $data->price}}</td>
                                 <td>{{ $data->city}}</td>
                                 <td>{{ $data->address}}</td>
-                                <td>{{ Str::limit($data->discription, 20) }}</td>
+                                <td>
+                                <a href="">
+                                     <div>
+                                        <span class="mb-1 badge-sm px-3 rounded {{ $data->usertype == 'Admin' ? 'text-bg-success' : ($data->usertype == 'Agent' ? 'text-bg-warning' : 'text-bg-info') }}">
+                                            {{ ucfirst( $data->usertype) }}
+                                        </span>
+                                    </div>
+                                    {{ $data->username }}
+                                </a>
+                                </td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->status == 'published' ? 'checked' : '' }}  />

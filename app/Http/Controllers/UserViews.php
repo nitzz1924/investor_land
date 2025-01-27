@@ -11,7 +11,10 @@ use App\Models\PropertyListing;
 class UserViews extends Controller
 {
     public function dashboard(){
-        return view('UserPanelPages.dashboard');
+        $authuser = Auth::guard('customer')->user();
+        $allproperties = PropertyListing::where('roleid',$authuser->id)->orderBy('created_at', 'DESC')->get();
+        $mylistingscnt = PropertyListing::where('roleid',$authuser->id)->count();
+        return view('UserPanelPages.dashboard', compact('allproperties', 'mylistingscnt'));
     }
 
     public function logoutuserpanel()

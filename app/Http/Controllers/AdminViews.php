@@ -21,11 +21,11 @@ class AdminViews extends Controller
         $blogCount = Blog::count();
         $mylistingCount = PropertyListing::where('usertype', 'Admin')->count();
         $allproperties = PropertyListing::orderBy('created_at', 'DESC')->get();
-        $leaddata = Lead::join('property_listings','leads.userid','=','property_listings.roleid')
-        ->select('leads.*','property_listings.property_name as propertyname')
-        ->orderBy('leads.created_at', 'DESC')->get();
-        $allcustomers = RegisterUser::where('user_type','user')->orderBy('created_at', 'DESC')->get();
-        $allagents = RegisterUser::where('user_type','agent')->orderBy('created_at', 'DESC')->get();
+        $leaddata = Lead::join('property_listings', 'leads.userid', '=', 'property_listings.roleid')
+            ->select('leads.*', 'property_listings.property_name as propertyname')
+            ->orderBy('leads.created_at', 'DESC')->get();
+        $allcustomers = RegisterUser::where('user_type', 'user')->orderBy('created_at', 'DESC')->get();
+        $allagents = RegisterUser::where('user_type', 'agent')->orderBy('created_at', 'DESC')->get();
         // dd( $leaddata);
         $data = [
             'propertyCount' => $propertyCount,
@@ -36,7 +36,7 @@ class AdminViews extends Controller
             'mylistingCount' => $mylistingCount,
         ];
 
-        return view('AdminPanelPages.dashboard', compact('data', 'allproperties','leaddata','allcustomers','allagents'));
+        return view('AdminPanelPages.dashboard', compact('data', 'allproperties', 'leaddata', 'allcustomers', 'allagents'));
     }
     public function master()
     {
@@ -73,7 +73,17 @@ class AdminViews extends Controller
 
     public function allproperties()
     {
-        $allproperties = PropertyListing::orderBy('created_at', 'DESC')->get();
+        $agentListings = PropertyListing::join('register_users', 'property_listings.roleid', '=', 'register_users.id')
+            ->select('property_listings.*', 'register_users.name as username')
+            ->orderBy('property_listings.created_at', 'DESC')
+            ->get();
+
+        $adminListings = PropertyListing::join('users', 'property_listings.roleid', '=', 'users.id')
+            ->select('property_listings.*', 'users.name as username')
+            ->orderBy('property_listings.created_at', 'DESC')
+            ->get();
+
+        $allproperties = $agentListings->merge($adminListings);
         $allpropertiescnt = PropertyListing::count();
         return view('AdminPanelPages.allproperties', compact('allproperties', 'allpropertiescnt'));
     }
@@ -103,7 +113,7 @@ class AdminViews extends Controller
 
     public function datefilterleads(Request $request)
     {
-       
+
         $datefrom = $request->input('datefrom');
         $dateto = $request->input('dateto');
 
@@ -123,11 +133,11 @@ class AdminViews extends Controller
 
     public function leadslistkaban()
     {
-        $newleads = Lead::where('status','=','new')->orderBy('created_at', 'DESC')->get();
-        $qualified = Lead::where('status','=','qualified')->orderBy('created_at', 'DESC')->get();
-        $notresponded = Lead::where('status','=','not responded')->orderBy('created_at', 'DESC')->get();
-        $paymentmode = Lead::where('status','=','Final')->orderBy('created_at', 'DESC')->get();
-        $won = Lead::where('status','=','won')->orderBy('created_at', 'DESC')->get();
+        $newleads = Lead::where('status', '=', 'new')->orderBy('created_at', 'DESC')->get();
+        $qualified = Lead::where('status', '=', 'qualified')->orderBy('created_at', 'DESC')->get();
+        $notresponded = Lead::where('status', '=', 'not responded')->orderBy('created_at', 'DESC')->get();
+        $paymentmode = Lead::where('status', '=', 'Final')->orderBy('created_at', 'DESC')->get();
+        $won = Lead::where('status', '=', 'won')->orderBy('created_at', 'DESC')->get();
         $leadcount = Lead::count();
         $followupstatus = Master::where('type', 'Follow Up Status')->get();
         return view('AdminPanelPages.leadslistkaban', compact('newleads', 'qualified', 'notresponded', 'paymentmode', 'won', 'followupstatus', 'leadcount'));
@@ -136,11 +146,11 @@ class AdminViews extends Controller
     public function updateLeadStatusKanban(Request $request)
     {
         $data = $request->all();
-      
+
         $lead = Lead::find($data['card_id']);
         if ($lead) {
             $lead->update([
-                'status' => $data['box_status'], 
+                'status' => $data['box_status'],
             ]);
             return response()->json(['success' => true, 'message' => 'Lead status updated successfully.']);
         } else {
@@ -155,9 +165,10 @@ class AdminViews extends Controller
         return view('AdminPanelPages.bloglists', compact('blogs', 'blogcount'));
     }
 
-    public function addblog(){
+    public function addblog()
+    {
         $categories = Master::where('type', 'Blog Categories')->get();
-        return view('AdminPanelPages.addblog',compact('categories'));
+        return view('AdminPanelPages.addblog', compact('categories'));
     }
 
     public function editblog($id)
@@ -168,14 +179,16 @@ class AdminViews extends Controller
         return view('AdminPanelPages.editblog', compact('blogs', 'categories'));
     }
 
-    public function allcustomers(){
-        $allcustomers = RegisterUser::where('user_type','user')->orderBy('created_at', 'DESC')->get();
-        $allcustomerscnt = RegisterUser::where('user_type','user')->count();
+    public function allcustomers()
+    {
+        $allcustomers = RegisterUser::where('user_type', 'user')->orderBy('created_at', 'DESC')->get();
+        $allcustomerscnt = RegisterUser::where('user_type', 'user')->count();
         return view('AdminPanelPages.allcustomers', compact('allcustomers', 'allcustomerscnt'));
     }
-    public function allagents(){
-        $allagents = RegisterUser::where('user_type','agent')->orderBy('created_at', 'DESC')->get();
-        $allagentscnt = RegisterUser::where('user_type','agent')->count();
+    public function allagents()
+    {
+        $allagents = RegisterUser::where('user_type', 'agent')->orderBy('created_at', 'DESC')->get();
+        $allagentscnt = RegisterUser::where('user_type', 'agent')->count();
         return view('AdminPanelPages.allagents', compact('allagents', 'allagentscnt'));
     }
 }

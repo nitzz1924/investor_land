@@ -135,28 +135,28 @@
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-badroom.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->bedroom}} Bedsroom</span>
+                                                <span>{{$list->bedroom}} <span class="hideshowproperty">Bedsroom</span></span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-bathroom.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->bathroom}} Bathrooms</span>
+                                                <span>{{$list->bathroom}} <span class="hideshowproperty">Bathrooms</span></span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-area.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->squarefoot}} sq ft</span>
+                                                <span>{{$list->squarefoot}} <span class="hideshowproperty">sq ft</span></span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-garage.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->floor}} Floors</span>
+                                                <span>{{$list->floor}} <span class="hideshowproperty">Floors</span>
                                             </div>
                                         </div>
                                     </div>
@@ -187,19 +187,19 @@
                     <div class="about-content-body">
                         <p class="wow fadeInUp text-black text-center" data-wow-delay="0.5s">Investor Lands offers a portfolio of projects designed to maximize returns and build lasting value. Explore now to find the perfect project that aligns with your goals and future vision.</p>
                         <div class="row">
-                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.75s">
+                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="0.75s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-1.svg')}}" alt=""></div>
                                 <span class="text-black">Smart Home Design</span>
                             </div>
-                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1s">
+                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-2.svg')}}" alt=""></div>
                                 <span class="text-black">Beautiful Scene Around</span>
                             </div>
-                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1.25s">
+                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1.25s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-3.svg')}}" alt=""></div>
                                 <span class="text-black">Exceptional Lifestyle</span>
                             </div>
-                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="1.5s">
+                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1.5s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-4.svg')}}" alt=""></div>
                                 <span class="text-black">Complete 24/7 Security</span>
                             </div>
@@ -325,7 +325,7 @@
 
         <div class="row">
             @foreach ($blogs as $blog)
-            <div class="col-lg-4">
+            <div class="col-lg-4 col-6">
                 <div class="post-item wow fadeInUp" data-wow-delay="0.25s">
                     <div class="post-featured-image">
                         <figure>
@@ -364,7 +364,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6">
                 <!-- Location Item Start -->
                 <div class="location-item wow fadeInUp" data-wow-delay="0.25s">
                     <!-- Location Image Start -->
@@ -391,7 +391,7 @@
                 <!-- Location Item End -->
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6">
                 <!-- Location Item Start -->
                 <div class="location-item wow fadeInUp" data-wow-delay="0.5s">
                     <!-- Location Image Start -->
@@ -413,7 +413,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6">
                 <div class="location-item wow fadeInUp" data-wow-delay="0.75s">
                     <div class="location-image">
                         <figure>
@@ -433,7 +433,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-6">
                 <div class="location-item wow fadeInUp" data-wow-delay="1s">
                     <div class="location-image">
                         <figure>
