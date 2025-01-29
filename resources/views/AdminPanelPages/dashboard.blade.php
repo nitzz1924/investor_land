@@ -172,7 +172,7 @@
                                         <tr>
                                             <td>{{ $index + 1}}</td>
                                             <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>
-                                            <td>{{ $data->name}}</td>
+                                            <td>{{ ucwords($data->name)}}</td>
                                             <td>{{ $data->mobile}}</td>
                                             <td>{{ $data->email}}</td>
                                             <td> <span class="badge {{$data->verification_status == 1 ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst('Verified') }}</span></td>
@@ -210,7 +210,7 @@
                                         <tr>
                                             <td>{{ $index + 1}}</td>
                                             <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>
-                                            <td>{{ $data->name}}</td>
+                                            <td>{{ ucwords($data->name) }}</td>
                                             <td>{{ $data->company_name}}</td>
                                             <td>{{ $data->mobile}}</td>
                                             <td>{{ $data->email}}</td>

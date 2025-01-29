@@ -31,7 +31,15 @@
                                 <div class="d-flex align-items-center justify-content-center mb-2">
                                     <div class="d-flex align-items-center justify-content-start round-110 position-relative">
                                         <div class="border border-4 border-white d-flex align-items-center justify-content-start rounded-circle overflow-hidden round-100">
-                                            <img id="imagemain" src="{{asset('assets/images/Users/'.$userdata->profile_photo_path)}}" alt="modernize-img" class="w-100 h-100">
+                                            @if(Auth::guard('customer')->user()->profile_photo_path)
+                                            @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                            <img id="imagemain" src="{{ Auth::guard('customer')->user()->profile_photo_path }}" alt="modernize-img">
+                                            @else
+                                            <img id="imagemain" src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img">
+                                            @endif
+                                            @else
+                                            <img id="imagemain" src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img">
+                                            @endif
                                         </div>
                                         <a href="#" class="btn btn-primary btn-sm position-absolute top-0 end-0 m-2" style="display: none;"><i class="ti ti-pencil"></i></a>
                                         <input type="file" onchange="readURL(this);" id="profileImageInput" name="myprofileimage" style="display: none;">
@@ -87,7 +95,7 @@
                                                 <span class="bar"></span>
                                                 <label for="input1">Mobile</label>
                                             </div>
-                                             @if($userdata->user_type == 'agent')
+                                            @if($userdata->user_type == 'agent')
                                             <div class="form-group mb-4">
                                                 <input type="text" class="form-control" value="{{$userdata->company_name}}" name="companyname" id="input1">
                                                 <span class="bar"></span>

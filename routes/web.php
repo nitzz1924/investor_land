@@ -117,10 +117,6 @@ Route::controller(WebsiteStores::class)->group(function () {
 Route::controller(GoogleAuthentication::class)->group(function () {
     Route::get('auth/google', 'googleLogin')->name('auth.google');
     Route::get('auth/google-callback', 'GoogleAuth')->name('auth.google.callback');
-    Route::get('auth/google-registration/{usertype}', 'GoogleRegister')->name('auth.google.registration');
+    Route::get('auth/registration/{usertype}', 'googleRegistrationRedirects')->name('auth.registration');
+    Route::get('auth/google-register-callback', 'GoogleRegister')->name('auth.google.registration');
 });
-
-
-
-
-

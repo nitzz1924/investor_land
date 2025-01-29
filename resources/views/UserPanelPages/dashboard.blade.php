@@ -12,9 +12,13 @@
                             <div class="d-flex align-items-center mb-7">
                                 <div class="rounded-circle overflow-hidden me-6">
                                     @if(Auth::guard('customer')->user()->profile_photo_path)
-                                    <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
+                                        @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                            <img src="{{ Auth::guard('customer')->user()->profile_photo_path }}" alt="modernize-img" width="40" height="40">
+                                        @else
+                                            <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
+                                        @endif
                                     @else
-                                    <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
                                     @endif
                                 </div>
                                 <h5 class="fw-semibold mb-0 fs-5">Welcome back {{Auth::guard('customer')->user()->name}}</h5>

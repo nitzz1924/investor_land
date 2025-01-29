@@ -72,7 +72,7 @@
 
                                             <!-- Google Login Button -->
                                             <div class="col-md-12 text-center">
-                                                <a href="{{ route('auth.google.registration', ['usertype' => 'user']) }}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                                <a href="{{ route('auth.registration', ['usertype' => 'user']) }}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
                                                     <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/google-icon.svg" alt="Google Icon" style="width: 20px; height: 20px; margin-right: 10px;">
                                                     Sign In with Google
                                                 </a>
@@ -131,9 +131,9 @@
 
                                             <!-- Google Login Button -->
                                             <div class="col-md-12 text-center">
-                                                <a href="{{ route('auth.google')}}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                                <a href="{{ route('auth.registration', ['usertype' => 'agent']) }}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
                                                     <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/google-icon.svg" alt="Google Icon" style="width: 20px; height: 20px; margin-right: 10px;">
-                                                    Register with Google
+                                                     Sign In with Google
                                                 </a>
                                             </div>
                                         </form>

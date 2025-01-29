@@ -56,7 +56,7 @@
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('user.logoutuserpanel')}}" aria-expanded="false">
                         <span>
-                           <i class="ti ti-logout-2 text-danger"></i>
+                            <i class="ti ti-logout-2 text-danger"></i>
                         </span>
                         <span class="hide-menu text-danger">Log out</span>
                     </a>
@@ -364,10 +364,15 @@
                             <a class="nav-link pe-0" href="javascript:void(0)" id="drop1" aria-expanded="false">
                                 <div class="d-flex align-items-center">
                                     <div class="user-profile-img">
-                                        @php
-                                        $userdata = Auth::guard('customer')->user();
-                                        @endphp
-                                        <img src="{{asset('assets/images/Users/'.  $userdata->profile_photo_path)}}" class="rounded-circle" width="35" height="35" alt="modernize-img" />
+                                        @if(Auth::guard('customer')->user()->profile_photo_path)
+                                        @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                        <img src="{{ Auth::guard('customer')->user()->profile_photo_path }}" alt="modernize-img" width="40" height="40">
+                                        @else
+                                        <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
+                                        @endif
+                                        @else
+                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        @endif
                                     </div>
                                 </div>
                             </a>
@@ -375,7 +380,15 @@
                                 <div class="profile-dropdown position-relative" data-simplebar>
                                     <div class="d-flex align-items-center py-9 mx-7 border-bottom">
 
-                                        <img src="{{asset('assets/images/Users/'.  $userdata->profile_photo_path)}}" class="rounded-circle" width="80" height="80" alt="modernize-img" />
+                                        @if(Auth::guard('customer')->user()->profile_photo_path)
+                                        @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                        <img src="{{ Auth::guard('customer')->user()->profile_photo_path }}" alt="modernize-img" width="40" height="40">
+                                        @else
+                                        <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
+                                        @endif
+                                        @else
+                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        @endif
                                         <div class="ms-3">
                                             @if (Auth::guard('customer')->user())
                                             <h5 class="mb-1 fs-3">{{ Auth::guard('customer')->user()->name }}</h5>
