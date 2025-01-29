@@ -1,5 +1,6 @@
 <?php
 // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------
+use App\Http\Controllers\GoogleAuthentication;
 use App\Http\Controllers\UserViews;
 use App\Http\Controllers\WebsiteStores;
 use Illuminate\Support\Facades\Auth;
@@ -112,6 +113,12 @@ Route::controller(WebsiteStores::class)->group(function () {
 });
 
 
+//Google Authentication Routes
+Route::controller(GoogleAuthentication::class)->group(function () {
+    Route::get('auth/google', 'googleLogin')->name('auth.google');
+    Route::get('auth/google-callback', 'GoogleAuth')->name('auth.google.callback');
+    Route::get('auth/google-registration/{usertype}', 'GoogleRegister')->name('auth.google.registration');
+});
 
 
 

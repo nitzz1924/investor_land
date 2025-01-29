@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2025 at 10:50 AM
+-- Generation Time: Jan 29, 2025 at 05:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -323,6 +323,7 @@ INSERT INTO `register_companies` (`id`, `companyname`, `companylogo`, `city`, `s
 
 CREATE TABLE `register_users` (
   `id` int(11) NOT NULL,
+  `google_id` varchar(255) DEFAULT NULL,
   `user_type` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `mobile` varchar(255) DEFAULT NULL,
@@ -340,9 +341,9 @@ CREATE TABLE `register_users` (
 -- Dumping data for table `register_users`
 --
 
-INSERT INTO `register_users` (`id`, `user_type`, `name`, `mobile`, `email`, `password`, `company_name`, `company_document`, `profile_photo_path`, `verification_status`, `created_at`, `updated_at`) VALUES
-(2, 'user', 'Ravi Shankar', '5754854858', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', NULL, NULL, '1737716083_agent-6.jpg', '1', '2025-01-21 05:44:02', '2025-01-24 05:24:43'),
-(4, 'agent', 'Anshul', '6565656565', 'ans@gmail.com', '$2y$12$xFw53U/L9mKUkv0.S.AvoOL0pVIWEtzhJxw/mKK2fN74979ZRdp7K', 'DOSSO', '1737625140_dummy.pdf', '1737715936_agent-1.jpg', '1', '2025-01-23 04:09:01', '2025-01-24 05:22:37');
+INSERT INTO `register_users` (`id`, `google_id`, `user_type`, `name`, `mobile`, `email`, `password`, `company_name`, `company_document`, `profile_photo_path`, `verification_status`, `created_at`, `updated_at`) VALUES
+(2, NULL, 'user', 'Ravi Shankar', '5754854858', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', NULL, NULL, '1737716083_agent-6.jpg', '1', '2025-01-21 05:44:02', '2025-01-24 05:24:43'),
+(4, '101105880704969277948', 'agent', 'Anshul', '6565656565', 'anshulyuvmedia@gmail.com', '$2y$12$xFw53U/L9mKUkv0.S.AvoOL0pVIWEtzhJxw/mKK2fN74979ZRdp7K', 'DOSSO', '1737625140_dummy.pdf', '1737715936_agent-1.jpg', '1', '2025-01-23 04:09:01', '2025-01-27 12:14:16');
 
 -- --------------------------------------------------------
 
@@ -364,7 +365,11 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('zeh1NRsXcQauI5VY0X7s9GeURKSPIgwEMvjgAxSM', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZFFlQ0xPRnFqanBhN3lSOWVZRGNsdVZBSFVIR0FPY3VnVUdhelk1USI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VybG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1737971141);
+('5kbyZzQhvgWzktiQPMAk8wfQd3bLh28OwdDow9iO', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiU3pBVk56RTlHTm90RGlNT3hFZWdMdHhiZ1JRNDRtTWJHZVhCeHhCMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC91c2VyLXJlZ2lzdHJhdGlvbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1738125171),
+('MglZukPfQ5xRtWu9M2gbQzXU5gdtsdKIPP0Ch0xX', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiNjNCTnFXZnQzUHpuMzA3SEVMUjNpZ3ZLc3JKWERRajkzQ0g1emJOMiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC91c2VyLXJlZ2lzdHJhdGlvbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1738125171),
+('S8t2d2ookamBst3viIXN8UUGftHUEbR1lOa5vTnB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoib0R6NFUyY0JVQzJObXRlSjlTTG9aQm1SVE0wbm9ISG1DYm5XeW92OCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC91c2VyLXJlZ2lzdHJhdGlvbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1737984383),
+('vvmtmtQnCDstSbEnQT1sTdiyFUMWfCmTsn0QxgxS', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiZFNLUXRaOGladTdxNW9zNzNMeE9XYmdpdzFzTzlDOGFlcG9OUFBBcSI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czozNzoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2FkbWluL2Rhc2hib2FyZCI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1738125172),
+('zeh1NRsXcQauI5VY0X7s9GeURKSPIgwEMvjgAxSM', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiZFFlQ0xPRnFqanBhN3lSOWVZRGNsdVZBSFVIR0FPY3VnVUdhelk1USI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjtzOjU6InN0YXRlIjtzOjQwOiJGZmtEWUpTNklzcGxnVnlGSnAwdVFlREE4UVpwV2JoajFUUmtFZXVkIjt9', 1737984804);
 
 -- --------------------------------------------------------
 
@@ -569,7 +574,7 @@ ALTER TABLE `register_companies`
 -- AUTO_INCREMENT for table `register_users`
 --
 ALTER TABLE `register_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="property-single-content">
-                    <div class="about-property wow fadeInUp" data-wow-delay="0.75s">
+                    <div class="about-property wow" data-wow-delay="0.75s">
                         <div class="property-single-subtitle text-center">
                             <h3 class="mb-3 loginhead">Your Trusted Partner in Real Estate</h3>
                             <p>Enter Details to Login</p>
@@ -22,7 +22,7 @@
                             <strong>{{ $message }}</strong>
                         </div>
                         @endif
-                        <div class="property-inquiry-box wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="property-inquiry-box wow" data-wow-delay="0.5s">
                             <div class="property-inquiry-form">
                                 <form id="" action="{{ route('website.loginuser') }}" method="POST">
                                     @csrf
@@ -51,7 +51,7 @@
 
                                         <!-- Google Login Button -->
                                         <div class="col-md-12 text-center">
-                                            <a href="#" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
+                                            <a href="{{ route('auth.google')}}" class="btn btn-outline-primary btn-lg w-100 d-flex align-items-center justify-content-center">
                                                 <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/svgs/google-icon.svg" alt="Google Icon" style="width: 20px; height: 20px; margin-right: 10px;">
                                                 Login with Google
                                             </a>

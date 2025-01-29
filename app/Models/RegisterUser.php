@@ -11,6 +11,7 @@ class RegisterUser extends Authenticatable
     protected $table = 'register_users';
 
     protected $fillable = [
+        'google_id',
         'user_type',
         'name',
         'mobile',
