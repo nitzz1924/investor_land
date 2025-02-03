@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Lead;
 use App\Models\Master;
+use App\Models\Nortification;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
 use App\Models\RegisterUser;
 use Illuminate\Http\Request;
 use Auth;
+use Notification;
 class AdminViews extends Controller
 {
     public function admindashboard()
@@ -84,6 +86,7 @@ class AdminViews extends Controller
             ->get();
 
         $allproperties = $agentListings->merge($adminListings);
+        // dd( $allproperties);
         $allpropertiescnt = PropertyListing::count();
         return view('AdminPanelPages.allproperties', compact('allproperties', 'allpropertiescnt'));
     }
@@ -190,5 +193,12 @@ class AdminViews extends Controller
         $allagents = RegisterUser::where('user_type', 'agent')->orderBy('created_at', 'DESC')->get();
         $allagentscnt = RegisterUser::where('user_type', 'agent')->count();
         return view('AdminPanelPages.allagents', compact('allagents', 'allagentscnt'));
+    }
+
+    public function notifications()
+    {
+        $allnotificaitons = Nortification::orderBy('created_at', 'DESC')->get();
+        $notificationcount = Nortification::count();
+        return view('AdminPanelPages.allnotifications', compact('allnotificaitons', 'notificationcount'));
     }
 }

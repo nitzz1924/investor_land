@@ -3292,6 +3292,18 @@ footer.footer {
 	.hideshowproperty{
 		font-size: 10px;
 	}
+	.price-filter-dropdown {
+		position: absolute !important;
+		top: 90% !important;
+		left: 93px !important;
+		background: white !important;
+		border: 1px solid #ccc !important;
+		border-radius: 15px !important;
+		padding: 18px !important;
+		width: 290px !important;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+		z-index: 1000 !important;
+	}
 
 	.btn-default {
 		padding: 10px 20px;
@@ -3904,4 +3916,21 @@ footer.footer {
 
 .expertisesection {
 	display: none;
+}
+
+
+.price-filter-dropdown {
+    position: absolute;
+    top: 60%;
+    left: 353px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 18px;
+    width: 350px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+.d-none {
+    display: none;
 }

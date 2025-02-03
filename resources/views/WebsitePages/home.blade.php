@@ -45,6 +45,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-8">
                             <select name="filtercity" class="form-control">
+                                <option value="" selected>Select City</option>
                                 @foreach ($uniqueCities as $uc)
                                 <option value="{{$uc}}">{{$uc}}</option>
                                 @endforeach
@@ -55,19 +56,30 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-lg-4 col-6">
+                        <div class="col-lg-5 col-6">
                             <select name="filtercategory" class="form-control">
+                                <option value="" selected>Select Category</option>
                                 @foreach ($uniqueCategories as $uq)
                                 <option value="{{$uq}}">{{$uq}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-4 col-6">
-                            <select name="filtercategory" class="form-control">
-                                @foreach ($uniqueCategories as $uq)
-                                <option value="{{$uq}}">{{$uq}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-lg-7 col-6">
+                            <button type="button" id="priceFilterBtn" class="form-control text-start">Price (INR)</button>
+                            <div id="priceFilterDropdown" class="price-filter-dropdown d-none">
+                                <div class="d-flex justify-content-between">
+                                    <label>Minimum</label>
+                                    <label>Maximum</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="number" name="filterminprice" id="minPrice" class="form-control me-2" placeholder="0">
+                                    <input type="text" name="filtermaxprice" id="maxPrice" class="form-control" placeholder="Any">
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <button type="button" id="resetPriceFilter" class="btn btn-light">Reset</button>
+                                    <button type="button" id="applyPriceFilter" class="btn text-white" style="background-color: #726555;">Done</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -669,14 +681,68 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Property Filter -->
 <script>
-    //This is Home Page filter by Car Details
+    document.getElementById("priceFilterBtn").addEventListener("click", function() {
+        let dropdown = document.getElementById("priceFilterDropdown");
+        dropdown.classList.toggle("d-none");
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", function(event) {
+        let dropdown = document.getElementById("priceFilterDropdown");
+        let button = document.getElementById("priceFilterBtn");
+
+        if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add("d-none");
+        }
+    });
+
+    // Apply filter
+    document.getElementById("applyPriceFilter").addEventListener("click", function() {
+        let minPrice = document.getElementById("minPrice").value;
+        let maxPrice = document.getElementById("maxPrice").value || "Any";
+
+        document.getElementById("priceFilterBtn").textContent = `Price: ${minPrice} - ${maxPrice} INR`;
+        document.getElementById("priceFilterDropdown").classList.add("d-none");
+    });
+
+    // Reset filter
+    document.getElementById("resetPriceFilter").addEventListener("click", function() {
+        document.getElementById("minPrice").value = "";
+        document.getElementById("maxPrice").value = "";
+        document.getElementById("priceFilterBtn").textContent = "Price (INR)";
+    });
+
+
+    // Search Form AJAX Request
     jQuery('#searchform').submit(function(e) {
         e.preventDefault();
-        var formdata = new FormData(document.getElementById('searchform'));
+        var formdata = new FormData(document.getElementById('searchform')); //getting form data
+
         for (var pair of formdata.entries()) {
             console.log(pair[0] + ': ' + pair[1]);
         }
+
+        var filtercity = formdata.get('filtercity');
+        var filtercategory = formdata.get('filtercategory');
+        var minPrice = formdata.get('filterminprice');
+        var maxPrice = formdata.get('filtermaxprice');
+
+        if (!minPrice && !maxPrice && !filtercity && !filtercategory) {
+            Toastify({
+                text: "Please select at least one to filter Listings.",
+                duration: 3000,
+                className: "info",
+                style: {
+                    background: "#726555",
+                },
+                position: "center",
+            }).showToast();
+            return false; 
+        }
+
         $.ajax({
             url: "{{ route('website.filterlistings') }}"
             , type: "POST"

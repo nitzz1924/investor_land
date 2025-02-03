@@ -43,18 +43,28 @@ class WebsiteViews extends Controller
     {
         $category = $req->query('filtercategory');
         $city = $req->query('filtercity');
+        $minprice = $req->query('filterminprice');
+        $maxprice = $req->query('filtermaxprice');
 
         $listings = PropertyListing::query();
 
         if ($category) {
             $listings->where('category', $category);
         }
-
+        
         if ($city) {
             $listings->where('city', $city);
         }
 
-        $listings = $listings->paginate(4);
+        if ($minprice) {
+            $listings->where('price', '>=', $minprice);
+        }
+
+        if ($maxprice) {
+            $listings->where('price', '<=', $maxprice);
+        }
+
+        $listings = $listings->where('status', '=', 'published')->paginate(4);
 
         return view('WebsitePages.propertylistings', compact('listings', 'category', 'city'));
     }
@@ -78,10 +88,12 @@ class WebsiteViews extends Controller
     {
         $category = $req->input('filtercategory');
         $city = $req->input('filtercity');
+        $minprice = $req->input('filterminprice');
+        $maxprice = $req->input('filtermaxprice');
 
         return response()->json([
             'success' => true,
-            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category,'filtercity' => $city]),
+            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category,'filtercity' => $city, 'filterminprice' => $minprice, 'filtermaxprice' => $maxprice]),
         ], 200);
     }
     public function myownlistings($usernameroute, $useridroute){

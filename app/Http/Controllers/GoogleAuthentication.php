@@ -24,7 +24,9 @@ class GoogleAuthentication extends Controller
 
             if ($user) {
                 Auth::guard('customer')->login($user);
-                return redirect()->route('user.dashboard');
+                $user->verification_status = 1;
+                $user->save();
+                return redirect()->route('website.userlogin')->with('success', 'You are logged in successfully');
             } else {
                 $this->googleRegistrationRedirects('default_type');
                 return redirect()->route('website.userlogin')->with('error', 'This User is not registered');
@@ -58,6 +60,7 @@ class GoogleAuthentication extends Controller
                     'user_type' => $usertype,
                     'email' => $googleUser->email,
                     'google_id' => $googleUser->id,
+                    'verification_status' => 0,
                     'profile_photo_path' => $googleUser->avatar ?? 'public/assets/images/defaultuser.png',
                     'password' => Hash::make('12345678'),   
                 ]);

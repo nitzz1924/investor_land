@@ -66,6 +66,15 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/all-customers', [AdminViews::class, 'allcustomers'])->name('admin.allcustomers');
     Route::get('/all-agents', [AdminViews::class, 'allagents'])->name('admin.allagents');
     Route::post('/updateadminlistingstatus', [AdminStores::class, 'updateadminlistingstatus'])->name('admin.updateadminlistingstatus');
+    Route::get('/all-notifications', [AdminViews::class, 'notifications'])->name('admin.notifications');
+    Route::post('/insertnotification', [AdminStores::class, 'insertnotification'])->name('admin.insertnotification');
+    Route::get('/deletenortification/{id}', [AdminStores::class, 'deletenortification'])->name('admin.deletenortification');
+    Route::post('/udpatenortification', [AdminStores::class, 'udpatenortification'])->name('admin.udpatenortification');
+
+
+
+
+    
 });
 
 

@@ -23,6 +23,7 @@
     <link href="{{asset('websiteAssets/css/magnific-popup.css')}}" rel="stylesheet">
     <link href="{{asset('websiteAssets/css/custom.css')}}" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body class="tt-magic-cursor">
@@ -65,13 +66,24 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
                             <li class="nav-item dropdown">
                                 @if(Auth::guard('customer')->check())
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if(Auth::guard('customer')->user()->profile_photo_path)
+                                    @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                        {{ Auth::guard('customer')->user()->name }}
+                                    </a>
+                                    @else
+                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                     {{ Auth::guard('customer')->user()->name }}
-                                </a>
+                                    </a>
+                                    @endif
+                                @else
+                                    <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                @endif
                                 <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                    <li><a class="dropdown-item" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('user.myprofile') }}">My Profile</a></li>
+                                    <li><a class="dropdown-item" target="_blank" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+                                    <li><a class="dropdown-item" target="_blank" href="{{ route('user.myprofile') }}">My Profile</a></li>
                                     <li>
                                         <form method="GET" action="{{ route('user.logoutuserpanel') }}">
                                             @csrf
@@ -241,6 +253,7 @@
     <script src="{{asset('websiteAssets/js/wow.js')}}"></script>
     <script src="{{asset('websiteAssets/js/function.js')}}"></script>
     <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </body>

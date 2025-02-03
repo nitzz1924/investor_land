@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Lead;
+use App\Models\Nortification;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\Master;
 use Exception;
@@ -537,6 +539,83 @@ class AdminStores extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false], 404);
+    }
+
+    public function insertnotification(Request $request){
+    
+        $description = $request->input('notificationdes');
+        $files = $request->file('notificationimg');
+        $notificationname = $request->input('notificationname');
+        $sendtowhom = $request->input('sendto');
+
+        try{
+            $notificationimg = null;
+            if ($request->hasFile('notificationimg')) {
+                $request->validate([
+                    'notificationimg' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('notificationimg');
+                $notificationimg = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Notificaitons'), $notificationimg);
+            }
+             // Create the property listing
+             $data = Nortification::create([
+                'notificationname' => $notificationname,
+                'notificationimg' =>$notificationimg,
+                'notificationdes' =>  $description,
+                'sendto' =>  $sendtowhom,
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Notification inserted successfully!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function deletenortification($id)
+    {
+        try {
+            $data = Nortification::find($id);
+            $data->delete();
+            return back()->with('success', "Deleted..!!!");
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function udpatenortification(Request $request){
+    
+        $description = $request->input('notificationdesupdate');
+        $files = $request->file('notificationimgupdate');
+        $notificationname = $request->input('notificationnameupdate');
+        $sendtoupdate = $request->input('sendtoupdate');
+
+        try{
+            $notificationimg = null;
+            if ($request->hasFile('notificationimgupdate')) {
+                $request->validate([
+                    'notificationimgupdate' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('notificationimgupdate');
+                $notificationimg = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Notificaitons'), $notificationimg);
+            }
+            $olddata = Nortification::find($request->nortiid);
+
+             // Update the Nortification
+             $data = Nortification::where('id', $request->nortiid)->update([
+                'notificationname' => $notificationname,
+                'notificationimg' =>$notificationimg  ?? $olddata->notificationimg,
+                'notificationdes' =>  $description,
+                'sendto' =>  $sendtoupdate,
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Notification Updated....!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
     }
 
 }
