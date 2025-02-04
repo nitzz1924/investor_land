@@ -54,6 +54,14 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a class="sidebar-link" href="{{ route('user.notifications')}}" aria-expanded="false">
+                        <span>
+                            <i class="ti ti-bell"></i>
+                        </span>
+                        <span class="hide-menu">Notifications</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('user.logoutuserpanel')}}" aria-expanded="false">
                         <span>
                             <i class="ti ti-logout-2 text-danger"></i>
@@ -278,86 +286,51 @@
                         <li class="nav-item nav-icon-hover-bg rounded-circle dropdown">
                             <a class="nav-link position-relative" href="javascript:void(0)" id="drop2" aria-expanded="false">
                                 <i class="ti ti-bell-ringing"></i>
+                                @php
+                                use App\Models\Nortification;
+                                $loggedinUser = Auth::guard('customer')->user();
+                                $data = Nortification::where('sendto', $loggedinUser->user_type)->orderBy('created_at','DESC')->get();
+                                @endphp
+
+                                @if($data->isNotEmpty())
                                 <div class="notification bg-primary rounded-circle"></div>
+                                @endif
+
                             </a>
-                            <div class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                            <div style="height: 300px; overflow-y: scroll;" class="dropdown-menu content-dd dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                                 <div class="d-flex align-items-center justify-content-between py-3 px-7">
                                     <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
-                                    <span class="badge text-bg-primary rounded-4 px-3 py-1 lh-sm">5 new</span>
                                 </div>
-                                <div class="message-body" data-simplebar>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-2.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                Roman Joined the Team!
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">Congratulate him</span>
-                                        </div>
+                                @if($data->isNotEmpty())   
+                                <div>
+                                    @foreach ($data->take(5) as $row)
+                                    <div class="message-body" data-simplebar>
+                                        <a href="javascript:void(0)" class="py-6 px-7 text-wrap row d-flex align-items-center dropdown-item">
+                                            <div class="col-md-4 p-0">
+                                                <img src="{{ asset('assets/images/Notificaitons/'.$row->notificationimg) }}" alt="user" class="rounded img-fluid" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="mb-1 fw-semibold lh-base">
+                                                    {{ $row->notificationname }}
+                                                </h6>
+                                                <span class="fs-2 d-block text-body-secondary text-wrap"> {{ $row->notificationdes }}</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                    <div class="py-6 px-7 mb-1">
+                                    <a href="{{ route('user.notifications') }}">
+                                        <button class="btn btn-outline-primary w-100">
+                                            See All Notifications
+                                        </button>
                                     </a>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-3.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                New message
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">Salma sent you new message</span>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-4.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                Bianca sent payment
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">Check your earnings</span>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-5.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                Jolly completed tasks
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">Assign her new tasks</span>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-6.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                John received payment
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">$230 deducted from account</span>
-                                        </div>
-                                    </a>
-                                    <a href="javascript:void(0)" class="py-6 px-7 d-flex align-items-center dropdown-item">
-                                        <span class="me-3">
-                                            <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/profile/user-7.jpg" alt="user" class="rounded-circle" width="48" height="48" />
-                                        </span>
-                                        <div class="w-100">
-                                            <h6 class="mb-1 fw-semibold lh-base">
-                                                Roman Joined the Team!
-                                            </h6>
-                                            <span class="fs-2 d-block text-body-secondary">Congratulate him</span>
-                                        </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="py-6 px-7 mb-1">
-                                    <button class="btn btn-outline-primary w-100">
-                                        See All Notifications
-                                    </button>
-                                </div>
+                                @else
+                                    <div class="d-flex justify-content-center align-items-center mt-5">
+                                           <p class="mb-0 text-muted">No new notifications</p>
+                                    </div>
+                                @endif
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -371,7 +344,7 @@
                                         <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
                                         @endif
                                         @else
-                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        <img src="{{ asset('assets/images/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
                                         @endif
                                     </div>
                                 </div>
@@ -387,7 +360,7 @@
                                         <img src="{{ asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path) }}" alt="modernize-img" width="40" height="40">
                                         @endif
                                         @else
-                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        <img src="{{ asset('assets/images/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
                                         @endif
                                         <div class="ms-3">
                                             @if (Auth::guard('customer')->user())

@@ -23,6 +23,43 @@
                     </div>
                 </div>
             </div>
+            @if($userdata->user_type == 'agent')
+                @if(empty($userdata->company_document) || empty($userdata->company_name) || empty($userdata->mobile))
+                    <div class="alert customize-alert alert-dismissible alert-light-danger bg-danger-subtle text-danger fade show remove-close-icon" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="d-flex align-items-center  me-3 me-md-0 fw-bolder">
+                            <i class="ti ti-info-circle fs-5 me-2 text-danger"></i>
+                            Complete your Profile Details!!!!!!
+                        </div>
+                        <ol start="1" class="mt-2 text-black">
+                            @if(empty($userdata->company_document))
+                                <li>Company Document is missing</li>
+                            @endif
+                            @if(empty($userdata->company_name))
+                                <li>Company Name is missing</li>
+                            @endif
+                            @if(empty($userdata->mobile))
+                                <li>Mobile Number is missing</li>
+                            @endif
+                        </ol>
+                    </div>
+                @endif
+            @elseif($userdata->user_type == 'user')
+                @if(empty($userdata->mobile))
+                    <div class="alert customize-alert alert-dismissible alert-light-danger bg-danger-subtle text-danger fade show remove-close-icon" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="d-flex align-items-center  me-3 me-md-0 fw-bolder">
+                            <i class="ti ti-info-circle fs-5 me-2 text-danger"></i>
+                            Complete your Profile Details!!!!!!
+                        </div>
+                        <ol start="1" class="mt-2 text-black">
+                            @if(empty($userdata->mobile))
+                                <li>Mobile Number is missing</li>
+                            @endif
+                        </ol>
+                    </div>
+                @endif
+            @endif
             <div class="card overflow-hidden">
                 <div class="card-body pt-0">
                     <div class="row align-items-center justify-content-start">
@@ -101,6 +138,10 @@
                                                 <span class="bar"></span>
                                                 <label for="input1">Company Name</label>
                                             </div>
+                                                <div class="form-group col-md-6 mb-4">
+                                                    <div for="input1" class="mb-1">Company Document</div>
+                                                    <input type="file" name="company_document" class="form-control" id="company_document">
+                                                </div>
                                             @endif
                                         </div>
                                         @if($userdata->user_type == 'agent')

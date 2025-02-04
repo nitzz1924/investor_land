@@ -21,7 +21,7 @@
                                         <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
                                     @endif
                                 </div>
-                                <h5 class="fw-semibold mb-0 fs-5">Welcome back {{Auth::guard('customer')->user()->name}}</h5>
+                                <h5 class="fw-semibold mb-0 fs-5">Welcome back {{ucwords(Auth::guard('customer')->user()->name)}}</h5>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="border-end pe-4 border-muted border-opacity-10">

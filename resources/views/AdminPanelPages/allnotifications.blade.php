@@ -87,8 +87,8 @@
                                     <select name="sendto" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                         <option selected="">--select to send--</option>
                                         <option value="all">All</option>
-                                        <option value="users">Users</option>
-                                        <option value="agents">Agents</option>
+                                        <option value="user">Users</option>
+                                        <option value="agent">Agents</option>
                                     </select>
                                 </div>
                             </div>
@@ -194,7 +194,31 @@
     {{-- Insert functionality --}}
     <script>
         document.querySelector("#submitAllForms").addEventListener("click", function(event) {
-            event.preventDefault();
+            // Check if required fields are empty
+            
+            const sendToField = document.querySelector('select[name="sendto"]');
+            const notificationNameField = document.querySelector('input[name="notificationname"]');
+
+            if (!sendToField.value || sendToField.value === "--select to send--") {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please select a recipient for the notification.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+                return;
+            }
+
+            if (!notificationNameField.value.trim()) {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please enter a notification title.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+                return;
+            }
+            event.preventDefault(); 
 
             // Create a FormData object
             const combinedFormData = new FormData();
@@ -308,8 +332,8 @@
                                     <select name="sendtoupdate" class="form-select mr-sm-2  mb-3" id="inlineFormCustomSelect" required>
                                         <option selected="">--select to send--</option>
                                         <option value="all" ${data.sendto == 'all' ? 'selected': ''}>All</option>
-                                        <option value="users" ${data.sendto == 'users' ? 'selected': ''}>Users</option>
-                                        <option value="agents" ${data.sendto == 'agents' ? 'selected': ''}>Agents</option>
+                                        <option value="user" ${data.sendto == 'user' ? 'selected': ''}>Users</option>
+                                        <option value="agent" ${data.sendto == 'agent' ? 'selected': ''}>Agents</option>
                                     </select>
                                 </div>
                                 <div class="mb-4">

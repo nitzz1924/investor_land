@@ -70,11 +70,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/insertnotification', [AdminStores::class, 'insertnotification'])->name('admin.insertnotification');
     Route::get('/deletenortification/{id}', [AdminStores::class, 'deletenortification'])->name('admin.deletenortification');
     Route::post('/udpatenortification', [AdminStores::class, 'udpatenortification'])->name('admin.udpatenortification');
-
-
-
-
-    
 });
 
 
@@ -93,7 +88,7 @@ Route::prefix('user')->middleware('customer.auth')->group(function () {
         Route::post('/updateuserlisting', 'updateuserlisting')->name('user.updateuserlisting');
         Route::get('/deletelisting/{id}', 'deletelisting')->name('user.deletelisting');
         Route::post('/updateaduserlistingstatus', 'updateaduserlistingstatus')->name('user.updateaduserlistingstatus');
-       
+        Route::get('/notifications', 'notifications')->name('user.notifications');
     });
 });
 

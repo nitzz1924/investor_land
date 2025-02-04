@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2025 at 02:19 PM
+-- Generation Time: Feb 04, 2025 at 10:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,8 +62,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1738560131),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1738560131;', 1738560131);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1738646133),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1738646133;', 1738646133);
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ CREATE TABLE `leads` (
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
 (1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '2', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-25 09:59:25'),
 (3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '2', 'New', NULL, '2025-01-13 06:59:41', '2025-01-25 09:59:28'),
-(12, 'Ravi Shankar', '2222222222', 'auto@gmail.com', 'Ajmer', 'Rajasthan', 'Apartment', 'Pune', '39', '4', 'New', NULL, '2025-01-24 01:13:18', '2025-01-25 09:59:05');
+(12, 'Ravi Shankar', '2222222222', 'auto@gmail.com', 'Ajmer', 'Rajasthan', 'Apartment', 'Pune', '39', '4', 'New', NULL, '2025-01-24 01:13:18', '2025-02-04 04:19:14');
 
 -- --------------------------------------------------------
 
@@ -244,8 +244,10 @@ CREATE TABLE `nortifications` (
 --
 
 INSERT INTO `nortifications` (`id`, `notificationname`, `notificationimg`, `notificationdes`, `sendto`, `created_at`, `updated_at`) VALUES
-(1, 'New Listings', '1738579683_1737549230_p-3.jpg', 'Hurry.!!! ...Check New Listings', NULL, '2025-02-03 04:15:30', '2025-02-03 05:18:24'),
-(12, 'Holi Offer', '1738584061_7bec7e63a493e2d61891b1e4051ef75a.jpg', 'Buy with Us for major discount on lands this Holi', 'users', '2025-02-03 06:31:01', '2025-02-03 06:31:01');
+(15, 'New Listings', '1738650488_1736944039_pexels-anton-8100-46924.jpg', 'Huryy Up.!!! New Listings coming up', 'user', '2025-02-04 00:58:08', '2025-02-04 00:58:08'),
+(16, 'Holi Offer', '1738650714_7eb7eabbe9bd03c2fc99881d04da9cbd.jpg', 'Buy with Us for major discount on lands this Holi', 'user', '2025-02-04 01:01:54', '2025-02-04 01:01:54'),
+(17, 'Holi Offer', '1738650714_7eb7eabbe9bd03c2fc99881d04da9cbd.jpg', 'Buy with Us for major discount on lands this Holi', 'user', '2025-02-04 01:01:54', '2025-02-04 01:01:54'),
+(20, 'New Listings', '1738650488_1736944039_pexels-anton-8100-46924.jpg', 'Huryy Up.!!! New Listings coming up', 'agent', '2025-02-04 00:58:08', '2025-02-04 07:31:56');
 
 -- --------------------------------------------------------
 
@@ -375,8 +377,8 @@ CREATE TABLE `register_users` (
 
 INSERT INTO `register_users` (`id`, `google_id`, `user_type`, `name`, `mobile`, `email`, `password`, `company_name`, `company_document`, `profile_photo_path`, `verification_status`, `created_at`, `updated_at`) VALUES
 (2, NULL, 'user', 'Ravi Shankar', '5754854858', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', NULL, NULL, '1737716083_agent-6.jpg', '1', '2025-01-21 05:44:02', '2025-01-24 05:24:43'),
-(4, '101105880704969277948', 'agent', 'Anshul Meena', '2222222222', 'anshulyuvmedia@gmail.com', '$2y$12$pRmLyDPyS2MgROKtMsVQ1OssBFii8IWpxIVednqpkmG74VLEd61Xy', NULL, NULL, '1738568423_music.png', '1', '2025-01-29 00:12:55', '2025-02-03 02:22:18'),
-(6, '100390981121721709551', 'user', 'nitesh sharma', NULL, 'nitesh.yuvmedia@gmail.com', '$2y$12$9wS/m999wbTibsoS/1ccDur5j510fF5lhTQ8eR/t9Iaf1l8lbRODm', NULL, NULL, NULL, '1', '2025-01-29 00:08:37', '2025-02-03 07:52:50');
+(4, '101105880704969277948', 'agent', 'Anshul Meena', '2222222222', 'anshulyuvmedia@gmail.com', '$2y$12$pRmLyDPyS2MgROKtMsVQ1OssBFii8IWpxIVednqpkmG74VLEd61Xy', 'Investor Lands', '1738656522_0a2a51dac6138826127f093500461d91.pdf', '1738655533_1736574645_music.png', '1', '2025-01-29 00:12:55', '2025-02-04 02:38:42'),
+(6, '100390981121721709551', 'user', 'nitesh sharma', '1234567898', 'nitesh.yuvmedia@gmail.com', '$2y$12$9wS/m999wbTibsoS/1ccDur5j510fF5lhTQ8eR/t9Iaf1l8lbRODm', NULL, NULL, '1738656776_1736574645_music.png', '1', '2025-01-29 00:08:37', '2025-02-04 03:54:56');
 
 -- --------------------------------------------------------
 
@@ -398,7 +400,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('O4MufY3fYqdWAAf1qBpHGudfqOY3FvZJoSHWtIrz', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiWlljaFlNaHVhYm1ubFI5SzRVcVJzSG5XckxKZkd5VHcyUzBNZkpLVyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9hbGwtbm90aWZpY2F0aW9ucyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO3M6NToic3RhdGUiO3M6NDA6ImptcVY3OGNUa1lJN3dLd0hXeXlXR2dPSkdtV0JPU0F3Z0JBZ0JkNDkiO30=', 1738588008);
+('CB3oiumkn68aDKVZwyUKbXusJ8JaAcYp8yh4GohE', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicEh2UXdIQVVPSXJtWkUxN3BHZTBGV2dKVlBrMm53ZlcyUHpaNVhsYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1738662458),
+('Sbs8MoOz0n4e7Aw9epCs8oDj5cDonEA440mMCJ8Y', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMVo3SThJUXlTNlZYb3RicnMzbkpab2xNeXJ1QUNxRkZESmVqdURNbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjtzOjU6InN0YXRlIjtzOjQwOiJ0NnRLeEF0QmU2ZjI3bHBNbVhWb2hBczNRU3FuM1N1aGl3VW5pQUZsIjt9', 1738662729);
 
 -- --------------------------------------------------------
 
@@ -591,7 +594,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nortifications`
 --
 ALTER TABLE `nortifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

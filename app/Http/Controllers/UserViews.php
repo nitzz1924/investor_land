@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nortification;
 use Illuminate\Http\Request;
 use Session;
 use Auth;
@@ -34,6 +35,8 @@ class UserViews extends Controller
         try {
             $user = Auth::guard('customer')->user();
             $filenameprofileimage = "";
+            $thumbnailFilename = null;
+
             if ($request->hasFile('myprofileimage')) {
                 $request->validate([
                     'myprofileimage' => 'image|mimes:jpeg,png,jpg|max:2048',
@@ -43,13 +46,23 @@ class UserViews extends Controller
                 $profileimage->move(public_path('assets/images/Users'), $filenameprofileimage);
             }
 
+            if ($request->hasFile('company_document')) {
+                $request->validate([
+                    'company_document' => 'required|mimes:jpeg,pdf,jpg',
+                ]);
+
+                $file = $request->file('company_document');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Users'), $thumbnailFilename);
+            }
 
             $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'mobile' => $request->mobile,
-                'companyname' => $request->companyname,
+                'company_name' => $request->companyname,
                 'profile_photo_path' => $filenameprofileimage == null ? $user->profile_photo_path : $filenameprofileimage,
+                'company_document' => $thumbnailFilename == null ? $user->company_document : $thumbnailFilename,
             ]);
 
             return back()->with('success', "Profile Updated..!!!");
@@ -288,6 +301,13 @@ class UserViews extends Controller
             return response()->json(['success' => true]);
         }
         return response()->json(['success' => false], 404);
+    }
+
+    public function notifications(){
+        $authuser = Auth::guard('customer')->user();
+        $notifications = Nortification::where('sendto',  $authuser->user_type)->orderBy('created_at','DESC')->get();
+        $notifycnt = Nortification::where('sendto',  $authuser->user_type)->count();
+        return view('UserPanelPages.allnotifications', compact('notifications','notifycnt'));
     }
 
 }
