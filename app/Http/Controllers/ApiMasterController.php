@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\RegisterUser;
 use Auth, Hash, Exception;
 use App\Models\Blog;
+use App\Models\Lead;
+use App\Models\Nortification;
 use App\Models\PropertyListing;
 use App\Models\Master;
+use Log;
 class ApiMasterController extends Controller
 {
     public function loginuser(Request $rq)
@@ -20,8 +23,12 @@ class ApiMasterController extends Controller
                     if (Auth::guard('customer')->check()) {
                         $user->verification_status = 1;
                         $user->save();
+
+                        // Generate API token for authentication
+                        $token = $user->createToken('AuthToken')->plainTextToken;
                         $response = [
                             'success' => true,
+                            'token' => $token,
                             'message' => 'Login Successfully..!!!!!'
                         ];
                     } else {
@@ -112,7 +119,7 @@ class ApiMasterController extends Controller
         if ($category) {
             $listings->where('category', $category);
         }
-        
+
         if ($city) {
             $listings->where('city', $city);
         }
@@ -133,7 +140,8 @@ class ApiMasterController extends Controller
         ]);
     }
 
-    public function getcategories(){
+    public function getcategories()
+    {
         $categories = Master::where('type', 'Property Categories')->get();
         return response()->json([
             'success' => true,
@@ -150,6 +158,245 @@ class ApiMasterController extends Controller
             'success' => true,
             'categories' => $categories,
             'details' => $propertydetails,
+        ]);
+    }
+
+    public function insertlisting(Request $request)
+    {
+        $authuser = auth()->user();
+        if (!$authuser) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized user. Please log in.'], 401);
+        }
+
+        $datareq = $request->all();
+
+        try {
+            // Handle the thumbnail image
+            $thumbnailFilename = null;
+            if ($request->hasFile('thumbnailImages')) {
+                $request->validate([
+                    'thumbnailImages' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('thumbnailImages');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
+            }
+
+            // Handle multiple gallery images
+            $galleryImages = [];
+            if ($request->hasFile('galleryImages')) {
+                $request->validate([
+                    'galleryImages.*' => 'required|image|mimes:jpeg,png,jpg',
+                ]);
+                $files = $request->file('galleryImages');
+                foreach ($files as $file) {
+                    $imageName = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $imageFullName = $imageName . '.' . $extension;
+
+                    // Define the upload path
+                    $uploadedPath = public_path('assets/images/Listings');
+
+                    // Move the file to the desired location
+                    $file->move($uploadedPath, $imageFullName);
+
+                    // Store the path for the image
+                    $galleryImages[] = 'assets/images/Listings/' . $imageFullName;
+                }
+            }
+
+            // Handle multiple documents
+            $documents = [];
+            if ($request->hasFile('documents')) {
+                $request->validate([
+                    'documents.*' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $files = $request->file('documents');
+                foreach ($files as $file) {
+                    $documentname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $documentfullname = $documentname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $documentfullname);
+                    $documents[] = 'assets/images/Listings/' . $documentfullname;
+                }
+            }
+
+            // Create the property listing
+            $data = PropertyListing::create([
+                'usertype' => 'Admin',
+                'roleid' => $authuser->id,
+                'property_name' => $datareq['property_name'],
+                'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
+                'price' => $datareq['price'],
+                'squarefoot' => $datareq['sqfoot'],
+                'bedroom' => $datareq['bedroom'],
+                'bathroom' => $datareq['bathroom'],
+                'floor' => $datareq['floor'],
+                'city' => $datareq['city'],
+                'address' => $datareq['officeaddress'],
+                'thumbnail' => $thumbnailFilename,
+                'category' => $datareq['category'],
+                'gallery' => json_encode($galleryImages),
+                'documents' => json_encode($documents),
+                'status' => $datareq['status'],
+            ]);
+
+            return response()->json(['success' => true, 'data' => $data, 'message' => 'Listing inserted successfully!']);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function filterlistings(Request $req)
+    {
+        $category = $req->query('filtercategory');
+        $city = $req->query('filtercity');
+        $minprice = $req->query('filterminprice');
+        $maxprice = $req->query('filtermaxprice');
+
+
+        Log::info('Filters:', [
+            'category' => $category,
+            'city' => $city,
+            'minprice' => $minprice,
+            'maxprice' => $maxprice,
+        ]);
+
+
+        $listings = PropertyListing::query();
+
+        if ($category) {
+            $listings->where('category', $category);
+        }
+
+        if ($city) {
+            $listings->where('city', $city);
+        }
+
+        if ($minprice) {
+            $listings->where('price', '>=', $minprice);
+        }
+
+        if ($maxprice) {
+            $listings->where('price', '<=', $maxprice);
+        }
+
+        $listings = $listings->where('status', '=', 'published')->paginate(4);
+
+        return response()->json([
+            'success' => true,
+            'data' => $listings
+        ]);
+    }
+
+    public function sendenquiry(Request $rq)
+    {
+        try {
+            $data = Lead::create([
+                'name' => $rq->customername,
+                'mobilenumber' => $rq->phone,
+                'email' => $rq->email,
+                'city' => $rq->city,
+                'state' => $rq->state,
+                'housecategory' => $rq->propertytype,
+                'inwhichcity' => $rq->cityofproperty,
+                'propertyid' => $rq->propertyid,
+                'userid' => $rq->userid,
+            ]);
+            return response()->json(['success' => true, 'data' => $data, 'message' => 'Enquiry Sent..!!!']);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function userprofile(Request $rq)
+    {
+        $userprofiledata = RegisterUser::find($rq->id);
+        return response()->json(['success' => true, 'data' => $userprofiledata]);
+    }
+
+    public function updateuserprofile(Request $request, $id)
+    {
+        try {
+            $user = RegisterUser::find($id);
+            $filenameprofileimage = "";
+            $thumbnailFilename = null;
+
+            if ($request->hasFile('myprofileimage')) {
+                $request->validate([
+                    'myprofileimage' => 'image|mimes:jpeg,png,jpg|max:2048',
+                ]);
+                $profileimage = $request->file('myprofileimage');
+                $filenameprofileimage = time() . '_' . $profileimage->getClientOriginalName();
+                $profileimage->move(public_path('assets/images/Users'), $filenameprofileimage);
+            }
+
+            if ($request->hasFile('company_document')) {
+                $request->validate([
+                    'company_document' => 'required|mimes:jpeg,pdf,jpg',
+                ]);
+
+                $file = $request->file('company_document');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Users'), $thumbnailFilename);
+            }
+
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'mobile' => $request->mobile,
+                'company_name' => $request->companyname,
+                'profile_photo_path' => $filenameprofileimage == null ? $user->profile_photo_path : $filenameprofileimage,
+                'company_document' => $thumbnailFilename == null ? $user->company_document : $thumbnailFilename,
+            ]);
+
+            return response()->json(['success' => true, 'message' => 'Profile Updated..!!!', 'data' => $user]);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function viewuserlistings(Request $rq)
+    {
+        $allproperties = PropertyListing::where('roleid', $rq->id)->orderBy('created_at', 'DESC')->get();
+        $allpropertiescnt = PropertyListing::where('roleid', $rq->id)->count();
+        return response()->json([
+            'success' => true,
+            'properties' => $allproperties,
+            'count' => $allpropertiescnt,
+        ]);
+    }
+
+    public function usernotifications(Request $rq)
+    {
+        $notifications = Nortification::where('sendto', $rq->user_type)->orderBy('created_at', 'DESC')->get();
+        $notifycnt = Nortification::where('sendto', $rq->user_type)->count();
+        return response()->json([
+            'success' => true,
+            'notifications' => $notifications,
+            'count' => $notifycnt,
+        ]);
+    }
+
+    public function listingscitywise()
+    {
+        $cityListings = PropertyListing::where('status', 'published')
+            ->get()
+            ->groupBy('city');
+
+        $listingsbycitys = Master::where('type', 'City')->get();
+        foreach ($listingsbycitys as $city) {
+            $cityName = $city->label; 
+
+            $city->listings = $cityListings[$cityName] ?? collect();
+            $city->property_count = $city->listings->count();
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $listingsbycitys,
         ]);
     }
 }

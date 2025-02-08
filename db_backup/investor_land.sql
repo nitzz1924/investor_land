@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2025 at 10:59 AM
+-- Generation Time: Feb 08, 2025 at 10:59 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,8 +62,8 @@ CREATE TABLE `cache` (
 --
 
 INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('f36a972d4deb9cb9427937777891777d', 'i:1;', 1738646133),
-('f36a972d4deb9cb9427937777891777d:timer', 'i:1738646133;', 1738646133);
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1738997181),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1738997181;', 1738997181);
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,8 @@ CREATE TABLE `leads` (
 INSERT INTO `leads` (`id`, `name`, `mobilenumber`, `email`, `city`, `state`, `housecategory`, `inwhichcity`, `propertyid`, `userid`, `status`, `followupdetails`, `created_at`, `updated_at`) VALUES
 (1, 'John Smit', '9876543210', 'john.doe@example.com', 'Mumbai', 'Maharashtra', 'Apartment', 'Pune', '30', '2', 'Qualified', '[{\"date\":\"2025-01-14\",\"description\":\"this is 14th\"},{\"date\":\"2025-01-15\",\"description\":\"This is 15th\"},{\"date\":\"2025-01-16\",\"description\":\"This is 16th\"}]', '2024-12-10 06:59:41', '2025-01-25 09:59:25'),
 (3, 'Jane Smith', '8765432109', 'jane.smith@example.com', 'Bengaluru', 'Karnataka', 'Villa', 'Hyderabad', '33', '2', 'New', NULL, '2025-01-13 06:59:41', '2025-01-25 09:59:28'),
-(12, 'Ravi Shankar', '2222222222', 'auto@gmail.com', 'Ajmer', 'Rajasthan', 'Apartment', 'Pune', '39', '4', 'New', NULL, '2025-01-24 01:13:18', '2025-02-04 04:19:14');
+(12, 'Ravi Shankar', '2222222222', 'auto@gmail.com', 'Ajmer', 'Rajasthan', 'Apartment', 'Pune', '39', '4', 'New', NULL, '2025-01-24 01:13:18', '2025-02-04 04:19:14'),
+(15, 'Kane', '5858585854', 'kane@gmai.com', 'Bhilwara', 'Rajasthan', 'Villa', 'Ajmer', '55', '4', 'New', NULL, '2025-02-06 04:39:51', '2025-02-06 04:39:51');
 
 -- --------------------------------------------------------
 
@@ -197,7 +198,12 @@ INSERT INTO `masters` (`id`, `label`, `type`, `categoryimage`, `created_at`, `up
 (35, 'Fashion', 'Blog Categories', NULL, '2025-01-15 05:53:59', '2025-01-15 05:53:59'),
 (36, 'Health', 'Blog Categories', NULL, '2025-01-15 05:54:06', '2025-01-15 05:54:06'),
 (37, 'Luxury House', 'Property Categories', '1737012944_2.png', '2025-01-16 01:38:56', '2025-01-16 02:05:44'),
-(38, 'Bunglow', 'Property Categories', '1737549230_p-3.jpg', '2025-01-22 06:52:26', '2025-01-22 07:03:50');
+(38, 'Bunglow', 'Property Categories', '1737549230_p-3.jpg', '2025-01-22 06:52:26', '2025-01-22 07:03:50'),
+(39, 'City', 'Master', '', '2025-02-08 02:49:08', '2025-02-08 02:49:08'),
+(40, 'Ajmer', 'City', '1739002957_Inside_View_Toda_and_Digambaro_Ki_Jain_Chhatries.jpg', '2025-02-08 02:50:12', '2025-02-08 02:52:37'),
+(41, 'Delhi', 'City', '1739007523_s1200-3.jpg', '2025-02-08 04:08:43', '2025-02-08 04:08:43'),
+(42, 'Jodhpur', 'City', '1739007574_scale_1200.png', '2025-02-08 04:09:34', '2025-02-08 04:09:34'),
+(43, 'Jaipur', 'City', '1739008152_jpg.jpg', '2025-02-08 04:19:12', '2025-02-08 04:19:12');
 
 -- --------------------------------------------------------
 
@@ -280,6 +286,18 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
+(1, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'c66de47a3a37dd288023acbce8a9b689fe675ab3ea78510aa8f76634c8d1ead3', '[\"*\"]', '2025-02-06 02:25:47', NULL, '2025-02-06 01:18:37', '2025-02-06 02:25:47'),
+(2, 'App\\Models\\RegisterUser', 4, 'AuthToken', '2fefbabb846b97adfe982636046d943ae0a733d0542cb3df0576616fb35a36d8', '[\"*\"]', NULL, NULL, '2025-02-06 05:26:40', '2025-02-06 05:26:40'),
+(3, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'faa67e6120bf28184d0ba3ddd2890d0a5c0a0f623dcd38431afe59155ea62d5e', '[\"*\"]', NULL, NULL, '2025-02-06 05:51:29', '2025-02-06 05:51:29'),
+(4, 'App\\Models\\RegisterUser', 11, 'AuthToken', 'c2570152b33048f47492068383c1e72143978c8f3e9f177b17b7e39163797cd8', '[\"*\"]', NULL, NULL, '2025-02-06 06:08:10', '2025-02-06 06:08:10'),
+(5, 'App\\Models\\RegisterUser', 11, 'AuthToken', 'dbf7c19a1eb71fa44fc1dea553a69ce4dd95f17b0a3091d924b1ed4a88324f5d', '[\"*\"]', '2025-02-06 06:56:50', NULL, '2025-02-06 06:49:32', '2025-02-06 06:56:50'),
+(6, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'ef5497a9641d058e851133de819223cf08889f233047b2954507184720ecf1c6', '[\"*\"]', NULL, NULL, '2025-02-08 00:29:59', '2025-02-08 00:29:59');
+
 -- --------------------------------------------------------
 
 --
@@ -315,9 +333,10 @@ CREATE TABLE `property_listings` (
 INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `discription`, `price`, `squarefoot`, `bedroom`, `bathroom`, `floor`, `city`, `address`, `thumbnail`, `category`, `status`, `gallery`, `documents`, `created_at`, `updated_at`) VALUES
 (31, 'Admin', '1', 'Dvilla Residences Batu', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '1500000', '343', '3', '4', '4', 'Ajmer', 'Ajmer', '1736588231_p-1.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/c68bd9055776bf38d8fc43c0ed283678.jpg\",\"assets\\/images\\/Listings\\/dc36f18a9a0a776671d4879cae69b551.jpg\"]', '[\"assets\\/images\\/Listings\\/faa98789cfb692431ffb52e13497443a.pdf\",\"assets\\/images\\/Listings\\/466accbac9a66b805ba50e42ad715740.pdf\"]', '2025-01-10 06:28:41', '2025-01-16 02:17:34'),
 (36, 'Admin', '1', 'PIK Villa House', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5000000', '500', '3', '3', '5', 'Ajmer', 'Beawar', '1736588133_p-2.jpg', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/115c343463041f8763d7552fdce43c9f.jpg\",\"assets\\/images\\/Listings\\/01d8bae291b1e4724443375634ccfa0e.jpg\"]', '[\"assets\\/images\\/Listings\\/f621585df244e9596dc70a39b579efb1.pdf\",\"assets\\/images\\/Listings\\/3a09a524440d44d7f19870070a5ad42f.pdf\"]', '2025-01-11 04:05:33', '2025-01-23 11:07:49'),
-(39, 'Admin', '1', 'Tungis Luxury', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5200000', '600', '4', '4', '6', 'Banswara', 'Jaipur', '1737548653_p-3.jpg', 'Bunglow', 'published', '[\"assets\\/images\\/Listings\\/8f125da0b3432ed853c0b6f7ee5aaa6b.jpg\",\"assets\\/images\\/Listings\\/29fdff891569187da8e5ed4f7a6ea4c8.jpg\",\"assets\\/images\\/Listings\\/7bec7e63a493e2d61891b1e4051ef75a.jpg\",\"assets\\/images\\/Listings\\/95e6834d0a3d99e9ea8811855ae9229d.jpg\"]', '[\"assets\\/images\\/Listings\\/5d0cb12f8c9ad6845110317afc6e2183.pdf\",\"assets\\/images\\/Listings\\/3ce83f544dbe69bb4fb19211fc442c2f.pdf\"]', '2025-01-22 06:54:13', '2025-01-22 07:00:06'),
+(39, 'Admin', '1', 'Tungis Luxury', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '5200000', '600', '4', '4', '6', 'Jaipur', 'Banswara', '1737548653_p-3.jpg', 'Bunglow', 'published', '[\"assets\\/images\\/Listings\\/8f125da0b3432ed853c0b6f7ee5aaa6b.jpg\",\"assets\\/images\\/Listings\\/29fdff891569187da8e5ed4f7a6ea4c8.jpg\",\"assets\\/images\\/Listings\\/7bec7e63a493e2d61891b1e4051ef75a.jpg\",\"assets\\/images\\/Listings\\/95e6834d0a3d99e9ea8811855ae9229d.jpg\"]', '[\"assets\\/images\\/Listings\\/5d0cb12f8c9ad6845110317afc6e2183.pdf\",\"assets\\/images\\/Listings\\/3ce83f544dbe69bb4fb19211fc442c2f.pdf\"]', '2025-01-22 06:54:13', '2025-02-08 09:48:18'),
 (40, 'Agent', '4', 'Ojiag Duplex Apartment', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '8600000', '541', '5', '5', '8', 'Jodhpur', 'Bhilwara', '1737616797_p-7.jpg', 'Apartment', 'published', '[\"assets\\/images\\/Listings\\/6f3a770e5af1fd4cadc5f004b81e1040.jpg\",\"assets\\/images\\/Listings\\/7eb7eabbe9bd03c2fc99881d04da9cbd.jpg\",\"assets\\/images\\/Listings\\/79a3308b13cd31f096d8a4a34f96b66b.jpg\",\"assets\\/images\\/Listings\\/d1dc3a8270a6f9394f88847d7f0050cf.jpg\"]', '[\"assets\\/images\\/Listings\\/75e33da9b103b7b91dcd8da0abe1354b.pdf\"]', '2025-01-23 01:49:57', '2025-01-27 06:08:28'),
-(41, 'Agent', '4', 'Duplex Bungalow', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '3500000', '343', '5', '5', '5', 'Beawar', 'Beawar', '1737717576_p-9.jpg', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/696186d1596721cb6e79013d4655c5d9.jpg\",\"assets\\/images\\/Listings\\/79cae1be0fbae74dafbf8399ee2209cb.jpg\",\"assets\\/images\\/Listings\\/6be5336db2c119736cf48f475e051bfe.jpg\"]', '[\"assets\\/images\\/Listings\\/0a2a51dac6138826127f093500461d91.pdf\"]', '2025-01-24 05:49:36', '2025-02-03 02:03:28');
+(41, 'Agent', '4', 'Duplex Bungalow', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '3500000', '343', '5', '5', '5', 'Jodhpur', 'Beawar', '1737717576_p-9.jpg', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/696186d1596721cb6e79013d4655c5d9.jpg\",\"assets\\/images\\/Listings\\/79cae1be0fbae74dafbf8399ee2209cb.jpg\",\"assets\\/images\\/Listings\\/6be5336db2c119736cf48f475e051bfe.jpg\"]', '[\"assets\\/images\\/Listings\\/0a2a51dac6138826127f093500461d91.pdf\"]', '2025-01-24 05:49:36', '2025-02-08 09:40:01'),
+(55, 'Admin', '4', 'Weekend Villa MBH', 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '6500000', '605', '4', '3', '4', 'Delhi', 'Bhilwara', '1738828547_p-5.jpg', 'Villa', 'published', '[\"assets\\/images\\/Listings\\/bf2fb7d1825a1df3ca308ad0bf48591e.jpg\",\"assets\\/images\\/Listings\\/94c4dd41f9dddce696557d3717d98d82.jpg\",\"assets\\/images\\/Listings\\/a3a8381281635a1926bd3ea09f29f4d9.jpg\"]', '[\"assets\\/images\\/Listings\\/c65d7bd70fe3e5e3a2f3de681edc193d.pdf\"]', '2025-02-06 02:25:47', '2025-02-06 09:41:09');
 
 -- --------------------------------------------------------
 
@@ -377,8 +396,9 @@ CREATE TABLE `register_users` (
 
 INSERT INTO `register_users` (`id`, `google_id`, `user_type`, `name`, `mobile`, `email`, `password`, `company_name`, `company_document`, `profile_photo_path`, `verification_status`, `created_at`, `updated_at`) VALUES
 (2, NULL, 'user', 'Ravi Shankar', '5754854858', 'auto@gmail.com', '$2y$12$21XxJ/VcpVnAwpyHfYKoeuLYOMrCXnBNqM0yvtNxQ0bKQzoxF.1C6', NULL, NULL, '1737716083_agent-6.jpg', '1', '2025-01-21 05:44:02', '2025-01-24 05:24:43'),
-(4, '101105880704969277948', 'agent', 'Anshul Meena', '2222222222', 'anshulyuvmedia@gmail.com', '$2y$12$pRmLyDPyS2MgROKtMsVQ1OssBFii8IWpxIVednqpkmG74VLEd61Xy', 'Investor Lands', '1738656522_0a2a51dac6138826127f093500461d91.pdf', '1738655533_1736574645_music.png', '1', '2025-01-29 00:12:55', '2025-02-04 02:38:42'),
-(6, '100390981121721709551', 'user', 'nitesh sharma', '1234567898', 'nitesh.yuvmedia@gmail.com', '$2y$12$9wS/m999wbTibsoS/1ccDur5j510fF5lhTQ8eR/t9Iaf1l8lbRODm', NULL, NULL, '1738656776_1736574645_music.png', '1', '2025-01-29 00:08:37', '2025-02-04 03:54:56');
+(4, '101105880704969277948', 'agent', 'Anshul Kumar Meena', '6545756256', 'anshul.yuvmedia@gmail.com', '$2y$12$pRmLyDPyS2MgROKtMsVQ1OssBFii8IWpxIVednqpkmG74VLEd61Xy', 'Investor Lands Updated', '1738999591_0a2a51dac6138826127f093500461d91.pdf', '1738655533_1736574645_music.png', '1', '2025-01-29 00:12:55', '2025-02-08 01:56:31'),
+(6, '100390981121721709551', 'user', 'nitesh sharma', '1234567898', 'nitesh.yuvmedia@gmail.com', '$2y$12$9wS/m999wbTibsoS/1ccDur5j510fF5lhTQ8eR/t9Iaf1l8lbRODm', NULL, NULL, '1738656776_1736574645_music.png', '1', '2025-01-29 00:08:37', '2025-02-04 03:54:56'),
+(11, NULL, 'agent', 'Priteek', '85458598258', 'priteekyuvmedia@gmail.com', '$2y$12$oROoN0IJU4FgT0np0HDa5uTRslgulAZbtKLMP2aVzMaJhOgKFOYPK', 'Investor Lands', '1738757439_dummy.pdf', NULL, '1', '2025-02-05 06:40:39', '2025-02-06 06:08:10');
 
 -- --------------------------------------------------------
 
@@ -400,8 +420,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('CB3oiumkn68aDKVZwyUKbXusJ8JaAcYp8yh4GohE', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicEh2UXdIQVVPSXJtWkUxN3BHZTBGV2dKVlBrMm53ZlcyUHpaNVhsYiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1738662458),
-('Sbs8MoOz0n4e7Aw9epCs8oDj5cDonEA440mMCJ8Y', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMVo3SThJUXlTNlZYb3RicnMzbkpab2xNeXJ1QUNxRkZESmVqdURNbiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjtzOjU6InN0YXRlIjtzOjQwOiJ0NnRLeEF0QmU2ZjI3bHBNbVhWb2hBczNRU3FuM1N1aGl3VW5pQUZsIjt9', 1738662729);
+('anYA0K56SsJKDzPBUckIDQIRGBpw6JtBl7bFyRch', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUnVRS1JFSU5TYU9idzJHSFRTS0RlR2trWG1VNEhkM0xBUXA4dktVMCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1739008160),
+('Y0CcVFbtqdBL0WT1hEJ8cgg5B82cLvXiwszGlNiE', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36', 'YTo3OntzOjY6Il90b2tlbiI7czo0MDoiV2hZUzNIV0NOaDdvVUpyamcyRnhaNDhNaDZ2azc0YjA0Mm40YUN5SSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzQ6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9tYXN0ZXIiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMiR1VkFmdlRJVkZ4dlVHbDdzUUJUNVhlWE5ueVV0RVZrRnM3OE04enZxSEZhSkZsOEd6T3V0YSI7czo1OiJzdGF0ZSI7czo0MDoic1RzUE1SZmxLTzZOQnZEWVBtMm01eXFtNjVFTUtWTTBpMWV0QXJPViI7czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1739008152);
 
 -- --------------------------------------------------------
 
@@ -576,13 +596,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `leads`
 --
 ALTER TABLE `leads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `masters`
 --
 ALTER TABLE `masters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -600,13 +620,13 @@ ALTER TABLE `nortifications`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `register_companies`
@@ -618,7 +638,7 @@ ALTER TABLE `register_companies`
 -- AUTO_INCREMENT for table `register_users`
 --
 ALTER TABLE `register_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`

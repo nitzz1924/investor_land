@@ -17,7 +17,22 @@ class WebsiteViews extends Controller
         $uniqueCategories = PropertyListing::select('category')->distinct()->pluck('category');
         // dd( $uniqueCategories);
         $uniqueCities = PropertyListing::select('city')->distinct()->pluck('city');
-        return view('WebsitePages.home', compact('categories', 'listings', 'blogs', 'uniqueCategories', 'uniqueCities'));
+
+        // Fetch city-wise property count along with listing details
+        $cityListings = PropertyListing::where('status', 'published')
+            ->get()
+            ->groupBy('city');
+
+        $listingsbycitys = Master::where('type', 'City')->get();
+        foreach ($listingsbycitys as $city) {
+            $cityName = $city->label; // Assuming 'label' stores city name
+
+            $city->listings = $cityListings[$cityName] ?? collect(); 
+            $city->property_count = $city->listings->count();
+        }
+        // dd($cityListings);
+
+        return view('WebsitePages.home', compact('categories', 'listingsbycitys', 'listings', 'blogs', 'uniqueCategories', 'uniqueCities'));
     }
     public function aboutpage()
     {
@@ -51,7 +66,7 @@ class WebsiteViews extends Controller
         if ($category) {
             $listings->where('category', $category);
         }
-        
+
         if ($city) {
             $listings->where('city', $city);
         }
@@ -93,13 +108,14 @@ class WebsiteViews extends Controller
 
         return response()->json([
             'success' => true,
-            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category,'filtercity' => $city, 'filterminprice' => $minprice, 'filtermaxprice' => $maxprice]),
+            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category, 'filtercity' => $city, 'filterminprice' => $minprice, 'filtermaxprice' => $maxprice]),
         ], 200);
     }
-    public function myownlistings($usernameroute, $useridroute){
+    public function myownlistings($usernameroute, $useridroute)
+    {
         $username = $usernameroute;
         $userid = $useridroute;
-        $listings = PropertyListing::where('roleid',$userid)->orderBy('created_at', 'DESC')->paginate(4);
+        $listings = PropertyListing::where('roleid', $userid)->orderBy('created_at', 'DESC')->paginate(4);
         return view('WebsitePages.myownlistings', compact('listings', 'username', 'userid'));
     }
 

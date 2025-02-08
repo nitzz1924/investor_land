@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 class CustomerAuth
 {
-     /**
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request

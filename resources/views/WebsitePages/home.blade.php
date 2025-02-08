@@ -362,111 +362,47 @@
         </div>
     </div>
 </div>
+
+
 <div class="property-by-city">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- Section Title Start -->
                 <div class="section-title">
                     <h3 class="wow fadeInUp">Location</h3>
                     <h2 class="text-anime">Properties by Location</h2>
                 </div>
-                <!-- Section Title End -->
             </div>
         </div>
 
         <div class="row">
+        @foreach ($listingsbycitys as $row)
             <div class="col-lg-3 col-6">
-                <!-- Location Item Start -->
                 <div class="location-item wow fadeInUp" data-wow-delay="0.25s">
-                    <!-- Location Image Start -->
                     <div class="location-image">
                         <figure>
-                            <img src="{{asset('websiteAssets/images/city-1.jpg')}}" alt="">
-                        </figure>
-                    </div>
-                    <!-- Location Image End -->
-
-                    <!-- Location Content Start -->
-                    <div class="location-content">
-                        <div class="location-header">
-                            <h3>Ajmer</h3>
-                            <p>22 Properties</p>
-                        </div>
-
-                        <div class="location-footer">
-                            <a href="#" class="btn-default">See More</a>
-                        </div>
-                    </div>
-                    <!-- Location Content End -->
-                </div>
-                <!-- Location Item End -->
-            </div>
-
-            <div class="col-lg-3 col-6">
-                <!-- Location Item Start -->
-                <div class="location-item wow fadeInUp" data-wow-delay="0.5s">
-                    <!-- Location Image Start -->
-                    <div class="location-image">
-                        <figure>
-                            <img src="{{asset('websiteAssets/images/city-2.jpg')}}" alt="">
+                            <img src="{{asset('assets/images/Categories/'.$row->categoryimage)}}" alt="">
                         </figure>
                     </div>
                     <div class="location-content">
                         <div class="location-header">
-                            <h3>Delhi</h3>
-                            <p>22 Properties</p>
+                            <h3>{{$row->label}}</h3>
+                            <p>{{ $row->property_count }} Properties</p>
                         </div>
-
-                        <div class="location-footer">
+                        {{-- <div class="location-footer">
                             <a href="#" class="btn-default">See More</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 col-6">
-                <div class="location-item wow fadeInUp" data-wow-delay="0.75s">
-                    <div class="location-image">
-                        <figure>
-                            <img src="{{asset('websiteAssets/images/city-3.jpg')}}" alt="">
-                        </figure>
-                    </div>
-                    <div class="location-content">
-                        <div class="location-header">
-                            <h3>Mumbai</h3>
-                            <p>22 Properties</p>
-                        </div>
-
-                        <div class="location-footer">
-                            <a href="#" class="btn-default">See More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-6">
-                <div class="location-item wow fadeInUp" data-wow-delay="1s">
-                    <div class="location-image">
-                        <figure>
-                            <img src="{{asset('websiteAssets/images/city-4.jpg')}}" alt="">
-                        </figure>
-                    </div>
-                    <div class="location-content">
-                        <div class="location-header">
-                            <h3>Bengluru</h3>
-                            <p>22 Properties</p>
-                        </div>
-
-                        <div class="location-footer">
-                            <a href="#" class="btn-default">See More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @endforeach
         </div>
     </div>
 </div>
+
+
+
+
 <div class="why-choose-us">
     <div class="container">
         <div class="row align-items-center">

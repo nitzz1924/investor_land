@@ -25,7 +25,7 @@ class AdminStores extends Controller
         try {
             if ($rq->hasFile('categoryimage')) {
                 $rq->validate([
-                    'categoryimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'categoryimage' => 'image|mimes:jpeg,png,jpg',
                 ]);
                 $file = $rq->file('categoryimage');
                 $filename = time() . '_' . $file->getClientOriginalName();
@@ -59,7 +59,7 @@ class AdminStores extends Controller
         try {
             if ($rq->hasFile('categoryimage')) {
                 $rq->validate([
-                    'categoryimage' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'categoryimage' => 'image|mimes:jpeg,png,jpg',
                 ]);
                 $file = $rq->file('categoryimage');
                 $filename = time() . '_' . $file->getClientOriginalName();
