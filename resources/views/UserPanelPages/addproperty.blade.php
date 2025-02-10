@@ -61,8 +61,22 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-2 text-center text-danger mb-0">
+                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
                             Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
+                        </p>
+                    </div>
+                </div>
+                 <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-7">Property Videos</h4>
+                        <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
+                            <div class="dz-default dz-message">
+                                <button class="dz-button" type="button">Drop Video Files here
+                                    to upload</button>
+                            </div>
+                        </form>
+                          <p class="fs-3 text-left text-danger pt-3 mb-0 fw-bold">
+                           Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB <br> Max can be : 2 Files
                         </p>
                     </div>
                 </div>
@@ -132,7 +146,7 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-2 text-center text-danger mb-0">
+                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
                             Set the product documents. Only *.pdf, *.jpg files are accepted.
                         </p>
                     </div>
@@ -166,7 +180,7 @@
                                         to upload</button>
                                 </div>
                             </form>
-                            <p class="fs-2 text-center text-danger mb-0">
+                            <p class="fs-3 text-left text-danger mb-0 fw-bold">
                                 Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
                             </p>
                         </div>
@@ -220,6 +234,38 @@
             const propertyThumbnail = Dropzone.forElement("#propertythumbnail"); // Single image
             const descriptionContent = quill.root.innerHTML;
             combinedFormData.append("description", descriptionContent);
+
+            //Multiple Video Upload Dropzone
+            const videosdrop = Dropzone.forElement("#propertyvideosform");
+            videosdrop.options.acceptedFiles = "video/mp4, video/mov, video/avi";
+            videosdrop.options.maxFilesize = 20; // This is Video Size that is 10 MB maximum.
+            videosdrop.options.maxFiles = 2;
+            if (videosdrop.files.length > 2) {
+                Swal.fire({
+                    title: "Error!"
+                    , text: "You can upload a maximum of 2 video files."
+                    , icon: "error"
+                    , confirmButtonText: "OK"
+                    , customClass: {
+                        confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                    }
+                    , buttonsStyling: true
+                    , showCancelButton: true
+                    , showCloseButton: true
+                });
+                setTimeout(function() {
+                    window.location.reload();
+                }, 2000);
+                return;
+            }
+            videosdrop.files.forEach((Videofile) => {
+                if (Videofile) {
+                    combinedFormData.append("propertyvideos[]", Videofile);
+                }
+            });
+            console.log("Property Videos:", videosdrop.files);
+
+            
 
             // Append multiple image files to FormData
             dropzoneInstance.files.forEach((file) => {

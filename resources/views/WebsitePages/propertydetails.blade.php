@@ -1,3 +1,4 @@
+{{------------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 @extends('layouts.website')
 @section('title', $propertyName.' | Details',)
 @section('content')
@@ -109,6 +110,28 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="property-map-location wow fadeInUp" data-wow-delay="1.25s">
+                        <div class="property-single-subtitle">
+                            <h3>Tour this Property</h3>
+                        </div>
+                        <div class="row">
+                            @if ($propertydetails->videos)
+                            @foreach (json_decode($propertydetails->videos) as $videopart)
+                            <div class="col-md-6">
+                                <div class="item rounded-4 overflow-hidden">
+                                    <video controls class="img-fluid">
+                                        <source src="{{ asset($videopart) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                            @endforeach
+                            @else
+                            <p class="text-center text-muted">No Videos Found</p>
+                            @endif
+                        </div>
+                    </div>
                     <div class="property-amenities wow fadeInUp" data-wow-delay="1s">
                         <div class="property-single-subtitle">
                             <h3>Features & Amenities</h3>
@@ -126,15 +149,6 @@
                                 <li>Garden</li>
                                 <li>Kids Play Area</li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="property-map-location wow fadeInUp" data-wow-delay="1.25s">
-                        <div class="property-single-subtitle">
-                            <h3>Map Location</h3>
-                        </div>
-
-                        <div class="property-map-iframe">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d135589.94055825932!2d74.55331276083179!3d26.453373262694694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396be6d8fcb7cd01%3A0xcbaf8f12eb8100ee!2sAjmer%2C%20Rajasthan!5e1!3m2!1sen!2sin!4v1737543080216!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>

@@ -16,10 +16,10 @@
                             </ol>
                         </nav>
                     </div>
-                     <div class="col-md-2 d-flex justify-content-end align-items-center">
+                    <div class="col-md-2 d-flex justify-content-end align-items-center">
                         <div class="">
                             <a href="{{ route('admin.allproperties') }}" class="btn btn-outline-primary">
-                               <i class="ti ti-arrow-narrow-left"></i> Go Back
+                                <i class="ti ti-arrow-narrow-left"></i> Go Back
                             </a>
                         </div>
                     </div>
@@ -60,8 +60,22 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-2 text-center text-danger mb-0">
-                            Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
+                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
+                            Set the property Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-7">Property Videos</h4>
+                        <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
+                            <div class="dz-default dz-message">
+                                <button class="dz-button" type="button">Drop Video Files here
+                                    to upload</button>
+                            </div>
+                        </form>
+                        <p class="fs-3 text-left text-danger pt-3 mb-0 fw-bold">
+                            Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB <br> Max can be : 2 Files
                         </p>
                     </div>
                 </div>
@@ -131,8 +145,8 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-2 text-center text-danger mb-0">
-                            Set the product documents. Only *.pdf, *.jpg files are accepted.
+                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
+                            Set the property documents. Only *.pdf, *.jpg files are accepted.
                         </p>
                     </div>
                 </div>
@@ -165,8 +179,8 @@
                                         to upload</button>
                                 </div>
                             </form>
-                            <p class="fs-2 text-center text-danger mb-0">
-                                Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
+                            <p class="fs-3 text-left text-danger mb-0 fw-bold">
+                                Set the property thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
                             </p>
                         </div>
                     </div>
@@ -220,6 +234,41 @@
             const descriptionContent = quill.root.innerHTML;
             combinedFormData.append("description", descriptionContent);
 
+
+            //Multiple Video Upload Dropzone
+            const videosdrop = Dropzone.forElement("#propertyvideosform");
+            videosdrop.options.acceptedFiles = "video/mp4, video/mov, video/avi";
+            videosdrop.options.maxFilesize = 20; // This is Video Size that is 20 MB maximum.
+            videosdrop.options.maxFiles = 2; // Restrict to 2 files maximum
+            if (videosdrop.files.length > 2) {
+                Swal.fire({
+                    title: "Error!"
+                    , text: "You can upload a maximum of 2 video files."
+                    , icon: "error"
+                    , confirmButtonText: "OK"
+                    , customClass: {
+                        confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                    }
+                    , buttonsStyling: true
+                    , showCancelButton: true
+                    , showCloseButton: true
+                });
+                setTimeout(function() {
+                    window.location.reload();
+                }, 2000);
+                return;
+            }
+            videosdrop.files.forEach((Videofile) => {
+                if (Videofile) {
+                    combinedFormData.append("propertyvideos[]", Videofile);
+                }
+            });
+            console.log("Property Videos:", videosdrop.files);
+
+
+
+
+
             // Append multiple image files to FormData
             dropzoneInstance.files.forEach((file) => {
                 if (file) {
@@ -227,14 +276,13 @@
                     combinedFormData.append("galleryImages[]", file);
                 }
             });
-            
+
             propertydocumentsform.files.forEach((file) => {
                 if (file) {
                     // Append each file to FormData
                     combinedFormData.append("documents[]", file);
                 }
             });
-            console.log("propertydocumentsform:", propertydocumentsform.files);
 
 
             // Check if there are any files selected for the thumbnail
@@ -274,11 +322,11 @@
                                 , showCloseButton: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href="editproperty/" + data.data.id;
+                                    window.location.href = "editproperty/" + data.data.id;
                                 }
                             });
                         } else {
-                           Swal.fire({
+                            Swal.fire({
                                 title: "Error!"
                                 , text: data.message
                                 , icon: "error"

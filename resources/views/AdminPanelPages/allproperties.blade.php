@@ -56,14 +56,12 @@
                                 <td>{{ $data->city}}</td>
                                 <td>{{ $data->address}}</td>
                                 <td>
-                                <a href="">
                                      <div>
                                         <span class="mb-1 badge-sm px-3 rounded {{ $data->usertype == 'Admin' ? 'text-bg-success' : ($data->usertype == 'Agent' ? 'text-bg-warning' : 'text-bg-info') }}">
                                             {{ ucfirst( $data->usertype) }}
                                         </span>
                                     </div>
                                     {{ $data->username }}
-                                </a>
                                 </td>
                                 <td>
                                     <div class="form-check form-switch">

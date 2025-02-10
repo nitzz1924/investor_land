@@ -22,6 +22,7 @@ class PropertyListing extends Model
         'category',
         'gallery',
         'documents',
+        'videos',
         'status',
     ];
 }

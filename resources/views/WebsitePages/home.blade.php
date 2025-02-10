@@ -3,6 +3,21 @@
 @section('title','Home')
 @section('content')
 
+
+<div class="row justify-content-center">
+    <div class="col-lg-5">
+        @if ($message = Session::get('success'))
+        <div class="alert border-0 alert-success text-center" role="alert" id="successAlert">
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
+        @if ($message = Session::get('error'))
+        <div class="alert border-0 alert-danger text-center" role="alert" id="dangerAlert">
+            <strong>{{ $message }}</strong>
+        </div>
+        @endif
+    </div>
+</div>
 <div class="hero">
     <div class="hero-section parallaxie">
         <div class="container">
@@ -376,7 +391,7 @@
         </div>
 
         <div class="row">
-        @foreach ($listingsbycitys as $row)
+            @foreach ($listingsbycitys as $row)
             <div class="col-lg-3 col-6">
                 <div class="location-item wow fadeInUp" data-wow-delay="0.25s">
                     <div class="location-image">
@@ -395,7 +410,7 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+            @endforeach
         </div>
     </div>
 </div>
@@ -618,6 +633,16 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+<script>
+    setTimeout(function() {
+        $('#successAlert').fadeOut('slow');
+    }, 3000);
+
+    setTimeout(function() {
+        $('#dangerAlert').fadeOut('slow');
+    }, 3000);
+
+</script>
 <!-- Property Filter -->
 <script>
     document.getElementById("priceFilterBtn").addEventListener("click", function() {
@@ -668,15 +693,15 @@
 
         if (!minPrice && !maxPrice && !filtercity && !filtercategory) {
             Toastify({
-                text: "Please select at least one to filter Listings.",
-                duration: 3000,
-                className: "info",
-                style: {
-                    background: "#726555",
-                },
-                position: "center",
-            }).showToast();
-            return false; 
+                text: "Please select at least one to filter Listings."
+                , duration: 3000
+                , className: "info"
+                , style: {
+                    background: "#726555"
+                , }
+                , position: "center"
+            , }).showToast();
+            return false;
         }
 
         $.ajax({

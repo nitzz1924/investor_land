@@ -72,8 +72,36 @@
                             </div>
                             @endif
                         </div>
-                        <p class="fs-2 text-center text-danger pt-3 mb-0">
+                        <p class="fs-3 text-center text-danger pt-3 mb-0 fw-bold">
                             Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-7">Property Videos</h4>
+                        <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
+                            <div class="dz-default dz-message">
+                                <button class="dz-button" type="button">Drop Video Files here
+                                    to upload</button>
+                            </div>
+                        </form>
+                        <div id="videoPreview" class="mt-3">
+                            @if ($listingdata->videos)
+                            <div class="d-flex flex-wrap">
+                                @foreach (json_decode($listingdata->videos) as $video)
+                                <div class="mx-2 mb-2">
+                                    <video controls class="rounded-3" style="max-height: 200px; max-width: 300px;">
+                                        <source src="{{ asset($video) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                @endforeach
+                            </div>
+                            @endif
+                        </div>
+                        <p class="fs-3 text-center text-danger pt-3 mb-0 fw-bold">
+                           Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB
                         </p>
                     </div>
                 </div>
@@ -148,7 +176,7 @@
                             @foreach (json_decode($listingdata->documents) as $document)
                             <div class="mx-2">
                                 @if (pathinfo($document, PATHINFO_EXTENSION) == 'pdf')
-                                <iframe src="{{ asset($document) }}" class="rounded-3 img-fluid" style="max-height: 100px; width: 100px;" frameborder="0"></iframe>
+                                <iframe src="{{ asset($document) }}" class="rounded-3 img-fluid" style="max-height: 200px; max-width: 300px;" frameborder="0"></iframe>
                                 @else
                                 <img src="{{ asset($document) }}" class="rounded-3 img-fluid" alt="Document" style="max-height: 100px;">
                                 @endif
@@ -157,7 +185,7 @@
                             @endforeach
                         </div>
                         @endif
-                        <p class="fs-2 text-center text-danger mb-0">
+                        <p class="fs-3 mt-4 text-center text-danger mb-0 fw-bold">
                             Set the product documents. Only *.pdf files are accepted.
                         </p>
                     </div>
@@ -194,7 +222,7 @@
                             <div id="thumbnailPreview" class="mt-3">
                                 <img src="{{asset('assets/images/Listings/'.$listingdata->thumbnail)}}" alt="Thumbnail Preview" class="img-fluid rounded-3" style="max-height: 100px; display: {{$listingdata->thumbnail ? 'block' : 'none'}};">
                             </div>
-                            <p class="fs-2 text-center text-danger mb-0">
+                            <p class="fs-3 text-center mt-3 text-danger mb-0 fw-bold">
                                 Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
                             </p>
                         </div>
@@ -262,6 +290,19 @@
             const descriptionContent = document.querySelector('#editorr').innerHTML;
             console.log(descriptionContent);
             combinedFormData.append("description", descriptionContent);
+
+            //Multiple Video Upload Dropzone
+            const videosdrop = Dropzone.forElement("#propertyvideosform");
+            videosdrop.options.acceptedFiles = "video/mp4, video/mov, video/avi";
+            videosdrop.options.maxFilesize = 20; // This is Video Size that is 10 MB maximum.
+            videosdrop.files.forEach((Videofile) => {
+                if (Videofile) {
+                    combinedFormData.append("propertyvideos[]", Videofile);
+                }
+            });
+            console.log("Property Videos:", videosdrop.files);
+
+            
 
             // Append multiple image files to FormData
             dropzoneInstance.files.forEach((file) => {

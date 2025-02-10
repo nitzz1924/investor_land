@@ -148,6 +148,25 @@ class UserViews extends Controller
                 // dd($documents);
             }
 
+             // Handle multiple Videos
+             $Videos = [];
+             if ($request->hasFile('propertyvideos')) {
+                 $request->validate([
+                     'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
+                 ]);
+ 
+                 $videofiles = $request->file('propertyvideos');
+                 foreach ($videofiles as $file) {
+                     $videoname = md5(rand(1000, 10000));
+                     $extension = strtolower($file->getClientOriginalExtension());
+                     $videofullname = $videoname . '.' . $extension;
+                     $uploadedPath = public_path('assets/images/Listings');
+                     $file->move($uploadedPath, $videofullname);
+                     $Videos[] = 'assets/images/Listings/' . $videofullname;
+                 }
+                 // dd($Videos);
+             }
+
             // Create the property listing
             $data = PropertyListing::create([
                 'usertype' =>  ucfirst($authuser->user_type),
@@ -165,6 +184,7 @@ class UserViews extends Controller
                 'category' => $datareq['category'],
                 'gallery' => json_encode($galleryImages),
                 'documents' => json_encode($documents),
+                'videos' => json_encode($Videos),
                 'status' => $datareq['status'],
             ]);
 
@@ -253,6 +273,25 @@ class UserViews extends Controller
             }
 
 
+            // Handle multiple Videos
+            $Videos = [];
+            if ($request->hasFile('propertyvideos')) {
+                $request->validate([
+                    'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
+                ]);
+
+                $videofiles = $request->file('propertyvideos');
+                foreach ($videofiles as $file) {
+                    $videoname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $videofullname = $videoname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $videofullname);
+                    $Videos[] = 'assets/images/Listings/' . $videofullname;
+                }
+                // dd($Videos);
+            }
+
             $olddata = PropertyListing::find($request->listingid);
             // dd($olddata);
             // Create the property listing
@@ -272,6 +311,7 @@ class UserViews extends Controller
                 'category' => $datareq['category'],
                 'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
+                'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
                 'status' => $datareq['status'],
             ]);
 

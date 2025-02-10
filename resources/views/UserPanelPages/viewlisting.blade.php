@@ -128,6 +128,33 @@
                 </div>
             </div>
         </div>
+         <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center mb-7">
+                                <h4 class="card-title">Property Views</h4>
+                            </div>
+                            <div class="row">
+                                @if ($listingdata->videos)
+                                @foreach (json_decode($listingdata->videos) as $videopart)
+                                <div class="col-md-6">
+                                    <div class="item rounded-4 overflow-hidden">
+                                        <video controls class="img-fluid">
+                                            <source src="{{ asset($videopart) }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @else
+                                       <p class="text-center text-muted">No Videos Found</p>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 @endsection

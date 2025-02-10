@@ -49,9 +49,9 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <!-- Logo Start -->
-                    <a class="navbar-brand" href="/">
-                        <h1>Investor Lands</h1>
-                        {{-- <img src="images/logo.svg" alt="Logo"> --}}
+                    <a class="navbar-brand" href="/" style="width: 320px;">
+                        {{-- <h1>Investor Lands</h1> --}}
+                        <img class="" src="{{asset('assets/images/logotwo.png')}}" alt="Logo">
                     </a>
                     <!-- Logo End -->
 
@@ -67,19 +67,19 @@
                             <li class="nav-item dropdown">
                                 @if(Auth::guard('customer')->check())
                                 @if(Auth::guard('customer')->user()->profile_photo_path)
-                                    @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                        {{ Auth::guard('customer')->user()->name }}
-                                    </a>
-                                    @else
-                                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                    {{ Auth::guard('customer')->user()->name }}
+                                </a>
+                                @else
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                     {{ Auth::guard('customer')->user()->name }}
-                                    </a>
-                                    @endif
+                                </a>
+                                @endif
                                 @else
-                                    <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
                                 @endif
                                 <ul class="dropdown-menu" aria-labelledby="userMenu">
                                     <li><a class="dropdown-item" target="_blank" href="{{ route('user.dashboard') }}">My Dashboard</a></li>

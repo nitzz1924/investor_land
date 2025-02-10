@@ -27,7 +27,7 @@ class GoogleAuthentication extends Controller
                 Auth::guard('customer')->login($user);
                 $user->verification_status = 1;
                 $user->save();
-                return redirect()->route('website.userlogin')->with('success', 'You are logged in successfully');
+                return redirect()->route('website.homepage')->with('success', 'You are logged in successfully');
             } else {
                 $this->googleRegistrationRedirects('default_type');
                 return redirect()->route('website.userlogin')->with('error', 'This User is not registered');

@@ -12,16 +12,6 @@
                             <h3 class="mb-3 loginhead">Your Trusted Partner in Real Estate</h3>
                             <p>Enter Details to Login</p>
                         </div>
-                        @if ($message = Session::get('success'))
-                        <div class="alert border-0 alert-success text-center" role="alert" id="successAlert">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @endif
-                        @if ($message = Session::get('error'))
-                        <div class="alert border-0 alert-danger text-center" role="alert" id="dangerAlert">
-                            <strong>{{ $message }}</strong>
-                        </div>
-                        @endif
                         <div class="property-inquiry-box wow" data-wow-delay="0.5s">
                             <div class="property-inquiry-form">
                                 <form id="" action="{{ route('website.loginuser') }}" method="POST">
@@ -72,14 +62,4 @@
         </div>
     </div>
 </div>
-<script>
-    setTimeout(function() {
-        $('#successAlert').fadeOut('slow');
-    }, 3000);
-
-    setTimeout(function() {
-        $('#dangerAlert').fadeOut('slow');
-    }, 3000);
-
-</script>
 @endsection
