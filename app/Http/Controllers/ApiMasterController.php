@@ -13,7 +13,7 @@ use App\Models\Master;
 use Log;
 class ApiMasterController extends Controller
 {
-    public function loginuser(Request $rq)
+    public function loginuser(Request $rq)  
     {
         try {
             $user = RegisterUser::where('email', $rq->email)->first();
@@ -29,6 +29,7 @@ class ApiMasterController extends Controller
                         $response = [
                             'success' => true,
                             'token' => $token,
+                            'data' => $user,
                             'message' => 'Login Successfully..!!!!!'
                         ];
                     } else {

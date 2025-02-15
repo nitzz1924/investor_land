@@ -89,7 +89,9 @@ class WebsiteViews extends Controller
         $categories = Master::where('type', 'Property Categories')->get();
         $propertydetails = PropertyListing::find($id);
         $propertyName = $propertydetails->property_name;
-        return view('WebsitePages.propertydetails', compact('categories', 'propertydetails', 'propertyName'));
+        $listings = PropertyListing::where('category',$propertydetails->category)->get();
+        // dd( $listings);
+        return view('WebsitePages.propertydetails', compact('categories','listings', 'propertydetails', 'propertyName'));
     }
     public function userlogin()
     {

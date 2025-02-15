@@ -8,6 +8,7 @@
             <div class="col-md-12">
                 <div class="page-header-box">
                     <h1 class="text-anime">{{$propertyName}}</h1>
+                    <h3 class="text-anime text-white">{{$propertydetails->nearbylocation}}</h3>
                     <p class="text-anime text-white">{{$propertydetails->category}}</p>
                 </div>
             </div>
@@ -38,7 +39,7 @@
                             <div class="swiper-arrow-next"><i class="fa-solid fa-arrow-right"></i></div>
                         </div>
                     </div>
-                    <div class="property-overview wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="property-overview wow " data-wow-delay="0.5s">
                         <div class="property-single-subtitle">
                             <h3>Overview</h3>
                         </div>
@@ -96,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="about-property wow fadeInUp" data-wow-delay="0.75s">
+                    <div class="about-property wow " data-wow-delay="0.75s">
                         <div class="property-single-subtitle">
                             <h3>About This Property</h3>
                         </div>
@@ -110,8 +111,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="property-map-location wow fadeInUp" data-wow-delay="1.25s">
+
+                    <div class="property-map-location wow " data-wow-delay="1.25s">
                         <div class="property-single-subtitle">
                             <h3>Tour this Property</h3>
                         </div>
@@ -132,23 +133,143 @@
                             @endif
                         </div>
                     </div>
-                    <div class="property-amenities wow fadeInUp" data-wow-delay="1s">
+                    <div class="property-amenities wow " data-wow-delay="1s">
                         <div class="property-single-subtitle">
                             <h3>Features & Amenities</h3>
                         </div>
 
                         <div class="property-amenities-box">
                             <ul>
-                                <li>Club House</li>
-                                <li>Barbeque</li>
-                                <li>Library</li>
-                                <li>Gym</li>
-                                <li>Party Lawn</li>
-                                <li>Theater</li>
-                                <li>Swimming Pool</li>
-                                <li>Garden</li>
-                                <li>Kids Play Area</li>
+                                @foreach (json_decode($propertydetails->amenties) as $amenti)
+                                <li>{{$amenti}}</li>
+                                @endforeach
                             </ul>
+                        </div>
+                    </div>
+
+                    <div class="property-map-location wow" data-wow-delay="1.25s">
+                        <div class="property-single-subtitle">
+                            <h3>Mortgage Calculator</h3>
+                            <div class="calculator mt-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <label for="totalPrice">Total Price (INR):</label>
+                                            <input type="number" id="totalPrice" value="146784424" />
+                                            <input type="range" id="totalPriceRange" min="10000000" max="500000000" value="146784424" step="100000" />
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="loanPeriod">Loan Period (Years):</label>
+                                            <input type="number" id="loanPeriod" value="25" />
+                                            <input type="range" id="loanPeriodRange" min="1" max="30" value="25" step="1" />
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="downPayment">Down Payment (INR):</label>
+                                            <input type="number" id="downPayment" value="29356885" />
+                                            <input type="range" id="downPaymentRange" min="0" max="146784424" value="29356885" step="100000" />
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="interestRate">Interest Rate (%):</label>
+                                            <input type="number" id="interestRate" value="4.74" />
+                                            <input type="range" id="interestRateRange" min="1" max="20" value="4.74" step="0.01" />
+                                        </div>
+                                        <button class="btn-default" onclick="calculateMortgage()">Calculate</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="result">
+                                            <h2>INR <span id="monthlyPayment">668,792</span> per month</h2>
+                                            <p>
+                                                TOTAL LOAN AMOUNT: INR
+                                                <span id="totalLoanAmount">200,639,866</span>
+                                            </p>
+                                        </div>
+                                        <div class="chart-container">
+                                            <canvas id="paymentChart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-amenities wow " data-wow-delay="1s">
+                        <div class="property-single-subtitle">
+                            <h3>Price Trend</h3>
+                        </div>
+                        <div class="property-amenities-box">
+                            <div id="chart-line-basic" class="mx-n3"></div>
+                        </div>
+                    </div>
+                    <div class="property-map-location wow" data-wow-delay="1.25s">
+                        <div class="property-single-subtitle">
+                            <h3>Map Location</h3>
+                        </div>
+
+                        <div class="property-map-iframe">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49359.77289774349!2d77.59174385159328!3d13.045949738664566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1707476041972!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                    <div class="property-map-location wow" data-wow-delay="1.25s">
+                        <div class="property-single-subtitle">
+                            <h3>Releted Properties</h3>
+                        </div>
+
+                        <div class="property-slider">
+                            <div class="swiper">
+                                <div class="swiper-wrapper">
+                                    @foreach ($listings as $list)
+                                    <div class="swiper-slide">
+                                        <div class="property-item">
+                                            <div class="property-header">
+                                                <figure class="image-anime">
+                                                    <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
+                                                </figure>
+                                                <span class="property-label">{{$list->category}}</span>
+                                            </div>
+                                            <div class="property-body">
+                                                <h3>{{$list->property_name}}</h3>
+                                                <p>{{$list->address}}</p>
+
+                                                <div class="property-meta">
+                                                    <div class="property-amenity-item">
+                                                        <div class="icon-box">
+                                                            <img src="{{asset('websiteAssets/images/icon-badroom.svg')}}" alt="">
+                                                        </div>
+                                                        <span>{{$list->bedroom}} <span class="hideshowproperty">Bedsroom</span></span>
+                                                    </div>
+
+                                                    <div class="property-amenity-item">
+                                                        <div class="icon-box">
+                                                            <img src="{{asset('websiteAssets/images/icon-bathroom.svg')}}" alt="">
+                                                        </div>
+                                                        <span>{{$list->bathroom}} <span class="hideshowproperty">Bathrooms</span></span>
+                                                    </div>
+
+                                                    <div class="property-amenity-item">
+                                                        <div class="icon-box">
+                                                            <img src="{{asset('websiteAssets/images/icon-area.svg')}}" alt="">
+                                                        </div>
+                                                        <span>{{$list->squarefoot}} <span class="hideshowproperty">sq ft</span></span>
+                                                    </div>
+
+                                                    <div class="property-amenity-item">
+                                                        <div class="icon-box">
+                                                            <img src="{{asset('websiteAssets/images/icon-garage.svg')}}" alt="">
+                                                        </div>
+                                                        <span>{{$list->floor}} <span class="hideshowproperty">Floors</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="property-footer">
+                                                <span class="badge {{$list->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst($list->status) }}</span>
+                                                <a href="{{route('website.propertydetails',['id'=> $list->id])}}" class="btn-default">View Property</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -262,6 +383,7 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     setTimeout(function() {
         $('#successAlert').fadeOut('slow');

@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 ">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-7">
@@ -38,10 +38,21 @@
                             </button>
                         </div>
                         <form action="#" class="form-horizontal">
-                            <div class="mb-4">
-                                <label class="form-label">Property Name<span class="text-danger">*</span>
-                                </label>
-                                <input type="text" placeholder="Property Name" name="property_name" class="form-control" required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Property Name<span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" placeholder="Property Name" name="property_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Near By Location<span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" placeholder="Enter Near by Location of Property" name="nearbylocation" class="form-control" required>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label class="form-label">Property Description</label>
@@ -145,9 +156,20 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
+                        <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
                             Set the property documents. Only *.pdf, *.jpg files are accepted.
                         </p>
+                        <div class="mt-4">
+                            <form action="" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="form-label">Upload Master Plan of Property</label>
+                                    <input type="file" name="masterplandocument" class="form-control" id="masterplandocument">
+                                </div>
+                            </form>
+                            <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
+                                Set the Master Plan Document. Only *.pdf files are accepted.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,15 +209,45 @@
                     <div class="card">
                         <form action="" method="post">
                             <div class="card-body">
-                                <h4 class="card-title mb-7">Property Details</h4>
+                                <h4 class="card-title mb-7">Property Categories</h4>
                                 <div class="mb-3">
-                                    <label class="form-label">Categories</label>
                                     <select name="category" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                         <option value="3" selected="">--select category--</option>
                                         @foreach ($categories as $data)
                                         <option value="{{$data->label}}">{{$data->label}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <form onsubmit="return false;">
+                            <div class="card-body">
+                                <h4 class="card-title mb-7">Features & Amenities</h4>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="form-label text-muted">Enter to Add Amenities</label>
+                                        <input type="text" name="input" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <form>
+                            <div class="card-body">
+                              <h4 class="card-title mb-7">Pin Location in Map</h4>
+                                <div class="container well">
+                                    <div id="maparea" style="width: 100%; height: 400px;"></div>
+                                    <div class="mt-3">
+                                        <label class="form-label">Lat</label>
+                                        <input type="text" name="latitude" class="form-control" id="us2-lat" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <label class="form-label">Long</label>
+                                        <input type="text" name="longitude" class="form-control" id="us2-lon" />
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -209,12 +261,76 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="input"]').tagsinput({
+                trimValue: true
+                , confirmKeys: [13, 44]
+                , focusClass: 'my-focus-class'
+            });
+
+            $('.bootstrap-tagsinput input').on('focus', function() {
+                $(this).closest('.bootstrap-tagsinput').addClass('has-focus');
+            }).on('blur', function() {
+                $(this).closest('.bootstrap-tagsinput').removeClass('has-focus');
+            });
+
+        });
+
+    </script>
+    <script>
+        var counter = 0;
+        let amenties = [];
+        $(document).on('click', '.addRow', function() {
+            counter++;
+            var name = $('#amentinamevalue').val();
+            amenties.push(name);
+            var tr = `
+                    <tr>
+                        <td class="row-number">${counter}</td>
+                        <td>
+                            <div class="mb-3">
+                                <div class="mb-4">${name}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm deleteRow" data-value="${name}">delete</button>
+                        </td>
+                    </tr>
+                `;
+            $('#tablebody').append(tr);
+            updateRowNumbers();
+            console.log("dsfsd", amenties);
+        });
+
+        $(document).on('click', '.deleteRow', function() {
+            var valueToRemove = $(this).data("value"); // Get the value associated with the button
+            amenties = amenties.filter(item => item !== valueToRemove); // Remove value from array
+            $(this).closest('tr').remove();
+            updateRowNumbers();
+            console.log("Updated Amenities:", amenties);
+        });
+
+        // Function to update row numbers dynamically
+        function updateRowNumbers() {
+            counter = 0; // Reset counter
+            $('#tablebody tr').each(function() {
+                counter++;
+                $(this).find('.row-number').text(counter);
+            });
+        }
+
+    </script>
     <script>
         document.querySelector("#submitAllForms").addEventListener("click", function(event) {
             event.preventDefault();
 
+
+
             // Create a FormData object
             const combinedFormData = new FormData();
+
 
             // Select all forms
             const forms = document.querySelectorAll("form");
@@ -225,14 +341,28 @@
                 for (let [key, value] of formData.entries()) {
                     combinedFormData.append(key, value);
                 }
-            });
+            })
+
 
             // Get Dropzone instances
             const dropzoneInstance = Dropzone.forElement("#propertyGalleryForm"); // Multiple images
             const propertydocumentsform = Dropzone.forElement("#propertydocumentsform"); // Multiple images
             const propertyThumbnail = Dropzone.forElement("#propertythumbnail"); // Single image
+            const MasterPlanDocument = document.getElementById("masterplandocument"); // Master Plan Document
             const descriptionContent = quill.root.innerHTML;
             combinedFormData.append("description", descriptionContent);
+
+
+            //Get Amenities here..
+            let amenities = $('input[name="input"]').tagsinput('items');
+            combinedFormData.append("amenities", JSON.stringify(amenities));
+
+             //Create JSON for Latitude & Longitude
+            const locationData = {
+                Latitude: document.getElementById("us2-lat").value,
+                Longitude: document.getElementById("us2-lon").value
+            };
+            combinedFormData.append("location", JSON.stringify(locationData));
 
 
             //Multiple Video Upload Dropzone
@@ -263,11 +393,6 @@
                     combinedFormData.append("propertyvideos[]", Videofile);
                 }
             });
-            console.log("Property Videos:", videosdrop.files);
-
-
-
-
 
             // Append multiple image files to FormData
             dropzoneInstance.files.forEach((file) => {
@@ -293,6 +418,21 @@
                 });
                 console.log("thumbnailImages:", propertyThumbnail.files);
             }
+
+            //Master Plan Document
+            if (MasterPlanDocument.files.length > 0) {
+                for (let i = 0; i < MasterPlanDocument.files.length; i++) {
+                    combinedFormData.append("masterplandocument", MasterPlanDocument.files[i]);
+                }
+                console.log("MasterPlanDocument:", MasterPlanDocument.files);
+            }
+
+
+            // Log all form values to the console
+            for (let [key, value] of combinedFormData.entries()) {
+                console.log(key, value);
+            }
+
 
             // Submit the form data via AJAX
             $.ajax({

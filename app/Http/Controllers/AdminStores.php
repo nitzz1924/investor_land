@@ -227,7 +227,23 @@ class AdminStores extends Controller
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
             }
-            // dd($thumbnailFilename);
+
+
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
+
+
+
 
             // Handle multiple gallery images
             $galleryImages = [];
@@ -297,6 +313,7 @@ class AdminStores extends Controller
                 'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
                 'squarefoot' => $datareq['sqfoot'],
@@ -306,9 +323,12 @@ class AdminStores extends Controller
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename,
+                'masterplandoc' => $masterdoc,
+                'maplocations' =>$datareq['location'],
                 'category' => $datareq['category'],
                 'gallery' => json_encode($galleryImages),
                 'documents' => json_encode($documents),
+                'amenties' =>  $datareq['amenities'],
                 'videos' => json_encode($Videos),
                 'status' => $datareq['status'],
             ]);
@@ -338,6 +358,19 @@ class AdminStores extends Controller
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
             }
             // dd($thumbnailFilename);
+
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
 
             // Handle multiple gallery images
             $galleryImages = [];
@@ -408,6 +441,7 @@ class AdminStores extends Controller
                 'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
                 'squarefoot' => $datareq['sqfoot'],
@@ -417,9 +451,12 @@ class AdminStores extends Controller
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename ?? $olddata->thumbnail,
+                'masterplandoc' => $masterdoc ?? $olddata->masterdoc,
+                'maplocations' =>$datareq['location'] ?? $olddata->maplocations,
                 'category' => $datareq['category'],
                 'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
+                'amenties' =>  $datareq['amenities'] ?? $olddata->amenities,
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
                 'status' => $datareq['status'],
             ]);

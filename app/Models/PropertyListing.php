@@ -19,9 +19,12 @@ class PropertyListing extends Model
         'city',
         'address',
         'thumbnail',
+        'masterplandoc',
+        'maplocations',
         'category',
         'gallery',
         'documents',
+        'amenties',
         'videos',
         'status',
     ];

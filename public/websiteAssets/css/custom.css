@@ -3934,3 +3934,63 @@ footer.footer {
 .d-none {
     display: none;
 }
+
+.calculator {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="number"],
+input[type="range"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    margin-top: 5px;
+}
+
+.result {
+    margin-top: 20px;
+}
+
+.result h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.result p {
+    font-size: 16px;
+    color: #555;
+}
+
+.chart-container {
+    margin-top: 20px;
+    width: 100%;
+    height: 200px;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+
+
