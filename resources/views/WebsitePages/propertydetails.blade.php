@@ -112,12 +112,40 @@
                         </div>
                     </div>
 
+
+                    @if(!empty($propertydetails->masterplandoc))
+                    <div class="property-amenities wow" data-wow-delay="1s">
+                        <div class="property-single-subtitle">
+                            <h3>Master Plans</h3>
+                        </div>
+
+                        <div class="property-amenities-box">
+                            @php
+                            $fileExtension = pathinfo($propertydetails->masterplandoc, PATHINFO_EXTENSION);
+                            @endphp
+
+                            @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg']))
+                                <img src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" alt="Master Plan" style="max-width: 100%; height: auto;">
+                                <div class="d-flex justify-content-center mt-3">
+                                    <a href="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" download class="btn-default">Download</a>
+                                </div>
+                            @elseif(strtolower($fileExtension) == 'pdf')
+                                <iframe src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" width="100%" height="600px"></iframe>
+                            @else
+                                <p>Unsupported file format</p>
+                            @endif
+                        </div>
+                    </div>
+                    @endif
+
+
+
+                    @if (!empty($propertydetails->videos))
                     <div class="property-map-location wow " data-wow-delay="1.25s">
                         <div class="property-single-subtitle">
                             <h3>Tour this Property</h3>
                         </div>
                         <div class="row">
-                            @if ($propertydetails->videos)
                             @foreach (json_decode($propertydetails->videos) as $videopart)
                             <div class="col-md-6">
                                 <div class="item rounded-4 overflow-hidden">
@@ -128,11 +156,11 @@
                                 </div>
                             </div>
                             @endforeach
-                            @else
-                            <p class="text-center text-muted">No Videos Found</p>
-                            @endif
                         </div>
                     </div>
+                    @endif
+
+                    @if(!empty($propertydetails->amenties))
                     <div class="property-amenities wow " data-wow-delay="1s">
                         <div class="property-single-subtitle">
                             <h3>Features & Amenities</h3>
@@ -146,6 +174,7 @@
                             </ul>
                         </div>
                     </div>
+                    @endif
 
                     <div class="property-map-location wow" data-wow-delay="1.25s">
                         <div class="property-single-subtitle">
@@ -173,7 +202,7 @@
                                             <input type="number" id="interestRate" value="4.74" />
                                             <input type="range" id="interestRateRange" min="1" max="20" value="4.74" step="0.01" />
                                         </div>
-                                        <button class="btn-default" onclick="calculateMortgage()">Calculate</button>
+                                        {{-- <button class="btn-default" onclick="calculateMortgage()">Calculate</button> --}}
                                     </div>
                                     <div class="col-md-6">
                                         <div class="result">
@@ -207,69 +236,6 @@
 
                         <div class="property-map-iframe">
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49359.77289774349!2d77.59174385159328!3d13.045949738664566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1707476041972!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                    <div class="property-map-location wow" data-wow-delay="1.25s">
-                        <div class="property-single-subtitle">
-                            <h3>Releted Properties</h3>
-                        </div>
-
-                        <div class="property-slider">
-                            <div class="swiper">
-                                <div class="swiper-wrapper">
-                                    @foreach ($listings as $list)
-                                    <div class="swiper-slide">
-                                        <div class="property-item">
-                                            <div class="property-header">
-                                                <figure class="image-anime">
-                                                    <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
-                                                </figure>
-                                                <span class="property-label">{{$list->category}}</span>
-                                            </div>
-                                            <div class="property-body">
-                                                <h3>{{$list->property_name}}</h3>
-                                                <p>{{$list->address}}</p>
-
-                                                <div class="property-meta">
-                                                    <div class="property-amenity-item">
-                                                        <div class="icon-box">
-                                                            <img src="{{asset('websiteAssets/images/icon-badroom.svg')}}" alt="">
-                                                        </div>
-                                                        <span>{{$list->bedroom}} <span class="hideshowproperty">Bedsroom</span></span>
-                                                    </div>
-
-                                                    <div class="property-amenity-item">
-                                                        <div class="icon-box">
-                                                            <img src="{{asset('websiteAssets/images/icon-bathroom.svg')}}" alt="">
-                                                        </div>
-                                                        <span>{{$list->bathroom}} <span class="hideshowproperty">Bathrooms</span></span>
-                                                    </div>
-
-                                                    <div class="property-amenity-item">
-                                                        <div class="icon-box">
-                                                            <img src="{{asset('websiteAssets/images/icon-area.svg')}}" alt="">
-                                                        </div>
-                                                        <span>{{$list->squarefoot}} <span class="hideshowproperty">sq ft</span></span>
-                                                    </div>
-
-                                                    <div class="property-amenity-item">
-                                                        <div class="icon-box">
-                                                            <img src="{{asset('websiteAssets/images/icon-garage.svg')}}" alt="">
-                                                        </div>
-                                                        <span>{{$list->floor}} <span class="hideshowproperty">Floors</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="property-footer">
-                                                <span class="badge {{$list->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst($list->status) }}</span>
-                                                <a href="{{route('website.propertydetails',['id'=> $list->id])}}" class="btn-default">View Property</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -329,6 +295,27 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="recent-posts-widget wow fadeInUp" data-wow-delay="0.75s">
+                        <h3>Related Properties</h3>
+                        <div class="recent-posts-lists">
+                            @foreach ($listings->take(4) as $latest)
+                            <div class="recent-post-item">
+                                <div class="post-image">
+                                <a target="_blank" href="{{ route('website.propertydetails',['id' => $latest->id])}}">
+                                    <img src="{{asset('assets/images/Listings/'.$latest->thumbnail)}}" alt="">
+                                </a>
+                                </div>
+
+                                <div class="post-info">
+                                    <p class="meta"><a target="_blank" href="{{ route('website.propertydetails',['id' => $latest->id])}}">{{ $latest->category }}</a></p>
+                                    <h4><a href="{{ route('website.propertydetails',['id' => $latest->id])}}">{{Str::limit($latest->property_name,15)}}</a></h4>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
                     <div class="property-inquiry-box wow fadeInUp" data-wow-delay="0.5s">
                         <h3>Send Inquiry</h3>
                         <div class="property-inquiry-form">
@@ -378,6 +365,7 @@
                             </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

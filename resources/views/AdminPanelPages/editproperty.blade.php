@@ -125,7 +125,19 @@
                                     <div class="">
                                         <label class="form-label">Property Price<span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" value="{{$listingdata->price}}" name="price" class="form-control" placeholder="Property Price" required>
+                                        <input type="text" id="propertyprice" value="{{$listingdata->price}}" name="price" class="form-control" placeholder="Property Price" required>
+                                    </div>
+                                    <div class="mt-3 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-black fw-bold" for="flexCheckDefault">
+                                                Will this price added to the chart ?
+                                            </label>
+                                        </div>
+                                        <div class="form-group mt-3 mb-3" style="display: none;" id="dateInput">
+                                         <label class="form-label">Add Date</label>
+                                            <input type="date" name="historydate" id="historydateinput"  class="form-control" value="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -301,14 +313,14 @@
                             </div>
                         </form>
                     </div>
-                     <div class="card">
+                    <div class="card">
                         <form>
                             <div class="card-body">
-                              <h4 class="card-title mb-7">Pin Location in Map</h4>
+                                <h4 class="card-title mb-7">Pin Location in Map</h4>
                                 <div class="container well">
                                     <div id="maparea" style="width: 100%; height: 400px;"></div>
                                     @php
-                                       $locations = json_decode($listingdata->maplocations,true);
+                                    $locations = json_decode($listingdata->maplocations,true);
                                     @endphp
                                     <div class="mt-3">
                                         <label class="form-label">Lat</label>
@@ -322,6 +334,42 @@
                             </div>
                         </form>
                     </div>
+                    <div class="card">
+                        <form>
+                            <div class="card-body">
+                                <h4 class="card-title mb-7">Price History</h4>
+                                @if(!empty($listingdata->pricehistory))
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sno</th>
+                                                    <th>On this date</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            @php
+                                               $history = json_decode($listingdata->pricehistory, true) ?? [];
+                                            @endphp
+                                            <tbody>
+                                                @foreach ($history as $index => $data)
+                                                <tr>
+                                                    <td>{{ (int)$index + 1 }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($data['dateValue'])->format('d-M-Y') }}</td>
+                                                    <td>₹ {{  $data['priceValue'] }} /-</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                @else
+                                      <h4 class="card-title mb-7">No History Found</h4>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="d-flex justify-content-start mb-5">
@@ -331,6 +379,7 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
             var amenities = $('input[name="input"]').val(); // Get preloaded values
@@ -348,6 +397,12 @@
                     $('input[name="input"]').tagsinput('add', item.trim());
                 });
             }
+        });
+
+
+        document.getElementById("flexCheckDefault").addEventListener("change", function() {
+            var dateInput = document.getElementById("dateInput");
+            dateInput.style.display = this.checked ? "block" : "none";
         });
 
     </script>
@@ -383,12 +438,23 @@
             let amenities = $('input[name="input"]').tagsinput('items');
             combinedFormData.append("amenities", JSON.stringify(amenities));
 
-             //Create JSON for Latitude & Longitude
+            //Create JSON for Latitude & Longitude
             const locationData = {
-                Latitude: document.getElementById("us2-lat").value,
-                Longitude: document.getElementById("us2-lon").value
+                Latitude: document.getElementById("us2-lat").value
+                , Longitude: document.getElementById("us2-lon").value
             };
             combinedFormData.append("location", JSON.stringify(locationData));
+
+
+            //Get Value of Price History using checkbox
+            let checkbox = document.getElementById("flexCheckDefault");
+            if (checkbox.checked) {
+                const PriceHistory = {
+                    dateValue: document.getElementById("historydateinput").value,
+                    priceValue: document.getElementById("propertyprice").value
+                };
+                combinedFormData.append("historydate", JSON.stringify([PriceHistory]));
+            }
 
 
             //Multiple Video Upload Dropzone

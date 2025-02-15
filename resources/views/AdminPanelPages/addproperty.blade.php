@@ -99,7 +99,19 @@
                                     <div class="">
                                         <label class="form-label">Property Price<span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="price" class="form-control" placeholder="Property Price" value="" required>
+                                        <input type="text" id="propertyprice" name="price" class="form-control" placeholder="Property Price" value="" required>
+                                    </div>
+                                    <div class="mt-3 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-black fw-bold" for="flexCheckDefault">
+                                                Will this price added to the chart ?
+                                            </label>
+                                        </div>
+                                        <div class="form-group mt-3 mb-3" style="display: none;" id="dateInput">
+                                         <label class="form-label">Add Date</label>
+                                            <input type="date" name="historydate" id="historydateinput"  class="form-control" value="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -237,7 +249,7 @@
                     <div class="card">
                         <form>
                             <div class="card-body">
-                              <h4 class="card-title mb-7">Pin Location in Map</h4>
+                                <h4 class="card-title mb-7">Pin Location in Map</h4>
                                 <div class="container well">
                                     <div id="maparea" style="width: 100%; height: 400px;"></div>
                                     <div class="mt-3">
@@ -276,6 +288,11 @@
                 $(this).closest('.bootstrap-tagsinput').removeClass('has-focus');
             });
 
+        });
+
+        document.getElementById("flexCheckDefault").addEventListener("change", function() {
+            var dateInput = document.getElementById("dateInput");
+            dateInput.style.display = this.checked ? "block" : "none";
         });
 
     </script>
@@ -326,8 +343,6 @@
         document.querySelector("#submitAllForms").addEventListener("click", function(event) {
             event.preventDefault();
 
-
-
             // Create a FormData object
             const combinedFormData = new FormData();
 
@@ -357,12 +372,23 @@
             let amenities = $('input[name="input"]').tagsinput('items');
             combinedFormData.append("amenities", JSON.stringify(amenities));
 
-             //Create JSON for Latitude & Longitude
+            //Create JSON for Latitude & Longitude
             const locationData = {
-                Latitude: document.getElementById("us2-lat").value,
-                Longitude: document.getElementById("us2-lon").value
+                Latitude: document.getElementById("us2-lat").value
+                , Longitude: document.getElementById("us2-lon").value
             };
             combinedFormData.append("location", JSON.stringify(locationData));
+
+
+            //Get Value of Date using checkbox
+            let checkbox = document.getElementById("flexCheckDefault");
+            if (checkbox.checked) {
+                const PriceHistory = {
+                    dateValue: document.getElementById("historydateinput").value,
+                    priceValue: document.getElementById("propertyprice").value
+                };
+                combinedFormData.append("historydate", JSON.stringify([PriceHistory]));
+            }
 
 
             //Multiple Video Upload Dropzone

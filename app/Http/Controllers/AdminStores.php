@@ -233,7 +233,7 @@ class AdminStores extends Controller
             $masterdoc = null;
             if ($request->hasFile('masterplandocument')) {
                 $request->validate([
-                    'masterplandocument' => 'required|mimes:pdf',
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
                 ]);
 
                 $file = $request->file('masterplandocument');
@@ -316,6 +316,7 @@ class AdminStores extends Controller
                 'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
+                'pricehistory' => $datareq['historydate'],
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],
@@ -363,7 +364,7 @@ class AdminStores extends Controller
             $masterdoc = null;
             if ($request->hasFile('masterplandocument')) {
                 $request->validate([
-                    'masterplandocument' => 'required|mimes:pdf',
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
                 ]);
 
                 $file = $request->file('masterplandocument');
@@ -435,8 +436,13 @@ class AdminStores extends Controller
             }
 
             $olddata = PropertyListing::find($request->listingid);
-            // dd($olddata);
-            // Create the property listing
+            
+            $updatedhistory="null";
+            if($datareq['historydate']){ 
+                // dd($datareq['historydate']);
+                $updatedhistory = array_merge(json_decode($olddata->pricehistory),json_decode($datareq['historydate']));
+            }
+            // dd( $updatedhistory);
             $data = PropertyListing::where('id', $request->listingid)->update([
                 'usertype' => 'Admin',
                 'roleid' => $authuser->id,
@@ -444,6 +450,7 @@ class AdminStores extends Controller
                 'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
+                'pricehistory' => $updatedhistory == "null" ? $olddata->pricehistory : json_encode($updatedhistory),
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],

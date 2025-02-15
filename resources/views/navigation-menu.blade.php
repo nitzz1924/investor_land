@@ -5,7 +5,7 @@
           <!-- Start Vertical Layout Sidebar -->
           <!-- ---------------------------------- -->
           <div class="brand-logo d-flex align-items-center justify-content-between">
-              <a href="index.html" class="text-nowrap text-center fw-bolder fs-6 logo-img">
+              <a href="{{route('admin.admindashboard')}}" class="text-nowrap text-center fw-bolder fs-6 logo-img">
                   {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/dark-logo.svg" class="dark-logo" alt="Logo-Dark" /> --}}
                   <span style="color: #4F73D9; font-weight:bolder; font-size: xx-large;">Investor Lands</span> {{-- <img src="https://bootstrapdemos.adminmart.com/modernize/dist/assets/images/logos/light-logo.svg" class="light-logo" alt="Logo-light" /> --}}
               </a>

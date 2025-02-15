@@ -12,6 +12,7 @@ class PropertyListing extends Model
         'property_name',
         'discription',
         'price',
+        'pricehistory',
         'squarefoot',
         'bedroom',
         'bathroom',
