@@ -179,7 +179,7 @@
                                 </div>
                             </form>
                             <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
-                                Set the Master Plan Document. Only *.pdf files are accepted.
+                                Set the Master Plan Document.<br>Only *.pdf and *.jpg files are accepted.
                             </p>
                         </div>
                     </div>

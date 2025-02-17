@@ -25,7 +25,7 @@
                     </div>
                     <div class="">
                         <a href="{{ route('user.addlisting') }}" class="btn btn-outline-primary">
-                            <i class="ti ti-plus"></i> Add New Listing
+                            <i class="ti ti-plus"></i> Add New Property
                         </a>
                     </div>
                 </div>

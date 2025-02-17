@@ -50,7 +50,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>
-                                <td>{{ $data->blogname}}</td>
+                                <td>{{ Str::limit( $data->blogname,20)}}</td>
                                 <td>{{ Str::limit(strip_tags($data->blogdescription), 20) }}</td>
                                 <td>
                                     <div class="hstack gap-3 flex-wrap">

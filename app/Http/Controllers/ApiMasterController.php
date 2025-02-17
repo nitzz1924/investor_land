@@ -13,7 +13,7 @@ use App\Models\Master;
 use Log;
 class ApiMasterController extends Controller
 {
-    public function loginuser(Request $rq)  
+    public function loginuser(Request $rq)
     {
         try {
             $user = RegisterUser::where('email', $rq->email)->first();
@@ -184,6 +184,23 @@ class ApiMasterController extends Controller
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
             }
 
+
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
+
+
+
+
             // Handle multiple gallery images
             $galleryImages = [];
             if ($request->hasFile('galleryImages')) {
@@ -205,7 +222,9 @@ class ApiMasterController extends Controller
                     // Store the path for the image
                     $galleryImages[] = 'assets/images/Listings/' . $imageFullName;
                 }
+                //    dd( $galleryImages);
             }
+
 
             // Handle multiple documents
             $documents = [];
@@ -223,6 +242,26 @@ class ApiMasterController extends Controller
                     $file->move($uploadedPath, $documentfullname);
                     $documents[] = 'assets/images/Listings/' . $documentfullname;
                 }
+                // dd($documents);
+            }
+
+            // Handle multiple Videos
+            $Videos = [];
+            if ($request->hasFile('propertyvideos')) {
+                $request->validate([
+                    'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
+                ]);
+
+                $videofiles = $request->file('propertyvideos');
+                foreach ($videofiles as $file) {
+                    $videoname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $videofullname = $videoname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $videofullname);
+                    $Videos[] = 'assets/images/Listings/' . $videofullname;
+                }
+                // dd($Videos);
             }
 
             // Create the property listing
@@ -230,8 +269,10 @@ class ApiMasterController extends Controller
                 'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
+                'pricehistory' => $datareq['historydate'],
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],
@@ -239,15 +280,19 @@ class ApiMasterController extends Controller
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename,
+                'masterplandoc' => $masterdoc,
+                'maplocations' => $datareq['location'],
                 'category' => $datareq['category'],
                 'gallery' => json_encode($galleryImages),
                 'documents' => json_encode($documents),
+                'amenties' => $datareq['amenities'],
+                'videos' => json_encode($Videos),
                 'status' => $datareq['status'],
             ]);
 
-            return response()->json(['success' => true, 'data' => $data, 'message' => 'Listing inserted successfully!']);
+            return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
         } catch (Exception $e) {
-            return response()->json(['success' => false, 'message' => $e->getMessage()]);
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
         }
     }
 
@@ -390,7 +435,7 @@ class ApiMasterController extends Controller
 
         $listingsbycitys = Master::where('type', 'City')->get();
         foreach ($listingsbycitys as $city) {
-            $cityName = $city->label; 
+            $cityName = $city->label;
 
             $city->listings = $cityListings[$cityName] ?? collect();
             $city->property_count = $city->listings->count();

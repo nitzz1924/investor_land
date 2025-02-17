@@ -1,6 +1,6 @@
 {{------------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 @extends('layouts.UserPanelLayouts.user')
-@section('title','Add Listing')
+@section('title','Add Property')
 @section('user-content')
     <div class="container-fluid">
         <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
@@ -17,10 +17,10 @@
                             </ol>
                         </nav>
                     </div>
-                     <div class="col-md-2 d-flex justify-content-end align-items-center">
+                    <div class="col-md-2 d-flex justify-content-end align-items-center">
                         <div class="">
                             <a href="{{ route('user.mylistings') }}" class="btn btn-outline-primary">
-                               <i class="ti ti-arrow-narrow-left"></i> Go Back
+                                <i class="ti ti-arrow-narrow-left"></i> Go Back
                             </a>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 ">
+            <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-7">
@@ -39,10 +39,21 @@
                             </button>
                         </div>
                         <form action="#" class="form-horizontal">
-                            <div class="mb-4">
-                                <label class="form-label">Property Name<span class="text-danger">*</span>
-                                </label>
-                                <input type="text" placeholder="Property Name" name="property_name" class="form-control" required>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Property Name<span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" placeholder="Property Name" name="property_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-4">
+                                        <label class="form-label">Near By Location<span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" placeholder="Enter Near by Location of Property" name="nearbylocation" class="form-control" required>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label class="form-label">Property Description</label>
@@ -62,11 +73,11 @@
                             </div>
                         </form>
                         <p class="fs-3 text-left text-danger mb-0 fw-bold">
-                            Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
+                            Set the property Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
                         </p>
                     </div>
                 </div>
-                 <div class="card">
+                <div class="card">
                     <div class="card-body">
                         <h4 class="card-title mb-7">Property Videos</h4>
                         <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
@@ -75,8 +86,8 @@
                                     to upload</button>
                             </div>
                         </form>
-                          <p class="fs-3 text-left text-danger pt-3 mb-0 fw-bold">
-                           Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB <br> Max can be : 2 Files
+                        <p class="fs-3 text-left text-danger pt-3 mb-0 fw-bold">
+                            Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB <br> Max can be : 2 Files
                         </p>
                     </div>
                 </div>
@@ -89,7 +100,19 @@
                                     <div class="">
                                         <label class="form-label">Property Price<span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="price" class="form-control" placeholder="Property Price" value="" required>
+                                        <input type="text" id="propertyprice" name="price" class="form-control" placeholder="Property Price" value="" required>
+                                    </div>
+                                    <div class="mt-3 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <label class="form-check-label text-black fw-bold" for="flexCheckDefault">
+                                                Will this price added to the chart ?
+                                            </label>
+                                        </div>
+                                        <div class="form-group mt-3 mb-3" style="display: none;" id="dateInput">
+                                            <label class="form-label">Add Date</label>
+                                            <input type="date" name="historydate" id="historydateinput" class="form-control" value="">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -146,9 +169,20 @@
                                     to upload</button>
                             </div>
                         </form>
-                        <p class="fs-3 text-left text-danger mb-0 fw-bold">
-                            Set the product documents. Only *.pdf, *.jpg files are accepted.
+                        <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
+                            Set the property documents. Only *.pdf, *.jpg files are accepted.
                         </p>
+                        <div class="mt-4">
+                            <form action="" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label class="form-label">Upload Master Plan of Property</label>
+                                    <input type="file" name="masterplandocument" class="form-control" id="masterplandocument">
+                                </div>
+                            </form>
+                            <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
+                                Set the Master Plan Document.<br>Only *.pdf and *.jpg files are accepted.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -181,22 +215,52 @@
                                 </div>
                             </form>
                             <p class="fs-3 text-left text-danger mb-0 fw-bold">
-                                Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
+                                Set the property thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
                             </p>
                         </div>
                     </div>
                     <div class="card">
                         <form action="" method="post">
                             <div class="card-body">
-                                <h4 class="card-title mb-7">Property Details</h4>
+                                <h4 class="card-title mb-7">Property Categories</h4>
                                 <div class="mb-3">
-                                    <label class="form-label">Categories</label>
                                     <select name="category" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                         <option value="3" selected="">--select category--</option>
                                         @foreach ($categories as $data)
                                         <option value="{{$data->label}}">{{$data->label}}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <form onsubmit="return false;">
+                            <div class="card-body">
+                                <h4 class="card-title mb-7">Features & Amenities</h4>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="form-label text-muted">Enter to Add Amenities</label>
+                                        <input type="text" name="input" class="form-control" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <form>
+                            <div class="card-body">
+                                <h4 class="card-title mb-7">Pin Location in Map</h4>
+                                <div class="container well">
+                                    <div id="maparea" style="width: 100%; height: 400px;"></div>
+                                    <div class="mt-3">
+                                        <label class="form-label">Lat</label>
+                                        <input type="text" name="latitude" class="form-control" id="us2-lat" />
+                                    </div>
+                                    <div class="mt-2">
+                                        <label class="form-label">Long</label>
+                                        <input type="text" name="longitude" class="form-control" id="us2-lon" />
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -210,12 +274,79 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[name="input"]').tagsinput({
+                trimValue: true
+                , confirmKeys: [13, 44]
+                , focusClass: 'my-focus-class'
+            });
+
+            $('.bootstrap-tagsinput input').on('focus', function() {
+                $(this).closest('.bootstrap-tagsinput').addClass('has-focus');
+            }).on('blur', function() {
+                $(this).closest('.bootstrap-tagsinput').removeClass('has-focus');
+            });
+
+        });
+
+        document.getElementById("flexCheckDefault").addEventListener("change", function() {
+            var dateInput = document.getElementById("dateInput");
+            dateInput.style.display = this.checked ? "block" : "none";
+        });
+
+    </script>
+    <script>
+        var counter = 0;
+        let amenties = [];
+        $(document).on('click', '.addRow', function() {
+            counter++;
+            var name = $('#amentinamevalue').val();
+            amenties.push(name);
+            var tr = `
+                    <tr>
+                        <td class="row-number">${counter}</td>
+                        <td>
+                            <div class="mb-3">
+                                <div class="mb-4">${name}</div>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm deleteRow" data-value="${name}">delete</button>
+                        </td>
+                    </tr>
+                `;
+            $('#tablebody').append(tr);
+            updateRowNumbers();
+            console.log("dsfsd", amenties);
+        });
+
+        $(document).on('click', '.deleteRow', function() {
+            var valueToRemove = $(this).data("value"); // Get the value associated with the button
+            amenties = amenties.filter(item => item !== valueToRemove); // Remove value from array
+            $(this).closest('tr').remove();
+            updateRowNumbers();
+            console.log("Updated Amenities:", amenties);
+        });
+
+        // Function to update row numbers dynamically
+        function updateRowNumbers() {
+            counter = 0; // Reset counter
+            $('#tablebody tr').each(function() {
+                counter++;
+                $(this).find('.row-number').text(counter);
+            });
+        }
+
+    </script>
     <script>
         document.querySelector("#submitAllForms").addEventListener("click", function(event) {
             event.preventDefault();
 
             // Create a FormData object
             const combinedFormData = new FormData();
+
 
             // Select all forms
             const forms = document.querySelectorAll("form");
@@ -226,20 +357,46 @@
                 for (let [key, value] of formData.entries()) {
                     combinedFormData.append(key, value);
                 }
-            });
+            })
+
 
             // Get Dropzone instances
             const dropzoneInstance = Dropzone.forElement("#propertyGalleryForm"); // Multiple images
             const propertydocumentsform = Dropzone.forElement("#propertydocumentsform"); // Multiple images
             const propertyThumbnail = Dropzone.forElement("#propertythumbnail"); // Single image
+            const MasterPlanDocument = document.getElementById("masterplandocument"); // Master Plan Document
             const descriptionContent = quill.root.innerHTML;
             combinedFormData.append("description", descriptionContent);
+
+
+            //Get Amenities here..
+            let amenities = $('input[name="input"]').tagsinput('items');
+            combinedFormData.append("amenities", JSON.stringify(amenities));
+
+            //Create JSON for Latitude & Longitude
+            const locationData = {
+                Latitude: document.getElementById("us2-lat").value
+                , Longitude: document.getElementById("us2-lon").value
+            };
+            combinedFormData.append("location", JSON.stringify(locationData));
+
+
+            //Get Value of Date using checkbox
+            let checkbox = document.getElementById("flexCheckDefault");
+            if (checkbox.checked) {
+                const PriceHistory = {
+                    dateValue: document.getElementById("historydateinput").value
+                    , priceValue: document.getElementById("propertyprice").value
+                };
+                combinedFormData.append("historydate", JSON.stringify([PriceHistory]));
+            }
+
 
             //Multiple Video Upload Dropzone
             const videosdrop = Dropzone.forElement("#propertyvideosform");
             videosdrop.options.acceptedFiles = "video/mp4, video/mov, video/avi";
-            videosdrop.options.maxFilesize = 20; // This is Video Size that is 10 MB maximum.
-            videosdrop.options.maxFiles = 2;
+            videosdrop.options.maxFilesize = 20; // This is Video Size that is 20 MB maximum.
+            videosdrop.options.maxFiles = 2; // Restrict to 2 files maximum
             if (videosdrop.files.length > 2) {
                 Swal.fire({
                     title: "Error!"
@@ -263,9 +420,6 @@
                     combinedFormData.append("propertyvideos[]", Videofile);
                 }
             });
-            console.log("Property Videos:", videosdrop.files);
-
-            
 
             // Append multiple image files to FormData
             dropzoneInstance.files.forEach((file) => {
@@ -274,14 +428,13 @@
                     combinedFormData.append("galleryImages[]", file);
                 }
             });
-            
+
             propertydocumentsform.files.forEach((file) => {
                 if (file) {
                     // Append each file to FormData
                     combinedFormData.append("documents[]", file);
                 }
             });
-            console.log("propertydocumentsform:", propertydocumentsform.files);
 
 
             // Check if there are any files selected for the thumbnail
@@ -292,6 +445,21 @@
                 });
                 console.log("thumbnailImages:", propertyThumbnail.files);
             }
+
+            //Master Plan Document
+            if (MasterPlanDocument.files.length > 0) {
+                for (let i = 0; i < MasterPlanDocument.files.length; i++) {
+                    combinedFormData.append("masterplandocument", MasterPlanDocument.files[i]);
+                }
+                console.log("MasterPlanDocument:", MasterPlanDocument.files);
+            }
+
+
+            // Log all form values to the console
+            for (let [key, value] of combinedFormData.entries()) {
+                console.log(key, value);
+            }
+
 
             // Submit the form data via AJAX
             $.ajax({
@@ -321,11 +489,11 @@
                                 , showCloseButton: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
-                                    window.location.href="editlisting/" + data.data.id;
+                                    window.location.href = "editlisting/" + data.data.id;
                                 }
                             });
                         } else {
-                           Swal.fire({
+                            Swal.fire({
                                 title: "Error!"
                                 , text: data.message
                                 , icon: "error"
@@ -351,4 +519,5 @@
         });
 
     </script>
+
 @endsection

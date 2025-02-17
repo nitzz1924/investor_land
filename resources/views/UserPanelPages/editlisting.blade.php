@@ -1,6 +1,6 @@
 {{------------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 @extends('layouts.UserPanelLayouts.user')
-@section('title','Edit Listing')
+@section('title','Edit Property')
 @section('user-content')
 <div class="container-fluid">
     <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
@@ -39,11 +39,22 @@
                         </button>
                     </div>
                     <form action="#" class="form-horizontal">
-                        <div class="mb-4">
-                            <label class="form-label">Property Name<span class="text-danger">*</span>
-                            </label>
-                            <input type="text" value="{{$listingdata->property_name}}" placeholder="Property Name" name="property_name" class="form-control" required>
-                            <input type="hidden" name="listingid" value="{{$listingdata->id}}">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label">Property Name<span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" value="{{$listingdata->property_name}}" placeholder="Property Name" name="property_name" class="form-control" required>
+                                    <input type="hidden" name="listingid" value="{{$listingdata->id}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <label class="form-label">Near By Location<span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" value="{{$listingdata->nearbylocation}}" placeholder="Enter Near by Location of Property" name="nearbylocation" class="form-control" required>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label class="form-label">Property Description</label>
@@ -73,39 +84,39 @@
                         </div>
                         @endif
                     </div>
-                    <p class="fs-2 text-center text-danger pt-3 mb-0">
+                    <p class="fs-3 text-start text-danger pt-3 mb-0 fw-bold">
                         Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
                     </p>
                 </div>
             </div>
             <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title mb-7">Property Videos</h4>
-                        <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
-                            <div class="dz-default dz-message">
-                                <button class="dz-button" type="button">Drop Video Files here
-                                    to upload</button>
-                            </div>
-                        </form>
-                        <div id="videoPreview" class="mt-3">
-                            @if ($listingdata->videos)
-                            <div class="d-flex flex-wrap">
-                                @foreach (json_decode($listingdata->videos) as $video)
-                                <div class="mx-2 mb-2">
-                                    <video controls class="rounded-3" style="max-height: 200px; max-width: 300px;">
-                                        <source src="{{ asset($video) }}" type="video/mp4">
-                                        Your browser does not support the video tag.
-                                    </video>
-                                </div>
-                                @endforeach
-                            </div>
-                            @endif
+                <div class="card-body">
+                    <h4 class="card-title mb-7">Property Videos</h4>
+                    <form action="#" class="dropzone dz-clickable mb-2" id="propertyvideosform" enctype="multipart/form-data">
+                        <div class="dz-default dz-message">
+                            <button class="dz-button" type="button">Drop Video Files here
+                                to upload</button>
                         </div>
-                        <p class="fs-2 text-center text-danger pt-3 mb-0">
-                            Set the product Gallery images. Only *.png, *.jpg and *.jpeg image files are accepted.
-                        </p>
+                    </form>
+                    <div id="videoPreview" class="mt-3">
+                        @if ($listingdata->videos)
+                        <div class="d-flex flex-wrap">
+                            @foreach (json_decode($listingdata->videos) as $video)
+                            <div class="mx-2 mb-2">
+                                <video controls class="rounded-3" style="max-height: 200px; max-width: 300px;">
+                                    <source src="{{ asset($video) }}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                            @endforeach
+                        </div>
+                        @endif
                     </div>
+                    <p class="fs-3 text-start text-danger pt-3 mb-0 fw-bold">
+                        Set the property Videos. Only *.mp4, *.mov and *.avi video files are accepted. <br> Video Max size : 20MB
+                    </p>
                 </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title mb-7">Pricing & Other Details</h4>
@@ -115,7 +126,19 @@
                                 <div class="">
                                     <label class="form-label">Property Price<span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" value="{{$listingdata->price}}" name="price" class="form-control" placeholder="Property Price" required>
+                                    <input type="text" id="propertyprice" value="{{$listingdata->price}}" name="price" class="form-control" placeholder="Property Price" required>
+                                </div>
+                                <div class="mt-3 mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label text-black fw-bold" for="flexCheckDefault">
+                                            Will this price added to the chart ?
+                                        </label>
+                                    </div>
+                                    <div class="form-group mt-3 mb-3" style="display: none;" id="dateInput">
+                                        <label class="form-label">Add Date</label>
+                                        <input type="date" name="historydate" id="historydateinput" class="form-control" value="">
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -186,9 +209,30 @@
                         @endforeach
                     </div>
                     @endif
-                    <p class="fs-2 text-center text-danger mb-0">
+                    <p class="fs-3 mt-4 text-start text-danger mb-0 fw-bold">
                         Set the product documents. Only *.pdf files are accepted.
                     </p>
+                    <div class="mt-4">
+                        <form action="" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label class="form-label">Upload Master Plan of Property</label>
+                                <input type="file" name="masterplandocument" class="form-control" id="masterplandocument">
+                            </div>
+                        </form>
+                        @if ($listingdata->masterplandoc)
+                        <div class="mt-2">
+                            @if (pathinfo($listingdata->masterplandoc, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe src="{{ asset('assets/images/Listings/' . $listingdata->masterplandoc) }}" class="rounded-3 img-fluid" style="max-height: 200px; max-width: 300px;" frameborder="0"></iframe>
+                            @else
+                            <img src="{{ asset('assets/images/Listings/' . $listingdata->masterplandoc) }}" class="rounded-3 img-fluid" alt="Document" style="max-height: 100px;">
+                            @endif
+                            <a href="{{ asset('assets/images/Listings/' . $listingdata->masterplandoc) }}" class="btn btn-outline-primary mt-2" download>Download</a>
+                        </div>
+                        @endif
+                        <p class="fs-3 mt-2 text-left text-danger mb-0 fw-bold">
+                            Set the Master Plan Document. Only *.pdf files are accepted.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -223,7 +267,7 @@
                         <div id="thumbnailPreview" class="mt-3">
                             <img src="{{asset('assets/images/Listings/'.$listingdata->thumbnail)}}" alt="Thumbnail Preview" class="img-fluid rounded-3" style="max-height: 100px; display: {{$listingdata->thumbnail ? 'block' : 'none'}};">
                         </div>
-                        <p class="fs-2 text-center text-danger mb-0">
+                        <p class="fs-3 text-start mt-3 text-danger mb-0 fw-bold">
                             Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted.
                         </p>
                     </div>
@@ -257,6 +301,76 @@
                         </div>
                     </form>
                 </div>
+                <div class="card">
+                    <form onsubmit="return false;">
+                        <div class="card-body">
+                            <h4 class="card-title mb-7">Features & Amenities</h4>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label text-muted">Enter to Add Amenities</label>
+                                    <input type="text" value="{{ isset($listingdata->amenties) && is_array($listingdata->amenties) ? implode(',', $listingdata->amenties) : '' }}" name="input" class="form-control" data-role="tagsinput">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                    <form>
+                        <div class="card-body">
+                            <h4 class="card-title mb-7">Pin Location in Map</h4>
+                            <div class="container well">
+                                <div id="maparea" style="width: 100%; height: 400px;"></div>
+                                @php
+                                $locations = json_decode($listingdata->maplocations,true);
+                                @endphp
+                                <div class="mt-3">
+                                    <label class="form-label">Lat</label>
+                                    <input type="text" value="{{ $locations['Latitude']}}" name="latitude" class="form-control" id="us2-lat" />
+                                </div>
+                                <div class="mt-2">
+                                    <label class="form-label">Long</label>
+                                    <input type="text" value="{{ $locations['Longitude']}}" name="longitude" class="form-control" id="us2-lon" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card">
+                    <form>
+                        <div class="card-body">
+                            <h4 class="card-title mb-7">Price History</h4>
+                            @if(!empty($listingdata->pricehistory))
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Sno</th>
+                                                <th>On this date</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        @php
+                                        $history = json_decode($listingdata->pricehistory, true) ?? [];
+                                        @endphp
+                                        <tbody>
+                                            @foreach ($history as $index => $data)
+                                            <tr>
+                                                <td>{{ (int)$index + 1 }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($data['dateValue'])->format('d-M-Y') }}</td>
+                                                <td>₹ {{ $data['priceValue'] }} /-</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            @else
+                            <h4 class="card-title mb-7">No History Found</h4>
+                            @endif
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="d-flex justify-content-start mb-5">
@@ -266,6 +380,33 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var amenities = $('input[name="input"]').val(); // Get preloaded values
+
+        $('input[name="input"]').tagsinput({
+            trimValue: true
+            , confirmKeys: [13, 44, 32], // Enter, comma, space
+            focusClass: 'my-focus-class'
+        });
+
+        // Set existing values on page load
+        if (amenities) {
+            var amenityArray = amenities.split(','); // Convert string to array
+            amenityArray.forEach(function(item) {
+                $('input[name="input"]').tagsinput('add', item.trim());
+            });
+        }
+    });
+
+
+    document.getElementById("flexCheckDefault").addEventListener("change", function() {
+        var dateInput = document.getElementById("dateInput");
+        dateInput.style.display = this.checked ? "block" : "none";
+    });
+
+</script>
 <script>
     document.querySelector("#submitAllForms").addEventListener("click", function(event) {
         event.preventDefault();
@@ -288,9 +429,47 @@
         const dropzoneInstance = Dropzone.forElement("#propertyGalleryForm"); // Multiple images
         const propertydocumentsform = Dropzone.forElement("#propertydocumentsform"); // Multiple images
         const propertyThumbnail = Dropzone.forElement("#propertythumbnail"); // Single image
+        const MasterPlanDocument = document.getElementById("masterplandocument"); // Master Plan Document
         const descriptionContent = document.querySelector('#editorr').innerHTML;
         console.log(descriptionContent);
         combinedFormData.append("description", descriptionContent);
+
+
+        //Get Amenities here..
+        let amenities = $('input[name="input"]').tagsinput('items');
+        combinedFormData.append("amenities", JSON.stringify(amenities));
+
+        //Create JSON for Latitude & Longitude
+        const locationData = {
+            Latitude: document.getElementById("us2-lat").value
+            , Longitude: document.getElementById("us2-lon").value
+        };
+        combinedFormData.append("location", JSON.stringify(locationData));
+
+
+        //Get Value of Price History using checkbox
+        let checkbox = document.getElementById("flexCheckDefault");
+        if (checkbox.checked) {
+            const PriceHistory = {
+                dateValue: document.getElementById("historydateinput").value
+                , priceValue: document.getElementById("propertyprice").value
+            };
+            combinedFormData.append("historydate", JSON.stringify([PriceHistory]));
+        }
+
+
+        //Multiple Video Upload Dropzone
+        const videosdrop = Dropzone.forElement("#propertyvideosform");
+        videosdrop.options.acceptedFiles = "video/mp4, video/mov, video/avi";
+        videosdrop.options.maxFilesize = 20; // This is Video Size that is 10 MB maximum.
+        videosdrop.files.forEach((Videofile) => {
+            if (Videofile) {
+                combinedFormData.append("propertyvideos[]", Videofile);
+            }
+        });
+        console.log("Property Videos:", videosdrop.files);
+
+
 
         // Append multiple image files to FormData
         dropzoneInstance.files.forEach((file) => {
@@ -316,6 +495,14 @@
                 combinedFormData.append("thumbnailImages", file);
             });
             console.log("thumbnailImages:", propertyThumbnail.files);
+        }
+
+        //Master Plan Document
+        if (MasterPlanDocument.files.length > 0) {
+            for (let i = 0; i < MasterPlanDocument.files.length; i++) {
+                combinedFormData.append("masterplandocument", MasterPlanDocument.files[i]);
+            }
+            console.log("MasterPlanDocument:", MasterPlanDocument.files);
         }
 
         // Submit the form data via AJAX

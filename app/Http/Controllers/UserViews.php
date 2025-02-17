@@ -11,10 +11,11 @@ use App\Models\Master;
 use App\Models\PropertyListing;
 class UserViews extends Controller
 {
-    public function dashboard(){
+    public function dashboard()
+    {
         $authuser = Auth::guard('customer')->user();
-        $allproperties = PropertyListing::where('roleid',$authuser->id)->orderBy('created_at', 'DESC')->get();
-        $mylistingscnt = PropertyListing::where('roleid',$authuser->id)->count();
+        $allproperties = PropertyListing::where('roleid', $authuser->id)->orderBy('created_at', 'DESC')->get();
+        $mylistingscnt = PropertyListing::where('roleid', $authuser->id)->count();
         return view('UserPanelPages.dashboard', compact('allproperties', 'mylistingscnt'));
     }
 
@@ -24,7 +25,8 @@ class UserViews extends Controller
         return redirect()->route('website.userlogin');
     }
 
-    public function myprofile(){
+    public function myprofile()
+    {
         $userdata = Auth::guard('customer')->user();
         return view('UserPanelPages.myprofile', compact('userdata'));
     }
@@ -74,8 +76,8 @@ class UserViews extends Controller
     public function mylistings()
     {
         $authuser = Auth::guard('customer')->user();
-        $allproperties = PropertyListing::where('roleid',$authuser->id)->orderBy('created_at', 'DESC')->get();
-        $allpropertiescnt = PropertyListing::where('roleid',$authuser->id)->count();
+        $allproperties = PropertyListing::where('roleid', $authuser->id)->orderBy('created_at', 'DESC')->get();
+        $allpropertiescnt = PropertyListing::where('roleid', $authuser->id)->count();
         return view('UserPanelPages.mylistings', compact('allproperties', 'allpropertiescnt', 'authuser'));
     }
 
@@ -103,7 +105,23 @@ class UserViews extends Controller
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
             }
-            // dd($thumbnailFilename);
+
+
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
+
+
+
 
             // Handle multiple gallery images
             $galleryImages = [];
@@ -129,6 +147,7 @@ class UserViews extends Controller
                 //    dd( $galleryImages);
             }
 
+
             // Handle multiple documents
             $documents = [];
             if ($request->hasFile('documents')) {
@@ -148,32 +167,34 @@ class UserViews extends Controller
                 // dd($documents);
             }
 
-             // Handle multiple Videos
-             $Videos = [];
-             if ($request->hasFile('propertyvideos')) {
-                 $request->validate([
-                     'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
-                 ]);
- 
-                 $videofiles = $request->file('propertyvideos');
-                 foreach ($videofiles as $file) {
-                     $videoname = md5(rand(1000, 10000));
-                     $extension = strtolower($file->getClientOriginalExtension());
-                     $videofullname = $videoname . '.' . $extension;
-                     $uploadedPath = public_path('assets/images/Listings');
-                     $file->move($uploadedPath, $videofullname);
-                     $Videos[] = 'assets/images/Listings/' . $videofullname;
-                 }
-                 // dd($Videos);
-             }
+            // Handle multiple Videos
+            $Videos = [];
+            if ($request->hasFile('propertyvideos')) {
+                $request->validate([
+                    'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
+                ]);
+
+                $videofiles = $request->file('propertyvideos');
+                foreach ($videofiles as $file) {
+                    $videoname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $videofullname = $videoname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $videofullname);
+                    $Videos[] = 'assets/images/Listings/' . $videofullname;
+                }
+                // dd($Videos);
+            }
 
             // Create the property listing
             $data = PropertyListing::create([
-                'usertype' =>  ucfirst($authuser->user_type),
+                'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
+                'pricehistory' => $datareq['historydate'],
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],
@@ -181,13 +202,15 @@ class UserViews extends Controller
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename,
+                'masterplandoc' => $masterdoc,
+                'maplocations' => $datareq['location'],
                 'category' => $datareq['category'],
                 'gallery' => json_encode($galleryImages),
                 'documents' => json_encode($documents),
+                'amenties' => $datareq['amenities'],
                 'videos' => json_encode($Videos),
                 'status' => $datareq['status'],
             ]);
-
             return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
@@ -229,6 +252,19 @@ class UserViews extends Controller
             }
             // dd($thumbnailFilename);
 
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
+
             // Handle multiple gallery images
             $galleryImages = [];
             if ($request->hasFile('galleryImages')) {
@@ -272,7 +308,6 @@ class UserViews extends Controller
                 // dd($documents);
             }
 
-
             // Handle multiple Videos
             $Videos = [];
             if ($request->hasFile('propertyvideos')) {
@@ -293,14 +328,21 @@ class UserViews extends Controller
             }
 
             $olddata = PropertyListing::find($request->listingid);
-            // dd($olddata);
-            // Create the property listing
+
+            $updatedhistory = "null";
+            if ($datareq['historydate']) {
+                // dd($datareq['historydate']);
+                $updatedhistory = array_merge(json_decode($olddata->pricehistory), json_decode($datareq['historydate']));
+            }
+            // dd( $updatedhistory);
             $data = PropertyListing::where('id', $request->listingid)->update([
-                'usertype' =>  ucfirst($authuser->user_type),
+                'usertype' => 'Admin',
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
+                'pricehistory' => $updatedhistory == "null" ? $olddata->pricehistory : json_encode($updatedhistory),
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],
@@ -308,9 +350,12 @@ class UserViews extends Controller
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename ?? $olddata->thumbnail,
+                'masterplandoc' => $masterdoc ?? $olddata->masterdoc,
+                'maplocations' => $datareq['location'] ?? $olddata->maplocations,
                 'category' => $datareq['category'],
                 'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
+                'amenties' => $datareq['amenities'] ?? $olddata->amenities,
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
                 'status' => $datareq['status'],
             ]);
@@ -343,11 +388,12 @@ class UserViews extends Controller
         return response()->json(['success' => false], 404);
     }
 
-    public function notifications(){
+    public function notifications()
+    {
         $authuser = Auth::guard('customer')->user();
-        $notifications = Nortification::where('sendto',  $authuser->user_type)->orderBy('created_at','DESC')->get();
-        $notifycnt = Nortification::where('sendto',  $authuser->user_type)->count();
-        return view('UserPanelPages.allnotifications', compact('notifications','notifycnt'));
+        $notifications = Nortification::where('sendto', $authuser->user_type)->orderBy('created_at', 'DESC')->get();
+        $notifycnt = Nortification::where('sendto', $authuser->user_type)->count();
+        return view('UserPanelPages.allnotifications', compact('notifications', 'notifycnt'));
     }
 
 }

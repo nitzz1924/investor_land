@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/daterangepicker.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css">
+
 
 
 </head>
@@ -119,6 +121,11 @@
     <script src="{{ asset('assets/js/apexcharts.min.js') }}"></script> 
     <script src="{{ asset('assets/js/dashboard2.js') }}"></script>
     <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
+    <script src="{{ asset('assets/js/map.js') }}"></script> 
+    <script src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+    <script src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
+    <script src="https://cdnjs.com/libraries/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
     <script>
         $('.floating-labels .form-control').on('focus blur', function(e) {
             $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
