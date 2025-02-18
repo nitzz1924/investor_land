@@ -27,5 +27,6 @@ Route::controller(ApiMasterController::class)->group(function () {
     Route::get('/viewuserlistings', 'viewuserlistings')->name('api.viewuserlistings');
     Route::get('/usernotifications', 'usernotifications')->name('api.usernotifications');
     Route::get('/listingscitywise', 'listingscitywise')->name('api.listingscitywise');
+    Route::post('/updatelisting/{id}', 'updatelisting')->name('api.updatelisting');
 
 });

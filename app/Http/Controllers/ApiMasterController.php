@@ -266,7 +266,7 @@ class ApiMasterController extends Controller
 
             // Create the property listing
             $data = PropertyListing::create([
-                'usertype' => 'Admin',
+                'usertype' => $authuser->usertype,
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
@@ -444,5 +444,137 @@ class ApiMasterController extends Controller
             'success' => true,
             'data' => $listingsbycitys,
         ]);
+    }
+
+    public function updatelisting(Request $request, $id)
+    {
+        //dd($request->all());
+        $datareq = $request->all();
+
+        try {
+            // Handle the thumbnail image
+            $thumbnailFilename = null;
+            if ($request->hasFile('thumbnailImages')) {
+                $request->validate([
+                    'thumbnailImages' => 'required|mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('thumbnailImages');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
+            }
+            // dd($thumbnailFilename);
+
+            // Handle the Master Plan Doc
+            $masterdoc = null;
+            if ($request->hasFile('masterplandocument')) {
+                $request->validate([
+                    'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $file = $request->file('masterplandocument');
+                $masterdoc = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Listings'), $masterdoc);
+            }
+            // dd($masterdoc);
+
+            // Handle multiple gallery images
+            $galleryImages = [];
+            if ($request->hasFile('galleryImages')) {
+                $request->validate([
+                    'galleryImages.*' => 'required|image|mimes:jpeg,png,jpg',
+                ]);
+                $files = $request->file('galleryImages');
+                foreach ($files as $file) {
+                    $imageName = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $imageFullName = $imageName . '.' . $extension;
+
+                    // Define the upload path
+                    $uploadedPath = public_path('assets/images/Listings');
+
+                    // Move the file to the desired location
+                    $file->move($uploadedPath, $imageFullName);
+
+                    // Store the path for the image
+                    $galleryImages[] = 'assets/images/Listings/' . $imageFullName;
+                }
+                //    dd( $galleryImages);
+            }
+
+            // Handle multiple documents
+            $documents = [];
+            if ($request->hasFile('documents')) {
+                $request->validate([
+                    'documents.*' => 'required|mimes:pdf,jpeg,jpg',
+                ]);
+
+                $files = $request->file('documents');
+                foreach ($files as $file) {
+                    $documentname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $documentfullname = $documentname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $documentfullname);
+                    $documents[] = 'assets/images/Listings/' . $documentfullname;
+                }
+                // dd($documents);
+            }
+
+            // Handle multiple Videos
+            $Videos = [];
+            if ($request->hasFile('propertyvideos')) {
+                $request->validate([
+                    'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
+                ]);
+
+                $videofiles = $request->file('propertyvideos');
+                foreach ($videofiles as $file) {
+                    $videoname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $videofullname = $videoname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Listings');
+                    $file->move($uploadedPath, $videofullname);
+                    $Videos[] = 'assets/images/Listings/' . $videofullname;
+                }
+                // dd($Videos);
+            }
+
+            $olddata = PropertyListing::find($id);
+
+            $updatedhistory = "null";
+            if ($datareq['historydate']) {
+                $updatedhistory = array_merge(json_decode($olddata->pricehistory), json_decode($datareq['historydate']));
+            }
+           
+            $data = PropertyListing::where('id', $id)->update([
+                'usertype' => 'Admin',
+                'roleid' => $datareq['roleid'],
+                'property_name' => $datareq['property_name'],
+                'nearbylocation' => $datareq['nearbylocation'],
+                'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
+                'price' => $datareq['price'],
+                'pricehistory' => $updatedhistory == "null" ? $olddata->pricehistory : json_encode($updatedhistory),
+                'squarefoot' => $datareq['sqfoot'],
+                'bedroom' => $datareq['bedroom'],
+                'bathroom' => $datareq['bathroom'],
+                'floor' => $datareq['floor'],
+                'city' => $datareq['city'],
+                'address' => $datareq['officeaddress'],
+                'thumbnail' => $thumbnailFilename ?? $olddata->thumbnail,
+                'masterplandoc' => $masterdoc ?? $olddata->masterdoc,
+                'maplocations' => $datareq['location'] ?? $olddata->maplocations,
+                'category' => $datareq['category'],
+                'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
+                'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
+                'amenties' => $datareq['amenities'] ?? $olddata->amenities,
+                'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
+                'status' => $datareq['status'],
+            ]);
+
+            return response()->json(['data' => $data, 'message' => 'Listing Updated..!']);
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
     }
 }
