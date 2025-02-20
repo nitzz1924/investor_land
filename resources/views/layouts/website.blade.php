@@ -49,9 +49,8 @@
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <!-- Logo Start -->
-                    <a class="navbar-brand" href="/" style="width: 320px;">
-                        {{-- <h1>Investor Lands</h1> --}}
-                        <img class="" src="{{asset('assets/images/logotwo.png')}}" alt="Logo">
+                    <a class="navbar-brand" href="/" style="width: 360px;">
+                        <img class="" src="{{asset('assets/images/finallogo.png')}}" alt="Logo">
                     </a>
                     <!-- Logo End -->
 
@@ -63,6 +62,7 @@
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage')}}">About us</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('website.whytoinvest')}}">Why to Invest ?</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
                             <li class="nav-item dropdown">
                                 @if(Auth::guard('customer')->check())
@@ -97,9 +97,6 @@
                             </li>
                             @endif
                             </li>
-
-
-
                         </ul>
                     </div>
                     <!-- Main Menu End -->
@@ -227,12 +224,10 @@
                             <li><a href="#">Terms & Condition</a></li>
                         </ul>
                     </div>
-                    <!-- Footer Policy Links End -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- Footer Copyright Section End -->
 
 
     <!-- ALL JS -->

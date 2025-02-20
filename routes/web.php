@@ -106,8 +106,8 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/userlogin', 'userlogin')->name('website.userlogin');
     Route::get('/user-registration', 'registration')->name('website.registration');
     Route::post('/filterlistings', 'filterlistings')->name('website.filterlistings');
-    Route::get('/myownlistings/{username}/{userid}', 'myownlistings')->name('user.myownlistings');
-
+    Route::get('/myownlistings/{username}/{userid}', 'myownlistings')->name('website.myownlistings');
+    Route::get('/whytoinvest', 'whytoinvest')->name('website.whytoinvest');
 });
 
 Route::controller(WebsiteStores::class)->group(function () {

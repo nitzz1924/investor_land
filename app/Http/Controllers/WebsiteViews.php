@@ -60,6 +60,8 @@ class WebsiteViews extends Controller
         $city = $req->query('filtercity');
         $minprice = $req->query('filterminprice');
         $maxprice = $req->query('filtermaxprice');
+        $sqftfrom = $req->query('sqftfrom');
+        $sqftto = $req->query('sqftto');
 
         $listings = PropertyListing::query();
 
@@ -79,6 +81,14 @@ class WebsiteViews extends Controller
             $listings->where('price', '<=', $maxprice);
         }
 
+        if ($sqftfrom) {
+            $listings->where('squarefoot', '>=', $sqftfrom);
+        }
+
+        if ($sqftto) {
+            $listings->where('squarefoot', '<=', $sqftto);
+        }
+
         $listings = $listings->where('status', '=', 'published')->paginate(4);
 
         return view('WebsitePages.propertylistings', compact('listings', 'category', 'city'));
@@ -90,8 +100,24 @@ class WebsiteViews extends Controller
         $propertydetails = PropertyListing::find($id);
         $propertyName = $propertydetails->property_name;
         $listings = PropertyListing::where('category',$propertydetails->category)->get();
+        $priceHistory = json_decode($propertydetails->pricehistory, true);
+     
+
+        $dates = [];
+        $prices = [];
+
+        foreach ($priceHistory as $entry) {
+            $formattedDate = date("M Y", strtotime($entry['dateValue']));
+            $formattedPrice = str_replace(',', '', $entry['priceValue']); // Adjusting price format
+            
+            if (!in_array($formattedDate, $dates)) {
+                $dates[] = $formattedDate;
+                $prices[] = $formattedPrice;
+            }
+
+        }
         // dd( $listings);
-        return view('WebsitePages.propertydetails', compact('categories','listings', 'propertydetails', 'propertyName'));
+        return view('WebsitePages.propertydetails', compact('prices','dates','categories','listings', 'propertydetails', 'propertyName'));
     }
     public function userlogin()
     {
@@ -107,10 +133,12 @@ class WebsiteViews extends Controller
         $city = $req->input('filtercity');
         $minprice = $req->input('filterminprice');
         $maxprice = $req->input('filtermaxprice');
+        $sqftfrom = $req->input('sqftfrom');
+        $sqftto = $req->input('sqftto');
 
         return response()->json([
             'success' => true,
-            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category, 'filtercity' => $city, 'filterminprice' => $minprice, 'filtermaxprice' => $maxprice]),
+            'redirect_url' => route('website.propertylistings', ['filtercategory' => $category, 'filtercity' => $city, 'filterminprice' => $minprice, 'filtermaxprice' => $maxprice, 'sqftfrom' => $sqftfrom, 'sqftto' => $sqftto]),
         ], 200);
     }
     public function myownlistings($usernameroute, $useridroute)
@@ -119,6 +147,10 @@ class WebsiteViews extends Controller
         $userid = $useridroute;
         $listings = PropertyListing::where('roleid', $userid)->orderBy('created_at', 'DESC')->paginate(4);
         return view('WebsitePages.myownlistings', compact('listings', 'username', 'userid'));
+    }
+
+    public function whytoinvest(){
+        return view('WebsitePages.whyToinvest');
     }
 
 }

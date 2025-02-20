@@ -125,14 +125,14 @@
                             @endphp
 
                             @if(in_array(strtolower($fileExtension), ['jpg', 'jpeg']))
-                                <img src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" alt="Master Plan" style="max-width: 100%; height: auto;">
-                                <div class="d-flex justify-content-center mt-3">
-                                    <a href="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" download class="btn-default">Download</a>
-                                </div>
+                            <img src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" alt="Master Plan" style="max-width: 100%; height: auto;">
+                            <div class="d-flex justify-content-center mt-3">
+                                <a href="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" download class="btn-default">Download</a>
+                            </div>
                             @elseif(strtolower($fileExtension) == 'pdf')
-                                <iframe src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" width="100%" height="600px"></iframe>
+                            <iframe src="{{ asset('assets/images/Listings/' . $propertydetails->masterplandoc) }}" width="100%" height="600px"></iframe>
                             @else
-                                <p>Unsupported file format</p>
+                            <p>Unsupported file format</p>
                             @endif
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                             <h3>Price Trend</h3>
                         </div>
                         <div class="property-amenities-box">
-                            <div id="chart-line-basic" class="mx-n3"></div>
+                            <div id="pricehistorychart" class="mx-n3"></div>
                         </div>
                     </div>
                     <div class="property-map-location wow" data-wow-delay="1.25s">
@@ -303,9 +303,9 @@
                             @foreach ($listings->take(4) as $latest)
                             <div class="recent-post-item">
                                 <div class="post-image">
-                                <a target="_blank" href="{{ route('website.propertydetails',['id' => $latest->id])}}">
-                                    <img src="{{asset('assets/images/Listings/'.$latest->thumbnail)}}" alt="">
-                                </a>
+                                    <a target="_blank" href="{{ route('website.propertydetails',['id' => $latest->id])}}">
+                                        <img src="{{asset('assets/images/Listings/'.$latest->thumbnail)}}" alt="">
+                                    </a>
                                 </div>
 
                                 <div class="post-info">
@@ -382,4 +382,79 @@
     }, 3000);
 
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dates = {{ Js::from($dates) }};
+        var prices = {{ Js::from($prices) }};
+
+        console.log("Dates:", dates);
+        console.log("Prices:", prices);
+
+        var options_line = {
+            series: [{
+                name: "Price History",
+                data: prices.map(price => parseInt(price)) // Keep numeric data for plotting
+            }],
+            chart: {
+                height: 350,
+                type: "line",
+                fontFamily: "inherit",
+                zoom: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: true
+                }
+            },
+            dataLabels: {
+                enabled: false
+            },
+            colors: ["#726554"],
+            stroke: {
+                curve: "straight"
+            },
+            grid: {
+                row: {
+                    colors: ["transparent"],
+                    opacity: 0.5
+                },
+                borderColor: "transparent"
+            },
+            xaxis: {
+                categories: dates, // Use dynamic dates array
+                labels: {
+                    style: {
+                        colors: "#a1aab2"
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    formatter: function (value) {
+                        return "₹" + value.toLocaleString() + "/-"; // Add ₹ at start and /- at end
+                    },
+                    style: {
+                        colors: "#a1aab2"
+                    }
+                }
+            },
+            tooltip: {
+                y: {
+                    formatter: function (value) {
+                        return "₹" + value.toLocaleString() + "/-"; // Tooltip formatting
+                    }
+                },
+                theme: "dark"
+            }
+        };
+
+        var chart_line_basic = new ApexCharts(
+            document.querySelector("#pricehistorychart"),
+            options_line
+        );
+        chart_line_basic.render();
+    });
+</script>
+
+
 @endsection

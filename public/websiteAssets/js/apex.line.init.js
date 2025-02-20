@@ -85,6 +85,14 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   chart_line_basic.render();
 
+
+
+
+
+
+
+
+
   // Data Label Line Chart   -------> LINE CHART
   var options = {
     series: [
@@ -303,6 +311,11 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   chart_line_zoomable.render();
 
+
+
+
+  
+
   // Gradient Line Chart -------> LINE CHART
   var options_gradient = {
     series: [
@@ -469,6 +482,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Alternatively, you can also reset the data at certain intervals to prevent creating a huge series
     data = data.slice(data.length - 10, data.length);
   }
+
+
+
+
+
+
 
   // Realtime Line Chart -------> LINE CHART
   var options_realtime = {

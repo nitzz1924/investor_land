@@ -40,18 +40,25 @@
                         </div>
                         <form action="#" class="form-horizontal">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="form-label">Property Name<span class="text-danger">*</span>
                                         </label>
                                         <input type="text" placeholder="Property Name" name="property_name" class="form-control" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="mb-4">
                                         <label class="form-label">Near By Location<span class="text-danger">*</span>
                                         </label>
                                         <input type="text" placeholder="Enter Near by Location of Property" name="nearbylocation" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-4">
+                                        <label class="form-label">Approx Rental Income<span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" placeholder="Approx Rental Income" name="approxrentalincome" class="form-control" required>
                                     </div>
                                 </div>
                             </div>

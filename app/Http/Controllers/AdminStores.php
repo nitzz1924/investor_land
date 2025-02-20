@@ -314,6 +314,7 @@ class AdminStores extends Controller
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
+                'approxrentalincome' => $datareq['approxrentalincome'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
                 'pricehistory' => $datareq['historydate'],
@@ -448,6 +449,7 @@ class AdminStores extends Controller
                 'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
+                'approxrentalincome' => $datareq['approxrentalincome'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
                 'pricehistory' => $updatedhistory == "null" ? $olddata->pricehistory : json_encode($updatedhistory),

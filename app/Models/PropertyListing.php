@@ -10,6 +10,7 @@ class PropertyListing extends Model
         'usertype',
         'roleid',
         'property_name',
+        'approxrentalincome',
         'discription',
         'price',
         'pricehistory',

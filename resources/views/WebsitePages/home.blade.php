@@ -31,7 +31,22 @@
                         <div class="hero-content-body wow fadeInUp" data-wow-delay="0.5s">
                             <p>Your Partner for Hassle-Free Property Investment</p>
                         </div>
-                        <div class="footer-social-links">
+                        <div class="d-flex justify-content-center fixed-buttons">
+                            <div>
+                                <!-- WhatsApp Button -->
+                                <a href="https://wa.me/917073880500" target="_blank" class="whatsapp-btn">
+                                    <i class="fab fa-whatsapp"></i>&nbsp;WhatsApp Us
+                                </a>
+                            </div>
+
+                            <div>
+                                <!-- Call Button -->
+                                <a href="tel:+917073880500" class="call-btn">
+                                    <i class="fas fa-phone"></i>&nbsp;Call Us
+                                </a>
+                            </div>
+                        </div>
+                        {{-- <div class="footer-social-links">
                             <ul>
                                 <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
@@ -40,7 +55,7 @@
                                 <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                                 <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
                             </ul>
-                        </div>
+                        </div> --}}
                     </div>
                     <!-- Hero Left Content End -->
                 </div>
@@ -71,7 +86,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-lg-5 col-6">
+                        <div class="col-lg-4 col-6">
                             <select name="filtercategory" class="form-control">
                                 <option value="" selected>Select Category</option>
                                 @foreach ($uniqueCategories as $uq)
@@ -79,7 +94,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-lg-7 col-6">
+                        <div class="col-lg-4 col-6">
                             <button type="button" id="priceFilterBtn" class="form-control text-start">Price (INR)</button>
                             <div id="priceFilterDropdown" class="price-filter-dropdown d-none">
                                 <div class="d-flex justify-content-between">
@@ -93,6 +108,23 @@
                                 <div class="d-flex justify-content-between mt-2">
                                     <button type="button" id="resetPriceFilter" class="btn btn-light">Reset</button>
                                     <button type="button" id="applyPriceFilter" class="btn text-white" style="background-color: #726555;">Done</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-6">
+                            <button type="button" id="sqftbtn" class="form-control text-start">Sqft</button>
+                            <div id="sqftbtnDropdown" class="price-filter-dropdownsqft d-none">
+                                <div class="d-flex justify-content-between">
+                                    <label>From</label>
+                                    <label>To</label>
+                                </div>
+                                <div class="d-flex">
+                                    <input type="text" name="sqftfrom" id="sqftfrom" class="form-control me-2" placeholder="0">
+                                    <input type="text" name="sqftto" id="sqftto" class="form-control" placeholder="0">
+                                </div>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <button type="button" id="resetsqftfilter" class="btn btn-light">Reset</button>
+                                    <button type="button" id="applysqftfilter" class="btn text-white" style="background-color: #726555;">Done</button>
                                 </div>
                             </div>
                         </div>
@@ -214,19 +246,19 @@
                     <div class="about-content-body">
                         <p class="wow fadeInUp text-black text-center" data-wow-delay="0.5s">Investor Lands offers a portfolio of projects designed to maximize returns and build lasting value. Explore now to find the perfect project that aligns with your goals and future vision.</p>
                         <div class="row">
-                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="0.75s">
+                            <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay="0.75s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-1.svg')}}" alt=""></div>
                                 <span class="text-black">Smart Home Design</span>
                             </div>
-                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1s">
+                            <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay="1s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-2.svg')}}" alt=""></div>
                                 <span class="text-black">Beautiful Scene Around</span>
                             </div>
-                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1.25s">
+                            <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay="1.25s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-3.svg')}}" alt=""></div>
                                 <span class="text-black">Exceptional Lifestyle</span>
                             </div>
-                            <div class="col-lg-3 col-3 wow fadeInUp" data-wow-delay="1.5s">
+                            <div class="col-lg-3 col-6 wow fadeInUp" data-wow-delay="1.5s">
                                 <div class="icon-box"><img src="{{asset('websiteAssets/images/icon-about-4.svg')}}" alt=""></div>
                                 <span class="text-black">Complete 24/7 Security</span>
                             </div>
@@ -660,6 +692,42 @@
         }
     });
 
+
+    document.getElementById("sqftbtn").addEventListener("click", function() {
+        let sqftbtndropdown = document.getElementById("sqftbtnDropdown");
+        sqftbtndropdown.classList.toggle("d-none");
+    });
+
+    // Close when clicking outside
+    document.addEventListener("click", function(event) {
+        let sqftbtndropdown = document.getElementById("sqftbtnDropdown");
+        let button = document.getElementById("sqftbtn");
+
+        if (!button.contains(event.target) && !sqftbtndropdown.contains(event.target)) {
+            sqftbtndropdown.classList.add("d-none");
+        }
+    });
+
+
+
+    // Apply filter for Square Feet
+    document.getElementById("applysqftfilter").addEventListener("click", function() {
+        let sqftfrom = document.getElementById("sqftto").value;
+        let sqftto = document.getElementById("sqftfrom").value || "Any";
+
+        document.getElementById("sqftbtn").textContent = `Sqft: ${sqftfrom} - ${sqftto} m`;
+        document.getElementById("sqftbtnDropdown").classList.add("d-none");
+    });
+
+    // Reset filter for Square Feet
+    document.getElementById("resetsqftfilter").addEventListener("click", function() {
+        document.getElementById("sqftto").value = "";
+        document.getElementById("sqftfrom").value = "";
+        document.getElementById("sqftbtn").textContent = "Sqft";
+    });
+
+
+
     // Apply filter
     document.getElementById("applyPriceFilter").addEventListener("click", function() {
         let minPrice = document.getElementById("minPrice").value;
@@ -690,8 +758,10 @@
         var filtercategory = formdata.get('filtercategory');
         var minPrice = formdata.get('filterminprice');
         var maxPrice = formdata.get('filtermaxprice');
+        var sqftfrom = formdata.get('sqftfrom');
+        var sqftto = formdata.get('sqftto');
 
-        if (!minPrice && !maxPrice && !filtercity && !filtercategory) {
+        if (!minPrice && !maxPrice && !filtercity && !filtercategory && !sqftfrom && !sqftto) {
             Toastify({
                 text: "Please select at least one to filter Listings."
                 , duration: 3000

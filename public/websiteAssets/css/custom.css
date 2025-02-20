@@ -1450,6 +1450,8 @@ header.main-header .header-sticky.active {
 .post-item .post-featured-image figure img {
 	width: 100%;
 	transition: all 0.4s ease-out;
+	object-fit: cover;
+    height: 300px;
 }
 
 .post-item .post-featured-image .post-read-more {
@@ -3267,6 +3269,24 @@ footer.footer {
 }
 
 @media only screen and (max-width: 767px) {
+	.post-item .post-featured-image figure img{
+		width: 100%;
+		transition: all 0.4s ease-out;
+		object-fit: cover;
+		height: 180px;
+	}
+	.post-item .post-body .post-category ul li a {
+		color: var(--text-color);
+		font-size: 14px;
+	}
+	.location-item .location-image img {
+		width: 100%;
+		transition: all 0.5s ease-out;
+		height: 150px;
+	}
+	.location-item .location-content{
+		padding: 20px;
+	}
 	.hero .hero-search-form-section {
 		top: -60px;
 	}
@@ -3294,8 +3314,8 @@ footer.footer {
 	}
 	.price-filter-dropdown {
 		position: absolute !important;
-		top: 90% !important;
-		left: 93px !important;
+		top: 100% !important;
+		left: 123px !important;
 		background: white !important;
 		border: 1px solid #ccc !important;
 		border-radius: 15px !important;
@@ -3523,7 +3543,7 @@ footer.footer {
 	}
 
 	.post-item .post-body h3 a {
-		font-size: 20px;
+		font-size: 15px;
 	}
 
 	.newsletter-title {
@@ -3921,8 +3941,20 @@ footer.footer {
 
 .price-filter-dropdown {
     position: absolute;
-    top: 60%;
-    left: 353px;
+    top: 120%;
+    left: 53px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 18px;
+    width: 350px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+.price-filter-dropdownsqft {
+    position: absolute;
+    top: 109%;
+    left: 443px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 15px;
@@ -3941,24 +3973,24 @@ footer.footer {
     text-align: center;
 }
 
-h1 {
+.calculator h1 {
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-.input-group {
+.calculator .input-group {
     margin-bottom: 15px;
     text-align: left;
 }
 
-label {
+.calculator label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-input[type="number"],
-input[type="range"] {
+.calculator input[type="number"],
+.calculator input[type="range"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -3966,16 +3998,16 @@ input[type="range"] {
     margin-top: 5px;
 }
 
-.result {
+.calculator .result {
     margin-top: 20px;
 }
 
-.result h2 {
+.calculator .result h2 {
     font-size: 20px;
     margin-bottom: 10px;
 }
 
-.result p {
+.calculator .result p {
     font-size: 16px;
     color: #555;
 }
@@ -3986,11 +4018,41 @@ input[type="range"] {
     height: 200px;
 }
 
-.footer {
+.calculator .footer {
     margin-top: 20px;
     font-size: 14px;
     color: #777;
 }
+.fixed-buttons {
+	gap: 10px;
+	z-index: 1000;
+}
 
+.fixed-buttons a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 170px;
+	height: 45px;
+	border-radius: 25px;
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-btn {
+	background-color: #25D366; /* WhatsApp Green */
+}
+
+.call-btn {
+	background-color: #726555; /* Blue for Call */
+}
+
+.fixed-buttons a:hover {
+	opacity: 0.8;
+}
 
 
