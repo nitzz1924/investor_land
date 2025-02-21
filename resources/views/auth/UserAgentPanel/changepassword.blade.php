@@ -1,6 +1,6 @@
 {{------------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 @extends('layouts.website')
-@section('title','Reset Password')
+@section('title','Change Password')
 @section('content')
 <div class="py-5" style="background-image: url('{{asset('websiteAssets/images/post-3.jpg')}}'); background-size: cover; background-position: center;">
     <div class="container">
@@ -10,7 +10,7 @@
                     <div class="about-property wow" data-wow-delay="0.75s">
                         <div class="property-single-subtitle text-center">
                             <h3 class="mb-3 loginhead">Your Trusted Partner in Real Estate</h3>
-                            <p>Enter your email address and we'll send you an email with instructions to reset your password.</p>
+                            <p>Enter your new Password for Email : <strong class="text-black">{{$decrypedmail}}</strong></p>
                         </div>
                         <div class="property-inquiry-box wow" data-wow-delay="0.5s">
                             @if ($message = Session::get('success'))
@@ -24,16 +24,24 @@
                             </div>
                             @endif
                             <div class="property-inquiry-form">
-                                <form id="" action="{{ route('email.sendMail') }}" method="POST">
+                                <form id="" action="{{ route('website.updatePassword')}}" method="POST">
                                     @csrf
                                     <div class="row">
-                                        <!-- Email Field -->
                                         <div class="form-group col-md-12 mb-4">
-                                            <label for="email" class="form-label">Email Address</label>
-                                            <input type="email" name="email" class="form-control form-control-lg" id="email" placeholder="Enter your email" required>
+                                            <div class="">
+                                                <label for="password" class="form-label mb-0">Password</label>
+                                                <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password" required>
+                                            </div>
+                                            <input type="hidden" name="email" value="{{$decrypedmail}}">
+                                        </div>
+                                        <div class="form-group col-md-12 mb-4">
+                                            <div class="">
+                                                <label for="password" class="form-label mb-0">Confirm Password</label>
+                                                <input type="password" name="confirmpassword" class="form-control form-control-lg" id="confirmpass" placeholder="Confirm your password" required>
+                                            </div>
                                         </div>
                                         <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn-default btn-lg w-100">Reset Password</button>
+                                            <button type="submit" class="btn-default btn-lg w-100">Update Password</button>
                                         </div>
                                     </div>
                                 </form>
@@ -46,7 +54,7 @@
         </div>
     </div>
 </div>
-{{-- <script>
+<script>
     setTimeout(function() {
         $('#successAlert').fadeOut('slow');
     }, 3000);
@@ -55,5 +63,5 @@
         $('#dangerAlert').fadeOut('slow');
     }, 3000);
 
-</script> --}}
+</script>
 @endsection

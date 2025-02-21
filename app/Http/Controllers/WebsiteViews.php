@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Master;
 use App\Models\PropertyListing;
 use Illuminate\Http\Request;
+use function PHPUnit\Framework\returnArgument;
 
 class WebsiteViews extends Controller
 {
@@ -153,6 +154,11 @@ class WebsiteViews extends Controller
     }
     public function resetpassword(){
         return view('auth.UserAgentPanel.ResetPassword');
+    }
+
+    public function changepassword($Email){
+        $decrypedmail = decrypt($Email);
+        return view('auth.UserAgentPanel.ChangePassword', compact('decrypedmail'));
     }
 
 }

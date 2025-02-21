@@ -85,4 +85,19 @@ class WebsiteStores extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+
+    public function updatePassword(Request $rq){
+        try {
+            $user = RegisterUser::where('email', $rq->email)->first();
+            if ($user) {
+                $user->password = Hash::make($rq->password);
+                $user->save();
+                return back()->with('success', "Password Updated Successfully..!!!");
+            } else {
+                return back()->with('error', "Invalid Email..!!!");
+            }
+        } catch (Exception $e) {
+            return back()->with('error', $e->getMessage());
+        }
+    }
 }

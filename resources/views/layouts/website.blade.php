@@ -48,60 +48,65 @@
         <div class="header-sticky">
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
-                    <!-- Logo Start -->
-                    <a class="navbar-brand" href="/" style="width: 360px;">
-                        <img class="" src="{{asset('assets/images/finallogo.png')}}" alt="Logo">
-                    </a>
-                    <!-- Logo End -->
-
-                    <!-- Main Menu start -->
-                    <div class="collapse navbar-collapse main-menu">
-                        <ul class="navbar-nav mr-auto" id="menu">
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.homepage')}}">Home</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage')}}">About us</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.whytoinvest')}}">Why to Invest ?</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
-                            <li class="nav-item dropdown">
-                                @if(Auth::guard('customer')->check())
-                                @if(Auth::guard('customer')->user()->profile_photo_path)
-                                @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                    {{ Auth::guard('customer')->user()->name }}
-                                </a>
-                                @else
-                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                    {{ Auth::guard('customer')->user()->name }}
-                                </a>
-                                @endif
-                                @else
-                                <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
-                                @endif
-                                <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                    <li><a class="dropdown-item" target="_blank" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
-                                    <li><a class="dropdown-item" target="_blank" href="{{ route('user.myprofile') }}">My Profile</a></li>
-                                    <li>
-                                        <form method="GET" action="{{ route('user.logoutuserpanel') }}">
-                                            @csrf
-                                            <button type="submit" class="dropdown-item">Log Out</button>
-                                        </form>
+                    <div class="row">
+                        <div class="col-lg-3 col-10">
+                            <!-- Logo Start -->
+                            <a class="navbar-brand" href="/" style="width: 360px;">
+                                <img class="" src="{{asset('assets/images/finallogo.png')}}" alt="Logo">
+                            </a>
+                            <!-- Logo End -->
+                        </div>
+                        <div class="col-lg-9 col-2">
+                            <!-- Main Menu start -->
+                            <div class="collapse navbar-collapse main-menu">
+                                <ul class="navbar-nav mr-auto" id="menu">
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.homepage')}}">Home</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage')}}">About us</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.whytoinvest')}}">Why to Invest ?</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
+                                    <li class="nav-item dropdown">
+                                        @if(Auth::guard('customer')->check())
+                                        @if(Auth::guard('customer')->user()->profile_photo_path)
+                                        @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
+                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                            {{ Auth::guard('customer')->user()->name }}
+                                        </a>
+                                        @else
+                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                            {{ Auth::guard('customer')->user()->name }}
+                                        </a>
+                                        @endif
+                                        @else
+                                        <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
+                                        @endif
+                                        <ul class="dropdown-menu" aria-labelledby="userMenu">
+                                            <li><a class="dropdown-item" target="_blank" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+                                            <li><a class="dropdown-item" target="_blank" href="{{ route('user.myprofile') }}">My Profile</a></li>
+                                            <li>
+                                                <form method="GET" action="{{ route('user.logoutuserpanel') }}">
+                                                    @csrf
+                                                    <button type="submit" class="dropdown-item">Log Out</button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                        @else
+                                    <li class="nav-item highlighted-menu">
+                                        <a class="nav-link" href="{{ route('website.userlogin') }}">Login</a>
+                                    </li>
+                                    @endif
                                     </li>
                                 </ul>
-                                @else
-                            <li class="nav-item highlighted-menu">
-                                <a class="nav-link" href="{{ route('website.userlogin') }}">Login</a>
-                            </li>
-                            @endif
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Main Menu End -->
+                            </div>
+                            <!-- Main Menu End -->
 
-                    <div class="navbar-toggle"></div>
+                            <div class="navbar-toggle"></div>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
@@ -228,6 +233,30 @@
             </div>
         </div>
     </div>
+
+    <div class="">
+        <!-- Call Button -->
+        <a href="tel:+917073880500" class="call-btn animate-up-down" style="position: fixed; right: 20px; bottom: 20px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
+            <i class="fas fa-phone"></i>&nbsp; Call Us
+        </a>
+    </div>
+
+    <style>
+        .animate-up-down {
+            animation: upDown 1s infinite alternate;
+        }
+
+        @keyframes upDown {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+    </style>
 
 
     <!-- ALL JS -->

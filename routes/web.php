@@ -110,6 +110,7 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/myownlistings/{username}/{userid}', 'myownlistings')->name('website.myownlistings');
     Route::get('/whytoinvest', 'whytoinvest')->name('website.whytoinvest');
     Route::get('/resetpassword', 'resetpassword')->name('website.resetpassword');
+    Route::get('/changepassword/{email}', 'changepassword')->name('website.changepassword');
 });
 
 
@@ -118,6 +119,7 @@ Route::controller(WebsiteStores::class)->group(function () {
     Route::post('/sendenquiry', 'sendenquiry')->name('website.sendenquiry');
     Route::post('/register-user', 'registeruser')->name('website.registeruser');
     Route::post('/login-user', 'loginuser')->name('website.loginuser');
+    Route::post('/updatePassword', 'updatePassword')->name('website.updatePassword');
 });
 
 

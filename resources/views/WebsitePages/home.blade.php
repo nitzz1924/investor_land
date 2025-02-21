@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-4 col-6">
+                        <div class="col-lg-4 col-12">
                             <button type="button" id="sqftbtn" class="form-control text-start">Sqft</button>
                             <div id="sqftbtnDropdown" class="price-filter-dropdownsqft d-none">
                                 <div class="d-flex justify-content-between">

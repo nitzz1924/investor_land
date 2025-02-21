@@ -11,11 +11,13 @@ class ResetPasswordMail extends Mailable
 
     public $messageBody;  // Renaming to avoid conflicts
     public $subjectText;  // Renaming to avoid conflicts
+    public $encryptedEmail;  // Renaming to avoid conflicts
 
-    public function __construct($message, $subject)
+    public function __construct($message, $subject, $encryptedEmail)
     {
         $this->messageBody = $message;
         $this->subjectText = $subject;
+        $this->encryptedEmail = $encryptedEmail;
     }
 
     public function envelope()
@@ -32,6 +34,7 @@ class ResetPasswordMail extends Mailable
             with: [
                 'messageBody' => $this->messageBody,
                 'subjectText' => $this->subjectText,
+                'encryptedEmail' => $this->encryptedEmail,
             ],
         );
     }

@@ -8,5 +8,7 @@
 <body>
     <h3>{{ $subjectText }}</h3>
     <p>{!! nl2br(e($messageBody)) !!}</p>
+
+    <a href="http://127.0.0.1:8000/changepassword/{{$encryptedEmail}}" class="">Reset Password</a>
 </body>
 </html>
