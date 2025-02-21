@@ -288,8 +288,10 @@
                                 <i class="ti ti-bell-ringing"></i>
                                 @php
                                 use App\Models\Nortification;
-                                $loggedinUser = Auth::guard('customer')->user();
-                                $data = Nortification::where('sendto', $loggedinUser->user_type)->orderBy('created_at','DESC')->get();
+                                $authuser = Auth::guard('customer')->user();
+                                $data = Nortification::where('sendto', $authuser->user_type)
+                                ->orWhere('sendto', 'all')
+                                ->orderBy('created_at', 'DESC')->get();
                                 @endphp
 
                                 @if($data->isNotEmpty())
@@ -301,11 +303,11 @@
                                 <div class="d-flex align-items-center justify-content-between py-3 px-7">
                                     <h5 class="mb-0 fs-5 fw-semibold">Notifications</h5>
                                 </div>
-                                @if($data->isNotEmpty())   
+                                @if($data->isNotEmpty())
                                 <div>
                                     @foreach ($data->take(5) as $row)
                                     <div class="message-body" data-simplebar>
-                                        <a href="javascript:void(0)" class="py-6 px-7 text-wrap row d-flex align-items-center dropdown-item">
+                                        <a href="#" class="py-6 px-7 text-wrap row d-flex align-items-center dropdown-item">
                                             <div class="col-md-4 p-0">
                                                 <img src="{{ asset('assets/images/Notificaitons/'.$row->notificationimg) }}" alt="user" class="rounded img-fluid" />
                                             </div>
@@ -313,23 +315,23 @@
                                                 <h6 class="mb-1 fw-semibold lh-base">
                                                     {{ $row->notificationname }}
                                                 </h6>
-                                                <span class="fs-2 d-block text-body-secondary text-wrap"> {{ $row->notificationdes }}</span>
+                                                <span class="fs-2 d-block text-body-secondary text-wrap"> {{ Str::limit($row->notificationdes,20) }}</span>
                                             </div>
                                         </a>
                                     </div>
                                     @endforeach
                                     <div class="py-6 px-7 mb-1">
-                                    <a href="{{ route('user.notifications') }}">
-                                        <button class="btn btn-outline-primary w-100">
-                                            See All Notifications
-                                        </button>
-                                    </a>
+                                        <a href="{{ route('user.notifications') }}">
+                                            <button class="btn btn-outline-primary w-100">
+                                                See All Notifications
+                                            </button>
+                                        </a>
                                     </div>
                                 </div>
                                 @else
-                                    <div class="d-flex justify-content-center align-items-center mt-5">
-                                           <p class="mb-0 text-muted">No new notifications</p>
-                                    </div>
+                                <div class="d-flex justify-content-center align-items-center mt-5">
+                                    <p class="mb-0 text-muted">No new notifications</p>
+                                </div>
                                 @endif
                             </div>
                         </li>

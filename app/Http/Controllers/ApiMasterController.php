@@ -418,7 +418,8 @@ class ApiMasterController extends Controller
 
     public function usernotifications(Request $rq)
     {
-        $notifications = Nortification::where('sendto', $rq->user_type)->orderBy('created_at', 'DESC')->get();
+        $notifications = Nortification::where('sendto', $rq->user_type)->orWhere('sendto', 'all')->orderBy('created_at', 'DESC')
+        ->get();
         $notifycnt = Nortification::where('sendto', $rq->user_type)->count();
         return response()->json([
             'success' => true,

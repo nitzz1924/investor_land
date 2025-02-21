@@ -78,7 +78,7 @@
                                         @else
                                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                            {{ Auth::guard('customer')->user()->name }}
+                                            {{ Str::limit(Auth::guard('customer')->user()->name,7) }}
                                         </a>
                                         @endif
                                         @else

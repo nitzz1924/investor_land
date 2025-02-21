@@ -54,8 +54,10 @@
                                 <td>{{ Str::limit(strip_tags($data->blogdescription), 20) }}</td>
                                 <td>
                                     <div class="hstack gap-3 flex-wrap">
-                                        <a href="{{ route('admin.editblog',['id' => $data->id]) }}" class="link-dark fs-6" data-bs-toggle="tooltip" title="Edit"><i class="ti ti-edit"></i><a>
-                                                <button data-bs-toggle="tooltip" title="Delete" onclick="confirmDelete('{{ $data->id }}')" class="link-danger  fs-6"><i class="ti ti-trash"></i></button>
+                                        <a href="{{ route('admin.editblog',['id' => $data->id]) }}" class="link-dark fs-6" data-bs-toggle="tooltip" title="Edit">
+                                        <i class="ti ti-edit"></i>
+                                        </a>
+                                        <button data-bs-toggle="tooltip" title="Delete" onclick="confirmDelete('{{ $data->id }}')" class="link-danger  fs-6"><i class="ti ti-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>

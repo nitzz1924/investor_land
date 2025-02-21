@@ -45,7 +45,7 @@ class WebsiteViews extends Controller
     }
     public function blogs()
     {
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $blogs = Blog::orderBy('created_at', 'desc')->paginate(3);
         return view('WebsitePages.blogs', compact('blogs'));
     }
     public function blogdetails($id)

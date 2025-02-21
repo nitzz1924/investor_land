@@ -51,7 +51,7 @@
                                     </div>
                                 </td>
                                 <td>{{ Str::limit(strip_tags($data->notificationdes), 20) }}</td>
-                                <td>{{ ucfirst( $data->sendto) }}</td>
+                                <td>{{ $data->sendto == 'all' ? 'Sent to both' : ucfirst($data->sendto) }}</td>
                                 <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>
                                 <td>
                                     <div class="hstack gap-3 flex-wrap">

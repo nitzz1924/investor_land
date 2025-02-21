@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-end align-items-center gap-2">
                     <div class="">
-                        <a onclick="copyToClipboard(event)" href="{{ route('user.myownlistings',['username' => $authuser->name, 'userid' => $authuser->id]) }}" class="btn btn-outline-primary">
+                        <a onclick="copyToClipboard(event)" href="{{ route('user.mylistings',['username' => $authuser->name, 'userid' => $authuser->id]) }}" class="btn btn-outline-primary">
                             <i class="ti ti-copy"></i> My Listings Link
                         </a>
                     </div>

@@ -43,13 +43,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="post-pagination wow fadeInUp" data-wow-delay="1.5s">
-                    <ul class="pagination">
-                        <li><a href="#"><i class="fa-solid fa-arrow-left-long"></i></a></li>
-                        <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#"><i class="fa-solid fa-arrow-right-long"></i></a></li>
-                    </ul>
+                    {{ $blogs->links('pagination::bootstrap-4') }}
                 </div>
             </div>
         </div>

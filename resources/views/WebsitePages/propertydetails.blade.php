@@ -231,11 +231,16 @@
                     </div>
                     <div class="property-map-location wow" data-wow-delay="1.25s">
                         <div class="property-single-subtitle">
+                            @php
+                            $coordinates = json_decode($propertydetails->maplocations, true);
+                            $latitude = $coordinates['Latitude'] ?? '40.7324319';
+                            $longitude = $coordinates['Longitude'] ?? '-73.82480777777776';
+                            @endphp
                             <h3>Map Location</h3>
                         </div>
-
                         <div class="property-map-iframe">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d49359.77289774349!2d77.59174385159328!3d13.045949738664566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1707476041972!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z{{ $latitude }},{{ $longitude }}!5e0!3m2!1sen!2sin!4v{{ time() }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
                         </div>
                     </div>
                 </div>
@@ -383,77 +388,78 @@
 
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var dates = {{ Js::from($dates) }};
-        var prices = {{ Js::from($prices) }};
+    document.addEventListener("DOMContentLoaded", function() {
+        var dates = {{Js::from($dates)}};
+        var prices = {{Js::from($prices)}};
 
         console.log("Dates:", dates);
         console.log("Prices:", prices);
 
         var options_line = {
             series: [{
-                name: "Price History",
-                data: prices.map(price => parseInt(price)) // Keep numeric data for plotting
-            }],
-            chart: {
-                height: 350,
-                type: "line",
-                fontFamily: "inherit",
-                zoom: {
+                name: "Price History"
+                , data: prices.map(price => parseInt(price)) // Keep numeric data for plotting
+            }]
+            , chart: {
+                height: 350
+                , type: "line"
+                , fontFamily: "inherit"
+                , zoom: {
                     enabled: false
-                },
-                toolbar: {
+                }
+                , toolbar: {
                     show: true
                 }
-            },
-            dataLabels: {
+            }
+            , dataLabels: {
                 enabled: false
-            },
-            colors: ["#726554"],
-            stroke: {
+            }
+            , colors: ["#726554"]
+            , stroke: {
                 curve: "straight"
-            },
-            grid: {
+            }
+            , grid: {
                 row: {
-                    colors: ["transparent"],
-                    opacity: 0.5
-                },
-                borderColor: "transparent"
-            },
-            xaxis: {
+                    colors: ["transparent"]
+                    , opacity: 0.5
+                }
+                , borderColor: "transparent"
+            }
+            , xaxis: {
                 categories: dates, // Use dynamic dates array
                 labels: {
                     style: {
                         colors: "#a1aab2"
                     }
                 }
-            },
-            yaxis: {
+            }
+            , yaxis: {
                 labels: {
-                    formatter: function (value) {
+                    formatter: function(value) {
                         return "₹" + value.toLocaleString() + "/-"; // Add ₹ at start and /- at end
-                    },
-                    style: {
+                    }
+                    , style: {
                         colors: "#a1aab2"
                     }
                 }
-            },
-            tooltip: {
+            }
+            , tooltip: {
                 y: {
-                    formatter: function (value) {
+                    formatter: function(value) {
                         return "₹" + value.toLocaleString() + "/-"; // Tooltip formatting
                     }
-                },
-                theme: "dark"
+                }
+                , theme: "dark"
             }
         };
 
         var chart_line_basic = new ApexCharts(
-            document.querySelector("#pricehistorychart"),
-            options_line
+            document.querySelector("#pricehistorychart")
+            , options_line
         );
         chart_line_basic.render();
     });
+
 </script>
 
 

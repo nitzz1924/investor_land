@@ -39,6 +39,7 @@ class WebsiteStores extends Controller
             if ($rq->hasFile('company_document')) {
                 $rq->validate([
                     'company_document' => 'required|mimes:jpeg,pdf,jpg',
+                    'email' => 'required|email|unique:register_users',
                 ]);
 
                 $file = $rq->file('company_document');

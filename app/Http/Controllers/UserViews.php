@@ -392,9 +392,12 @@ class UserViews extends Controller
 
     public function notifications()
     {
+        // dd('$authuser');
         $authuser = Auth::guard('customer')->user();
-        $notifications = Nortification::where('sendto', $authuser->user_type)->orderBy('created_at', 'DESC')->get();
-        $notifycnt = Nortification::where('sendto', $authuser->user_type)->count();
+        $notifications = Nortification::where('sendto', $authuser->user_type)
+        ->orWhere('sendto', 'all')
+        ->orderBy('created_at', 'DESC')->get();
+        $notifycnt = Nortification::where('sendto', $authuser->user_type)->orWhere('sendto', 'all')->count();
         return view('UserPanelPages.allnotifications', compact('notifications', 'notifycnt'));
     }
 
