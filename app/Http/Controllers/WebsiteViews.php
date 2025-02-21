@@ -148,9 +148,11 @@ class WebsiteViews extends Controller
         $listings = PropertyListing::where('roleid', $userid)->orderBy('created_at', 'DESC')->paginate(4);
         return view('WebsitePages.myownlistings', compact('listings', 'username', 'userid'));
     }
-
     public function whytoinvest(){
         return view('WebsitePages.whyToinvest');
+    }
+    public function resetpassword(){
+        return view('auth.UserAgentPanel.ResetPassword');
     }
 
 }

@@ -25,7 +25,10 @@
 
                                         <!-- Password Field -->
                                         <div class="form-group col-md-12 mb-4">
-                                            <label for="password" class="form-label">Password</label>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <label for="password" class="form-label mb-0">Password</label>
+                                                <a href="{{ route('website.resetpassword') }}" class="text-muted text-decoration-underline" style="font-size: smaller;">Reset Password</a>
+                                            </div>
                                             <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="Enter your password" required>
                                         </div>
 

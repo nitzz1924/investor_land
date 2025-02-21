@@ -1,5 +1,6 @@
 <?php
 // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏----------------------------------------------------
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\GoogleAuthentication;
 use App\Http\Controllers\UserViews;
 use App\Http\Controllers\WebsiteStores;
@@ -108,7 +109,10 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::post('/filterlistings', 'filterlistings')->name('website.filterlistings');
     Route::get('/myownlistings/{username}/{userid}', 'myownlistings')->name('website.myownlistings');
     Route::get('/whytoinvest', 'whytoinvest')->name('website.whytoinvest');
+    Route::get('/resetpassword', 'resetpassword')->name('website.resetpassword');
 });
+
+
 
 Route::controller(WebsiteStores::class)->group(function () {
     Route::post('/sendenquiry', 'sendenquiry')->name('website.sendenquiry');
@@ -124,3 +128,7 @@ Route::controller(GoogleAuthentication::class)->group(function () {
     Route::get('auth/registration/{usertype}', 'googleRegistrationRedirects')->name('auth.registration');
     Route::get('auth/google-register-callback', 'GoogleRegister')->name('auth.google.registration');
 });
+
+
+//Mail Routes
+Route::post('send-mail', [EmailController::class,'sendMail'])->name('email.sendMail');
