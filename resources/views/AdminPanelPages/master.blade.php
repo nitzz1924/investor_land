@@ -182,7 +182,7 @@
             const masterdata = $(this).data('car-list');
             console.log(masterdata);
             $('#modal-body').empty();
-             const imageSrc = masterdata.categoryimage ? '{{ asset('assets/images/Categories/') }}/' + masterdata.categoryimage : '';
+            const imageSrc = masterdata.categoryimage ? '{{ asset('assets/images/Categories/') }}/' + masterdata.categoryimage : '{{asset('assets/images/Categories/placeholder.png') }}';
             $('#modalbodyedit').html(`
                     <div class="">
                         <div class="card-body">

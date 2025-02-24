@@ -206,4 +206,8 @@ class AdminViews extends Controller
         $notificationcount = Nortification::count();
         return view('AdminPanelPages.allnotifications', compact('allnotificaitons', 'notificationcount'));
     }
+
+    public function investpagesettings(){
+        return view('AdminPanelPages.investpagesettings');
+    }
 }

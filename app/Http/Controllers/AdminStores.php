@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\InvestSetting;
 use App\Models\Lead;
 use App\Models\Nortification;
 use App\Models\PropertyListing;
@@ -21,7 +22,7 @@ class AdminStores extends Controller
     public function createmaster(Request $rq)
     {
         // dd($rq->all());
-        $filename="";
+        $filename = "";
         try {
             if ($rq->hasFile('categoryimage')) {
                 $rq->validate([
@@ -326,11 +327,11 @@ class AdminStores extends Controller
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename,
                 'masterplandoc' => $masterdoc,
-                'maplocations' =>$datareq['location'],
+                'maplocations' => $datareq['location'],
                 'category' => $datareq['category'],
                 'gallery' => json_encode($galleryImages),
                 'documents' => json_encode($documents),
-                'amenties' =>  $datareq['amenities'],
+                'amenties' => $datareq['amenities'],
                 'videos' => json_encode($Videos),
                 'status' => $datareq['status'],
             ]);
@@ -416,7 +417,7 @@ class AdminStores extends Controller
                 }
                 // dd($documents);
             }
-            
+
             // Handle multiple Videos
             $Videos = [];
             if ($request->hasFile('propertyvideos')) {
@@ -437,11 +438,11 @@ class AdminStores extends Controller
             }
 
             $olddata = PropertyListing::find($request->listingid);
-            
-            $updatedhistory="null";
-            if($datareq['historydate']){ 
+
+            $updatedhistory = "null";
+            if ($datareq['historydate']) {
                 // dd($datareq['historydate']);
-                $updatedhistory = array_merge(json_decode($olddata->pricehistory),json_decode($datareq['historydate']));
+                $updatedhistory = array_merge(json_decode($olddata->pricehistory), json_decode($datareq['historydate']));
             }
             // dd( $updatedhistory);
             $data = PropertyListing::where('id', $request->listingid)->update([
@@ -461,11 +462,11 @@ class AdminStores extends Controller
                 'address' => $datareq['officeaddress'],
                 'thumbnail' => $thumbnailFilename ?? $olddata->thumbnail,
                 'masterplandoc' => $masterdoc ?? $olddata->masterdoc,
-                'maplocations' =>$datareq['location'] ?? $olddata->maplocations,
+                'maplocations' => $datareq['location'] ?? $olddata->maplocations,
                 'category' => $datareq['category'],
                 'gallery' => !empty($galleryImages) ? json_encode($galleryImages) : $olddata->gallery,
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
-                'amenties' =>  $datareq['amenities'] ?? $olddata->amenities,
+                'amenties' => $datareq['amenities'] ?? $olddata->amenities,
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
                 'status' => $datareq['status'],
             ]);
@@ -503,7 +504,7 @@ class AdminStores extends Controller
             if ($request->followupstatus) {
                 $leads->status = $request->followupstatus;
             }
-           $leads->save();
+            $leads->save();
 
             return back()->with('success', "Follow-up Added and Status Updated..!!!");
         } catch (Exception $e) {
@@ -522,7 +523,8 @@ class AdminStores extends Controller
         }
     }
 
-    public function updatelead(Request $request){
+    public function updatelead(Request $request)
+    {
         try {
 
             $data = Lead::find($request->leadid);
@@ -539,15 +541,16 @@ class AdminStores extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
-    
-    public function submitblog(Request $request){
+
+    public function submitblog(Request $request)
+    {
         $categories = json_decode($request->input('categories'), true);
         // dd($categories);
         $description = $request->input('blogdescription');
         $files = $request->file('blogthumbnail');
         $blogname = $request->input('blogname');
 
-        try{
+        try {
             $thumbnailFilename = null;
             if ($request->hasFile('blogthumbnail')) {
                 $request->validate([
@@ -558,12 +561,12 @@ class AdminStores extends Controller
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Blogs'), $thumbnailFilename);
             }
-             // Create the property listing
-             $data = Blog::create([
+            // Create the property listing
+            $data = Blog::create([
                 'blogname' => $blogname,
                 'blogcategories' => json_encode($categories),
-                'blogthumbnail' =>$thumbnailFilename,
-                'blogdescription' =>  $description,
+                'blogthumbnail' => $thumbnailFilename,
+                'blogdescription' => $description,
             ]);
             return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
 
@@ -572,14 +575,15 @@ class AdminStores extends Controller
         }
     }
 
-    public function updateblog(Request $request){
+    public function updateblog(Request $request)
+    {
         $categories = json_decode($request->input('categories'), true);
         // dd($categories);
         $description = $request->input('blogdescription');
         $files = $request->file('blogthumbnail');
         $blogname = $request->input('blogname');
 
-        try{
+        try {
             $thumbnailFilename = null;
             if ($request->hasFile('blogthumbnail')) {
                 $request->validate([
@@ -591,12 +595,12 @@ class AdminStores extends Controller
                 $file->move(public_path('assets/images/Blogs'), $thumbnailFilename);
             }
             $olddata = Blog::find($request->blogid);
-             // Create the property listing
-             $data = Blog::where('id', $request->blogid)->update([
+            // Create the property listing
+            $data = Blog::where('id', $request->blogid)->update([
                 'blogname' => $blogname,
                 'blogcategories' => json_encode($categories),
                 'blogthumbnail' => $thumbnailFilename ?? $olddata->blogthumbnail,
-                'blogdescription' =>  $description,
+                'blogdescription' => $description,
             ]);
             return response()->json(['data' => $data, 'message' => 'Blog Updated.....!']);
 
@@ -627,14 +631,15 @@ class AdminStores extends Controller
         return response()->json(['success' => false], 404);
     }
 
-    public function insertnotification(Request $request){
-    
+    public function insertnotification(Request $request)
+    {
+
         $description = $request->input('notificationdes');
         $files = $request->file('notificationimg');
         $notificationname = $request->input('notificationname');
         $sendtowhom = $request->input('sendto');
 
-        try{
+        try {
             $notificationimg = null;
             if ($request->hasFile('notificationimg')) {
                 $request->validate([
@@ -645,12 +650,12 @@ class AdminStores extends Controller
                 $notificationimg = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Notificaitons'), $notificationimg);
             }
-             // Create the property listing
-             $data = Nortification::create([
+            // Create the property listing
+            $data = Nortification::create([
                 'notificationname' => $notificationname,
-                'notificationimg' =>$notificationimg,
-                'notificationdes' =>  $description,
-                'sendto' =>  $sendtowhom,
+                'notificationimg' => $notificationimg,
+                'notificationdes' => $description,
+                'sendto' => $sendtowhom,
             ]);
             return response()->json(['data' => $data, 'message' => 'Notification inserted successfully!']);
 
@@ -670,14 +675,15 @@ class AdminStores extends Controller
         }
     }
 
-    public function udpatenortification(Request $request){
-    
+    public function udpatenortification(Request $request)
+    {
+
         $description = $request->input('notificationdesupdate');
         $files = $request->file('notificationimgupdate');
         $notificationname = $request->input('notificationnameupdate');
         $sendtoupdate = $request->input('sendtoupdate');
 
-        try{
+        try {
             $notificationimg = null;
             if ($request->hasFile('notificationimgupdate')) {
                 $request->validate([
@@ -690,14 +696,88 @@ class AdminStores extends Controller
             }
             $olddata = Nortification::find($request->nortiid);
 
-             // Update the Nortification
-             $data = Nortification::where('id', $request->nortiid)->update([
+            // Update the Nortification
+            $data = Nortification::where('id', $request->nortiid)->update([
                 'notificationname' => $notificationname,
-                'notificationimg' =>$notificationimg  ?? $olddata->notificationimg,
-                'notificationdes' =>  $description,
-                'sendto' =>  $sendtoupdate,
+                'notificationimg' => $notificationimg ?? $olddata->notificationimg,
+                'notificationdes' => $description,
+                'sendto' => $sendtoupdate,
             ]);
             return response()->json(['data' => $data, 'message' => 'Notification Updated....!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function submitinvestpagesettings(Request $request)
+    {
+        $description = $request->input('description');
+
+        try {
+            // Handle bannervideo images
+            $thumbnailFilename = null;
+            if ($request->hasFile('bannervideo')) {
+
+                $file = $request->file('bannervideo');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Investsettings'), $thumbnailFilename);
+            }
+
+
+            // Handle multiple Images to Share images
+            $imagestoshare = [];
+            if ($request->hasFile('imagestoshare')) {
+                $request->validate([
+                    'imagestoshare.*' => 'required|image|mimes:jpeg,png,jpg',
+                ]);
+                $files = $request->file('imagestoshare');
+                foreach ($files as $file) {
+                    $imageName = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $imageFullName = $imageName . '.' . $extension;
+
+                    // Define the upload path
+                    $uploadedPath = public_path('assets/images/Investsettings');
+
+                    // Move the file to the desired location
+                    $file->move($uploadedPath, $imageFullName);
+
+                    // Store the path for the image
+                    $imagestoshare[] = 'assets/images/Investsettings/' . $imageFullName;
+                }
+                //    dd( $imagestoshare);
+            }
+
+
+            // Handle multiple Videos
+            $Videos = [];
+            if ($request->hasFile('videostoshare')) {
+                $request->validate([
+                    'videostoshare.*' => 'required|mimes:mp4,mov,avi',
+                ]);
+
+                $videostoshare = $request->file('videostoshare');
+                foreach ($videostoshare as $file) {
+                    $videoname = md5(rand(1000, 10000));
+                    $extension = strtolower($file->getClientOriginalExtension());
+                    $videofullname = $videoname . '.' . $extension;
+                    $uploadedPath = public_path('assets/images/Investsettings');
+                    $file->move($uploadedPath, $videofullname);
+                    $Videos[] = 'assets/images/Investsettings/' . $videofullname;
+                }
+                // dd($Videos);
+            }
+
+            // Create the Invest Settings 
+            $data = InvestSetting::create([
+                'description' => strip_tags($description ?? ''),
+                'bannervideo' => $thumbnailFilename,
+                'imagestoshare' => json_encode($imagestoshare),
+                'videostoshare' => json_encode($Videos),
+            ]);
+
+            return response()->json(['data' => $data, 'message' => 'Settings inserted successfully!']);
 
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);

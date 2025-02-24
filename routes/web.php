@@ -71,6 +71,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/insertnotification', [AdminStores::class, 'insertnotification'])->name('admin.insertnotification');
     Route::get('/deletenortification/{id}', [AdminStores::class, 'deletenortification'])->name('admin.deletenortification');
     Route::post('/udpatenortification', [AdminStores::class, 'udpatenortification'])->name('admin.udpatenortification');
+    Route::get('/investpagesettings', [AdminViews::class, 'investpagesettings'])->name('admin.investpagesettings');
+    Route::post('/submitinvestpagesettings', [AdminStores::class, 'submitinvestpagesettings'])->name('admin.submitinvestpagesettings');
 });
 
 
