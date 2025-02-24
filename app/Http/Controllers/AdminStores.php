@@ -329,10 +329,10 @@ class AdminStores extends Controller
                 'masterplandoc' => $masterdoc,
                 'maplocations' => $datareq['location'],
                 'category' => $datareq['category'],
-                'gallery' => json_encode($galleryImages),
-                'documents' => json_encode($documents),
-                'amenties' => $datareq['amenities'],
-                'videos' => json_encode($Videos),
+                'gallery' => json_encode($galleryImages) ?? NULL,
+                'documents' => json_encode($documents) ?? NULL,
+                'amenties' => $datareq['amenities'] ?? NULL,
+                'videos' => json_encode($Videos) ?? NULL,
                 'status' => $datareq['status'],
             ]);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\InvestSetting;
 use App\Models\Master;
 use App\Models\PropertyListing;
 use Illuminate\Http\Request;
@@ -150,7 +151,8 @@ class WebsiteViews extends Controller
         return view('WebsitePages.myownlistings', compact('listings', 'username', 'userid'));
     }
     public function whytoinvest(){
-        return view('WebsitePages.whyToinvest');
+        $investdata = InvestSetting::first();
+        return view('WebsitePages.whyToinvest',compact('investdata'));
     }
     public function resetpassword(){
         return view('auth.UserAgentPanel.ResetPassword');
