@@ -302,6 +302,8 @@ class ApiMasterController extends Controller
         $city = $req->query('filtercity');
         $minprice = $req->query('filterminprice');
         $maxprice = $req->query('filtermaxprice');
+        $sqftfrom = $req->query('sqftfrom');
+        $sqftto = $req->query('sqftto');
 
 
         Log::info('Filters:', [
@@ -309,6 +311,8 @@ class ApiMasterController extends Controller
             'city' => $city,
             'minprice' => $minprice,
             'maxprice' => $maxprice,
+            'sqftfrom' => $sqftfrom,
+            'sqftto' => $sqftto,
         ]);
 
 
@@ -322,15 +326,22 @@ class ApiMasterController extends Controller
             $listings->where('city', $city);
         }
 
-        if ($minprice) {
+        if ($minprice && $maxprice) {
+            $listings->whereBetween('price', [$minprice, $maxprice]);
+        } elseif ($minprice) {
             $listings->where('price', '>=', $minprice);
-        }
-
-        if ($maxprice) {
+        } elseif ($maxprice) {
             $listings->where('price', '<=', $maxprice);
         }
 
-        $listings = $listings->where('status', '=', 'published')->paginate(4);
+        if ($sqftfrom && $sqftto) {
+            $listings->whereBetween('squarefoot', [$sqftfrom, $sqftto]);
+        } elseif ($sqftfrom) {
+            $listings->where('squarefoot', '>=', $sqftfrom);
+        } elseif ($sqftto) {
+            $listings->where('squarefoot', '<=', $sqftto);
+        }
+        $listings = $listings->where('status', '=', 'published')->get();
 
         return response()->json([
             'success' => true,
@@ -419,7 +430,7 @@ class ApiMasterController extends Controller
     public function usernotifications(Request $rq)
     {
         $notifications = Nortification::where('sendto', $rq->user_type)->orWhere('sendto', 'all')->orderBy('created_at', 'DESC')
-        ->get();
+            ->get();
         $notifycnt = Nortification::where('sendto', $rq->user_type)->count();
         return response()->json([
             'success' => true,
@@ -547,7 +558,7 @@ class ApiMasterController extends Controller
             if ($datareq['historydate']) {
                 $updatedhistory = array_merge(json_decode($olddata->pricehistory), json_decode($datareq['historydate']));
             }
-           
+
             $data = PropertyListing::where('id', $id)->update([
                 'usertype' => 'Admin',
                 'roleid' => $datareq['roleid'],

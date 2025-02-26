@@ -326,6 +326,7 @@
                         <div class="property-inquiry-form">
                             <form id="" action="{{ route('website.sendenquiry')}}" method="POST">
                                 @csrf
+                                 <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-responseAgent">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-3">
                                         <input type="text" value="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user()->name : '' }}" name="customername" class="form-control" id="customername" placeholder="Your Name" required>

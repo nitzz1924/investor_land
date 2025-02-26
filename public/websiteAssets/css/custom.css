@@ -380,7 +380,8 @@ select.form-control {
 	position: absolute;
 	left: 0;
 	top: 0;
-	background: url(../images/icon-heading.svg) no-repeat left center;
+	background: url(../images/faviconinvestor.jpeg) no-repeat left center;
+	background-size: contain;
 	z-index: -1;
 }
 
@@ -3849,6 +3850,20 @@ footer.footer {
 	.agents-page {
 		padding: 50px 0 10px;
 	}
+	.how-it-work-itemaboutnew {
+		padding: 10px !important;
+	}
+	.how-it-work-item h3, .how-it-work-itemaboutnew h3 {
+		font-size: 12px !important;
+		margin-bottom: 10px !important;
+	}
+	.how-it-work-itemaboutnew .icon-box img {
+		height: 65px !important;
+	}
+	.how-it-work-item .icon-box, .how-it-work-itemaboutnew .icon-box {
+		width: 65px !important;
+		height: 65px !important;
+	}
 }
 
 @media screen and (max-width: 1024px) and (max-height: 525px) {
@@ -3900,7 +3915,7 @@ footer.footer {
 .how-it-work-itemaboutnew {
 	text-align: center;
 	background: #72655521;
-	padding: 30px;
+	padding: 10px;
 	border-radius: 20px;
 }
 

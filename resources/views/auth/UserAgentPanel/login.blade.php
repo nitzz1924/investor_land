@@ -16,6 +16,7 @@
                             <div class="property-inquiry-form">
                                 <form id="" action="{{ route('website.loginuser') }}" method="POST">
                                     @csrf
+                                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-responseAgent">
                                     <div class="row">
                                         <!-- Email Field -->
                                         <div class="form-group col-md-12 mb-4">

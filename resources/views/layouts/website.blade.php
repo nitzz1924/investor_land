@@ -11,7 +11,7 @@
     <title>@yield('title') | Investor Land</title>
 
     <!-- All CSS -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('websiteAssets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('websiteAssets/images/faviconinvestor.jpeg')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -236,8 +236,12 @@
 
     <div class="">
         <!-- Call Button -->
-        <a href="tel:+917073880500" class="call-btn animate-up-down" style="position: fixed; right: 20px; bottom: 20px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
-            <i class="fas fa-phone"></i>&nbsp; Call Us
+        <a href="tel:+917073880500" class="call-btn animate-up-down" style="position: fixed; left: 20px; bottom: 80px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
+            <i class="fas fa-phone"></i>
+        </a>
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/917073880500" class="whatsapp-btn animate-up-down" style="position: fixed; left: 20px; bottom: 20px; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
+            <i class="fab fa-whatsapp fs-4"></i>
         </a>
     </div>
 
@@ -255,7 +259,6 @@
                 transform: translateY(-10px);
             }
         }
-
     </style>
 
 
@@ -283,6 +286,15 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LeyKeMqAAAAAO5XBgLOWNwdGUY0WFnaONWm5N78"></script>
+    <script>
+    grecaptcha.ready(function() {
+        grecaptcha.execute('6LeyKeMqAAAAAO5XBgLOWNwdGUY0WFnaONWm5N78', {action: 'submit'}).then(function(token) {
+            document.getElementById('g-recaptcha-response').value = token;
+            document.getElementById('g-recaptcha-responseAgent').value = token;
+        });
+    });
+</script>
 </body>
 </body>
 </html>

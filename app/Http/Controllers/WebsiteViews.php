@@ -75,19 +75,19 @@ class WebsiteViews extends Controller
             $listings->where('city', $city);
         }
 
-        if ($minprice) {
+        if ($minprice && $maxprice) {
+            $listings->whereBetween('price', [$minprice, $maxprice]);
+        } elseif ($minprice) {
             $listings->where('price', '>=', $minprice);
-        }
-
-        if ($maxprice) {
+        } elseif ($maxprice) {
             $listings->where('price', '<=', $maxprice);
         }
 
-        if ($sqftfrom) {
+        if ($sqftfrom && $sqftto) {
+            $listings->whereBetween('squarefoot', [$sqftfrom, $sqftto]);
+        } elseif ($sqftfrom) {
             $listings->where('squarefoot', '>=', $sqftfrom);
-        }
-
-        if ($sqftto) {
+        } elseif ($sqftto) {
             $listings->where('squarefoot', '<=', $sqftto);
         }
 

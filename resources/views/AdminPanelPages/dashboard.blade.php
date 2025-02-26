@@ -168,7 +168,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                                        @foreach ($allcustomers as $index => $data)
+                                        @foreach ($allcustomers->take(10) as $index => $data)
                                         <tr>
                                             <td>{{ $index + 1}}</td>
                                             <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>
@@ -206,7 +206,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="table-body">
-                                        @foreach ($allagents as $index => $data)
+                                        @foreach ($allagents->take(10) as $index => $data)
                                         <tr>
                                             <td>{{ $index + 1}}</td>
                                             <td>{{ $data->created_at->format('d M Y | h:i A')}}</td>

@@ -75,6 +75,8 @@
             <div class="col-lg-8 offset-lg-2">
                 <div class="contact-form wow fadeInUp" data-wow-delay="0.75s">
                     <form id="contactForm" action="#" method="POST" data-toggle="validator">
+                    @csrf
+                     <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-responseAgent">
                         <div class="row">
                             <div class="form-group col-md-6 mb-4">
                                 <input type="text" name="name" class="form-control footerforminput" id="name" placeholder="First Name" required>

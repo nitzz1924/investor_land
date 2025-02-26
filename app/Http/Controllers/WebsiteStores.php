@@ -7,13 +7,30 @@ use App\Models\Master;
 use App\Models\RegisterUser;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\Validator;
 use Hash;
+use Http;
 use Auth;
 class WebsiteStores extends Controller
 {
     public function sendenquiry(Request $rq)
     {
         try {
+            $validator = Validator::make($rq->all(), [
+                'g-recaptcha-response' => 'required',
+            ]);
+
+            // Verify Google reCAPTCHA v3
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET'),
+                'response' => $rq->input('g-recaptcha-response'),
+            ]);
+            $captchaData = $response->json();
+
+
+            if (!$captchaData['success'] || $captchaData['score'] < 0.5) {
+                return back()->with('error', 'reCAPTCHA verification failed. Please try again.')->withInput();
+            }
             $attributes = Lead::create([
                 'name' => $rq->customername,
                 'mobilenumber' => $rq->phone,
@@ -23,7 +40,7 @@ class WebsiteStores extends Controller
                 'housecategory' => $rq->propertytype,
                 'inwhichcity' => $rq->cityofproperty,
                 'propertyid' => $rq->propertyid,
-                'userid' =>  $rq->userid,
+                'userid' => $rq->userid,
             ]);
             return back()->with('success', "Enquiry Sent..!!!");
         } catch (Exception $e) {
@@ -31,41 +48,78 @@ class WebsiteStores extends Controller
         }
     }
 
-    public function registeruser(Request $rq)
+    public function registeruser(Request $request)
     {
-       
-        $thumbnailFilename = null;
         try {
-            if ($rq->hasFile('company_document')) {
-                $rq->validate([
-                    'company_document' => 'required|mimes:jpeg,pdf,jpg',
-                    'email' => 'required|email|unique:register_users',
-                ]);
+            // Validate all input fields including reCAPTCHA
+            $validator = Validator::make($request->all(), [
+                'g-recaptcha-response' => 'required',
+                'email' => 'required|email|unique:register_users',
+            ]);
 
-                $file = $rq->file('company_document');
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
+            // Verify Google reCAPTCHA v3
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET'),
+                'response' => $request->input('g-recaptcha-response'),
+            ]);
+
+            $captchaData = $response->json();
+
+            if (!$captchaData['success'] || $captchaData['score'] < 0.5) {
+                return back()->with('error', 'reCAPTCHA verification failed. Please try again.')->withInput();
+            }
+
+            // Handle file upload if present
+            $thumbnailFilename = null;
+            if ($request->hasFile('company_document')) {
+                $file = $request->file('company_document');
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Users'), $thumbnailFilename);
             }
-            // dd($thumbnailFilename);
-            $attributes = RegisterUser::create([
-                'user_type' => $rq->user_type,
-                'name' => $rq->name,
-                'mobile' => $rq->mobile,
-                'email' => $rq->email,
-                'company_name' => $rq->company_name,
+
+            // Create user record
+            RegisterUser::create([
+                'user_type' => $request->input('user_type'),
+                'name' => $request->name,
+                'mobile' => $request->mobile,
+                'email' => $request->email,
+                'company_name' => $request->company_name,
                 'company_document' => $thumbnailFilename,
-                'password' => Hash::make($rq->password),
+                'password' => Hash::make($request->password),
             ]);
-            return back()->with('success', "You have been Registered Successfully..!!!");
+
+            return back()->with('success', 'You have been registered successfully!');
+
         } catch (Exception $e) {
-            return back()->with('error', $e->getMessage());
+            return back()->with('error', 'An error occurred: ' . $e->getMessage())->withInput();
         }
     }
+
 
     public function loginuser(Request $rq)
     {
         try {
+             // Validate all input fields including reCAPTCHA
+             $validator = Validator::make($rq->all(), [
+                'g-recaptcha-response' => 'required',
+            ]);
             $user = RegisterUser::where('email', $rq->email)->first();
+            
+            // Verify Google reCAPTCHA v3
+            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => env('RECAPTCHA_SECRET'),
+                'response' => $rq->input('g-recaptcha-response'),
+            ]);
+
+            $captchaData = $response->json();
+
+            if (!$captchaData['success'] || $captchaData['score'] < 0.5) {
+                return back()->with('error', 'reCAPTCHA verification failed. Please try again.')->withInput();
+            }
             if ($user) {
                 if (Hash::check($rq->password, $user->password)) {
                     Auth::guard('customer')->login($user);
@@ -87,7 +141,8 @@ class WebsiteStores extends Controller
         }
     }
 
-    public function updatePassword(Request $rq){
+    public function updatePassword(Request $rq)
+    {
         try {
             $user = RegisterUser::where('email', $rq->email)->first();
             if ($user) {

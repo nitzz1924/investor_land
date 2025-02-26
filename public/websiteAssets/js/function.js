@@ -84,7 +84,7 @@
 	/* Property Type Carousel JS */
 	if ($('.property-type-slider').length) {
 		const property_type_carousel = new Swiper('.property-type-slider .swiper', {
-			slidesPerView : 1,
+			slidesPerView : 3,
 			speed: 1000,
 			spaceBetween: 30,
 			loop: true,

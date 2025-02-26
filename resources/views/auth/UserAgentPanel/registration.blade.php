@@ -42,6 +42,7 @@
                                     <div class="tab-pane fade show active" id="userForm" role="tabpanel" aria-labelledby="user-tab">
                                         <form action="{{ route('website.registeruser') }}" method="POST">
                                             @csrf
+                                             <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                                             <div class="row">
                                                 <div class="form-group col-md-6 mb-4">
                                                     <label for="user_name" class="form-label">Name</label>
@@ -84,6 +85,7 @@
                                     <div class="tab-pane fade" id="agentForm" role="tabpanel" aria-labelledby="agent-tab">
                                         <form action="{{ route('website.registeruser') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
+                                            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-responseAgent">
                                             <div class="row">
                                                 <!-- Name Field -->
                                                 <div class="form-group col-md-6 mb-4">
