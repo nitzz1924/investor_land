@@ -82,6 +82,7 @@ class ApiMasterController extends Controller
                 'company_name' => $rq->company_name,
                 'company_document' => $thumbnailFilename,
                 'password' => Hash::make($rq->password),
+                'profile_photo_path' => '/defaultuser.png',
             ]);
 
             $response = [
@@ -164,11 +165,7 @@ class ApiMasterController extends Controller
 
     public function insertlisting(Request $request)
     {
-        $authuser = auth()->user();
-        if (!$authuser) {
-            return response()->json(['success' => false, 'message' => 'Unauthorized user. Please log in.'], 401);
-        }
-
+        
         $datareq = $request->all();
 
         try {
@@ -266,8 +263,8 @@ class ApiMasterController extends Controller
 
             // Create the property listing
             $data = PropertyListing::create([
-                'usertype' => $authuser->usertype,
-                'roleid' => $authuser->id,
+                'usertype' => $datareq['usertype'],
+                'roleid' =>$datareq['roleid'],
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
@@ -319,7 +316,7 @@ class ApiMasterController extends Controller
         $listings = PropertyListing::query();
 
         if ($category) {
-            $listings->where('category', $category);
+            $listings->where('category', $category)->orWhere('category', 'all');
         }
 
         if ($city) {
@@ -429,8 +426,7 @@ class ApiMasterController extends Controller
 
     public function usernotifications(Request $rq)
     {
-        $notifications = Nortification::where('sendto', $rq->user_type)->orWhere('sendto', 'all')->orderBy('created_at', 'DESC')
-            ->get();
+        $notifications = Nortification::where('sendto', $rq->user_type)->orWhere('sendto', 'all')->orderBy('created_at', 'DESC')->get();
         $notifycnt = Nortification::where('sendto', $rq->user_type)->count();
         return response()->json([
             'success' => true,

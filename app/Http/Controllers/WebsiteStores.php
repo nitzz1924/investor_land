@@ -90,6 +90,7 @@ class WebsiteStores extends Controller
                 'company_name' => $request->company_name,
                 'company_document' => $thumbnailFilename,
                 'password' => Hash::make($request->password),
+                'profile_photo_path' => '/defaultuser.png',
             ]);
 
             return back()->with('success', 'You have been registered successfully!');
