@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2025 at 06:08 AM
+-- Generation Time: Feb 28, 2025 at 02:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,8 +43,7 @@ CREATE TABLE `blogs` (
 
 INSERT INTO `blogs` (`id`, `blogname`, `blogcategories`, `blogthumbnail`, `blogdescription`, `created_at`, `updated_at`) VALUES
 (7, 'How to Showcase Your Property for Maximum Buyer Appeal', '[\"Business\",\"Computer Software\",\"Fashion\"]', '1737013391_2.png', '<div class=\"ql-editor\" data-gramm=\"false\" contenteditable=\"true\"><p>When selling your property, the first impression can make all the difference. Buyers often form opinions within seconds of viewing a home, whether in person or online. To maximize your property’s appeal, it’s essential to present it in the best possible light. Here are some actionable tips to help you showcase your property and attract the right buyers.</p><p><br></p><h4>1. <strong>Enhance Curb Appeal</strong></h4><p>The exterior of your property sets the tone for what’s inside. Make sure it leaves a lasting impression.</p><ul><li><strong>Landscaping:</strong> Keep the lawn trimmed, bushes manicured, and pathways clear. Add fresh mulch, seasonal flowers, or potted plants for a welcoming touch.</li><li><strong>Exterior Maintenance:</strong> Repaint faded walls, fix broken fences, and ensure the gutters are clean.</li><li><strong>Lighting:</strong> Install outdoor lighting to highlight your home’s features and provide a safe, inviting feel during evening viewings.</li></ul><p><br></p><h4>2. <strong>Declutter and Depersonalize</strong></h4><p>Buyers want to envision themselves in the space. Decluttering and depersonalizing your home can make it easier for them to do so.</p><ul><li><strong>Declutter:</strong> Remove excess furniture and items that make the space look cramped.</li><li><strong>Depersonalize:</strong> Take down personal photos, mementos, and unique decor. Neutral spaces appeal to a broader audience.</li><li><strong>Storage:</strong> Organize closets and cabinets. Buyers will likely peek inside, and neat storage suggests the home is well-maintained.</li></ul><p><br></p></div><div class=\"ql-clipboard\" contenteditable=\"true\" tabindex=\"-1\"></div><div class=\"ql-tooltip ql-hidden\" style=\"margin-top: -33px;\"><a class=\"ql-preview\" rel=\"noopener noreferrer\" target=\"_blank\" href=\"about:blank\"></a><a class=\"ql-action\"></a><a class=\"ql-remove\"></a></div>', '2025-01-15 07:33:12', '2025-01-23 10:17:27'),
-(10, 'Simple Tips to Increase the Value of Your Property', '[\"Business\",\"Health\"]', '1737614935_blog.jpg', '<p>Selling your property can be both exciting and challenging. Whether you’re planning to put it on the market or simply looking to increase its long-term value, making smart improvements can significantly enhance its appeal. Here are seven practical tips to boost your property’s value and attract potential buyers.</p><p><br></p><h3><strong>1. Refresh the Paintwork</strong></h3><p>A fresh coat of paint can transform your property, giving it a clean and modern look.</p><ul><li><strong>Neutral Colors</strong>: Opt for neutral tones like beige, gray, or white to appeal to a broader audience.</li><li><strong>Accent Walls</strong>: Add character to your living space with a single, subtle accent wall.</li></ul><p><br></p><h3><strong>2. Improve Energy Efficiency</strong></h3><p>Energy-efficient homes are in high demand. Implementing these changes can save future buyers money while increasing your property’s value:</p><ul><li><strong>LED Lighting</strong>: Replace outdated bulbs with energy-efficient LED options.</li><li><strong>Insulation</strong>: Ensure your walls and attic are properly insulated to reduce energy consumption.</li><li><strong>Smart Thermostats</strong>: Install a smart thermostat for more efficient heating and cooling.</li></ul><p><br></p><h3><strong>3. Upgrade the Kitchen</strong></h3><p>The kitchen is often the heart of the home. Upgrades here can provide the best return on investment.</p><ul><li>Replace old cabinet handles with sleek, modern designs.</li><li>Add a stylish backsplash to enhance the space’s appeal.</li><li>Consider upgrading appliances to energy-efficient models.</li></ul><p><br></p><h3><strong>4. Beautify the Bathrooms</strong></h3><p>Modernizing your bathrooms can make a huge difference.</p><ul><li>Install new fixtures such as faucets, showerheads, and towel racks.</li><li>Replace outdated mirrors with elegant, framed alternatives.</li><li>Upgrade lighting to add a touch of luxury.</li></ul>', '2025-01-23 01:18:55', '2025-01-23 01:18:55'),
-(11, NULL, NULL, NULL, NULL, '2025-02-22 01:56:19', '2025-02-22 01:56:19');
+(10, 'Simple Tips to Increase the Value of Your Property', '[\"Business\",\"Health\"]', '1737614935_blog.jpg', '<p>Selling your property can be both exciting and challenging. Whether you’re planning to put it on the market or simply looking to increase its long-term value, making smart improvements can significantly enhance its appeal. Here are seven practical tips to boost your property’s value and attract potential buyers.</p><p><br></p><h3><strong>1. Refresh the Paintwork</strong></h3><p>A fresh coat of paint can transform your property, giving it a clean and modern look.</p><ul><li><strong>Neutral Colors</strong>: Opt for neutral tones like beige, gray, or white to appeal to a broader audience.</li><li><strong>Accent Walls</strong>: Add character to your living space with a single, subtle accent wall.</li></ul><p><br></p><h3><strong>2. Improve Energy Efficiency</strong></h3><p>Energy-efficient homes are in high demand. Implementing these changes can save future buyers money while increasing your property’s value:</p><ul><li><strong>LED Lighting</strong>: Replace outdated bulbs with energy-efficient LED options.</li><li><strong>Insulation</strong>: Ensure your walls and attic are properly insulated to reduce energy consumption.</li><li><strong>Smart Thermostats</strong>: Install a smart thermostat for more efficient heating and cooling.</li></ul><p><br></p><h3><strong>3. Upgrade the Kitchen</strong></h3><p>The kitchen is often the heart of the home. Upgrades here can provide the best return on investment.</p><ul><li>Replace old cabinet handles with sleek, modern designs.</li><li>Add a stylish backsplash to enhance the space’s appeal.</li><li>Consider upgrading appliances to energy-efficient models.</li></ul><p><br></p><h3><strong>4. Beautify the Bathrooms</strong></h3><p>Modernizing your bathrooms can make a huge difference.</p><ul><li>Install new fixtures such as faucets, showerheads, and towel racks.</li><li>Replace outdated mirrors with elegant, framed alternatives.</li><li>Upgrade lighting to add a touch of luxury.</li></ul>', '2025-01-23 01:18:55', '2025-01-23 01:18:55');
 
 -- --------------------------------------------------------
 
@@ -57,6 +56,14 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cache`
+--
+
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+('f36a972d4deb9cb9427937777891777d', 'i:1;', 1740734141),
+('f36a972d4deb9cb9427937777891777d:timer', 'i:1740734141;', 1740734141);
 
 -- --------------------------------------------------------
 
@@ -107,7 +114,7 @@ CREATE TABLE `invest_settings` (
 --
 
 INSERT INTO `invest_settings` (`id`, `description`, `bannervideo`, `imagestoshare`, `videostoshare`, `created_at`, `updated_at`) VALUES
-(1, '<p>dsfdsfsdfsdfsdfsdfsdfsdfsdf</p>', '1740210369_84f5ddd735176becc72c3b1ff424149e.mp4', '[\"assets\\/images\\/Investsettings\\/fc6709bfdf0572f183c1a84ce5276e96.jpg\",\"assets\\/images\\/Investsettings\\/c460dc0f18fc309ac07306a4a55d2fd6.jpg\",\"assets\\/images\\/Investsettings\\/e046cbb371a979a6893456eee7f00703.jpg\"]', '[\"assets\\/images\\/Investsettings\\/fc528592c3858f90196fbfacc814f235.mp4\",\"assets\\/images\\/Investsettings\\/5adaacd4531b78ff8b5cedfe3f4d5212.mp4\"]', '2025-02-22 02:16:10', '2025-02-22 02:16:10');
+(1, 'Investing in real estate is one of the most powerful ways to build wealth, but success comes from making informed decisions. Understanding market trends, choosing the right location, and identifying high-growth properties can make all the difference.\n\nAt Investor Lands, we provide expert insights, data-driven analysis, and strategic guidance to help you maximize returns on your investments. Whether you\'re a first-time buyer or a seasoned investor, our resources, articles, and expert consultations will empower you to make confident and profitable investment choices.\n\nStart your journey towards financial growth today—discover the secrets to smart real estate investing! 🚀💰\n\nWhy Invest in Real Estate?\n✔ Stable & Appreciating Asset – Real estate consistently grows in value over time.\n✔ Passive Income – Earn through rentals while your property appreciates.\n✔ Tax Benefits – Many governments offer tax advantages for property investments.\n✔ Tangible & Secure Investment – Unlike stocks, real estate is a physical asset with lasting value.\n\nHow Investor Lands Helps You Succeed:\n🏡 Verified Property Listings – Ensuring secure and profitable deals.\n📊 Market Insights & Trends – Stay ahead with expert analysis.\n🔍 Investment Strategies – Learn how to maximize ROI.\n📞 Personalized Consultation – Get tailored advice from real estate experts.\n\nDon\'t leave your financial future to chance—unlock the secrets to successful property investments today! 🚀\n\n\n\n\n\n\n\n', '1740210369_84f5ddd735176becc72c3b1ff424149e.mp4', '[\"assets\\/images\\/Investsettings\\/fc6709bfdf0572f183c1a84ce5276e96.jpg\",\"assets\\/images\\/Investsettings\\/c460dc0f18fc309ac07306a4a55d2fd6.jpg\",\"assets\\/images\\/Investsettings\\/e046cbb371a979a6893456eee7f00703.jpg\"]', '[\"assets\\/images\\/Investsettings\\/fc528592c3858f90196fbfacc814f235.mp4\",\"assets\\/images\\/Investsettings\\/5adaacd4531b78ff8b5cedfe3f4d5212.mp4\",\"assets\\/images\\/Investsettings\\/5adaacd4531b78ff8b5cedfe3f4d5212.mp4\"]', '2025-02-22 02:16:10', '2025-02-24 07:02:29');
 
 -- --------------------------------------------------------
 
@@ -308,12 +315,37 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'c66de47a3a37dd288023acbce8a9b689fe675ab3ea78510aa8f76634c8d1ead3', '[\"*\"]', '2025-02-17 00:32:25', NULL, '2025-02-06 01:18:37', '2025-02-17 00:32:25'),
+(1, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'c66de47a3a37dd288023acbce8a9b689fe675ab3ea78510aa8f76634c8d1ead3', '[\"*\"]', '2025-02-27 07:50:00', NULL, '2025-02-06 01:18:37', '2025-02-27 07:50:00'),
 (2, 'App\\Models\\RegisterUser', 4, 'AuthToken', '2fefbabb846b97adfe982636046d943ae0a733d0542cb3df0576616fb35a36d8', '[\"*\"]', NULL, NULL, '2025-02-06 05:26:40', '2025-02-06 05:26:40'),
 (3, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'faa67e6120bf28184d0ba3ddd2890d0a5c0a0f623dcd38431afe59155ea62d5e', '[\"*\"]', NULL, NULL, '2025-02-06 05:51:29', '2025-02-06 05:51:29'),
 (4, 'App\\Models\\RegisterUser', 11, 'AuthToken', 'c2570152b33048f47492068383c1e72143978c8f3e9f177b17b7e39163797cd8', '[\"*\"]', NULL, NULL, '2025-02-06 06:08:10', '2025-02-06 06:08:10'),
 (5, 'App\\Models\\RegisterUser', 11, 'AuthToken', 'dbf7c19a1eb71fa44fc1dea553a69ce4dd95f17b0a3091d924b1ed4a88324f5d', '[\"*\"]', '2025-02-06 06:56:50', NULL, '2025-02-06 06:49:32', '2025-02-06 06:56:50'),
 (6, 'App\\Models\\RegisterUser', 4, 'AuthToken', 'ef5497a9641d058e851133de819223cf08889f233047b2954507184720ecf1c6', '[\"*\"]', NULL, NULL, '2025-02-08 00:29:59', '2025-02-08 00:29:59');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` int(11) NOT NULL,
+  `projectname` varchar(255) DEFAULT NULL,
+  `projectthumbnail` varchar(255) DEFAULT NULL,
+  `categories` varchar(255) DEFAULT NULL,
+  `projectstatus` varchar(255) DEFAULT NULL,
+  `projectdescription` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `projectname`, `projectthumbnail`, `categories`, `projectstatus`, `projectdescription`, `created_at`, `updated_at`) VALUES
+(1, 'New Project', '1740741542_1739002957_Inside_View_Toda_and_Digambaro_Ki_Jain_Chhatries.jpg', '[\"Apartment\",\"Villa\"]', 'ongoing', '<p><strong>Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.</strong></p>', '2025-02-28 05:49:02', '2025-02-28 05:49:02'),
+(2, 'Updated Project', '1740743042_1739008152_jpg.jpg', '[\"Penthouse\",\"Residences\"]', 'published', 'sdfdsfdsf', '2025-02-28 06:14:02', '2025-02-28 06:38:14');
 
 -- --------------------------------------------------------
 
@@ -361,7 +393,7 @@ INSERT INTO `property_listings` (`id`, `usertype`, `roleid`, `property_name`, `n
 (41, 'Admin', '4', 'Duplex Bungalow', 'Near Royal Bakers Bakery', NULL, 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '3500000', '[{\"dateValue\":\"2025-02-15\",\"priceValue\":\"100000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"200000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"700000\"}]', '343', '5', '5', '5', 'Jodhpur', 'Beawar', '1737717576_p-9.jpg', NULL, '{\"Latitude\":\"40.7324319\",\"Longitude\":\"-73.82480777777776\"}', 'Luxury House', 'published', '[\"assets\\/images\\/Listings\\/696186d1596721cb6e79013d4655c5d9.jpg\",\"assets\\/images\\/Listings\\/79cae1be0fbae74dafbf8399ee2209cb.jpg\",\"assets\\/images\\/Listings\\/6be5336db2c119736cf48f475e051bfe.jpg\"]', '[\"assets\\/images\\/Listings\\/0a2a51dac6138826127f093500461d91.pdf\"]', '[]', '[\"assets\\/images\\/Listings\\/7c6f8dba4a02404f97b5953d2c4172a7.mp4\"]', '2025-01-24 05:49:36', '2025-02-18 07:29:34'),
 (55, 'Admin', '1', 'Weekend Villa MBH', NULL, NULL, 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '6500000', '[{\"dateValue\":\"2025-01-10\",\"priceValue\":\"100000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"200000\"},{\"dateValue\":\"2025-03-16\",\"priceValue\":\"300000\"},{\"dateValue\":\"2025-04-17\",\"priceValue\":\"400000\"},{\"dateValue\":\"2025-05-17\",\"priceValue\":\"550000\"}]', '605', '4', '3', '4', 'Delhi', 'Bhilwara', '1738828547_p-5.jpg', NULL, '{\"Latitude\":\"40.7324319\",\"Longitude\":\"-73.82480777777776\"}', 'Villa', 'published', '[\"assets\\/images\\/Listings\\/bf2fb7d1825a1df3ca308ad0bf48591e.jpg\",\"assets\\/images\\/Listings\\/94c4dd41f9dddce696557d3717d98d82.jpg\",\"assets\\/images\\/Listings\\/a3a8381281635a1926bd3ea09f29f4d9.jpg\"]', '[\"assets\\/images\\/Listings\\/c65d7bd70fe3e5e3a2f3de681edc193d.pdf\"]', NULL, NULL, '2025-02-06 02:25:47', '2025-02-18 07:50:05'),
 (57, 'Admin', '1', 'Tungis Luxury', 'Near CSM', NULL, 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '7500000', '[{\"dateValue\":\"2025-01-10\",\"priceValue\":\"100000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"200000\"},{\"dateValue\":\"2025-03-16\",\"priceValue\":\"300000\"},{\"dateValue\":\"2025-04-17\",\"priceValue\":\"400000\"},{\"dateValue\":\"2025-05-17\",\"priceValue\":\"550000\"}]', '600', '3', '3', '5', 'Jodhpur', 'Kota', '1739166806_8f125da0b3432ed853c0b6f7ee5aaa6b.jpg', NULL, '{\"Latitude\":\"26.449896\",\"Longitude\":\"74.639915\"}', 'Penthouse', 'published', '[\"assets\\/images\\/Listings\\/5c645cc19a53ac1dfb155840d886050c.jpg\",\"assets\\/images\\/Listings\\/987b75e2727ae55289abd70d3f5864e6.jpg\",\"assets\\/images\\/Listings\\/5cdf0f9533d6b4c0984fc5ae00913459.jpg\"]', '[\"assets\\/images\\/Listings\\/b16e8712b35e498857df08af3944b127.pdf\",\"assets\\/images\\/Listings\\/310614fca8fb8e5491295336298c340f.pdf\"]', '[\"Pool\",\"Gym\",\"Bar\",\"Parking\",\"WiFi\",\"Spa\",\"Garden\",\"24/7 Security\",\"Balcony\",\"Playground\",\"Clubhouse\",\"Pet Friendly\",\"Elevator\",\"Conference Room\",\"Smart Home System\",\"Backup Generator\",\"Laundry Service\",\"BBQ Area\",\"Tennis Court\",\"Sauna\"]', '[\"assets\\/images\\/Listings\\/84f5ddd735176becc72c3b1ff424149e.mp4\",\"assets\\/images\\/Listings\\/e8b1cbd05f6e6a358a81dee52493dd06.mp4\"]', '2025-02-10 00:23:26', '2025-02-21 11:37:41'),
-(89, 'Admin', '4', 'New Residency Villa', 'D-Mart', NULL, 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '6500000', '[{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"}]', '605', '4', '3', '4', 'Delhi', 'Bhilwara', '1739858691_p-5.jpg', '1739858691_0a2a51dac6138826127f093500461d91.pdf', '{\"Latitude\":\"40.7324319\",\"Longitude\":\"-73.82480777777776\"}', 'Villa', 'published', '[\"assets\\/images\\/Listings\\/9649dec6196d730c5e024f204477d8d1.jpg\",\"assets\\/images\\/Listings\\/dd1016d687d5960a8f279198a94d0cc5.jpg\",\"assets\\/images\\/Listings\\/f6d9e459b9fbf6dd26c4f7d621adec1d.jpg\"]', '[\"assets\\/images\\/Listings\\/fc76150735dde1d2d860aeb77ee2009e.pdf\"]', '[\"WiFi\", \"Parking\", \"Swimming Pool\"]', '[]', '2025-02-17 00:32:25', '2025-02-21 01:29:53');
+(89, 'Admin', '4', 'New Residency Villa', 'D-Mart', NULL, 'Property refers to any item that an individual or a business holds legal title to. This can include tangible items, such as houses, cars, or appliances, as well as intangible items that hold potential future value, such as stock and bond certificates. Legally, property is classified into two categories: personal property and real property. This distinction originates from English common law, and our contemporary legal system continues to differentiate between these two types.', '6500000', '[{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"},{\"dateValue\":\"2025-02-15\",\"priceValue\":\"5000000\"},{\"dateValue\":\"2025-02-16\",\"priceValue\":\"5500000\"},{\"dateValue\":\"2025-02-17\",\"priceValue\":\"7500000\"}]', '605', '4', '3', '4', 'Delhi', 'Bhilwara', '1739858691_p-5.jpg', '1739858691_0a2a51dac6138826127f093500461d91.pdf', '{\"Latitude\":\"40.7324319\",\"Longitude\":\"-73.82480777777776\"}', 'Villa', 'published', '[\"assets\\/images\\/Listings\\/9649dec6196d730c5e024f204477d8d1.jpg\",\"assets\\/images\\/Listings\\/dd1016d687d5960a8f279198a94d0cc5.jpg\",\"assets\\/images\\/Listings\\/f6d9e459b9fbf6dd26c4f7d621adec1d.jpg\"]', '[\"assets\\/images\\/Listings\\/fc76150735dde1d2d860aeb77ee2009e.pdf\"]', '[\"WiFi\", \"Parking\", \"Swimming Pool\"]', NULL, '2025-02-17 00:32:25', '2025-02-24 05:31:01');
 
 -- --------------------------------------------------------
 
@@ -445,7 +477,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('QYZt6KFcO9ABROTNXePzqm2EXSX26q6cwieIOFCd', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiaURTZHhyUHlrQUZ6dW1Ldk51QmJCNE12T0JvcFNpUkcxVExkWjZrYSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9pbnZlc3RwYWdlc2V0dGluZ3MiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6MjE6InBhc3N3b3JkX2hhc2hfc2FuY3R1bSI7czo2MDoiJDJ5JDEyJHVWQWZ2VElWRnh2VUdsN3NRQlQ1WGVYTm55VXRFVmtGczc4TTh6dnFIRmFKRmw4R3pPdXRhIjt9', 1740211900);
+('VvhxkLeVMkYWi1cBJWny3ReA24EldkH22sw31JbS', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiOWZFUXVGUEQyTW16R1ZFbXpydHRrME9DVGM1U0tFNVkzZ2djSXhMSCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9hZGRwcm9wZXJ0eSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoyMToicGFzc3dvcmRfaGFzaF9zYW5jdHVtIjtzOjYwOiIkMnkkMTIkdVZBZnZUSVZGeHZVR2w3c1FCVDVYZVhObnlVdEVWa0ZzNzhNOHp2cUhGYUpGbDhHek91dGEiO30=', 1740746940);
 
 -- --------------------------------------------------------
 
@@ -568,6 +600,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `property_listings`
 --
 ALTER TABLE `property_listings`
@@ -650,7 +688,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `nortifications`
 --
 ALTER TABLE `nortifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -659,10 +697,16 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `property_listings`
 --
 ALTER TABLE `property_listings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `register_companies`

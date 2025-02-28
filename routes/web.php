@@ -73,6 +73,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/udpatenortification', [AdminStores::class, 'udpatenortification'])->name('admin.udpatenortification');
     Route::get('/investpagesettings', [AdminViews::class, 'investpagesettings'])->name('admin.investpagesettings');
     Route::post('/submitinvestpagesettings', [AdminStores::class, 'submitinvestpagesettings'])->name('admin.submitinvestpagesettings');
+    Route::get('/all-projects', [AdminViews::class, 'projects'])->name('admin.projects');
+    Route::get('/addproject', [AdminViews::class, 'addproject'])->name('admin.addproject');
+    Route::post('/submitproject', [AdminStores::class, 'submitproject'])->name('admin.submitproject');
+    Route::get('/editproject/{id}', [AdminViews::class, 'editproject'])->name('admin.editproject');
+    Route::post('/updateproject', [AdminStores::class, 'updateproject'])->name('admin.updateproject');
+
 });
 
 

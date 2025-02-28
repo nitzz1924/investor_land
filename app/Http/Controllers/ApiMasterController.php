@@ -267,6 +267,7 @@ class ApiMasterController extends Controller
                 'roleid' =>$datareq['roleid'],
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
+                'approxrentalincome' => $datareq['approxrentalincome'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
                 'pricehistory' => $datareq['historydate'],

@@ -4096,5 +4096,7 @@ footer.footer {
 .fixed-buttons a:hover {
 	opacity: 0.8;
 }
-
+#featuredpropslider .swiper-pagination .swiper-pagination-bullet{
+	background: #fff;
+}
 

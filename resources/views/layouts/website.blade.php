@@ -52,7 +52,7 @@
                         <div class="col-lg-3 col-10">
                             <!-- Logo Start -->
                             <a class="navbar-brand" href="/" style="width: 360px;">
-                                <img class="" src="{{asset('assets/images/finallogo.png')}}" alt="Logo">
+                                <img class="" src="{{asset('assets/images/finallogonewnew.png')}}" alt="Logo">
                             </a>
                             <!-- Logo End -->
                         </div>

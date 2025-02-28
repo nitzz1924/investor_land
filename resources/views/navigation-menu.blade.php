@@ -115,6 +115,24 @@
                   <li class="sidebar-item">
                       <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
                           <span class="d-flex">
+                             <i class="ti ti-building-fortress"></i>
+                          </span>
+                          <span class="hide-menu">Projects</span>
+                      </a>
+                      <ul aria-expanded="false" class="collapse first-level">
+                          <li class="sidebar-item">
+                              <a href="{{ route('admin.projects')}}" class="sidebar-link">
+                                  <div class="round-16 d-flex align-items-center justify-content-center">
+                                      <i class="ti ti-circle"></i>
+                                  </div>
+                                  <span class="hide-menu">All Projects</span>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li class="sidebar-item">
+                      <a class="sidebar-link has-arrow" href="javascript:void(0)" id="get-url" aria-expanded="false">
+                          <span class="d-flex">
                               <i class="ti ti-address-book"></i>
                           </span>
                           <span class="hide-menu">Customers</span>

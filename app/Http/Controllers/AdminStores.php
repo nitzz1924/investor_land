@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\InvestSetting;
 use App\Models\Lead;
 use App\Models\Nortification;
+use App\Models\Project;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
 use App\Models\Notification;
@@ -653,7 +654,7 @@ class AdminStores extends Controller
             // Create the property listing
             $data = Nortification::create([
                 'notificationname' => $notificationname,
-                'notificationimg' => $notificationimg,
+                'notificationimg' => $notificationimg ?? 'placeholder.png',
                 'notificationdes' => $description,
                 'sendto' => $sendtowhom,
             ]);
@@ -778,6 +779,74 @@ class AdminStores extends Controller
             ]);
 
             return response()->json(['data' => $data, 'message' => 'Settings inserted successfully!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function submitproject(Request $request){
+        $categories = json_decode($request->input('categories'), true);
+        // dd($categories);
+        $projectdescription = $request->input('projectdescription');
+        $files = $request->file('projectthumbnail');
+        $projectname = $request->input('projectname');
+
+        try {
+            $thumbnailFilename = null;
+            if ($request->hasFile('projectthumbnail')) {
+                $request->validate([
+                    'projectthumbnail' => 'mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('projectthumbnail');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Projects'), $thumbnailFilename);
+            }
+            // Create the property listing
+            $data = Project::create([
+                'projectname' => $projectname,
+                'categories' => json_encode($categories),
+                'projectthumbnail' => $thumbnailFilename,
+                'projectdescription' => strip_tags($projectdescription),
+                'projectstatus' =>  $request->projectstatus,
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Project inserted successfully!']);
+
+        } catch (Exception $e) {
+            return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public function updateproject(Request $request)
+    {
+        $categories = json_decode($request->input('categories'), true);
+        // dd($categories);
+        $projectdescription = $request->input('projectdescription');
+        $files = $request->file('projectthumbnail');
+        $projectname = $request->input('projectname');
+
+        try {
+            $thumbnailFilename = null;
+            if ($request->hasFile('projectthumbnail')) {
+                $request->validate([
+                    'projectthumbnail' => 'mimes:jpeg,png,jpg',
+                ]);
+
+                $file = $request->file('projectthumbnail');
+                $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/images/Projects'), $thumbnailFilename);
+            }
+            $olddata = Project::find($request->projectid);
+            // Create the property listing
+            $data = Project::where('id', $request->projectid)->update([
+                'projectname' => $projectname,
+                'categories' => json_encode($categories),
+                'projectthumbnail' => $thumbnailFilename ?? $olddata->projectthumbnail,
+                'projectdescription' => strip_tags($projectdescription),
+                'projectstatus' =>  $request->projectstatus,
+            ]);
+            return response()->json(['data' => $data, 'message' => 'Project Updated.....!']);
 
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);

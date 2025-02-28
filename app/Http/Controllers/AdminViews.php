@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Lead;
 use App\Models\Master;
 use App\Models\Nortification;
+use App\Models\Project;
 use App\Models\PropertyListing;
 use App\Models\RegisterCompany;
 use App\Models\RegisterUser;
@@ -209,5 +210,23 @@ class AdminViews extends Controller
 
     public function investpagesettings(){
         return view('AdminPanelPages.investpagesettings');
+    }
+
+    public function projects(){
+        $data = Project::orderBy('created_at', 'DESC')->get();
+        $projectcnt = Project::count();
+        return view('AdminPanelPages.all-projects',compact('data','projectcnt'));
+    }
+    public function addproject(){
+        $categories = Master::where('type', 'Property Categories')->get();
+        return view('AdminPanelPages.addproject',compact('categories'));
+    }
+
+    public function editproject($id)
+    {
+        // dd($id);
+        $project = Project::find($id);
+        $categories = Master::where('type', 'Property Categories')->get();
+        return view('AdminPanelPages.editproject', compact('project', 'categories'));
     }
 }

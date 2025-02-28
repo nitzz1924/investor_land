@@ -190,21 +190,22 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="property-slider">
+                <div class="property-slider" id="featuredpropslider">
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             @foreach ($listings as $list)
                             <div class="swiper-slide">
                                 <div class="property-item">
                                     <div class="property-header">
+                                        <a href="{{route('website.propertydetails',['id'=> $list->id])}}">
                                         <figure class="image-anime">
                                             <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
                                         </figure>
-
+                                        </a>
                                         <span class="property-label">{{$list->category}}</span>
                                     </div>
                                     <div class="property-body">
-                                        <h3>{{$list->property_name}}</h3>
+                                        <a href="{{route('website.propertydetails',['id'=> $list->id])}}"> <h3>{{$list->property_name}}</h3></a>
                                         <p>{{$list->address}}</p>
 
                                         <div class="property-meta">
@@ -238,8 +239,10 @@
                                         </div>
                                     </div>
                                     <div class="property-footer">
-                                        <span class="badge {{$list->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst($list->status) }}</span>
-                                        <a href="{{route('website.propertydetails',['id'=> $list->id])}}" class="btn-default">View Property</a>
+                                        <span class="badge {{$list->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}"> {{ ucfirst($list->status) }}
+                                        </span>
+                                        <a href="{{route('website.propertydetails',['id'=> $list->id])}}" class="btn-default">View Property
+                                        </a>
                                     </div>
                                 </div>
                             </div>
