@@ -89,6 +89,7 @@ class AdminStores extends Controller
                 $filenamecompanylogo = time() . '_' . $companylogo->getClientOriginalName();
                 $companylogo->move(public_path('assets/images/Services'), $filenamecompanylogo);
             }
+            
             if ($request->hasFile('registrationimage')) {
                 $request->validate([
                     'registrationimage' => 'image|mimes:jpeg,png,jpg,svg,webp|max:2048',
@@ -128,6 +129,7 @@ class AdminStores extends Controller
 
     public function updateregistercompany(Request $request)
     {
+        // DD( $request->companylogo);
         try {
             if ($request->hasFile('companylogo')) {
                 $request->validate([
@@ -137,6 +139,7 @@ class AdminStores extends Controller
                 $filenamecompanylogo = time() . '_' . $companylogo->getClientOriginalName();
                 $companylogo->move(public_path('assets/images/Services'), $filenamecompanylogo);
             }
+            
             if ($request->hasFile('registrationimage')) {
                 $request->validate([
                     'registrationimage' => 'required|image|mimes:jpeg,png,jpg,svg,webp|max:2048',

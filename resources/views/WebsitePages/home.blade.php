@@ -26,7 +26,7 @@
                     <!-- Hero Left Content Start -->
                     <div class="hero-content">
                         <div class="section-title">
-                            <h1 class="text-anime">Welcome to Investor Lands</h1>
+                            <h1 class="text-anime">Welcome to INVESTOR LANDS</h1>
                         </div>
                         <div class="hero-content-body wow fadeInUp" data-wow-delay="0.5s">
                             <p>Your Partner for Hassle-Free Property Investment</p>

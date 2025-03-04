@@ -50,13 +50,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-3 col-10">
-                            <!-- Logo Start -->
-                            <a class="navbar-brand" href="/" style="width: 360px;">
-                                <img class="" src="{{asset('assets/images/finallogonewnew.png')}}" alt="Logo">
+                            <a class="navbar-brand d-flex justify-content-center" href="/">
+                                <img class="" width="75px;" src="{{asset('assets/images/onlylogo.jpeg')}}" alt="Logo">
                             </a>
-                            <!-- Logo End -->
                         </div>
-                        <div class="col-lg-9 col-2">
+                        <div class="col-lg-9 col-2" style="display: flex;">
                             <!-- Main Menu start -->
                             <div class="collapse navbar-collapse main-menu">
                                 <ul class="navbar-nav mr-auto" id="menu">
