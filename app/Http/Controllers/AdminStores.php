@@ -811,7 +811,7 @@ class AdminStores extends Controller
                 'projectname' => $projectname,
                 'categories' => json_encode($categories),
                 'projectthumbnail' => $thumbnailFilename,
-                'projectdescription' => strip_tags($projectdescription),
+                'projectdescription' => $projectdescription,
                 'projectstatus' =>  $request->projectstatus,
             ]);
             return response()->json(['data' => $data, 'message' => 'Project inserted successfully!']);
@@ -846,7 +846,7 @@ class AdminStores extends Controller
                 'projectname' => $projectname,
                 'categories' => json_encode($categories),
                 'projectthumbnail' => $thumbnailFilename ?? $olddata->projectthumbnail,
-                'projectdescription' => strip_tags($projectdescription),
+                'projectdescription' => $projectdescription,
                 'projectstatus' =>  $request->projectstatus,
             ]);
             return response()->json(['data' => $data, 'message' => 'Project Updated.....!']);

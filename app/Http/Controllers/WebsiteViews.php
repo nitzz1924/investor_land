@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\InvestSetting;
 use App\Models\Master;
+use App\Models\Project;
 use App\Models\PropertyListing;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\returnArgument;
@@ -33,8 +34,8 @@ class WebsiteViews extends Controller
             $city->property_count = $city->listings->count();
         }
         // dd($cityListings);
-
-        return view('WebsitePages.home', compact('categories', 'listingsbycitys', 'listings', 'blogs', 'uniqueCategories', 'uniqueCities'));
+        $projects = Project::orderBy('created_at','DESC')->get();
+        return view('WebsitePages.home', compact('categories', 'listingsbycitys', 'listings', 'blogs', 'uniqueCategories', 'uniqueCities','projects'));
     }
     public function aboutpage()
     {
@@ -162,5 +163,11 @@ class WebsiteViews extends Controller
         $decrypedmail = decrypt($Email);
         return view('auth.UserAgentPanel.ChangePassword', compact('decrypedmail'));
     }
-
+    public function projectdetails($id)
+    {
+        $projectdetails = Project::find($id);
+        $receentproject = Project::orderBy('created_at', 'desc')->get();
+        // dd( $blogdetails);
+        return view('WebsitePages.projectdetails', compact('projectdetails','receentproject'));
+    }
 }

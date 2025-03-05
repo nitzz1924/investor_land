@@ -439,7 +439,7 @@
             const descriptionContent = document.querySelector('#editorr').innerHTML;
             console.log(descriptionContent);
             combinedFormData.append("description", descriptionContent);
-
+    
 
             //Get Amenities here..
             let amenities = $('input[name="input"]').tagsinput('items');

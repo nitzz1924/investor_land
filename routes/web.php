@@ -119,6 +119,8 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/whytoinvest', 'whytoinvest')->name('website.whytoinvest');
     Route::get('/resetpassword', 'resetpassword')->name('website.resetpassword');
     Route::get('/changepassword/{email}', 'changepassword')->name('website.changepassword');
+    Route::get('/project-details/{id}', 'projectdetails')->name('website.projectdetails');
+
 });
 
 
