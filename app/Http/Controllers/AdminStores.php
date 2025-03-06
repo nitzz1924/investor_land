@@ -329,7 +329,7 @@ class AdminStores extends Controller
                 'floor' => $datareq['floor'],
                 'city' => $datareq['city'],
                 'address' => $datareq['officeaddress'],
-                'thumbnail' => $thumbnailFilename,
+                'thumbnail' => $thumbnailFilename ?? 'placeholder.png',
                 'masterplandoc' => $masterdoc,
                 'maplocations' => $datareq['location'],
                 'category' => $datareq['category'],

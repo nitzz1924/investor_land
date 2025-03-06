@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Google Maps Preview</title>
+        <style>
+            body {
+                background-color: #f7fafc;
+                font-size: 0.875rem;
+                line-height: 1.5;
+                font-family: Arial, sans-serif;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+                padding: 2rem;
+            }
+            .card {
+                width: 480px;
+                background-color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+            .map {
+                width: 100%;
+                position: relative;
+            }
+            .content {
+                width: 100%;
+                border-bottom: 2px solid #a0aec0;
+                padding: 1rem 1.5rem;
+            }
+            .input-field {
+                width: 100%;
+                background-color: #edf2f7;
+                color: #4a5568;
+                border-radius: 0.375rem;
+                border: 2px solid #e2e8f0;
+                padding: 0.5rem 1rem;
+                outline: none;
+            }
+            .json-preview {
+                width: 100%;
+                background-color: #edf2f7;
+                color: #2b6cb0;
+                padding: 1rem 1.5rem;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                font-family: monospace;
+            }
+            .footer {
+                color: #718096;
+                font-size: 0.75rem;
+                text-align: center;
+                padding: 0.5rem 0.75rem;
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                z-index: 10;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <div id="js-preview-map" class="map">
+                    <img
+                        id="map-image"
+                        src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&center=52.5219216,13.4110207&zoom=12&size=480x125&maptype=roadmap&sensor=false"
+                        width="480"
+                        height="125"
+                        alt="Google Maps Berlin"
+                    />
+                </div>
+                <div class="content">
+                    <label for="address">Address:</label>
+                    <input
+                        type="text"
+                        id="address"
+                        class="input-field"
+                        placeholder="Enter an address"
+                    />
+                </div>
+                <pre class="json-preview"
+                ><code id="js-preview-json">{}</code></pre>
+            </div>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&libraries=places"></script>
+        <script>
+            var locationInfo = {
+                geo: null,
+                country: null,
+                state: null,
+                city: null,
+                postalCode: null,
+                street: null,
+                streetNumber: null,
+                reset: function () {
+                    this.geo = null;
+                    this.country = null;
+                    this.state = null;
+                    this.city = null;
+                    this.postalCode = null;
+                    this.street = null;
+                    this.streetNumber = null;
+                },
+            };
+
+            function initAutocomplete() {
+                var addressField = document.getElementById("address");
+                var autocomplete = new google.maps.places.Autocomplete(
+                    addressField,
+                    {
+                        types: ["geocode"],
+                    }
+                );
+
+                autocomplete.addListener("place_changed", function () {
+                    var place = autocomplete.getPlace();
+                    if (!place.geometry) {
+                        return;
+                    }
+
+                    var address = place.address_components;
+                    var lat = place.geometry.location.lat();
+                    var lng = place.geometry.location.lng();
+
+                    locationInfo.reset();
+                    locationInfo.geo = [lat, lng];
+
+                    for (var i = 0; i < address.length; i++) {
+                        var component = address[i].types[0];
+                        switch (component) {
+                            case "country":
+                                locationInfo.country = address[i].long_name;
+                                break;
+                            case "administrative_area_level_1":
+                                locationInfo.state = address[i].long_name;
+                                break;
+                            case "locality":
+                                locationInfo.city = address[i].long_name;
+                                break;
+                            case "postal_code":
+                                locationInfo.postalCode = address[i].long_name;
+                                break;
+                            case "route":
+                                locationInfo.street = address[i].long_name;
+                                break;
+                            case "street_number":
+                                locationInfo.streetNumber =
+                                    address[i].long_name;
+                                break;
+                        }
+                    }
+
+                    // Update static map image
+                    var mapImage = document.getElementById("map-image");
+                    mapImage.src = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&center=${lat},${lng}&zoom=14&size=480x125&maptype=roadmap&sensor=false`;
+
+                    // Display JSON output
+                    document.getElementById("js-preview-json").textContent =
+                        JSON.stringify(locationInfo, null, 4);
+                });
+            }
+
+            window.onload = initAutocomplete;
+        </script>
+    </body>
+</html>

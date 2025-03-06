@@ -119,7 +119,6 @@
     <script src="{{ asset('assets/js/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('assets/js/kanban.js') }}"></script>
     <script src="{{ asset('assets/js/map.js') }}"></script> 
-    <script src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=places"></script>
     <script src="https://rawgit.com/Logicify/jquery-locationpicker-plugin/master/dist/locationpicker.jquery.js"></script>
     <script src="https://cdnjs.com/libraries/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>

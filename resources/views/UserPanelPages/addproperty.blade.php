@@ -258,15 +258,19 @@
                         <form>
                             <div class="card-body">
                                 <h4 class="card-title mb-7">Pin Location in Map</h4>
-                                <div class="container well">
-                                    <div id="maparea" style="width: 100%; height: 400px;"></div>
+                                <div id="js-preview-map" class="map">
+                                    <img id="map-image" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&center=52.5219216,13.4110207&zoom=12&size=480x400&maptype=roadmap&sensor=false" width="480" height="400" alt="Google Maps Berlin" />
+                                </div>
+                                 <pre class="json-preview d-none"><code id="js-preview-json">{}</code></pre>
+                                <div class="content">
                                     <div class="mt-3">
-                                        <label class="form-label">Lat</label>
-                                        <input type="text" name="latitude" class="form-control" id="us2-lat" />
+                                        <input type="text" id="address" class="form-control" placeholder="Enter Address to Search" />
                                     </div>
-                                    <div class="mt-2">
-                                        <label class="form-label">Long</label>
-                                        <input type="text" name="longitude" class="form-control" id="us2-lon" />
+                                    <div class="mt-3">
+                                        <input type="text" name="latitude" value="" placeholder="Latitude" class="form-control" id="us2-lat" readonly />
+                                    </div>
+                                    <div class="mt-3">
+                                        <input type="text" name="longitude" value="" placeholder="Longitude" class="form-control" id="us2-lon" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -281,6 +285,7 @@
             </div>
         </div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&libraries=places"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -304,48 +309,90 @@
         });
 
     </script>
-    <script>
-        var counter = 0;
-        let amenties = [];
-        $(document).on('click', '.addRow', function() {
-            counter++;
-            var name = $('#amentinamevalue').val();
-            amenties.push(name);
-            var tr = `
-                    <tr>
-                        <td class="row-number">${counter}</td>
-                        <td>
-                            <div class="mb-3">
-                                <div class="mb-4">${name}</div>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger btn-sm deleteRow" data-value="${name}">delete</button>
-                        </td>
-                    </tr>
-                `;
-            $('#tablebody').append(tr);
-            updateRowNumbers();
-            console.log("dsfsd", amenties);
-        });
+     <script>
+        var locationInfo = {
+            geo: null
+            , country: null
+            , state: null
+            , city: null
+            , postalCode: null
+            , street: null
+            , streetNumber: null
+            , reset: function() {
+                this.geo = null;
+                this.country = null;
+                this.state = null;
+                this.city = null;
+                this.postalCode = null;
+                this.street = null;
+                this.streetNumber = null;
+            }
+        , };
 
-        $(document).on('click', '.deleteRow', function() {
-            var valueToRemove = $(this).data("value"); // Get the value associated with the button
-            amenties = amenties.filter(item => item !== valueToRemove); // Remove value from array
-            $(this).closest('tr').remove();
-            updateRowNumbers();
-            console.log("Updated Amenities:", amenties);
-        });
+        function initAutocomplete() {
+            var addressField = document.getElementById("address");
+            var autocomplete = new google.maps.places.Autocomplete(
+                addressField, {
+                    types: ["geocode"]
+                , }
+            );
 
-        // Function to update row numbers dynamically
-        function updateRowNumbers() {
-            counter = 0; // Reset counter
-            $('#tablebody tr').each(function() {
-                counter++;
-                $(this).find('.row-number').text(counter);
+            autocomplete.addListener("place_changed", function() {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+
+                var address = place.address_components;
+                var lat = place.geometry.location.lat();
+                var lng = place.geometry.location.lng();
+
+                locationInfo.reset();
+                locationInfo.geo = [lat, lng];
+
+                for (var i = 0; i < address.length; i++) {
+                    var component = address[i].types[0];
+                    switch (component) {
+                        case "country":
+                            locationInfo.country = address[i].long_name;
+                            break;
+                        case "administrative_area_level_1":
+                            locationInfo.state = address[i].long_name;
+                            break;
+                        case "locality":
+                            locationInfo.city = address[i].long_name;
+                            break;
+                        case "postal_code":
+                            locationInfo.postalCode = address[i].long_name;
+                            break;
+                        case "route":
+                            locationInfo.street = address[i].long_name;
+                            break;
+                        case "street_number":
+                            locationInfo.streetNumber =
+                                address[i].long_name;
+                            break;
+                    }
+                }
+
+                // Update static map image
+                var mapImage = document.getElementById("map-image");
+                mapImage.src = `https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&center=${lat},${lng}&zoom=14&size=480x400&maptype=roadmap&sensor=false`;
+
+                // Display JSON output
+                document.getElementById("js-preview-json").textContent =
+                    JSON.stringify(locationInfo, null, 4);
+                console.log("Selected Address Details:", locationInfo.geo[0]);
+                const locationData = {
+                    Latitude: locationInfo.geo[0]
+                    , Longitude: locationInfo.geo[1]
+                };
+                console.log(locationData);
+                document.getElementById("us2-lat").value = locationInfo.geo[0];
+                document.getElementById("us2-lon").value =  locationInfo.geo[1];
             });
         }
-
+        window.onload = initAutocomplete;
     </script>
     <script>
         document.querySelector("#submitAllForms").addEventListener("click", function(event) {

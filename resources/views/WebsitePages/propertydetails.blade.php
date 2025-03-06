@@ -233,14 +233,18 @@
                         <div class="property-single-subtitle">
                             @php
                             $coordinates = json_decode($propertydetails->maplocations, true);
+                            
                             $latitude = $coordinates['Latitude'] ?? '40.7324319';
                             $longitude = $coordinates['Longitude'] ?? '-73.82480777777776';
                             @endphp
                             <h3>Map Location</h3>
                         </div>
                         <div class="property-map-iframe">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1000!2d{{ $longitude }}!3d{{ $latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z{{ $latitude }},{{ $longitude }}!5e0!3m2!1sen!2sin!4v{{ time() }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
+                             <img id="map-image"
+                             class="rounded-3" 
+                                src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyA_KLtDmYZB0Qy_b0f6LHJSlDV2wYYPf8s&center={{$latitude}},{{  $longitude}}&zoom=12&size=800x400&maptype=roadmap&sensor=false" 
+                                width="800" height="400" 
+                                alt="Google Maps Location" />
                         </div>
                     </div>
                 </div>
