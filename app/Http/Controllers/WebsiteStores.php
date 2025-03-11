@@ -104,23 +104,7 @@ class WebsiteStores extends Controller
     public function loginuser(Request $rq)
     {
         try {
-             // Validate all input fields including reCAPTCHA
-             $validator = Validator::make($rq->all(), [
-                'g-recaptcha-response' => 'required',
-            ]);
             $user = RegisterUser::where('email', $rq->email)->first();
-            
-            // Verify Google reCAPTCHA v3
-            $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-                'secret' => env('RECAPTCHA_SECRET'),
-                'response' => $rq->input('g-recaptcha-response'),
-            ]);
-
-            $captchaData = $response->json();
-
-            if (!$captchaData['success'] || $captchaData['score'] < 0.5) {
-                return back()->with('error', 'reCAPTCHA verification failed. Please try again.')->withInput();
-            }
             if ($user) {
                 if (Hash::check($rq->password, $user->password)) {
                     Auth::guard('customer')->login($user);
