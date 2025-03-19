@@ -11,6 +11,10 @@ use App\Models\Nortification;
 use App\Models\PropertyListing;
 use App\Models\Master;
 use Log;
+use Laravel\Socialite\Facades\Socialite;
+use Google_Client;
+
+
 class ApiMasterController extends Controller
 {
     public function loginuser(Request $rq)
@@ -63,17 +67,26 @@ class ApiMasterController extends Controller
     public function registeruser(Request $rq)
     {
         $thumbnailFilename = null;
+    
         try {
+            // Check if email already exists
+            if (RegisterUser::where('email', $rq->email)->exists()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'This email is already registered. Please use a different email or log in.'
+                ], 400);
+            }
+    
             if ($rq->hasFile('company_document')) {
                 $rq->validate([
                     'company_document' => 'required|mimes:jpeg,pdf,jpg',
                 ]);
-
+    
                 $file = $rq->file('company_document');
                 $thumbnailFilename = time() . '_' . $file->getClientOriginalName();
                 $file->move(public_path('assets/images/Users'), $thumbnailFilename);
             }
-
+    
             $attributes = RegisterUser::create([
                 'user_type' => $rq->user_type,
                 'name' => $rq->name,
@@ -84,21 +97,21 @@ class ApiMasterController extends Controller
                 'password' => Hash::make($rq->password),
                 'profile_photo_path' => '/defaultuser.png',
             ]);
-
-            $response = [
+    
+            return response()->json([
                 'success' => true,
                 'message' => 'You have been Registered Successfully..!!!',
                 'data' => $attributes
-            ];
+            ]);
+    
         } catch (Exception $e) {
-            $response = [
+            return response()->json([
                 'success' => false,
-                'message' => $e->getMessage()
-            ];
+                'message' => 'Registration failed: ' . $e->getMessage()
+            ], 500);
         }
-
-        return response()->json($response);
     }
+
 
     public function blogs()
     {
@@ -260,7 +273,7 @@ class ApiMasterController extends Controller
                 'documents' => json_encode($documents),
                 'amenties' => $datareq['amenities'] ?? [],
                 'videos' => json_encode($Videos),
-                'status' => $datareq['status'] ?? "Unpublished",
+                'status' => "unpublished",
             ]);
 
             return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
@@ -378,7 +391,7 @@ class ApiMasterController extends Controller
                 'name' => $request->name,
                 'email' => $request->email,
                 'mobile' => $request->mobile,
-                'company_name' => $request->companyname,
+                'company_name' => $request->company_name,
                 'profile_photo_path' => $filenameprofileimage == null ? $user->profile_photo_path : $filenameprofileimage,
                 'company_document' => $thumbnailFilename == null ? $user->company_document : $thumbnailFilename,
             ]);
@@ -534,12 +547,130 @@ class ApiMasterController extends Controller
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
                 'amenties' => $datareq['amenities'] ?? $olddata->amenities,
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
-                'status' => $datareq['status'],
+                'status' =>'unpublished',
             ]);
-            Log::info('data', ['propertydata' => $propertydata]);
+            Log::info(['propertydata' => $propertydata]);
             return response()->json(['data' => $propertydata, 'message' => 'Listing Updated successfully!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
+        }
+    }
+    
+    
+     // **WEB LOGIN - Redirects to Google for Authentication**
+    public function googleLogin()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    // **WEB AUTHENTICATION - Handles Callback from Google**
+    public function GoogleAuth()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->user();
+            
+            $user = RegisterUser::where('google_id', $googleUser->id)
+                ->orWhere('email', $googleUser->email)
+                ->first();
+            
+            if ($user) {
+                Auth::guard('customer')->login($user);
+                $user->update(['verification_status' => 1]);
+                return redirect()->route('website.homepage')->with('success', 'You are logged in successfully');
+            }
+
+            return redirect()->route('website.userlogin')->with('error', 'This user is not registered');
+        } catch (Exception $exception) {
+            return redirect()->route('website.userlogin')->with('error', 'Something went wrong: ' . $exception->getMessage());
+        }
+    }
+
+    // **API LOGIN/REGISTER - Handles Google Sign-In for Mobile Apps / Frontend**
+    public function appGoogleAuth(Request $request)
+    {
+        try {
+            $request->validate(['token' => 'required|string']);
+            
+            // Verify token with Google API
+            $googleUser = Http::get('https://www.googleapis.com/oauth2/v3/userinfo', [
+                'access_token' => $request->token,
+            ])->json();
+            
+            if (!isset($googleUser['sub'])) {
+                return response()->json(['success' => false, 'message' => 'Invalid Google token'], 401);
+            }
+
+            // Check if user exists
+            $user = RegisterUser::where('google_id', $googleUser['sub'])
+                ->orWhere('email', $googleUser['email'])
+                ->first();
+
+            if (!$user) {
+                // Register new user
+                $user = RegisterUser::create([
+                    'name' => $googleUser['name'],
+                    'email' => $googleUser['email'],
+                    'google_id' => $googleUser['sub'],
+                    'user_type' => $request->user_type ?? 'default',
+                    'verification_status' => 1,
+                    'profile_photo_path' => $googleUser['picture'] ?? 'public/assets/images/defaultuser.png',
+                    'password' => Hash::make(uniqid()),
+                ]);
+            }
+
+            // Log in the user
+            Auth::guard('customer')->login($user);
+            
+            // Generate API token for mobile/web
+            $apiToken = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'User authenticated successfully',
+                'token' => $apiToken,
+                'data' => $user
+            ], 200);
+        } catch (Exception $exception) {
+            return response()->json(['success' => false, 'message' => 'Something went wrong', 'error' => $exception->getMessage()], 500);
+        }
+    }
+
+    // **API REGISTER - Handles Google Registration**
+    public function googleRegister(Request $request)
+    {
+        try {
+            $client = new Google_Client(['client_id' => config('services.google.client_id')]);
+            $payload = $client->verifyIdToken($request->id_token);
+            
+            if (!$payload) {
+                return response()->json(['error' => 'Invalid ID Token'], 400);
+            }
+            
+            $googleId = $payload['sub'];
+            $email = $payload['email'];
+            $name = $payload['name'];
+            $avatar = $payload['picture'] ?? 'public/assets/images/defaultuser.png';
+            $userType = $request->user_type ?? 'default';
+            
+            $user = RegisterUser::where('email', $email)->first();
+            
+            if ($user) {
+                return response()->json(['message' => 'User already exists'], 409);
+            }
+            
+            $newUser = RegisterUser::create([
+                'name' => $name,
+                'user_type' => $userType,
+                'email' => $email,
+                'google_id' => $googleId,
+                'verification_status' => 1,
+                'profile_photo_path' => $avatar,
+                'password' => Hash::make(uniqid()),
+            ]);
+            
+            return response()->json(['message' => 'Registered Successfully', 'user' => $newUser], 201);
+        } catch (Exception $e) {
+            return response()->json(['error' => 'Something went wrong', 'message' => $e->getMessage()], 500);
         }
     }
 }

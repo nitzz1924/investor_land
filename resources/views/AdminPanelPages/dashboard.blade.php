@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12 d-flex align-items-stretch">
+            <div class="col-lg-8 d-flex align-items-stretch">
                 <div class="w-100">
                     <div class="card">
                         <div class="card-header">
@@ -130,6 +130,42 @@
                                             <td>{{ $data->price}}</td>
                                             <td>{{ $data->city}}</td>
                                             <td>{{ $data->address}}</td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <span class="mb-1 badge {{$data->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}">
+                                                        {{ ucfirst($data->status) }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="w-100">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title fw-semibold mb-0">Changes Requested</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="">
+                                <table id="" class="table  table-hover  display text-nowrap py-3 overflow-scroll">
+                                    <tbody>
+                                        @foreach ($unpublishedproperties as $data)
+                                        <tr>
+                                            <td>
+                                                <a href="{{ route('admin.editproperty',['id' => $data->id]) }}">
+                                                    <div class="d-flex align-items-center gap-6">
+                                                        <img src="{{asset('assets/images/Listings/'.$data->thumbnail)}}" width="45" class="rounded">
+                                                        <h6 class="mb-0">{{ $data->property_name}}</h6>
+                                                    </div>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <div class="form-check form-switch">
                                                     <span class="mb-1 badge {{$data->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}">

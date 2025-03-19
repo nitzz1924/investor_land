@@ -210,7 +210,7 @@ class UserViews extends Controller
                 'documents' => json_encode($documents),
                 'amenties' => $datareq['amenities'],
                 'videos' => json_encode($Videos),
-                'status' => $datareq['status'],
+                'status' =>'unpublished',
             ]);
             return response()->json(['data' => $data, 'message' => 'Listing inserted successfully!']);
         } catch (Exception $e) {
@@ -359,7 +359,7 @@ class UserViews extends Controller
                 'documents' => !empty($documents) ? json_encode($documents) : $olddata->documents,
                 'amenties' => $datareq['amenities'] ?? $olddata->amenities,
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
-                'status' => $datareq['status'],
+                'status' => 'unpublished',
             ]);
 
             return response()->json(['data' => $data, 'message' => 'Listing Updated..!']);

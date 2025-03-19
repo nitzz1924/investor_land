@@ -206,7 +206,7 @@
                                     <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                         <option selected="">--select status--</option>
                                         <option value="unpublished">Unpublished</option>
-                                        <option value="published">Published</option>
+                                        {{-- <option value="published">Published</option> --}}
                                     </select>
                                 </div>
                             </form>

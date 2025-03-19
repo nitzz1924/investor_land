@@ -33,7 +33,6 @@
                         </div>
 
                         <div class="col-lg-4">
-                            <!-- Post Sharing Links Start -->
                             <div class="post-social-sharing wow fadeInUp" data-wow-delay="0.5s">
                                 <ul>
                                     <li> <a href="#" data-bs-toggle="tooltip" title="Click to copy" onclick="copyToClipboard(event)"><i class="fa-solid fa-share-nodes"></i></a></li>

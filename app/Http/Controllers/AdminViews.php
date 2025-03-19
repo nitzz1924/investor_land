@@ -24,6 +24,7 @@ class AdminViews extends Controller
         $blogCount = Blog::count();
         $mylistingCount = PropertyListing::where('usertype', 'Admin')->count();
         $allproperties = PropertyListing::orderBy('created_at', 'DESC')->get();
+        $unpublishedproperties = PropertyListing::orderBy('created_at', 'DESC')->where('status','=','unpublished')->get();
         $leaddata = Lead::join('property_listings', 'leads.userid', '=', 'property_listings.roleid')
             ->select('leads.*', 'property_listings.property_name as propertyname')
             ->orderBy('leads.created_at', 'DESC')->get();
@@ -39,7 +40,7 @@ class AdminViews extends Controller
             'mylistingCount' => $mylistingCount,
         ];
 
-        return view('AdminPanelPages.dashboard', compact('data', 'allproperties', 'leaddata', 'allcustomers', 'allagents'));
+        return view('AdminPanelPages.dashboard', compact('data', 'unpublishedproperties','allproperties', 'leaddata', 'allcustomers', 'allagents'));
     }
     public function master()
     {

@@ -256,7 +256,7 @@
                                 <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                     <option selected="">--select status--</option>
                                     <option value="unpublished" {{$listingdata->status == 'unpublished' ? 'selected' : ''}}>Unpublished</option>
-                                    <option value="published" {{$listingdata->status == 'published' ? 'selected' : ''}}>Published</option>
+                                    {{-- <option value="published" {{$listingdata->status == 'published' ? 'selected' : ''}}>Published</option> --}}
                                 </select>
                             </div>
                         </form>
