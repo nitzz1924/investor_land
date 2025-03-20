@@ -4100,4 +4100,34 @@ footer.footer {
 #featuredpropslider .swiper-pagination .swiper-pagination-bullet{
 	background: #fff;
 }
+.swiper-button-next,
+.swiper-button-prev {
+    color: #000000; /* Change color */ /* Background color for visibility */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
 
+.swiper-button-next, .swiper-button-prev {
+    position: absolute;
+    top: var(--swiper-navigation-top-offset, 95%) !important;
+	width: 50px !important;
+    height: 40px !important;
+    margin-right: -1% !important;
+    margin-top: -13% !important;
+}
+
+#featuredpropslider .swiper-button-next, 
+#featuredpropslider .swiper-button-prev {
+	background-color: #726555  !important;
+	color: white !important;
+    top: var(--swiper-navigation-top-offset, 85%) !important;
+	width: 34px !important;
+    height: 34px !important;
+    margin-right: 0% !important;
+    margin-top: -16% !important;
+    padding: 7px;
+}
+.swiper-button-next:after, .swiper-button-prev:after{
+	font-size: large;
+}

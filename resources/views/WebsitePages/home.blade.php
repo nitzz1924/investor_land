@@ -169,7 +169,9 @@
             </div>
             @endforeach
         </div>
-
+        <!-- Navigation Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
     </div>
 </div>
@@ -215,21 +217,21 @@
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-badroom.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->bedroom}} <span class="hideshowproperty">Bedsroom</span></span>
+                                                <span>{{$list->bedroom}} <span class="hideshowproperty">Bedsroom</span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-bathroom.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->bathroom}} <span class="hideshowproperty">Bathrooms</span></span>
+                                                <span>{{$list->bathroom}} <span class="hideshowproperty">Bathrooms</span>
                                             </div>
 
                                             <div class="property-amenity-item">
                                                 <div class="icon-box">
                                                     <img src="{{asset('websiteAssets/images/icon-area.svg')}}" alt="">
                                                 </div>
-                                                <span>{{$list->squarefoot}} <span class="hideshowproperty">sq ft</span></span>
+                                                <span>{{$list->squarefoot}} <span class="hideshowproperty">sq ft</span>
                                             </div>
 
                                             <div class="property-amenity-item">
@@ -250,6 +252,9 @@
                             </div>
                             @endforeach
                         </div>
+                         <!-- Navigation Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                         <div class="swiper-pagination"></div>
                     </div>
                 </div>
