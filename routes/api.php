@@ -30,4 +30,5 @@ Route::controller(ApiMasterController::class)->group(function () {
     Route::post('/updatelisting/{id}', 'updatelisting')->name('api.updatelisting');
     Route::post('/appGoogleAuth', 'appGoogleAuth')->name('api.appGoogleAuth');
     Route::post('/googleRegister', 'googleRegister')->name('api.googleRegister');
+    Route::post('/deletefile', 'deletefile')->name('api.deletefile');
 });

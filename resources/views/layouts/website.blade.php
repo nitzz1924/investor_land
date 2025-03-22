@@ -1,6 +1,6 @@
-{{-- // ----------------------------------------------------🔱🙏HAR HAR MAHADEV🔱🙏---------------------------------------------------- --}}
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,17 +11,19 @@
     <title>@yield('title') | Investor Land</title>
 
     <!-- All CSS -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('websiteAssets/images/faviconinvestor.jpeg')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('websiteAssets/images/logo.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-    <link href="{{asset('websiteAssets/css/bootstrap.min.css')}}" rel="stylesheet" media="screen">
-    <link href="{{asset('websiteAssets/css/slicknav.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('websiteAssets/css/swiper-bundle.min.css')}}">
-    <link href="{{asset('websiteAssets/css/all.min.css')}}" rel="stylesheet" media="screen">
-    <link href="{{asset('websiteAssets/css/animate.css')}}" rel="stylesheet">
-    <link href="{{asset('websiteAssets/css/magnific-popup.css')}}" rel="stylesheet">
-    <link href="{{asset('websiteAssets/css/custom.css')}}" rel="stylesheet" media="screen">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet">
+    <link href="{{ asset('websiteAssets/css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('websiteAssets/css/slicknav.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('websiteAssets/css/swiper-bundle.min.css') }}">
+    <link href="{{ asset('websiteAssets/css/all.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ asset('websiteAssets/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('websiteAssets/css/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ asset('websiteAssets/css/custom.css') }}" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
@@ -46,47 +48,47 @@
     <!-- Header Start -->
     <header class="main-header">
         <div class="header-sticky">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-10">
-                            <a class="navbar-brand d-flex justify-content-center" href="/">
-                                <img class="" width="75px;" src="{{asset('assets/images/onlylogo.jpeg')}}" alt="Logo">
-                            </a>
-                        </div>
-                        <div class="col-lg-9 col-2" style="display: flex;">
-                            <!-- Main Menu start -->
-                            <div class="collapse navbar-collapse main-menu">
-                                <ul class="navbar-nav mr-auto" id="menu">
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.homepage')}}">Home</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage')}}">About us</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.propertylistings')}}">Properties</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs')}}">Blogs</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.whytoinvest')}}">Why to Invest ?</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="{{ route('website.contactpage')}}">Contact us</a></li>
+            <nav class="navbar navbar-expand-lg w-100">
+                <div class="container d-flex justify-content-between align-items-center">
+
+                    <!-- Logo -->
+                    <a class="navbar-brand d-flex justify-content-center" href="/">
+                        <img width="75px" src="{{ asset('assets/images/logo.png') }}" alt="Logo">
+                    </a>
+
+                    <!-- Navigation Menu -->
+                    <div class="col-lg-9 d-flex">
+                        <div class="collapse navbar-collapse main-menu">
+                            <ul class="navbar-nav mr-auto" id="menu">
+                                <li class="nav-item"><a class="nav-link" href="{{ route('website.homepage') }}">Home</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('website.aboutpage') }}">About
+                                        us</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('website.propertylistings') }}">Properties</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('website.blogs') }}">Blogs</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="{{ route('website.whytoinvest') }}">Why
+                                        to Invest?</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="{{ route('website.contactpage') }}">Contact us</a></li>
+
+                                <!-- User Authentication -->
+                                @if (Auth::guard('customer')->check())
                                     <li class="nav-item dropdown">
-                                        @if(Auth::guard('customer')->check())
-                                        @if(Auth::guard('customer')->user()->profile_photo_path)
-                                        @if(Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://'))
-                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="{{ Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                            {{ Auth::guard('customer')->user()->name }}
+                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#"
+                                            id="userMenu" role="button" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                            <img src="{{ Auth::guard('customer')->user()->profile_photo_path ? (Str::startsWith(Auth::guard('customer')->user()->profile_photo_path, 'https://') ? Auth::guard('customer')->user()->profile_photo_path : asset('assets/images/Users/' . Auth::guard('customer')->user()->profile_photo_path)) : asset('assets/images/defaultuser.png') }}"
+                                                alt="Profile" class="rounded-pill me-2"
+                                                style="width: 30px; height: 30px; object-fit: cover;">
+                                            {{ Str::limit(Auth::guard('customer')->user()->name, 7) }}
                                         </a>
-                                        @else
-                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="{{ 'assets/images/Users/'. Auth::guard('customer')->user()->profile_photo_path ?? asset('assets/images/defaultuser.png') }}" alt="Profile" class="rounded-pill me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                                            {{ Str::limit(Auth::guard('customer')->user()->name,7) }}
-                                        </a>
-                                        @endif
-                                        @else
-                                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="{{ asset('assets/images/Users/defaultuser.png') }}" alt="modernize-img" width="40" height="40">
-                                        </a>
-                                        @endif
                                         <ul class="dropdown-menu" aria-labelledby="userMenu">
-                                            <li><a class="dropdown-item" target="_blank" href="{{ route('user.dashboard') }}">My Dashboard</a></li>
-                                            <li><a class="dropdown-item" target="_blank" href="{{ route('user.myprofile') }}">My Profile</a></li>
+                                            <li><a class="dropdown-item" target="_blank"
+                                                    href="{{ route('user.dashboard') }}">My Dashboard</a></li>
+                                            <li><a class="dropdown-item" target="_blank"
+                                                    href="{{ route('user.myprofile') }}">My Profile</a></li>
                                             <li>
                                                 <form method="GET" action="{{ route('user.logoutuserpanel') }}">
                                                     @csrf
@@ -94,25 +96,24 @@
                                                 </form>
                                             </li>
                                         </ul>
-                                        @else
+                                    </li>
+                                @else
                                     <li class="nav-item highlighted-menu">
                                         <a class="nav-link" href="{{ route('website.userlogin') }}">Login</a>
                                     </li>
-                                    @endif
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Main Menu End -->
-
-                            <div class="navbar-toggle"></div>
+                                @endif
+                            </ul>
                         </div>
                     </div>
+
+                    <div class="navbar-toggle"></div>
                 </div>
             </nav>
-
-            <div class="responsive-menu"></div>
         </div>
+
+        <div class="responsive-menu"></div>
     </header>
+
     <!-- Header End -->
     <div class="main-content">
         @yield('content')
@@ -126,12 +127,14 @@
                         <div class="footer-contact-info">
                             <h1>Get in Touch</h1>
                             <div class="footer-about-content">
-                                <p>Investor Lands is your trusted partner in achieving success. Join us as we redefine the future of real estate investments, one project at a time.</p>
+                                <p>Investor Lands is your trusted partner in achieving success. Join us as we redefine
+                                    the future of real estate investments, one project at a time.</p>
                             </div>
                             <div class="footer-contact-box">
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-location.svg')}}" alt="">
+                                        <img src="{{ asset('websiteAssets/images/icon-location.svg') }}"
+                                            alt="">
                                     </div>
 
                                     <p>123, Lorem Ipsum, Street no, Cityname, Country 123456</p>
@@ -139,7 +142,7 @@
 
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-phone.svg')}}" alt="">
+                                        <img src="{{ asset('websiteAssets/images/icon-phone.svg') }}" alt="">
                                     </div>
 
                                     <p>+91-94612-57675</p>
@@ -147,7 +150,7 @@
 
                                 <div class="footer-info-box">
                                     <div class="icon-box">
-                                        <img src="{{asset('websiteAssets/images/icon-email.svg')}}" alt="">
+                                        <img src="{{ asset('websiteAssets/images/icon-email.svg') }}" alt="">
                                     </div>
 
                                     <p>investorlands.com</p>
@@ -155,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                         <div class="footer-appointment">
                             <h1>Appointment</h1>
                             <div class="footer-appointment-content">
@@ -191,16 +194,32 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-4">
                         <div class="footer-quick-links">
                             <h1>Quick Links</h1>
                             <ul>
-                                <li><a href="{{ route('website.homepage')}}">Home</a></li>
-                                <li><a href="{{ route('website.aboutpage')}}">About Us</a></li>
-                                <li><a href="{{ route('website.propertylistings')}}">Properties</a></li>
-                                <li><a href="{{ route('website.blogs')}}">Blogs</a></li>
-                                <li><a href="{{ route('website.contactpage')}}">Contact Us</a></li>
+                                <li><a href="{{ route('website.homepage') }}">Home</a></li>
+                                <li><a href="{{ route('website.aboutpage') }}">About Us</a></li>
+                                <li><a href="{{ route('website.propertylistings') }}">Properties</a></li>
+                                <li><a href="{{ route('website.blogs') }}">Blogs</a></li>
+                                <li><a href="{{ route('website.contactpage') }}">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-quick-links">
+                            <h1>Help Links</h1>
+                            <ul>
+                                <li><a href="{{ route('website.privacypolicy') }}">Privacy Policy</a></li>
+                                <li><a href="{{ route('website.termsandconditions') }}">Terms & Conditions</a></li>
+                                <li><a href="{{ route('website.userandagentagreement') }}">User & Agent Agreement</a>
+                                </li>
+                                <li><a href="{{ route('website.dataretentionanddeletionpolicy') }}">Data Retention &
+                                        Deletion Policy</a></li>
+                                <li><a href="{{ route('website.cookiespolicy') }}">Cookies Policy</a></li>
+                                <li><a href="{{ route('website.contentandlistingguidelines') }}">Content & Listing
+                                        Guidelines</a></li>
                             </ul>
                         </div>
                     </div>
@@ -225,8 +244,8 @@
                     <!-- Footer Policy Links Start -->
                     <div class="footer-policy-links">
                         <ul>
-                            <li><a href="#">Privacy & Policy</a></li>
-                            <li><a href="#">Terms & Condition</a></li>
+                            <li><a href="{{ route('website.privacypolicy') }}">Privacy & Policy</a></li>
+                            <li><a href="{{ route('website.termsandconditions') }}">Terms & Condition</a></li>
                         </ul>
                     </div>
                 </div>
@@ -236,11 +255,13 @@
 
     <div class="">
         <!-- Call Button -->
-        <a href="tel:+917073880500" class="call-btn animate-up-down" style="position: fixed; left: 20px; bottom: 80px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
+        <a href="tel:+917073880500" class="call-btn animate-up-down"
+            style="position: fixed; left: 20px; bottom: 80px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
             <i class="fas fa-phone"></i>
         </a>
         <!-- WhatsApp Button -->
-        <a href="https://wa.me/917073880500" class="whatsapp-btn animate-up-down" style="position: fixed; left: 20px; bottom: 20px; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
+        <a href="https://wa.me/917073880500" class="whatsapp-btn animate-up-down"
+            style="position: fixed; left: 20px; bottom: 20px; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
             <i class="fab fa-whatsapp fs-4"></i>
         </a>
     </div>
@@ -259,34 +280,35 @@
                 transform: translateY(-10px);
             }
         }
-
     </style>
 
 
     <!-- ALL JS -->
-    <script src="{{asset('websiteAssets/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/validator.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/jquery.slicknav.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/swiper-bundle.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/jquery.waypoints.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/jquery.counterup.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/SmoothScroll.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/parallaxie.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/gsap.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/magiccursor.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/splitType.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/ScrollTrigger.min.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/wow.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/function.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/toastr-init.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/calculator.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/apex.line.init.js')}}"></script>
-    <script src="{{asset('websiteAssets/js/apexcharts.min.js')}}"></script>
+    <script src="{{ asset('websiteAssets/js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/validator.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/jquery.slicknav.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/SmoothScroll.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/parallaxie.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/gsap.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/magiccursor.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/splitType.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/ScrollTrigger.min.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/wow.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/function.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/toastr-init.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/calculator.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/apex.line.init.js') }}"></script>
+    <script src="{{ asset('websiteAssets/js/apexcharts.min.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LeyKeMqAAAAAO5XBgLOWNwdGUY0WFnaONWm5N78"></script>
     <script>
         grecaptcha.ready(function() {
@@ -297,8 +319,8 @@
                 document.getElementById('g-recaptcha-responseAgent').value = token;
             });
         });
-
     </script>
 </body>
 </body>
+
 </html>

@@ -449,6 +449,8 @@ class ApiMasterController extends Controller
         $datareq = $request->all();
         // \Log::info('Received Data:', $request->all());
         try {
+            
+            $olddata = PropertyListing::find($id);
             // Handle the thumbnail image
             $thumbnailFilename = null;
             if ($request->hasFile('thumbnailImages')) {
@@ -461,8 +463,8 @@ class ApiMasterController extends Controller
                 $file->move(public_path('assets/images/Listings'), $thumbnailFilename);
             }
 
-            // Handle Master Plan Document
-            $masterdoc = null;
+             // Handle the Master Plan Doc
+            $masterdoc = $olddata->masterplandoc;
             if ($request->hasFile('masterplandocument')) {
                 $request->validate([
                     'masterplandocument' => 'required|mimes:pdf,jpeg,jpg',
@@ -473,52 +475,48 @@ class ApiMasterController extends Controller
                 $file->move(public_path('assets/images/Listings'), $masterdoc);
             }
 
-            // \Log::info("Received Gallery Images", ['files' => $request->file('galleryImages')]);
-
-            // Handle multiple gallery images
-            $galleryImages = [];
+            // Handle multiple gallery images (merge with old data)
+            $galleryImages = json_decode($olddata->gallery, true) ?? [];
             if ($request->hasFile('galleryImages')) {
                 $request->validate([
                     'galleryImages.*' => 'required|image|mimes:jpeg,png,jpg',
                 ]);
                 foreach ($request->file('galleryImages') as $file) {
-                    $imageName = md5(rand(1000, 10000)) . '.' . strtolower($file->getClientOriginalExtension());
+                    $imageName = md5(rand(1000, 10000)) . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('assets/images/Listings'), $imageName);
                     $galleryImages[] = 'assets/images/Listings/' . $imageName;
                 }
-            } else {
-                // \Log::info("🚨 No gallery images detected in request.");
             }
 
-
-            // Handle multiple documents
-            $documents = [];
+            // Handle multiple documents (merge with old data)
+            $documents = json_decode($olddata->documents, true) ?? [];
             if ($request->hasFile('documents')) {
                 $request->validate([
                     'documents.*' => 'required|mimes:pdf,jpeg,jpg',
                 ]);
                 foreach ($request->file('documents') as $file) {
-                    $docName = md5(rand(1000, 10000)) . '.' . strtolower($file->getClientOriginalExtension());
-                    $file->move(public_path('assets/images/Listings'), $docName);
-                    $documents[] = 'assets/images/Listings/' . $docName;
+                    $documentName = md5(rand(1000, 10000)) . '.' . $file->getClientOriginalExtension();
+                    $file->move(public_path('assets/images/Listings'), $documentName);
+                    $documents[] = 'assets/images/Listings/' . $documentName;
                 }
             }
 
-            // Handle multiple videos
-            $Videos = [];
+            // Handle multiple Videos (merge with old data)
+            $Videos = json_decode($olddata->videos, true) ?? [];
             if ($request->hasFile('propertyvideos')) {
                 $request->validate([
                     'propertyvideos.*' => 'required|mimes:mp4,mov,avi',
                 ]);
                 foreach ($request->file('propertyvideos') as $file) {
-                    $videoName = md5(rand(1000, 10000)) . '.' . strtolower($file->getClientOriginalExtension());
+                    $videoName = md5(rand(1000, 10000)) . '.' . $file->getClientOriginalExtension();
                     $file->move(public_path('assets/images/Listings'), $videoName);
                     $Videos[] = 'assets/images/Listings/' . $videoName;
                 }
             }
 
-            $olddata = PropertyListing::find($id);
+            
 
+        
             $propertydata = PropertyListing::where('id', $id)->update([
                 'usertype' => 'Admin',
                 'roleid' => $datareq['roleid'],
@@ -544,12 +542,94 @@ class ApiMasterController extends Controller
                 'videos' => !empty($Videos) ? json_encode($Videos) : $olddata->videos,
                 'status' =>'unpublished',
             ]);
-            Log::info(['propertydata' => $propertydata]);
-            return response()->json(['data' => $propertydata, 'message' => 'Listing Updated successfully!']);
+            $updatedProperty = PropertyListing::where('id', $id)->first(); // Fetch updated record
+            return response()->json(['data' => $updatedProperty, 'message' => 'Listing Updated successfully!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
         }
     }
+    
+    
+     public function deletefile(Request $request)
+    {
+        Log::info("Delete request received:", $request->all());
+    
+        try {
+            $request->validate([
+                'property_id' => 'required|exists:property_listings,id',
+                'file_type' => 'required|in:thumbnail,gallery,video,document,masterplan',
+                'file_path' => 'required|string'
+            ]);
+    
+            $property = PropertyListing::find($request->property_id);
+            if (!$property) {
+                return response()->json(['error' => true, 'message' => 'Property not found.']);
+            }
+    
+            // Normalize file path (remove escaped slashes)
+            $filePath = str_replace('\/', '/', $request->file_path);
+            $absoluteFilePath = public_path($filePath);
+    
+            Log::info("Attempting to delete file at: " . $absoluteFilePath);
+    
+            // Check if the file exists and delete it
+            if (file_exists($absoluteFilePath)) {
+                unlink($absoluteFilePath);
+                Log::info("File deleted successfully: " . $absoluteFilePath);
+            } else {
+                Log::warning("File not found: " . $absoluteFilePath);
+            }
+    
+            // Handle different file types and update the database
+            switch ($request->file_type) {
+                case 'thumbnail':
+                    $property->thumbnail = null;
+                    break;
+                case 'gallery':
+                    $galleryImages = json_decode($property->gallery, true) ?? [];
+                    $galleryImages = array_values(array_filter($galleryImages, function ($img) use ($filePath) {
+                        return trim(str_replace('\/', '/', $img)) !== trim($filePath);
+                    }));
+                    $property->gallery = json_encode($galleryImages);
+                    break;
+                case 'video':
+                    $videos = json_decode($property->videos, true) ?? [];
+                    $videos = array_values(array_filter($videos, function ($vid) use ($filePath) {
+                        return trim(str_replace('\/', '/', $vid)) !== trim($filePath);
+                    }));
+                    $property->videos = json_encode($videos);
+                    Log::info("Updated videos list: " . json_encode($videos));
+                    break;
+                case 'document':
+                    $documents = json_decode($property->documents, true) ?? [];
+                    $documents = array_values(array_filter($documents, function ($doc) use ($filePath) {
+                        return trim(str_replace('\/', '/', $doc)) !== trim($filePath);
+                    }));
+                    $property->documents = json_encode($documents);
+                    Log::info("Updated documents list: " . json_encode($documents));
+                    break;
+                case 'masterplan':
+                    $masterPlans = json_decode($property->masterplandoc, true) ?? [];
+                    $masterPlans = array_values(array_filter($masterPlans, function ($doc) use ($filePath) {
+                        return trim(str_replace('\/', '/', $doc)) !== trim($filePath);
+                    }));
+                    $property->masterplandoc = json_encode($masterPlans);
+                    Log::info("Updated master plan list: " . json_encode($masterPlans));
+                    break;
+            }
+    
+            $property->save();
+    
+            return response()->json(['message' => 'File deleted successfully']);
+        } catch (Exception $e) {
+            Log::error("File delete error: " . $e->getMessage());
+            return response()->json(['error' => true, 'message' => 'Failed to delete file.']);
+        }
+    }
+
+
+
+
     
     
      // **WEB LOGIN - Redirects to Google for Authentication**
