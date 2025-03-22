@@ -519,11 +519,6 @@ class ApiMasterController extends Controller
 
             $olddata = PropertyListing::find($id);
 
-            $updatedhistory = "null";
-            if ($datareq['historydate']) {
-                $updatedhistory = array_merge(json_decode($olddata->pricehistory), json_decode($datareq['historydate']));
-            }
-
             $propertydata = PropertyListing::where('id', $id)->update([
                 'usertype' => 'Admin',
                 'roleid' => $datareq['roleid'],
@@ -532,7 +527,7 @@ class ApiMasterController extends Controller
                 'approxrentalincome' => $datareq['approxrentalincome'],
                 'discription' => strip_tags($datareq['description'] ?? ''), // Remove HTML tags
                 'price' => $datareq['price'],
-                'pricehistory' => $updatedhistory == "null" ? $olddata->pricehistory : json_encode($updatedhistory),
+                'pricehistory' =>  $datareq['historydate'],
                 'squarefoot' => $datareq['sqfoot'],
                 'bedroom' => $datareq['bedroom'],
                 'bathroom' => $datareq['bathroom'],

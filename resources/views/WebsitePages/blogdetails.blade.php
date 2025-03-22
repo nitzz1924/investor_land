@@ -57,7 +57,6 @@
                 <div class="post-sidebar">
                     <div class="category-box-widget wow fadeInUp" data-wow-delay="0.5s">
                         <h3>Categories</h3>
-
                         <ul>
                             @php
                             $categories = json_decode($blogdetails->blogcategories ?? '[]', true);
