@@ -248,18 +248,20 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-7">
-                            <h4 class="card-title">Status</h4>
+                            <h4 class="card-title">Current Property Status</h4>
                             <div class="p-2 h-100 {{$listingdata->status == 'unpublished' ? 'bg-danger' : 'bg-success'}} rounded-circle"></div>
                         </div>
-                        <form action="#" class="form-horizontal">
+                         <span class="mb-1 badge {{$listingdata->status == 'published' ? 'text-bg-success' : 'text-bg-danger' }}">
+                            {{ ucfirst($listingdata->status) }}
+                        </span>
+                        {{-- <form action="#" class="form-horizontal">
                             <div>
                                 <select name="status" class="form-select mr-sm-2  mb-2" id="inlineFormCustomSelect" required>
                                     <option selected="">--select status--</option>
                                     <option value="unpublished" {{$listingdata->status == 'unpublished' ? 'selected' : ''}}>Unpublished</option>
-                                    {{-- <option value="published" {{$listingdata->status == 'published' ? 'selected' : ''}}>Published</option> --}}
                                 </select>
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
                 <div class="card">

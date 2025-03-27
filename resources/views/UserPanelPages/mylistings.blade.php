@@ -44,7 +44,7 @@
                             <th>City</th>
                             <th>Property Address</th>
                             <th>Description</th>
-                            <th>Property Status</th>
+                            {{-- <th>Property Status</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -62,7 +62,7 @@
                             <td>{{ $data->city}}</td>
                             <td>{{ $data->address}}</td>
                             <td>{{ Str::limit($data->discription, 20) }}</td>
-                            <td>
+                            {{-- <td>
                                 <div class="form-check form-switch">
                                     <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool" {{ $data->status == 'published' ? 'checked' : '' }} {{ $data->status == 'unpublished' ? 'disabled' : '' }} />
                                     <label class="form-check-label  {{ $data->status == 'published' ? 'text-success' : 'text-danger' }}" for="color-success{{ $data->id }}">
@@ -70,7 +70,7 @@
                                     </label>
                                 </div>
                                 <small class="badge bg-danger fw-bold {{ $data->status == 'unpublished' ? 'd-block' : 'd-none' }}">Changes are under Review</small>
-                            </td>
+                            </td> --}}
                             <td>
                                 <div class="hstack gap-3 flex-wrap">
                                     <a href="{{ route('user.viewlisting',['id' => $data->id]) }}" class="link-primary  fs-6"><i class="ti ti-eye-share"></i></a>
