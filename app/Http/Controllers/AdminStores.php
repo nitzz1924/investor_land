@@ -450,8 +450,6 @@ class AdminStores extends Controller
             }
             // dd( $updatedhistory);
             $data = PropertyListing::where('id', $request->listingid)->update([
-                'usertype' => 'Admin',
-                'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
                 'approxrentalincome' => $datareq['approxrentalincome'],
@@ -475,6 +473,7 @@ class AdminStores extends Controller
                 'status' => $datareq['status'],
             ]);
 
+          
             return response()->json(['data' => $data, 'message' => 'Listing Updated..!']);
         } catch (Exception $e) {
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
@@ -855,5 +854,16 @@ class AdminStores extends Controller
             return response()->json(['error' => true, 'message' => $e->getMessage()]);
         }
     }
+    public function updatefeaturedstatus(Request $request)
+    {
+        $lisdata = PropertyListing::find($request->id);
+        if ($lisdata) {
+            $lisdata->featuredstatus = $request->featuredstatus;
+            $lisdata->save();
+            return response()->json(['success' => true]);
+        }
+        return response()->json(['success' => false], 404);
+    }
 
 }
+

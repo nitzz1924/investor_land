@@ -18,20 +18,22 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="property-listings">
+                    @if($listings->count() > 0)
                     <div class="row">
                         @foreach ($listings as $list)
                         <div class="col-md-6">
                             <div class="property-item wow fadeInUp" data-wow-delay="0.25s">
                                 <div class="property-header">
-                                    <figure class="image-anime">
-                                        <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
-                                    </figure>
-
+                                    <a href="{{ route('website.propertydetails', ['id' => $list->id]) }}" class="">
+                                        <figure class="image-anime">
+                                            <img src="{{asset('assets/images/Listings/'.$list->thumbnail)}}" alt="">
+                                        </figure>
+                                    </a>
                                     <span class="property-label">{{$list->category}}</span>
                                 </div>
                                 <div class="property-body">
                                     <h3>{{$list->property_name}}</h3>
-                                    <p>{{$list->address}}</p>
+                                    <p>{{$list->city}}</p>
 
                                     <div class="property-meta">
                                         <div class="property-amenity-item">
@@ -71,6 +73,16 @@
                         </div>
                         @endforeach
                     </div>
+                    @else
+                    <div class="row align-items-center justify-content-center">
+                        <div class="">
+                            <p class="text-center">No Listings Available</p>
+                        </div>
+                        <div class="text-center">
+                             <a href="{{url('/')}}" class="btn-default"><i class="fa-solid fa-house"></i> Go To Home</a>
+                        </div>
+                    </div>
+                    @endif
                     <div class="row">
                         <div class="col-md-12">
                             <div class="post-pagination wow fadeInUp" data-wow-delay="1.5s">

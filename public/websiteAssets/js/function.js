@@ -106,6 +106,30 @@
 			}
 		});
 	}
+	if ($('.property-type-sliderbycity').length) {
+		const property_type_carousel = new Swiper('.property-type-sliderbycity .swiper', {
+			slidesPerView : 3,
+			speed: 1000,
+			spaceBetween: 30,
+			loop: true,
+			pagination: {
+				el: '.swiper-pagination',
+				clickable: true,
+			},
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+			breakpoints: {
+				768: {
+				slidesPerView: 3,
+				},
+				991: {
+				slidesPerView: 3
+				}
+			}
+		});
+	}
 
 	/* Property Listing Carousel JS */
 	if ($('.property-slider').length) {

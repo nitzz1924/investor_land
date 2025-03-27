@@ -337,8 +337,6 @@ class UserViews extends Controller
             }
             // dd( $updatedhistory);
             $data = PropertyListing::where('id', $request->listingid)->update([
-                'usertype' => 'Admin',
-                'roleid' => $authuser->id,
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
                 'approxrentalincome' => $datareq['approxrentalincome'],

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lead;
 use App\Models\Master;
 use App\Models\RegisterUser;
+use App\Models\PropertyListing;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Validator;
@@ -141,4 +142,5 @@ class WebsiteStores extends Controller
             return back()->with('error', $e->getMessage());
         }
     }
+    
 }

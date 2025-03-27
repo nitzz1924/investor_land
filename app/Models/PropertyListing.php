@@ -29,5 +29,6 @@ class PropertyListing extends Model
         'amenties',
         'videos',
         'status',
+        'featuredstatus',
     ];
 }

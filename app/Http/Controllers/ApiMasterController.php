@@ -518,7 +518,6 @@ class ApiMasterController extends Controller
 
         
             $propertydata = PropertyListing::where('id', $id)->update([
-                'usertype' => 'Admin',
                 'roleid' => $datareq['roleid'],
                 'property_name' => $datareq['property_name'],
                 'nearbylocation' => $datareq['nearbylocation'],
@@ -628,10 +627,6 @@ class ApiMasterController extends Controller
     }
 
 
-
-
-    
-    
      // **WEB LOGIN - Redirects to Google for Authentication**
     public function googleLogin()
     {

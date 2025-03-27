@@ -78,6 +78,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/submitproject', [AdminStores::class, 'submitproject'])->name('admin.submitproject');
     Route::get('/editproject/{id}', [AdminViews::class, 'editproject'])->name('admin.editproject');
     Route::post('/updateproject', [AdminStores::class, 'updateproject'])->name('admin.updateproject');
+    Route::post('/updatefeaturedstatus', [AdminStores::class, 'updatefeaturedstatus'])->name('admin.updatefeaturedstatus');
 
 });
 
@@ -126,7 +127,6 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/data-retention-and-deletion-policy', 'dataretentionanddeletionpolicy')->name('website.dataretentionanddeletionpolicy');
     Route::get('/cookies-policy', 'cookiespolicy')->name('website.cookiespolicy');
     Route::get('/content-and-listing-guidelines', 'contentandlistingguidelines')->name('website.contentandlistingguidelines');
-
 });
 
 
@@ -136,6 +136,7 @@ Route::controller(WebsiteStores::class)->group(function () {
     Route::post('/register-user', 'registeruser')->name('website.registeruser');
     Route::post('/login-user', 'loginuser')->name('website.loginuser');
     Route::post('/updatePassword', 'updatePassword')->name('website.updatePassword');
+    Route::post('/filterbyCategoryHome', 'filterbyCategoryHome')->name('website.filterbyCategoryHome');
 });
 
 

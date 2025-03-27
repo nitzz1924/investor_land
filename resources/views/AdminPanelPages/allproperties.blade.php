@@ -35,10 +35,11 @@
                                 <th>Properties Photo & Name</th>
                                 <th>Category</th>
                                 <th>Price</th>
-                                <th>City</th>
+                                {{-- <th>City</th> --}}
                                 <th>Property Address</th>
                                 <th>Listed By</th>
                                 <th>Property Status</th>
+                                <th>Set Property Featured</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -48,12 +49,12 @@
                                 <td>
                                     <div class="d-flex align-items-center gap-6">
                                         <img src="{{asset('assets/images/Listings/'.$data->thumbnail)}}" width="45" class="rounded">
-                                        <h6 class="mb-0">{{ $data->property_name}}</h6>
+                                        <h6 class="mb-0">{{ Str::limit($data->property_name,15)}}</h6>
                                     </div>
                                 </td>
                                 <td>{{ $data->category}}</td>
                                 <td>₹{{ $data->price}}/-</td>
-                                <td>{{ $data->city}}</td>
+                                {{-- <td>{{ $data->city}}</td> --}}
                                 <td>{{ $data->address}}</td>
                                 <td>
                                      <div>
@@ -61,13 +62,21 @@
                                             {{ ucfirst( $data->usertype) }}
                                         </span>
                                     </div>
-                                    {{ $data->username }}
+                                    {{ ucwords($data->username) }}
                                 </td>
                                 <td>
                                     <div class="form-check form-switch">
                                         <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->status == 'published' ? 'checked' : '' }}  />
                                         <label class="form-check-label  {{ $data->status == 'published' ? 'text-success' : 'text-danger' }}" for="color-success{{ $data->id }}">
                                              {{ $data->status == 'published' ? 'Published' : 'Upublished' }}
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-check form-switch">
+                                        <input data-featuredid="{{ $data->id }}" class="form-check-input secondary featuredbool" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->featuredstatus == 'featured' ? 'checked' : '' }}  />
+                                        <label class="form-check-label  {{ $data->featuredstatus == 'featured' ? 'text-secondary fw-bold' : 'text-danger' }}" for="color-success{{ $data->id }}">
+                                             {{ $data->featuredstatus == 'featured' ? 'Featured' : 'Unfeatured' }}
                                         </label>
                                     </div>
                                 </td>
@@ -143,6 +152,62 @@
                         } else {
                             Swal.fire({
                                 title: "Status Not Updated!!"
+                                , text: data.message
+                                , icon: "error"
+                                , confirmButtonText: "OK"
+                                , customClass: {
+                                    confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                                }
+                                , buttonsStyling: true
+                                , showCancelButton: true
+                                , showCloseButton: true
+                            });
+                        }
+                    },
+                    error: function() {
+                        swal("Error", "An error occurred.", "error");
+                    }
+                });
+            });
+        });
+
+    </script>
+      <script>
+        $(document).ready(function() {
+            $('.featuredbool').change(function() {
+                var blogId = $(this).data('featuredid');
+                var status = $(this).is(':checked') ? 'featured' : 'unfeatured';
+                console.log(blogId, status);
+
+                 $.ajax({
+                    url: '{{ route('admin.updatefeaturedstatus') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: blogId,
+                        featuredstatus: status
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Property is " + status.charAt(0).toUpperCase() + status.slice(1) + " Now.!!!"
+                                , text: data.message
+                                , icon: "success"
+                                , confirmButtonText: "OK"
+                                , customClass: {
+                                    confirmButton: "btn btn-primary w-xs me-2 mt-2"
+                                }
+                                , buttonsStyling: true
+                                , showCancelButton: true
+                                , showCloseButton: true
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Property is Not Featured Now.!!!"
                                 , text: data.message
                                 , icon: "error"
                                 , confirmButtonText: "OK"
