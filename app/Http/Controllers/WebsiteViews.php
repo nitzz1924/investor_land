@@ -158,6 +158,7 @@ class WebsiteViews extends Controller
     public function resetpassword(){
         return view('auth.UserAgentPanel.ResetPassword');
     }
+    
 
     public function changepassword($Email){
         $decrypedmail = decrypt($Email);
@@ -169,5 +170,24 @@ class WebsiteViews extends Controller
         $receentproject = Project::orderBy('created_at', 'desc')->get();
         // dd( $blogdetails);
         return view('WebsitePages.projectdetails', compact('projectdetails','receentproject'));
+    }
+
+    public function privacypolicy(){
+        return view('WebsitePages.privacypolicy');
+    }
+    public function termsandconditions(){
+        return view('WebsitePages.termsandconditions');
+    }
+    public function userandagentagreement(){
+        return view('WebsitePages.userandagentagreement');
+    }
+    public function dataretentionanddeletionpolicy(){
+        return view('WebsitePages.dataretentionanddeletionpolicy');
+    }
+    public function cookiespolicy(){
+        return view('WebsitePages.cookiespolicy');
+    }
+    public function contentandlistingguidelines(){
+        return view('WebsitePages.contentandlistingguidelines');
     }
 }

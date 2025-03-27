@@ -120,6 +120,12 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/resetpassword', 'resetpassword')->name('website.resetpassword');
     Route::get('/changepassword/{email}', 'changepassword')->name('website.changepassword');
     Route::get('/project-details/{id}', 'projectdetails')->name('website.projectdetails');
+    Route::get('/privacy-policy', 'privacypolicy')->name('website.privacypolicy');
+    Route::get('/terms-and-conditions', 'termsandconditions')->name('website.termsandconditions');
+    Route::get('/user-and-agent-agreement', 'userandagentagreement')->name('website.userandagentagreement');
+    Route::get('/data-retention-and-deletion-policy', 'dataretentionanddeletionpolicy')->name('website.dataretentionanddeletionpolicy');
+    Route::get('/cookies-policy', 'cookiespolicy')->name('website.cookiespolicy');
+    Route::get('/content-and-listing-guidelines', 'contentandlistingguidelines')->name('website.contentandlistingguidelines');
 
 });
 
