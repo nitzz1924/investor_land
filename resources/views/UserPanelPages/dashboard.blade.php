@@ -109,7 +109,7 @@
                     <h4 class="card-title fw-semibold mb-0">Recent Properties Listed</h4>
                 </div>
                 <div class="card-body">
-                    <div class="">
+                    <div class="table-responsive   ">
                         <table id="" class="table  table-hover table-bordered display text-nowrap py-3">
                             <thead>
                                 <tr>

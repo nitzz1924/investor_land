@@ -15,7 +15,10 @@ class WebsiteViews extends Controller
     public function homepage()
     {
         $categories = Master::where('type', 'Property Categories')->get();
-        $listings = PropertyListing::orderBy('created_at', 'desc')->where('status', 'published')->get();
+        $listings = PropertyListing::orderByRaw("FIELD(featuredstatus, 'featured') DESC")
+            ->orderBy('created_at', 'desc')
+            ->where('status', 'published')
+            ->get();
         $blogs = Blog::orderBy('created_at', 'desc')->get();
         $uniqueCategories = PropertyListing::select('category')->distinct()->pluck('category');
         // dd( $uniqueCategories);
@@ -96,15 +99,13 @@ class WebsiteViews extends Controller
 
         return view('WebsitePages.propertylistings', compact('listings', 'category', 'city'));
     }
-
     public function propertydetails($id)
     {
         $categories = Master::where('type', 'Property Categories')->get();
         $propertydetails = PropertyListing::find($id);
         $propertyName = $propertydetails->property_name;
         $listings = PropertyListing::where('category',$propertydetails->category)->get();
-        $priceHistory = json_decode($propertydetails->pricehistory, true);
-     
+        $priceHistory = json_decode($propertydetails->pricehistory, true) ?? [];
 
         $dates = [];
         $prices = [];
@@ -158,8 +159,6 @@ class WebsiteViews extends Controller
     public function resetpassword(){
         return view('auth.UserAgentPanel.ResetPassword');
     }
-    
-
     public function changepassword($Email){
         $decrypedmail = decrypt($Email);
         return view('auth.UserAgentPanel.ChangePassword', compact('decrypedmail'));
