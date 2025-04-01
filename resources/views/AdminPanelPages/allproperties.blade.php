@@ -57,7 +57,7 @@
                                 {{-- <td>{{ $data->city}}</td> --}}
                                 <td>{{ $data->address}}</td>
                                 <td>
-                                     <div>
+                                    <div>
                                         <span class="mb-1 badge-sm px-3 rounded {{ $data->usertype == 'Admin' ? 'text-bg-success' : ($data->usertype == 'Agent' ? 'text-bg-warning' : 'text-bg-info') }}">
                                             {{ ucfirst( $data->usertype) }}
                                         </span>
@@ -66,17 +66,17 @@
                                 </td>
                                 <td>
                                     <div class="form-check form-switch">
-                                        <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->status == 'published' ? 'checked' : '' }}  />
+                                        <input data-id="{{ $data->id }}" class="form-check-input success" type="checkbox" id="color-success{{ $data->id }}" switch="bool" {{ $data->status == 'published' ? 'checked' : '' }} />
                                         <label class="form-check-label  {{ $data->status == 'published' ? 'text-success' : 'text-danger' }}" for="color-success{{ $data->id }}">
-                                             {{ $data->status == 'published' ? 'Published' : 'Upublished' }}
+                                            {{ $data->status == 'published' ? 'Published' : 'Upublished' }}
                                         </label>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="form-check form-switch">
-                                        <input data-featuredid="{{ $data->id }}" class="form-check-input secondary featuredbool" type="checkbox" id="color-success{{ $data->id }}" switch="bool"  {{ $data->featuredstatus == 'featured' ? 'checked' : '' }}  />
+                                        <input data-featuredid="{{ $data->id }}" class="form-check-input secondary featuredbool" type="checkbox" id="color-success{{ $data->id }}" switch="bool" {{ $data->featuredstatus == 'featured' ? 'checked' : '' }} />
                                         <label class="form-check-label  {{ $data->featuredstatus == 'featured' ? 'text-secondary fw-bold' : 'text-danger' }}" for="color-success{{ $data->id }}">
-                                             {{ $data->featuredstatus == 'featured' ? 'Featured' : 'Unfeatured' }}
+                                            {{ $data->featuredstatus == 'featured' ? 'Featured' : 'Unfeatured' }}
                                         </label>
                                     </div>
                                 </td>
@@ -123,15 +123,16 @@
                 var status = $(this).is(':checked') ? 'published' : 'unpublished';
                 console.log(blogId, status);
 
-                 $.ajax({
-                    url: '{{ route('admin.updateadminlistingstatus') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: blogId,
-                        status: status
-                    },
-                    success: function(response) {
+                $.ajax({
+                    url: '{{ route('
+                    admin.updateadminlistingstatus ') }}'
+                    , type: 'POST'
+                    , data: {
+                        _token: '{{ csrf_token() }}'
+                        , id: blogId
+                        , status: status
+                    }
+                    , success: function(response) {
                         if (response.success) {
                             Swal.fire({
                                 title: "Status Updated!"
@@ -163,8 +164,8 @@
                                 , showCloseButton: true
                             });
                         }
-                    },
-                    error: function() {
+                    }
+                    , error: function() {
                         swal("Error", "An error occurred.", "error");
                     }
                 });
@@ -172,22 +173,23 @@
         });
 
     </script>
-      <script>
+    <script>
         $(document).ready(function() {
             $('.featuredbool').change(function() {
                 var blogId = $(this).data('featuredid');
                 var status = $(this).is(':checked') ? 'featured' : 'unfeatured';
                 console.log(blogId, status);
 
-                 $.ajax({
-                    url: '{{ route('admin.updatefeaturedstatus') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: blogId,
-                        featuredstatus: status
-                    },
-                    success: function(response) {
+                $.ajax({
+                    url: '{{ route('
+                    admin.updatefeaturedstatus ') }}'
+                    , type: 'POST'
+                    , data: {
+                        _token: '{{ csrf_token() }}'
+                        , id: blogId
+                        , featuredstatus: status
+                    }
+                    , success: function(response) {
                         if (response.success) {
                             Swal.fire({
                                 title: "Property is " + status.charAt(0).toUpperCase() + status.slice(1) + " Now.!!!"
@@ -219,8 +221,8 @@
                                 , showCloseButton: true
                             });
                         }
-                    },
-                    error: function() {
+                    }
+                    , error: function() {
                         swal("Error", "An error occurred.", "error");
                     }
                 });

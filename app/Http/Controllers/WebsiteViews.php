@@ -171,7 +171,6 @@ class WebsiteViews extends Controller
         // dd( $blogdetails);
         return view('WebsitePages.projectdetails', compact('projectdetails','receentproject'));
     }
-
     public function privacypolicy(){
         return view('WebsitePages.privacypolicy');
     }
