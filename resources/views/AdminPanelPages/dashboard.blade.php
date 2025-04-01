@@ -4,11 +4,11 @@
     <div class="container-fluid">
         <!--  Owl carousel -->
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/house.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     Properties
@@ -19,11 +19,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/leadership.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     Leads
@@ -34,11 +34,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/team.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     Users
@@ -49,11 +49,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/real-estate-agent.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     Agents
@@ -64,11 +64,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/blog.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     Blogs
@@ -79,11 +79,11 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-6">
                 <div class="item">
                     <div class="card border-0 zoom-in bg-primary-subtle shadow-none">
                         <div class="card-body">
-                            <div class="d-flex align-items-center justify-content-between">
+                            <div class="flex-md-row flex-col d-flex align-items-center justify-content-between">
                                 <img src="{{asset('assets/images/listing.png')}}" width="50" height="50" class="mb-3" alt="modernize-img" />
                                 <p class="fw-semibold fs-4 text-black text-center mb-1">
                                     My Listings
@@ -103,7 +103,7 @@
                             <h4 class="card-title fw-semibold mb-0">Recent Properties</h4>
                         </div>
                         <div class="card-body">
-                            <div class="">
+                            <div class="table-responsive">
                                 <table id="" class="table  table-hover table-bordered display text-nowrap py-3">
                                     <thead>
                                         <tr>

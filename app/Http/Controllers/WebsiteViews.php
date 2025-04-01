@@ -105,8 +105,7 @@ class WebsiteViews extends Controller
         $propertydetails = PropertyListing::find($id);
         $propertyName = $propertydetails->property_name;
         $listings = PropertyListing::where('category',$propertydetails->category)->get();
-        $priceHistory = json_decode($propertydetails->pricehistory, true);
-     
+        $priceHistory = json_decode($propertydetails->pricehistory, true) ?? [];
 
         $dates = [];
         $prices = [];
