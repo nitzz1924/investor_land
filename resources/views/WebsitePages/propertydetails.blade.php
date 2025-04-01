@@ -109,8 +109,8 @@
                                 <div class="about-property-cta">
                                     <a href="{{ route('website.contactpage') }}" class="btn-default btn-border">Contact
                                         us</a>
-                                    <a href="tel:919461257675" class="btn-default"><i class="fa-solid fa-phone-volume"></i>
-                                        +91-94612-57675</a>
+                                    <a href="tel:917711930093" class="btn-default"><i class="fa-solid fa-phone-volume"></i>
+                                        +91-771-193-0093</a>
                                 </div>
                             </div>
                         </div>
@@ -280,7 +280,7 @@
 
                             <div class="property-info-lists">
                                 <!-- Property Info item Start-->
-                                <div class="property-info-item">
+                                {{-- <div class="property-info-item">
                                     <div class="icon-box">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                             fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
@@ -291,7 +291,7 @@
                                     </div>
 
                                     <p>123, Lorem ipsume Dolor, 3200</p>
-                                </div>
+                                </div> --}}
                                 <!-- Property Info item End-->
 
                                 <!-- Property Info item Start-->
@@ -304,7 +304,7 @@
                                         </svg>
                                     </div>
 
-                                    <p>+91-94612-57675</p>
+                                    <p>+91-771-193-0093</p>
                                 </div>
                                 <!-- Property Info item End-->
 
@@ -318,7 +318,7 @@
                                         </svg>
                                     </div>
 
-                                    <p>investorlands.com</p>
+                                    <p>investorlandsmedia@gmail.com</p>
                                 </div>
                             </div>
                         </div>

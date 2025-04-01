@@ -494,7 +494,7 @@
 
                         <div class="col-lg-5">
                             <div class="cta-button">
-                                <a href="tel:+919461257675" class="btn-default btn-border"><i class="fa-solid fa-phone-volume"></i> +91-94612-57675</a>
+                                <a href="tel:+917711930093" class="btn-default btn-border"><i class="fa-solid fa-phone-volume"></i> +91-771-193-0093</a>
                                 <a href="#" class="btn-default">Contact Now</a>
                             </div>
                         </div>

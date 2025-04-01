@@ -127,6 +127,7 @@ Route::controller(WebsiteViews::class)->group(function () {
     Route::get('/data-retention-and-deletion-policy', 'dataretentionanddeletionpolicy')->name('website.dataretentionanddeletionpolicy');
     Route::get('/cookies-policy', 'cookiespolicy')->name('website.cookiespolicy');
     Route::get('/content-and-listing-guidelines', 'contentandlistingguidelines')->name('website.contentandlistingguidelines');
+    Route::get('/delete-account', 'deleteaccount')->name('website.deleteaccount');
 });
 
 

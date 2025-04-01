@@ -43,7 +43,7 @@
                     </div>
 
                     <h3>Phone</h3>
-                    <p>(+91) 94612-57675</p>
+                    <p>(+91) 771-193-0093</p>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                     </div>
 
                     <h3>Email</h3>
-                    <p>investorlands.com</p>
+                    <p>investorlandsmedia@gmail.com</p>
                 </div>
             </div>
         </div>

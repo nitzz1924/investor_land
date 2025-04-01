@@ -132,21 +132,21 @@
                                     the future of real estate investments, one project at a time.</p>
                             </div>
                             <div class="footer-contact-box">
-                                <div class="footer-info-box">
+                                {{-- <div class="footer-info-box">
                                     <div class="icon-box">
                                         <img src="{{ asset('websiteAssets/images/icon-location.svg') }}"
                                             alt="">
                                     </div>
 
                                     <p>123, Lorem Ipsum, Street no, Cityname, Country 123456</p>
-                                </div>
+                                </div> --}}
 
                                 <div class="footer-info-box">
                                     <div class="icon-box">
                                         <img src="{{ asset('websiteAssets/images/icon-phone.svg') }}" alt="">
                                     </div>
 
-                                    <p>+91-94612-57675</p>
+                                    <p>+91-771-193-0093</p>
                                 </div>
 
                                 <div class="footer-info-box">
@@ -154,7 +154,7 @@
                                         <img src="{{ asset('websiteAssets/images/icon-email.svg') }}" alt="">
                                     </div>
 
-                                    <p>investorlands.com</p>
+                                    <p>investorlandsmedia@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -245,8 +245,7 @@
                     <!-- Footer Policy Links Start -->
                     <div class="footer-policy-links">
                         <ul>
-                            <li><a href="{{ route('website.privacypolicy') }}">Privacy & Policy</a></li>
-                            <li><a href="{{ route('website.termsandconditions') }}">Terms & Condition</a></li>
+                            <li><a href="{{ route('website.deleteaccount') }}">Delete account</a></li>
                         </ul>
                     </div>
                 </div>

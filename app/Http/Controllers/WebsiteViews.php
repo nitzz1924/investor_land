@@ -188,4 +188,7 @@ class WebsiteViews extends Controller
     public function contentandlistingguidelines(){
         return view('WebsitePages.contentandlistingguidelines');
     }
+    public function deleteaccount(){
+        return view('WebsitePages.deleteaccount');
+    }
 }
