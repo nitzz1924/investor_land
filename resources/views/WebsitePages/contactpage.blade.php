@@ -32,7 +32,7 @@
                     </div>
 
                     <h3>Address</h3>
-                    <p>Ajmer, Rajasthan</p>
+                    <p>{{$profiledata->officeaddress}}</p>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
                     </div>
 
                     <h3>Phone</h3>
-                    <p>(+91) 771-193-0093</p>
+                    <p>(+91) {{$profiledata->contactnumber}}</p>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
                     </div>
 
                     <h3>Email</h3>
-                    <p>investorlandsmedia@gmail.com</p>
+                    <p>{{$profiledata->email}}</p>
                 </div>
             </div>
         </div>

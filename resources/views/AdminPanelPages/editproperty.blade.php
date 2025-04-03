@@ -358,18 +358,16 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Sno</th>
                                                     <th>On this date</th>
                                                     <th>Price</th>
                                                 </tr>
                                             </thead>
                                             @php
-                                               $history = json_decode($listingdata->pricehistory, true) ?? [];
+                                               $history = collect(json_decode($listingdata->pricehistory, true) ?? [])->sortBy('dateValue');
                                             @endphp
                                             <tbody>
-                                                @foreach ($history as $index => $data)
+                                                @foreach ($history as $data)
                                                 <tr>
-                                                    <td>{{ (int)$index + 1 }}</td>
                                                     <td>{{ \Carbon\Carbon::parse($data['dateValue'])->format('d-M-Y') }}</td>
                                                     <td>₹ {{  $data['priceValue'] }} /-</td>
                                                 </tr>

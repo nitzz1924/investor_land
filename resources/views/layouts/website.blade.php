@@ -145,8 +145,12 @@
                                     <div class="icon-box">
                                         <img src="{{ asset('websiteAssets/images/icon-phone.svg') }}" alt="">
                                     </div>
+                                    @php
+                                        use App\Models\RegisterCompany;
+                                        $profiledata = RegisterCompany::first();
+                                    @endphp
 
-                                    <p>+91-771-193-0093</p>
+                                    <p>+91-{{$profiledata->contactnumber}}</p>
                                 </div>
 
                                 <div class="footer-info-box">
@@ -154,7 +158,7 @@
                                         <img src="{{ asset('websiteAssets/images/icon-email.svg') }}" alt="">
                                     </div>
 
-                                    <p>investorlandsmedia@gmail.com</p>
+                                    <p>{{$profiledata->email}}</p>
                                 </div>
                             </div>
                         </div>
@@ -255,12 +259,12 @@
 
     <div class="">
         <!-- Call Button -->
-        <a href="tel:+917073880500" class="call-btn animate-up-down"
+        <a href="tel:91{{$profiledata->contactnumber}}" class="call-btn animate-up-down"
             style="position: fixed; left: 20px; bottom: 80px; background-color: #726555; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
             <i class="fas fa-phone"></i>
         </a>
         <!-- WhatsApp Button -->
-        <a href="https://wa.me/917073880500" class="whatsapp-btn animate-up-down"
+        <a href="https://wa.me/91{{$profiledata->contactnumber}}" class="whatsapp-btn animate-up-down"
             style="position: fixed; left: 20px; bottom: 20px; background-color: #25D366; color: white; padding: 10px 20px; border-radius: 50px; text-align: center; z-index: 1000;">
             <i class="fab fa-whatsapp fs-4"></i>
         </a>

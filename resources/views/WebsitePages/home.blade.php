@@ -48,12 +48,10 @@
                         </div>
                         <div class="footer-social-links">
                             <ul>
-                                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa-brands fa-tiktok"></i></a></li>
+                                <li><a href="https://www.facebook.com/profile.php?id=61574636540162"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                <li><a href="https://www.instagram.com/investor_lands/"><i class="fa-brands fa-instagram"></i></a></li>
+                                <li><a href="https://www.linkedin.com/company/investor-lands/"><i class="fa-brands fa-linkedin-in"></i></a></li>
+                                <li><a href="https://www.youtube.com/@InvestorLands"><i class="fa-brands fa-youtube"></i></a></li>
                             </ul>
                         </div>
                     </div>

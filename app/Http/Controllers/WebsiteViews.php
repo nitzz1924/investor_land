@@ -7,6 +7,7 @@ use App\Models\InvestSetting;
 use App\Models\Master;
 use App\Models\Project;
 use App\Models\PropertyListing;
+use App\Models\RegisterCompany;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\returnArgument;
 
@@ -46,7 +47,8 @@ class WebsiteViews extends Controller
     }
     public function contactpage()
     {
-        return view('WebsitePages.contactpage');
+        $profiledata = RegisterCompany::first();
+        return view('WebsitePages.contactpage',compact('profiledata'));
     }
     public function blogs()
     {
@@ -110,18 +112,19 @@ class WebsiteViews extends Controller
         $dates = [];
         $prices = [];
 
-        foreach ($priceHistory as $entry) {
+        $sortedPriceHistory = collect($priceHistory)->sortBy(function ($entry) {
+            return strtotime($entry['dateValue']);
+        });
+
+        foreach ($sortedPriceHistory as $entry) {
             $formattedDate = date("M Y", strtotime($entry['dateValue']));
             $formattedPrice = str_replace(',', '', $entry['priceValue']); // Adjusting price format
-            
-            if (!in_array($formattedDate, $dates)) {
-                $dates[] = $formattedDate;
-                $prices[] = $formattedPrice;
-            }
 
+            $dates[] = $formattedDate;
+            $prices[] = $formattedPrice;
         }
-        // dd( $listings);
-        return view('WebsitePages.propertydetails', compact('prices','dates','categories','listings', 'propertydetails', 'propertyName'));
+        $profiledata = RegisterCompany::first();
+        return view('WebsitePages.propertydetails', compact('prices','dates','categories','listings', 'propertydetails', 'propertyName','profiledata'));
     }
     public function userlogin()
     {

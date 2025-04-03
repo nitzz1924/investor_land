@@ -1732,8 +1732,7 @@ footer.footer {
 
 .page-header {
 	padding: 150px 0;
-	background: url(../images/hero.jpg) no-repeat center center;
-	background-size: cover;
+	/* background: url(../images/hero.jpg) no-repeat center center; */
 	position: relative;
 	margin: 0 40px;
 	border-radius: 20px;

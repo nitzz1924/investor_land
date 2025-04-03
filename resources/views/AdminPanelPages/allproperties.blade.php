@@ -124,27 +124,26 @@
                 console.log(blogId, status);
 
                 $.ajax({
-                    url: '{{ route('
-                    admin.updateadminlistingstatus ') }}'
-                    , type: 'POST'
-                    , data: {
-                        _token: '{{ csrf_token() }}'
-                        , id: blogId
-                        , status: status
-                    }
-                    , success: function(response) {
+                    url: '{{ route('admin.updateadminlistingstatus') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: blogId,
+                        status: status
+                    },
+                    success: function(response) {
                         if (response.success) {
                             Swal.fire({
-                                title: "Status Updated!"
-                                , text: data.message
-                                , icon: "success"
-                                , confirmButtonText: "OK"
-                                , customClass: {
+                                title: "Status Updated!",
+                                text: response.message,
+                                icon: "success",
+                                confirmButtonText: "OK",
+                                customClass: {
                                     confirmButton: "btn btn-primary w-xs me-2 mt-2"
-                                }
-                                , buttonsStyling: true
-                                , showCancelButton: true
-                                , showCloseButton: true
+                                },
+                                buttonsStyling: true,
+                                showCancelButton: true,
+                                showCloseButton: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -152,26 +151,25 @@
                             });
                         } else {
                             Swal.fire({
-                                title: "Status Not Updated!!"
-                                , text: data.message
-                                , icon: "error"
-                                , confirmButtonText: "OK"
-                                , customClass: {
+                                title: "Status Not Updated!!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "OK",
+                                customClass: {
                                     confirmButton: "btn btn-primary w-xs me-2 mt-2"
-                                }
-                                , buttonsStyling: true
-                                , showCancelButton: true
-                                , showCloseButton: true
+                                },
+                                buttonsStyling: true,
+                                showCancelButton: true,
+                                showCloseButton: true
                             });
                         }
-                    }
-                    , error: function() {
-                        swal("Error", "An error occurred.", "error");
+                    },
+                    error: function() {
+                        Swal.fire("Error", "An error occurred.", "error");
                     }
                 });
             });
         });
-
     </script>
     <script>
         $(document).ready(function() {
@@ -181,27 +179,26 @@
                 console.log(blogId, status);
 
                 $.ajax({
-                    url: '{{ route('
-                    admin.updatefeaturedstatus ') }}'
-                    , type: 'POST'
-                    , data: {
-                        _token: '{{ csrf_token() }}'
-                        , id: blogId
-                        , featuredstatus: status
-                    }
-                    , success: function(response) {
+                    url: '{{ route('admin.updatefeaturedstatus') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: blogId,
+                        featuredstatus: status
+                    },
+                    success: function(response) {
                         if (response.success) {
                             Swal.fire({
-                                title: "Property is " + status.charAt(0).toUpperCase() + status.slice(1) + " Now.!!!"
-                                , text: data.message
-                                , icon: "success"
-                                , confirmButtonText: "OK"
-                                , customClass: {
+                                title: "Property is " + status.charAt(0).toUpperCase() + status.slice(1) + " Now.!!!",
+                                text: response.message,
+                                icon: "success",
+                                confirmButtonText: "OK",
+                                customClass: {
                                     confirmButton: "btn btn-primary w-xs me-2 mt-2"
-                                }
-                                , buttonsStyling: true
-                                , showCancelButton: true
-                                , showCloseButton: true
+                                },
+                                buttonsStyling: true,
+                                showCancelButton: true,
+                                showCloseButton: true
                             }).then((result) => {
                                 if (result.isConfirmed) {
                                     window.location.reload();
@@ -209,25 +206,24 @@
                             });
                         } else {
                             Swal.fire({
-                                title: "Property is Not Featured Now.!!!"
-                                , text: data.message
-                                , icon: "error"
-                                , confirmButtonText: "OK"
-                                , customClass: {
+                                title: "Property is Not Featured Now.!!!",
+                                text: response.message,
+                                icon: "error",
+                                confirmButtonText: "OK",
+                                customClass: {
                                     confirmButton: "btn btn-primary w-xs me-2 mt-2"
-                                }
-                                , buttonsStyling: true
-                                , showCancelButton: true
-                                , showCloseButton: true
+                                },
+                                buttonsStyling: true,
+                                showCancelButton: true,
+                                showCloseButton: true
                             });
                         }
-                    }
-                    , error: function() {
-                        swal("Error", "An error occurred.", "error");
+                    },
+                    error: function() {
+                        Swal.fire("Error", "An error occurred.", "error");
                     }
                 });
             });
         });
-
     </script>
 </x-app-layout>
